@@ -25,7 +25,7 @@ class TextBlock extends React.Component {
   }
 
   componentDidMount() {
-  // 
+    // 
   }
 
   render() {
@@ -33,11 +33,11 @@ class TextBlock extends React.Component {
 
 
     return (
-      <div className="glass" style={styles.content}>
+      <div className={this.props.class || "glass"} style={styles.content}>
         <h4 className="subtitle" style={{ alignSelf: 'flex-start', margin: '10px' }}>{this.props.text.title}</h4>
 
         {this.props.text.paragraph.map((el, i) =>
-          <p key={i} className="paragraph" style={{ alignSelf: 'flex-start' }}>{el}</p>
+          <p key={i} className="text" style={{ alignSelf: 'flex-start' }}>{el}</p>
         )}
 
         <Button color='secondary' size="sm" className="block-button">{this.props.text.button}</Button>
@@ -50,7 +50,7 @@ class TextBlock extends React.Component {
 
 const styles = {
   content: {
-    // width: '100%',
+    height: '100%',
   },
   text: {
     color: 'white'

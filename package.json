@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.3.1",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
     "node-fetch": "^2.6.0",
     "node-ncbi": "^0.5.1",
     "nodemon": "^1.19.1",
@@ -11,7 +13,9 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-pose": "^4.0.8",
+    "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
+    "react-test-renderer": "^16.8.6",
     "reactstrap": "^8.0.0",
     "xml2js": "^0.4.19"
   },

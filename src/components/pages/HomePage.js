@@ -72,7 +72,7 @@ class HomePage extends React.Component {
   componentDidMount() {
     getNewest('medicine')
       .then((results) => {
-        console.log(results)
+        // console.log(results)
         let articleTitles = parseSearchToTitlesArray(results).slice(0,4);
         this.setState({
           newPublicationsInfo: {
@@ -81,34 +81,36 @@ class HomePage extends React.Component {
             button: 'more articles'
           }
         })
+      }).catch((e) => {
+        console.log(e)
       })
   }
 
   render() {
     return (
-      <div className="">
+      <div className="page">
 
         <Header
           title={"PubMed Central"}
           subtitle={"making research accessible"}
         />
 
-        <div className="row row-eq-height">
+        <div className="row no-gutters row-eq-height">
 
-          <div className="col-12 col-md-8">
+          <div className="col col-12 col-md-8">
             <TextBlock
               text={aboutIntro}
             />
           </div>
 
-          <div className="col-12 col-md-4">
+          <div className="col col-12 col-md-4">
             <TextBlock
               text={resourcesIntro}
             />
           </div>
         </div>
 
-        <div className="row row-eq-height">
+        <div className="row no-gutters row-eq-height">
 
           <div className="col-12 col-md-4">
             <TextBlock

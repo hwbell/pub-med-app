@@ -2,7 +2,7 @@ import React from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
-var ncbi = require('node-ncbi');
+// components
 
 // elements
 
@@ -11,40 +11,43 @@ var ncbi = require('node-ncbi');
 
 // elements
 
-class Header extends React.Component {
+class OutlinedText extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      results: null
-
+      // 
     };
   }
 
   componentDidMount() {
-  // 
+    // 
   }
 
   render() {
+
+
+
     return (
-      <div className={this.props.class || "col glass"}>
+      <div className="outline" style={styles.content}>
         
-          <h2 className="title">{this.props.title}</h2>
-          <h4 className="subtitle">{this.props.subtitle}</h4>
+        <p className="paragraph" style={styles.text}>{ this.props.text }</p>
 
       </div>
+
     );
   }
 }
 
 const styles = {
-  main: {
-    padding: '10px'
+  content: {
+    width: '90%',
+    margin: '10px'
   },
   text: {
-    color: 'white'
-  }
+    paddingTop: '10px',
+  },
 
 }
 
-export default Header;
+export default OutlinedText;

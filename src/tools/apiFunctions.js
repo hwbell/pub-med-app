@@ -31,9 +31,9 @@ module.exports = {
 }
 
 
-let results = getNewest().then((result) => {
-  console.log( parseSearchToTitlesArray(result))
-})
+// let results = getNewest().then((result) => {
+//   console.log( parseSearchToTitlesArray(result))
+// })
 
 
 

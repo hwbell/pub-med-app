@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="fixed-top navigator"
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "space-around",
+      "padding": "10px",
+    }
+  }
+>
+  <div
+    className="row"
+  >
+    <a
+      className="nav-link"
+      href="#home"
+      id="logo"
+    >
+      PubMed
+    </a>
+  </div>
+  <div
+    className="row links-holder"
+  >
+    <a
+      className="nav-link"
+      href="/about"
+    >
+      About
+    </a>
+    <a
+      className="nav-link"
+      href="/search"
+    >
+      Search
+    </a>
+    <a
+      className="nav-link"
+      href="/collections"
+    >
+      Collections
+    </a>
+  </div>
+</div>
+`;

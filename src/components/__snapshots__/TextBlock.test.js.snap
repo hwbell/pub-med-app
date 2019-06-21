@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="glass"
+  style={
+    Object {
+      "height": "100%",
+    }
+  }
+>
+  <h4
+    className="subtitle"
+    style={
+      Object {
+        "alignSelf": "flex-start",
+        "margin": "10px",
+      }
+    }
+  >
+    About PMC
+  </h4>
+  <p
+    className="text"
+    style={
+      Object {
+        "alignSelf": "flex-start",
+      }
+    }
+  >
+    PubMed Central (PMC) is a free digital repository that archives 
+  publicly accessible full-text scholarly articles that have been published within the 
+  biomedical and life sciences journal literature. As one of the major research 
+  databases within the suite of resources that have been developed by the National 
+  Center for Biotechnology Information (NCBI), PubMed Central is much more than just 
+  a document repository. Launched in February 2000, the repository has grown rapidly 
+  as the NIH Public Access Policy is designed to make all research funded by the 
+  National Institutes of Health (NIH) freely accessible to anyone, and, in addition, 
+  many publishers are working cooperatively with the NIH to provide free access to 
+  their works.
+  </p>
+  <button
+    aria-label={null}
+    className="block-button btn btn-secondary btn-sm"
+    onClick={[Function]}
+  >
+    read more
+  </button>
+</div>
+`;

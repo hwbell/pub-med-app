@@ -16,30 +16,29 @@ body {
   color: whitesmoke;
   font-size: 16px;
 }
-.App {
-  width: 90vw;
+/* to remove spacing between bootstrap cols - https://stackoverflow.com/questions/40267056/remove-spacing-between-cols */
+.padding-0 {
+  padding-right:0;
+  padding-left:0;
 }
 
-.page, .navigator {
-  max-width: 800px;
-  margin: auto auto;
-}
-
-/* full width divs, page containers */
-.full-width {
-  /* max-width: 700px;
-  margin: auto auto; */
-}
-.glass {
-  /* border:solid ; */
-  position:relative;
-  background-color: rgba(11, 0, 47, 0.24);
-  border-radius: 10px;
+.page, .heading, .glass, .outline {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  margin: 4px 0px;
+}
+
+.page {
+  max-width: 800px;
+  margin: 120px auto 80px auto;
+}
+
+/* for any glass background container, add this to the parent div */
+.glass {
+  position:relative;
+  background-color: rgba(11, 0, 47, 0.24);
+  margin: 0px 4px;
 }
 .glass:before{
   content:'';
@@ -55,14 +54,36 @@ body {
   /* box-shadow:inset 0 0 0 50vw rgba(255,255,255,0.2) */
 }
 
-.navigator {
-  background-color: rgba(11, 0, 47, 0.24);
+/* for any outlined container, add this to the parent div */
+.outline {
+  border: 2px solid rgba(255, 255, 255, 0.226);
+  width: 92%;
 }
-/* .links-holder {
-  background-color: rgba(30, 12, 90, 0.876);
-} */
+
+/* this will be the universal border-radius */
+.glass, .outline {
+  border-radius: 10px;
+}
+
+/* to make bootstrap columns equal height */
+.row-eq-height{
+  margin-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.navigator {
+  background-color: white;
+  /* position: absolute; */
+  top: 0px;
+  left: 0px;
+}
+#logo {
+  font-size: 32px;
+  color: rgba(0, 60, 255, 0.94)
+}
 .nav-link {
-  color: rgb(253, 233, 255);
+  /* color: rgb(253, 233, 255); */
   transition: all 0.3s ease;
   font-size: 24px;
 }
@@ -71,7 +92,7 @@ body {
 }
 .title, .subtitle {
   color: whitesmoke;
-  padding: 5px 25px;
+  padding: 10px 25px;
 }
 .title {
   font-size: 40px;
@@ -79,10 +100,14 @@ body {
 .subtitle {
   font-size: 24px;
 }
-
-.paragraph {
-  padding: 0px 25px;
+.text, .paragraph {
   font-size: 14px;
+}
+.text {
+  padding: 0px 25px;
+}
+.paragraph {
+  padding: 10px 20px;
 }
 
 .block-button {

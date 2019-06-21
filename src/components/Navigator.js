@@ -2,13 +2,11 @@ import React from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
-// elements
-
 // styling
 // import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-// elements
-
+// routing with react-router
+import { Link } from 'react-router-dom';
 
 const links = [
   {
@@ -38,17 +36,19 @@ class Navigator extends React.Component {
   render() {
     return (
 
-        <div className="glass navigator" style={styles.main}>
+      <div className="fixed-top navigator" style={styles.main}>
 
-          <h1>PMC</h1>
+        <div className="row">
+          <a href="#home" id="logo" className="nav-link">PubMed</a>
+        </div>
 
-          <div className="row links-holder">
-            {links.map((link, i) => {
-              return (
-                <a className="nav-link" key={i}  href={link.link}>{link.title}</a>
-              )
-            })}
-          </div>
+        <div className="row links-holder">
+          {links.map((link, i) => {
+            return (
+              <a className="nav-link" key={i} href={link.link}>{link.title}</a>
+            )
+          })}
+        </div>
 
 
       </div>
@@ -61,12 +61,9 @@ const styles = {
     padding: '10px',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     alignItems: 'center'
   },
-  text: {
-    color: 'white'
-  }
 
 }
 

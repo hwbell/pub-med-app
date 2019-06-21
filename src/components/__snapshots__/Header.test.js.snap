@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="col glass"
+>
+  <h2
+    className="title"
+  />
+  <h4
+    className="subtitle"
+  />
+</div>
+`;
