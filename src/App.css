@@ -1,33 +1,91 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
+* {
+  font-family: Quicksand;
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
+body {
+  background-attachment: fixed;
+  background:url(./assets/background-image.jpg) fixed center;
+  background-size:100vw auto;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+* > p {
+  color: whitesmoke;
+  font-size: 16px;
+}
+.App {
+  width: 90vw;
 }
 
-.App-link {
-  color: #61dafb;
+.page, .navigator {
+  max-width: 800px;
+  margin: auto auto;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* full width divs, page containers */
+.full-width {
+  /* max-width: 700px;
+  margin: auto auto; */
+}
+.glass {
+  /* border:solid ; */
+  position:relative;
+  background-color: rgba(11, 0, 47, 0.24);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 4px 0px;
+}
+.glass:before{
+  content:'';
+  position:absolute;
+  z-index:-1;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+  background:url(./assets/background-image.jpg) fixed center;
+  filter:blur(10px);
+  background-size:100vw auto;
+  /* box-shadow:inset 0 0 0 50vw rgba(255,255,255,0.2) */
+}
+
+.navigator {
+  background-color: rgba(11, 0, 47, 0.24);
+}
+/* .links-holder {
+  background-color: rgba(30, 12, 90, 0.876);
+} */
+.nav-link {
+  color: rgb(253, 233, 255);
+  transition: all 0.3s ease;
+  font-size: 24px;
+}
+.nav-link:hover {
+  color: rgb(161, 161, 161);
+}
+.title, .subtitle {
+  color: whitesmoke;
+  padding: 5px 25px;
+}
+.title {
+  font-size: 40px;
+}
+.subtitle {
+  font-size: 24px;
+}
+
+.paragraph {
+  padding: 0px 25px;
+  font-size: 14px;
+}
+
+.block-button {
+  align-self: flex-end;
+  margin: 14px;
 }
