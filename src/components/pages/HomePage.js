@@ -12,7 +12,7 @@ import TextBlock from '../TextBlock';
 // import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 // tools
-import { getNewest, parseSearchToTitlesArray } from '../../tools/apiFunctions';
+import { getArticles, parseSearchToTitlesArray } from '../../tools/apiFunctions';
 
 // vars etc
 const aboutIntro = {
@@ -70,7 +70,7 @@ class HomePage extends React.Component {
   }
 
   componentDidMount() {
-    getNewest('medicine')
+    getArticles('medicine', 'date')
       .then((results) => {
         // console.log(results)
         let articleTitles = parseSearchToTitlesArray(results).slice(0,4);

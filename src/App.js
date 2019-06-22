@@ -5,7 +5,8 @@ import './App.css';
 // components
 import HomePage from './components/pages/HomePage';
 import AboutPage from './components/pages/AboutPage';
-import Navigator from './components/Navigator';
+import SearchPage from './components/pages/SearchPage'
+// import Navigator from './components/Navigator';
 
 // routing
 import Router from 'react-router-dom/BrowserRouter';
@@ -52,8 +53,9 @@ class App extends Component {
     return (
       <Router>
 
-        {/* Try and put this Navigator in its own component. There was an issue with the router
-          so it is here temporarily */}
+        {/* Try and put this Navigator in its own component if necessary? Its not resuasable so maybe
+          not There was an issue with the router(I think just w. enzyme tests) so it is here for now */}
+
         <div className="fixed-top navigator" style={styles.main}>
 
           <div className="row">
@@ -83,6 +85,7 @@ class App extends Component {
                 <Switch location={location}>
                   <Route exact path="/" component={HomePage} />
                   <Route path="/about/" component={AboutPage} />
+                  <Route path="/search/" component={SearchPage} />
                 </Switch>
 
               </RoutesContainer>

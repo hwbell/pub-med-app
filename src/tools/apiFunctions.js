@@ -3,8 +3,25 @@ var ncbi = require('node-ncbi');
 var fetch = require('node-fetch')
 var parseString = require('xml2js').parseString;
 
-const getNewest = async (query) => {
-  let articles = await fetch(`https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=biology&format=json`, {
+// query and return based on date / citations
+const getArticles = async (query, sortParam) => {
+
+  // must have a query
+  if (!query) return {};
+  
+  let allowedSorters = [
+    '%20sort_cited:y',
+    '%20sort_date:y',
+  ];
+
+  // check for bad strings and default to no sorter, which will sort by relevance
+  let sorter = `%20sort_${sortParam}:y`;
+  if ( !allowedSorters.indexOf(sorter) ) {
+    sorter = '';
+  }
+
+
+  let articles = await fetch(`https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=${query}${sorter}&format=json`, {
     method: 'GET'
   })
     .then(response => response.json())
@@ -26,14 +43,14 @@ const parseSearchToTitlesArray = (searchResults) => {
 } 
 
 module.exports = {
-  getNewest,
+  getArticles,
   parseSearchToTitlesArray
 }
 
 
-// let results = getNewest().then((result) => {
-//   console.log( parseSearchToTitlesArray(result))
-// })
+let results = getArticles('biology', 'date').then((result) => {
+  // console.log( parseSearchToTitlesArray(result))
+})
 
 
 

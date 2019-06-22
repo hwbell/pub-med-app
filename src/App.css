@@ -22,11 +22,16 @@ body {
   padding-left:0;
 }
 
-.page, .heading, .glass, .outline {
+.page, .heading, .glass, .outline, .article-result {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+}
+
+.article-result {
+  align-self: flex-start; 
+  margin-bottom: 25px;
 }
 
 .page {
@@ -90,6 +95,9 @@ body {
 .nav-link:hover {
   color: rgb(161, 161, 161);
 }
+
+
+/* some common text classes */
 .title, .subtitle {
   color: whitesmoke;
   padding: 10px 25px;
@@ -98,6 +106,7 @@ body {
   font-size: 40px;
 }
 .subtitle {
+  padding-top: 0px;
   font-size: 24px;
 }
 .text, .paragraph {
@@ -109,8 +118,37 @@ body {
 .paragraph {
   padding: 10px 20px;
 }
+.article-title {
+  padding: 10px 20px 0px 20px;
+  font-size: 16px;
+}
 
+/* buttons */
+.block-button, .article-button {
+  border: none;
+}
 .block-button {
-  align-self: flex-end;
-  margin: 14px;
+  align-self: flex-start;
+  margin: 10px 25px;
+}
+.article-button {
+  margin: 4px;
+}
+.warn {
+  background-color: #F1948A;
+}
+.add {
+  background-color: rgb(0, 98, 255);
+}
+.add:hover {
+  background-color: rgb(0, 74, 194);
+}
+
+/* the search page */
+.search-input {
+  width: 60%;
+  margin: 15px;
+}
+input {
+  text-align: center;
 }

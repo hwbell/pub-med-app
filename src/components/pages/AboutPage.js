@@ -35,11 +35,13 @@ class AboutPage extends React.Component {
             subtitle={"medical & life sciences literature for the public"}
           />
 
-          <OutlinedText
-            text={aboutPageText.full.top}
-          />
+          <div className="outline" style={styles.content}>
 
-          <img style={{margin: '15px', borderRadius: '10px'}} src={require('../../assets/about-page.png')}></img>
+            <p className="paragraph" style={styles.text}>{aboutPageText.full.top}</p>
+
+          </div>
+
+          <img style={{ margin: '15px', borderRadius: '10px' }} src={require('../../assets/about-page.png')}></img>
 
           <OutlinedText
             text={aboutPageText.full.bottom}
