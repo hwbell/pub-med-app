@@ -5,29 +5,46 @@ import 'bootstrap/dist/css/bootstrap.css';
 // components
 import Header from '../Header';
 import ArticleResult from '../ArticleResult';
+import CollectionForm from "../CollectionForm";
+
 import { Input, Form, InputGroup, Button } from 'reactstrap';
+import Loader from 'react-loader-spinner';
 
 // tools
 import { getArticles, parseSearchToTitlesArray } from '../../tools/apiFunctions';
 
-const loadingState = {
+// animation
+import posed, { PoseGroup } from 'react-pose';
 
+// pose containers
+const Div = posed.div({
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 }
+});
+
+const initialState = {
+  collectionModal: false,
+  results: null,
+  showLoading: true
 }
-
+const loadingState = {
+  results: null,
+  showLoading: true
+}
 
 class SearchPage extends React.Component {
   constructor(props) {
     super(props);
 
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.viewArticle = this.viewArticle.bind(this);
-    this.addToCollection = this.addToCollection.bind(this);
+    this.addArticle = this.addArticle.bind(this);
+    this.renderLoader = this.renderLoader.bind(this);
+    this.toggleCollectionForm = this.toggleCollectionForm.bind(this);
 
-    this.state = {
-      results: null,
-      // articleTitles: null
-    };
-    
+    this.state = initialState;
+
   }
 
   componentDidMount() {
@@ -37,6 +54,7 @@ class SearchPage extends React.Component {
         // let articleTitles = parseSearchToTitlesArray(results);
         this.setState({
           results: response.resultList.result,
+          showLoading: false
           // articleTitles
         })
       }).catch((e) => {
@@ -46,6 +64,7 @@ class SearchPage extends React.Component {
 
   // handleChange changes the value of the current query, in the input
   handleChange(value) {
+    // console.log(value)
     this.setState({
       query: value
     });
@@ -64,17 +83,31 @@ class SearchPage extends React.Component {
 
   // get the results from the api
   fetchSearch(query) {
-    getArticles('medicine', 'date')
+    getArticles(query)
       .then((response) => {
         console.log(response.resultList.result)
         // let articleTitles = parseSearchToTitlesArray(results);
         this.setState({
           results: response.resultList.result,
+          showLoading: false
           // articleTitles
         })
       }).catch((e) => {
         console.log(e)
       })
+  }
+
+  renderLoader() {
+    return (
+      <Div style={styles.loaderHolder} key="loader">
+        <Loader
+          height={100}
+          width={100}
+          type="ThreeDots"
+          color="whitesmoke"
+        />
+      </Div>
+    )
   }
 
   renderResults() {
@@ -86,7 +119,7 @@ class SearchPage extends React.Component {
       },
       {
         text: 'add to collection',
-        onClick: this.addToCollection
+        onClick: this.addArticle
       }
     ];
 
@@ -98,41 +131,74 @@ class SearchPage extends React.Component {
 
   }
 
+  addArticle(article) {
+    console.log(`adding article: ${article.id}`);
+
+    this.setState({
+      selected: article
+    }, () => {
+      this.toggleCollectionForm();
+    })
+
+  }
+
   viewArticle(article) {
     console.log(`Viewing article: ${article.id}`)
   }
 
-  addToCollection(article) {
-    console.log(`Adding article ${article.id} to user's collections`)
+  toggleCollectionForm() {
+    console.log('toggling AddForm')
+    this.setState(prevState => ({
+      collectionModal: !prevState.collectionModal
+    }));
   }
 
   render() {
 
     return (
       <div className="search-page page">
+
+        {/* modal for adding articles to collections. The additions are passed back to App 
+          as either new collections or additions to existing collections. pass the current
+          collections to the form so it can decide what to render */}
+        {this.state.selected &&
+          <CollectionForm
+            article={this.state.selected}
+            isVisible={this.state.collectionModal}
+            toggle={this.toggleCollectionForm}
+            collections={this.props.collections}
+            createNewCollection={this.props.createNewCollection}
+            modifyCollection={this.props.modifyCollection} />}
+
         <div className="glass">
 
+          {/* the header */}
           <Header
             class="heading"
             title={"PMC Search"}
             subtitle={"abstracts, full text & more"}
           />
 
+          {/* the search input form */}
           <Form className="search-input" onSubmit={this.handleSubmit}>
 
             <InputGroup>
-              <Input style={{borderRadius: '25px' }} 
-                placeholder={this.props.query || "abstracts, full text, patents ..."}
-                value={this.props.query}
+              <Input style={{ borderRadius: '25px' }}
+                placeholder={"abstracts, full text, patents ..."}
                 onChange={(e) => this.handleChange(e.target.value)}
               />
             </InputGroup>
 
           </Form>
 
-
+          {/* the results */}
           <div className="outline" style={styles.content}>
 
+            {/* the loading icon */}
+            {this.state.showLoading &&
+              this.renderLoader()
+            }
+            {/* the results when they appear */}
             {this.state.results &&
               this.renderResults()
             }

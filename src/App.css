@@ -7,10 +7,6 @@ body {
   background:url(./assets/background-image.jpg) fixed center;
   background-size:100vw auto;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 * > p {
   color: whitesmoke;
@@ -22,7 +18,15 @@ body {
   padding-left:0;
 }
 
-.page, .heading, .glass, .outline, .article-result {
+/*  use these! */
+.center-all-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.heading, .glass, .outline, .article-result {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -63,6 +67,7 @@ body {
 .outline {
   border: 2px solid rgba(255, 255, 255, 0.226);
   width: 92%;
+  margin: 15px;
 }
 
 /* this will be the universal border-radius */

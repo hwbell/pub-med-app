@@ -8,20 +8,26 @@ const getArticles = async (query, sortParam) => {
 
   // must have a query
   if (!query) return {};
-  
+
   let allowedSorters = [
     '%20sort_cited:y',
     '%20sort_date:y',
   ];
 
   // check for bad strings and default to no sorter, which will sort by relevance
-  let sorter = `%20sort_${sortParam}:y`;
-  if ( !allowedSorters.indexOf(sorter) ) {
+  let sorter;
+  if (!sortParam) {
     sorter = '';
+  } else {
+    sorter = `%20sort_${sortParam}:y`;
+    if (!allowedSorters.indexOf(sorter)) {
+      sorter = '';
+    }
   }
 
-
-  let articles = await fetch(`https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=${query}${sorter}&format=json`, {
+  let url = `https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=${query}${sorter}&format=json`;
+  console.log(url)
+  let articles = await fetch(url, {
     method: 'GET'
   })
     .then(response => response.json())
@@ -36,11 +42,11 @@ const getArticles = async (query, sortParam) => {
 
 // parses the result of a search query to a simple array of the article titles
 const parseSearchToTitlesArray = (searchResults) => {
-  let titlesArray = searchResults.resultList.result.map( (result) => {
+  let titlesArray = searchResults.resultList.result.map((result) => {
     return result.title;
   })
   return titlesArray;
-} 
+}
 
 module.exports = {
   getArticles,
