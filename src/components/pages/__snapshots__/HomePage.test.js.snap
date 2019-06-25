@@ -29,6 +29,7 @@ exports[`renders correctly 1`] = `
         style={
           Object {
             "height": "100%",
+            "margin": "0px 0px 0px 4px ",
           }
         }
       >
@@ -79,6 +80,7 @@ exports[`renders correctly 1`] = `
         style={
           Object {
             "height": "100%",
+            "margin": "0px 0px 0px 4px ",
           }
         }
       >
@@ -174,6 +176,7 @@ exports[`renders correctly 1`] = `
         style={
           Object {
             "height": "100%",
+            "margin": "0px 0px 0px 4px ",
           }
         }
       >
@@ -269,7 +272,36 @@ exports[`renders correctly 1`] = `
     </div>
     <div
       className="col-12 col-md-8"
-    />
+    >
+      <div
+        className="glass"
+        style={
+          Object {
+            "height": "100%",
+            "margin": "0px 0px 0px 4px ",
+          }
+        }
+      >
+        <h4
+          className="subtitle"
+          style={
+            Object {
+              "alignSelf": "flex-start",
+              "margin": "10px",
+            }
+          }
+        >
+          New Publications
+        </h4>
+        <button
+          aria-label={null}
+          className="block-button btn btn-secondary btn-sm"
+          onClick={[Function]}
+        >
+          more articles
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 `;

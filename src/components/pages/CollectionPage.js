@@ -5,13 +5,13 @@ import 'bootstrap/dist/css/bootstrap.css';
 // components
 import Header from '../Header';
 import ArticleResult from '../ArticleResult';
-import CollectionForm from "../CollectionForm";
+import EmailForm from "../EmailForm";
 
-import { Input, Form, InputGroup, Button } from 'reactstrap';
+import { ButtonGroup, Button } from 'reactstrap';
 import Loader from 'react-loader-spinner';
 
-// tools
-import { getArticles, parseSearchToTitlesArray } from '../../tools/apiFunctions';
+import { PDFViewer, PDFDownloadLink } from '@react-pdf/renderer';
+import GeneratedPdf from '../GeneratedPdf';
 
 // animation
 import posed, { PoseGroup } from 'react-pose';
@@ -23,13 +23,9 @@ const Div = posed.div({
 });
 
 const initialState = {
-  collectionModal: false,
-  results: null,
-  showLoading: true
-}
-const loadingState = {
-  results: null,
-  showLoading: true
+  showPreview: false,
+  emailModal: false,
+  exportSelected: true
 }
 
 class SearchPage extends React.Component {
@@ -37,7 +33,8 @@ class SearchPage extends React.Component {
     super(props);
 
     this.renderLoader = this.renderLoader.bind(this);
-    this.toggleCollectionForm = this.toggleCollectionForm.bind(this);
+    this.toggleEmailForm = this.toggleEmailForm.bind(this);
+    this.togglePreview = this.togglePreview.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = initialState;
@@ -76,20 +73,21 @@ class SearchPage extends React.Component {
 
     return collection.articles.map((article, i) => {
       return (
-        <ArticleResult key={i} 
-          collection={collection} 
-          article={article} 
+        <ArticleResult key={i}
+          collection={collection}
+          article={article}
           buttons={collectionButtons} />
       )
     })
 
   }
 
+  // for removing articles. submit registers the removal in App
   handleSubmit(article, collection) {
     console.log(`removing article: ${article.id} from user's ${collection.name} collection`);
-    
+
     this.props.modifyCollection(article, collection.name, -1, () => {
-      console.log('article added to collection')
+      console.log('article remove from collection')
     })
 
   }
@@ -98,10 +96,15 @@ class SearchPage extends React.Component {
     console.log(`Viewing article: ${article.id}`)
   }
 
-  toggleCollectionForm() {
-    console.log('toggling AddForm')
+  toggleEmailForm() {
     this.setState(prevState => ({
-      collectionModal: !prevState.collectionModal
+      emailModal: !prevState.emailModal
+    }));
+  }
+
+  togglePreview() {
+    this.setState(prevState => ({
+      showPreview: !prevState.showPreview
     }));
   }
 
@@ -110,14 +113,12 @@ class SearchPage extends React.Component {
     return (
       <div className="search-page page">
 
-        {/* {this.state.selected &&
-          <CollectionForm
-            article={this.state.selected}
-            isVisible={this.state.collectionModal}
-            toggle={this.toggleCollectionForm}
-            collections={this.props.collections}
-            createNewCollection={this.props.createNewCollection}
-            addToCollection={this.props.addToCollection} />} */}
+        {this.state.exportSelected &&
+          <EmailForm
+            collection={this.state.selectedCollection}
+            isVisible={this.state.emailModal}
+            toggle={this.toggleEmailForm}
+            collections={this.props.collections} />}
 
         <div className="glass">
 
@@ -128,31 +129,65 @@ class SearchPage extends React.Component {
             subtitle={"create & share lists of resources"}
           />
 
-          {/* the results */}
+          {/* results */}
 
-          {/* the results when they appear */}
+          {/* the collections when they appear */}
           {this.props.collections.length > 0 ?
-            this.props.collections.map((collection,i) => {
+
+            this.props.collections.map((collection, i) => {
 
               return (
                 <div key={i} className="outline" style={styles.content}>
+                  <div className="" style={styles.titleHolder}>
 
-                  <div className="row" style={styles.collectionTitle}>
-                    <p className="article-title">collection: </p>
-                    <p className="article-title"><strong>{collection.name}</strong></p>
+                    <div className="row">
+                      <p className="collection-title"><strong>{collection.name}</strong></p>
+                      <p className="collection-title">{`( ${collection.articles.length} )`}</p>
+                    </div>
+
+                    {/* email / download options for the article */}
+                    <ButtonGroup>
+                      <Button
+                        className="add" size="sm"
+                        onClick={this.togglePreview}>
+                        {!this.state.showPreview ? 'preview' : 'hide preview'}
+                      </Button>
+                      {/* <Button className="add" size="sm"
+                        onClick={() => this.toggleEmailForm()}>
+                        email
+                      </Button> */}
+                      <Button className="add" size="sm">
+                        <PDFDownloadLink style={{ color: 'white' }} document={<GeneratedPdf collection={collection} />} fileName="somename.pdf">
+                          {({ blob, url, loading, error }) => (loading ? 'loading...' : 'download')}
+                        </PDFDownloadLink>
+                      </Button>
+
+                    </ButtonGroup>
                   </div>
+
+                  {this.state.showPreview &&
+                    <Div className="pdf-holder">
+                      <PDFViewer className="pdf-viewer">
+                        <GeneratedPdf collection={collection} />
+                      </PDFViewer>
+                    </Div>}
+
+
                   {this.renderResults(collection)}
+
                 </div>
               )
 
             })
-          :
-          <div className="outline" style={styles.content}>
-            <p className="article-title">
-              {`It looks like you haven't made any collections yet! You can add
-                articles by searching the database, then organize, export & them here. `}
-            </p>
-          </div>}
+
+            // or if there aren't any collections yet
+            :
+            <div className="outline" style={styles.content}>
+              <p className="article-title">
+                {`It looks like you haven't made any collections yet! You can add
+                articles by searching the database, then organize, share & export them here. `}
+              </p>
+            </div>}
 
 
 
@@ -167,9 +202,16 @@ const styles = {
   main: {
     width: '100%'
   },
-  collectionTitle: {
-    alignSelf: 'flex-start',
+  titleHolder: {
+    width: '100%',
     padding: '15px',
+    // marginLeft: '10px',
+    borderRadius: '8px',
+    backgroundColor: 'whitesmoke',
+    // display: 'flex',
+    // flexDirection: 'row',
+    // justifyContent: 'space-between',
+    // alignItems: 'center'
   }
 }
 

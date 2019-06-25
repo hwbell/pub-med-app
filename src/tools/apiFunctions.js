@@ -26,7 +26,7 @@ const getArticles = async (query, sortParam) => {
   }
 
   let url = `https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=${query}${sorter}&format=json`;
-  console.log(url)
+  // console.log(url)
   let articles = await fetch(url, {
     method: 'GET'
   })

@@ -7,13 +7,16 @@ import HomePage from './components/pages/HomePage';
 import AboutPage from './components/pages/AboutPage';
 import SearchPage from './components/pages/SearchPage'
 import CollectionPage from './components/pages/CollectionPage';
-// import Navigator from './components/Navigator';
+
+// pose animation
+import posed, { PoseGroup } from 'react-pose';
 
 // routing
-import Router from 'react-router-dom/BrowserRouter';
-import Route from 'react-router-dom/Route';
 import { Switch, Link } from 'react-router-dom';
-import posed, { PoseGroup } from 'react-pose';
+// import Router from 'react-router-dom/BrowserRouter';
+const Router = require("react-router-dom").BrowserRouter;
+// import Route from 'react-router-dom/Route';
+const Route = require("react-router-dom").Route;
 
 const RoutesContainer = posed.div({
   enter: {

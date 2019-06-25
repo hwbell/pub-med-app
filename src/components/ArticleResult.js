@@ -24,6 +24,7 @@ class ArticleResult extends React.Component {
     return (
       <div style={styles.buttonsHolder}>
 
+        {/* the provided buttons & click functions */}
         {this.props.buttons.map((button, i) => {
 
           let buttonClass = 'article-button';
@@ -48,10 +49,20 @@ class ArticleResult extends React.Component {
     return (
       <div className="article-result">
 
-        <p className="article-title">{this.props.article.title}</p>
+        <div style={styles.top}>
+          
+          <p className="article-title">{this.props.article.title}</p>
+          <p className="article-title">{this.props.article.authorString}</p>
+          <p className="article-title">
+            {`${this.props.article.journalTitle}  `}
+            <strong>{`  ${this.props.article.pubYear}`}</strong>
+          </p>
+        
+        </div>
 
         {this.renderButtons()}
 
+        
       </div>
     );
   }
@@ -61,6 +72,13 @@ const styles = {
   buttonsHolder: {
     marginLeft: '15px',
     alignSelf: 'flex-start'
+  },
+  top: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    alignItems: 'flex-start'
   }
 
 }

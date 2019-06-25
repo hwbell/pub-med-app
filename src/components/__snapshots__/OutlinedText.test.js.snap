@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="outline"
+  style={
+    Object {
+      "margin": "10px",
+      "width": "90%",
+    }
+  }
+>
+  <p
+    className="paragraph"
+    style={
+      Object {
+        "paddingTop": "10px",
+      }
+    }
+  />
+</div>
+`;

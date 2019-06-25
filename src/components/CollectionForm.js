@@ -12,7 +12,10 @@ class CollectionForm extends React.Component {
     super(props);
 
     this.state = {
-      highlightInd: null
+      name: '',
+      highlightInd: null,
+      updating: false,
+      creating: false
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -29,9 +32,9 @@ class CollectionForm extends React.Component {
 
   highlight(i) {
     if (this.state.highlightInd !== i) {
-      this.setState({highlightInd: i});
+      this.setState({ highlightInd: i });
     } else {
-      this.setState({highlightInd: null})
+      this.setState({ highlightInd: null })
     }
   }
   renderSelectors() {
@@ -40,11 +43,11 @@ class CollectionForm extends React.Component {
 
       return (
         <div className="center-all-col">
-          {this.props.collections.map((collection, i) => 
-            <Button key={i} 
+          {this.props.collections.map((collection, i) =>
+            <Button key={i}
               color="link" className="nav-link"
-              style={{backgroundColor: i === this.state.highlightInd ? 'whitesmoke': 'white'}}
-              onClick={() => this.highlight(i)}>{collection.name}</Button> )}
+              style={{ backgroundColor: i === this.state.highlightInd ? 'whitesmoke' : 'white' }}
+              onClick={() => this.highlight(i)}>{`${collection.name} ( ${collection.articles.length} )`}</Button>)}
         </div>
       )
     } else {
@@ -56,7 +59,8 @@ class CollectionForm extends React.Component {
     console.log(this.props.collections)
     let message;
     if (this.props.collections.length === 0) {
-      message = "You don't currently have any collections ... would you like to make one?";
+      message = `You don't currently have any collections ... would you like to make one?
+      You can enter a name below.`;
     } else {
       message = "Select a collection to add the article to, or make a new collection."
     }
@@ -73,18 +77,19 @@ class CollectionForm extends React.Component {
     if (this.state.highlightInd === null) {
       return (
         <Form style={{ marginTop: '25px' }} onSubmit={this.handleSubmit}>
-  
+
           <InputGroup>
-  
+
             <p style={styles.text}>
               new collection:
             </p>
             <Input style={{ borderRadius: '25px' }}
               placeholder={" Ex - Cancer Biology "}
+              value={this.state.name}
               onChange={(e) => this.handleChange(e.target.value)}
             />
           </InputGroup>
-  
+
         </Form>
       )
     } else {
@@ -115,7 +120,7 @@ class CollectionForm extends React.Component {
 
   // handleSubmit will fire the submitted data back through Search to App and be recorded
   handleSubmit(e) {
-    console.log('collection input submitted')
+    // console.log('collection input submitted')
     e.preventDefault();
 
     // if we're updating an existing collection
@@ -123,24 +128,44 @@ class CollectionForm extends React.Component {
       let collectionName = this.props.collections[this.state.highlightInd].name;
       return this.props.modifyCollection(this.props.article, collectionName, 1, () => {
         console.log('article added to collection')
+        this.setState({name: ''});
       })
     }
 
     // if we're creating a new collection
-    let name = this.state.name;
-    if (name.length === 0) {
+
+    // check there is something there and it isn't just whitespace
+    if (!this.state.name || this.state.name.trim().length === 0) {
+      this.setState({
+        name: ''
+      })
       return;
     }
 
+
     // we make a new collection and register it with the function drilled from App
     let collection = {
-      name,
+      name: this.state.name,
       articles: [this.props.article]
     }
     this.props.createNewCollection(collection, () => {
-      console.log('collection created!')
+      console.log('collection created!');
+      this.setState({name: ''});
     });
 
+    // reset the highlightInd to prevent empty inputs after submits
+    this.setState({
+      highlightInd: null
+    })
+
+  }
+
+  closeModal() {
+    this.setState({
+      highlightInd: null
+    }, () => {
+      this.props.toggle();
+    })
   }
 
   render() {
@@ -152,19 +177,18 @@ class CollectionForm extends React.Component {
         <ModalBody>
           {this.renderMessage()}
 
+          {/* select an exisiting collection */}
           {this.renderSelectors()}
 
           {this.renderArticlePreview()}
-
-          {/* select an exisiting collection */}
 
           {/* name a new one */}
           {this.renderInput()}
 
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={this.handleSubmit}>create collection</Button>{' '}
-          <Button color="secondary" onClick={this.props.toggle}>cancel</Button>
+          <Button color="primary" size="sm" onClick={this.handleSubmit}>add article</Button>
+          <Button color="secondary" size="sm" onClick={() => this.closeModal()}>close</Button>
         </ModalFooter>
 
       </Modal>

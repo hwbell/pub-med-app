@@ -169,7 +169,10 @@ class SearchPage extends React.Component {
             collections={this.props.collections}
             createNewCollection={this.props.createNewCollection}
             modifyCollection={this.props.modifyCollection} />}
+        {/* ************************************************** */}
 
+
+        {/* **********the main page area************* */}
         <div className="glass">
 
           {/* the header */}

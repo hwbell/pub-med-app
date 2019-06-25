@@ -63,14 +63,19 @@ class HomePage extends React.Component {
   constructor(props) {
     super(props);
 
+    this.fetchArticles = this.fetchArticles.bind(this);
+    
     this.state = {
-      newPublicationsInfo: null
-
+      newPublicationsInfo: {
+        title: 'New Publications',
+        paragraph: [],
+        button: 'more articles'
+      }
     };
   }
 
-  componentDidMount() {
-    getArticles('medicine', 'date')
+  fetchArticles() {
+    return getArticles('medicine', 'date')
       .then((results) => {
         // console.log(results)
         let articleTitles = parseSearchToTitlesArray(results).slice(0,4);
@@ -84,6 +89,10 @@ class HomePage extends React.Component {
       }).catch((e) => {
         console.log(e)
       })
+  }
+
+  componentDidMount() {
+    this.fetchArticles();
   }
 
   render() {
