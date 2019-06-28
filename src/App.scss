@@ -1,4 +1,7 @@
+
+@import './variables.scss';
 @import url('https://fonts.googleapis.com/css?family=Quicksand');
+
 * {
   font-family: Quicksand;
 }
@@ -9,7 +12,7 @@ body {
   min-height: 100vh;
 }
 * > p {
-  color: whitesmoke;
+  color: $text-color;
   font-size: 16px;
 }
 * > a {
@@ -50,7 +53,7 @@ hr {
   width: 100%; 
   margin: 2px;
   border-radius: 4px;
-  background-color: rgba(0, 0, 0, 0.24);
+  background-color: rgba(4, 14, 49, 0.541);
   padding: 10px;
 }
 
@@ -131,7 +134,7 @@ hr {
 }
 
 /* buttons */
-.block-button, .article-button, .add, .warn {
+.block-button, .article-button, .add, .warn, .view {
   border: none;
 }
 .block-button {
@@ -142,16 +145,23 @@ hr {
   margin: 4px;
 }
 .warn {
-  background-color: rgb(194, 96, 85);
+  background-color: rgb(180, 67, 86);
 }
 .warn:hover {
-  background-color: rgb(150, 70, 63);
+  background-color: rgb(146, 54, 69);  
 }
 .add {
   background-color: rgb(26, 98, 214);
 }
 .add:hover {
   background-color: rgb(0, 74, 194);
+}
+.view {
+  background-color: rgb(23, 146, 177);
+}
+.view:hover {
+  background-color: rgb(16, 104, 126);
+
 }
 
 
@@ -209,6 +219,20 @@ body.modal-open {
 }
 .modal-xl {
  /* margin: 0px; */
- padding: 20px;
+ padding: 1vw;
  max-width: 750px;
+}
+
+/* the article links */
+.article-link {
+  transition: all 0.3s ease;
+  margin: 10px;
+  font-size: 22px;
+}
+.fa-dollar-sign {
+  color: rgb(23, 177, 49);
+  &:hover {
+  color: rgb(13, 104, 30);
+  }
+  
 }

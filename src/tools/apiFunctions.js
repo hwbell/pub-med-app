@@ -51,7 +51,7 @@ const getArticles = async (query, sortParam) => {
 }
 
 // let results = getArticles('cancer').then((response) => {
-  // console.log(response.resultList.result[0])
+//   console.log(response.resultList.result.slice(0,2))
 // })
 
 // parses the result of a search query to a simple array of the article titles

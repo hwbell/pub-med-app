@@ -1,5 +1,5 @@
 import React from 'react';
-import '../App.css';
+import '../App.scss';
 import 'bootstrap/dist/css/bootstrap.css';
 
 var ncbi = require('node-ncbi');

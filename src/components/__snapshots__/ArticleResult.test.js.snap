@@ -44,7 +44,7 @@ exports[`renders correctly 1`] = `
   >
     <button
       aria-label={null}
-      className="article-button btn btn-secondary btn-sm"
+      className="article-button view btn btn-secondary btn-sm"
       onClick={[Function]}
       type="button"
     >

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../App.css';
+import '../App.scss';
 import 'bootstrap/dist/css/bootstrap.css';
 
 // components
@@ -31,7 +31,7 @@ class ArticleResult extends React.Component {
 
         <p className="article-title">{authorString}</p>
 
-        {journalInfo.journal.title ?
+        { journalInfo && journalInfo.journal ?
           <p className="article-title">
             {`${this.props.article.journalInfo.journal.title}  `}
             <strong>{`  ${pubYear}`}</strong>
@@ -57,6 +57,8 @@ class ArticleResult extends React.Component {
             buttonClass += ` warn`;
           } else if (button.text === 'add to collection') {
             buttonClass += ` add`;
+          } else {
+            buttonClass += ` view`;
           }
 
           return (

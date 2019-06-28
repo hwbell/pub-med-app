@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../App.css';
+import '../../App.scss';
 import 'bootstrap/dist/css/bootstrap.css';
 
 // components
@@ -51,7 +51,7 @@ class SearchPage extends React.Component {
   }
 
   componentDidMount() {
-    getArticles('medicine', 'date')
+    getArticles('medicine')
       .then((response) => {
         console.log(response.resultList.result)
         // let articleTitles = parseSearchToTitlesArray(results);
@@ -211,7 +211,7 @@ class SearchPage extends React.Component {
 
             <InputGroup>
               <Input style={{ borderRadius: '25px' }}
-                placeholder={"abstracts, full text, patents ..."}
+                placeholder={"articles, patents, clinical guidelines ..."}
                 onChange={(e) => this.handleChange(e.target.value)}
               />
             </InputGroup>

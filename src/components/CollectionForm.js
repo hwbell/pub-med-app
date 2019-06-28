@@ -1,5 +1,5 @@
 import React from 'react';
-import '../App.css';
+import '../App.scss';
 import 'bootstrap/dist/css/bootstrap.css';
 
 // components
@@ -129,7 +129,7 @@ class CollectionForm extends React.Component {
       let collectionName = this.props.collections[this.state.highlightInd].name;
       return this.props.modifyCollection(this.props.article, collectionName, 1, () => {
         console.log('article added to collection')
-        this.setState({name: ''});
+        this.setState({ name: '' });
       })
     }
 
@@ -151,7 +151,7 @@ class CollectionForm extends React.Component {
     }
     this.props.createNewCollection(collection, () => {
       console.log('collection created!');
-      this.setState({name: ''});
+      this.setState({ name: '' });
     });
 
     // reset the highlightInd to prevent empty inputs after submits
@@ -162,11 +162,14 @@ class CollectionForm extends React.Component {
   }
 
   closeModal() {
-    this.setState({
-      highlightInd: null
-    }, () => {
-      this.props.toggle();
-    })
+    this.props.toggle();
+    // set a timeout on the reset here so the content doesn't jump before the modal
+    // fades
+    setTimeout(() => {
+      this.setState({
+        highlightInd: null
+      })
+    }, 1000)
   }
 
   render() {

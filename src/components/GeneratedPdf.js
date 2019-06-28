@@ -21,12 +21,18 @@ class GeneratedPdf extends React.Component {
 
   renderCollection() {
     this.props.collection.articles.map((article) => {
+
+      let { name, authorString, journalInfo, pubYear } = article;
+
       return (
         <View style={styles.article}>
-          <Text style={styles.title}>{article.name}</Text>
-          <Text style={styles.author}>{article.authorString}</Text>
+          <Text style={styles.title}>{name}</Text>
+          <Text style={styles.author}>{authorString}</Text>
           <Text style={styles.journal}>
-            {`${article.journalTitle}  `} <strong>{`  ${article.pubYear}`}</strong>
+            {journalInfo && journalInfo.journal.title ?
+              `${journalInfo.journal.title}  ` :
+              ``}
+            <strong>{`  ${pubYear}`}</strong>
           </Text>
         </View>
       )
@@ -34,6 +40,7 @@ class GeneratedPdf extends React.Component {
   }
 
   render() {
+
     return (
       <Document>
         <Page size="A4" style={styles.page}>
@@ -42,7 +49,14 @@ class GeneratedPdf extends React.Component {
 
           {this.props.collection.articles.map((article, i) => {
 
-            console.log(article)
+            let publicationInfo;
+
+            if (article.journalInfo && article.journalInfo.journal) {
+              publicationInfo = `${article.journalInfo.journal.title}  ${article.pubYear}`
+            } else {
+              publicationInfo = `${article.pubYear}`;
+            }
+
             return (
               <View key={i} style={styles.article}>
 
@@ -52,7 +66,7 @@ class GeneratedPdf extends React.Component {
                 </View>
 
                 <Text style={styles.journal}>
-                  {`${article.journalTitle}  ${article.pubYear}`}
+                  {publicationInfo}
                 </Text>
 
                 <Text style={styles.author}>{article.authorString}</Text>

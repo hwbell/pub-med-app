@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../App.css';
+import '../../App.scss';
 import 'bootstrap/dist/css/bootstrap.css';
 
 // components
@@ -10,7 +10,7 @@ import EmailForm from "../EmailForm";
 import { ButtonGroup, Button } from 'reactstrap';
 import Loader from 'react-loader-spinner';
 
-import { PDFViewer, PDFDownloadLink } from '@react-pdf/renderer';
+import { PDFViewer } from '@react-pdf/renderer';
 import GeneratedPdf from '../GeneratedPdf';
 
 // animation
@@ -23,12 +23,13 @@ const Div = posed.div({
 });
 
 const initialState = {
+  pdfReady: false,
   showPreview: false,
   emailModal: false,
-  exportSelected: true
+  exportSelected: true,
 }
 
-class SearchPage extends React.Component {
+class CollectionPage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -42,7 +43,9 @@ class SearchPage extends React.Component {
   }
 
   componentDidMount() {
-
+    this.setState({
+      pdfReady: true
+    })
   }
 
   renderLoader() {
@@ -87,7 +90,7 @@ class SearchPage extends React.Component {
     console.log(`removing article: ${article.id} from user's ${collection.name} collection`);
 
     this.props.modifyCollection(article, collection.name, -1, () => {
-      console.log('article remove from collection')
+      console.log('article removed from collection')
     })
 
   }
@@ -141,8 +144,10 @@ class SearchPage extends React.Component {
                   <div className="row" style={styles.titleHolder}>
 
                     <div className="row">
-                      <p className="collection-title"><strong>{collection.name}</strong></p>
-                      <p className="collection-title">{`( ${collection.articles.length} )`}</p>
+                      <p className="collection-title">
+                        <strong>{`${collection.name} `}</strong>
+                        {` [ ${collection.articles.length} ]`}
+                      </p>
                     </div>
 
                     {/* email / download options for the article */}
@@ -152,15 +157,18 @@ class SearchPage extends React.Component {
                         onClick={this.togglePreview}>
                         {!this.state.showPreview ? 'preview' : 'hide preview'}
                       </Button>
+                      
                       {/* <Button className="add" size="sm"
                         onClick={() => this.toggleEmailForm()}>
                         email
                       </Button> */}
-                      <Button className="add article-button" size="sm">
-                        <PDFDownloadLink style={{ color: 'white', textDecoration: 'none' }} document={<GeneratedPdf collection={collection} />} fileName="somename.pdf">
-                          {({ blob, url, loading, error }) => (loading ? 'loading...' : 'download')}
-                        </PDFDownloadLink>
-                      </Button>
+
+                      {/* {this.state.pdfReady &&
+                        <Button className="add article-button" size="sm">
+                          <PDFDownloadLink style={{ color: 'white', textDecoration: 'none' }} document={<GeneratedPdf collection={collection} />} fileName="somename.pdf">
+                            {({ blob, url, loading, error }) => (loading ? 'loading...' : 'download')}
+                          </PDFDownloadLink>
+                        </Button>} */}
 
                     </div>
                   </div>
@@ -183,7 +191,7 @@ class SearchPage extends React.Component {
             // or if there aren't any collections yet
             :
             <div className="outline" style={styles.content}>
-              <p className="article-title">
+              <p className="paragraph">
                 {`It looks like you haven't made any collections yet! You can add
                 articles by searching the database, then organize, share & export them here. `}
               </p>
@@ -209,8 +217,8 @@ const styles = {
     backgroundColor: 'rgba(0, 0, 0, 0.24)'
   },
   buttonHolder: {
-    padding: '10px' 
+    padding: '10px'
   }
 }
 
-export default SearchPage;
+export default CollectionPage;

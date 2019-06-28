@@ -1,10 +1,10 @@
 import React from 'react';
-import '../App.css';
+import '../App.scss';
 import 'bootstrap/dist/css/bootstrap.css';
 
 // components
 import { Button, ButtonGroup, Input, Form, InputGroup, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-
+import { Document } from 'react-pdf'
 
 // this form is toggled visible by the 'add to collection' button on the search page
 class ArticleViewer extends React.Component {
@@ -20,10 +20,8 @@ class ArticleViewer extends React.Component {
   }
 
   renderArticlePreview() {
-    let { title, pmcid, pmid, authorString, journalInfo, abstractText, keywordList, fullTextUrlList } = this.props.article;
+    let { title, pmcid, pmid, authorString, journalInfo, abstractText, keywordList, fullTextUrlList, pubYear } = this.props.article;
 
-    // get rid of any that are undefined
-    let subtitles = [authorString, journalInfo, keywordList].filter(data => !!data)
 
     // authors, date, journal, keywords as subtitles with values below
     let headings = [
@@ -33,11 +31,11 @@ class ArticleViewer extends React.Component {
       },
       {
         name: 'Date Published',
-        text: journalInfo.printPublicationDate
+        text: !!journalInfo ? journalInfo.printPublicationDate : pubYear
       },
       {
         name: 'Journal',
-        text: journalInfo.journal.title
+        text: !!journalInfo ? journalInfo.journal.title : ''
       },
       {
         name: 'Keywords',
@@ -48,6 +46,27 @@ class ArticleViewer extends React.Component {
         text: !!abstractText ? abstractText : ''
       }
     ]
+
+    let ids = [
+      {
+        name: 'PMID',
+        text: pmid
+      },
+      {
+        name: 'PMCID',
+        text: pmcid
+      }
+    ];
+
+    // get urls for the article availablitity
+    let urlList = fullTextUrlList.fullTextUrl.map((articleObj) => {
+      console.log(articleObj)
+      let { availabilityCode, url } = articleObj;
+      return {
+        availabilityCode,
+        url
+      }
+    })
 
     return (
       <div className="">
@@ -60,6 +79,7 @@ class ArticleViewer extends React.Component {
           {title}
         </p>
 
+        {/* render the headings we have values for */}
         {headings.map((heading, i) => {
 
           if (!!heading.name && !!heading.text) {
@@ -75,6 +95,48 @@ class ArticleViewer extends React.Component {
 
         })}
 
+        {/* render the links to the article. They'll display the pdf here if we can get it,
+        otherwise it will link externally */}
+        <div>
+
+          <p style={styles.subtitle}>Full Text:</p>
+
+          <div>
+            {urlList.map((link, i) => {
+
+              // demand code and link
+              if (!!link.availabilityCode && !!link.url) {
+                // set fa class
+                let iconClass = link.availabilityCode === 'OA' ? 'fas fa-book-open' : 'fas fa-dollar-sign';
+
+                return (
+                  <a key={i} target="_blank" href={link.url}>
+                    <i style={styles.icon} className={`${iconClass} article-link`}></i>
+                  </a>
+                )
+
+              } else {
+                return null;
+              }
+            })}
+          </div>
+
+        </div>
+
+
+        {/* render the identifiers we have values for */}
+        <div className="float-right">
+          {ids.map((id, i) => {
+
+            if (!!id.name && !!id.text) {
+              return (
+                <p key={i} style={styles.subtitle}>{`${id.name}: ${id.text}`}</p>
+              )
+            } else {
+              return null;
+            }
+          })}
+        </div>
       </div>
     )
   }
@@ -96,7 +158,7 @@ class ArticleViewer extends React.Component {
       <Modal size="xl" centered={true} isOpen={this.props.isVisible} toggle={this.props.toggle}>
 
         {/* <ModalHeader toggle={this.props.toggle}>Your Collections</ModalHeader> */}
-        <ModalBody style={{margin: '10px'}}>
+        <ModalBody style={{ margin: '10px' }}>
 
           {this.renderArticlePreview()}
 
@@ -130,11 +192,9 @@ const styles = {
     fontWeight: 'bold'
   },
   text: {
-
     color: 'black',
-    fontSize: '16px',
+    fontSize: '14px',
   },
-
 }
 
 export default ArticleViewer;

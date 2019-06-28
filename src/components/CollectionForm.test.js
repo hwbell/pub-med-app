@@ -197,10 +197,12 @@ it('should close when "close" button is clicked', () => {
   deepWrapper.update();
 
   // after the call the highlightInd should be set to null, and the toggleStub should
-  // have been called
-  expect(deepWrapper.state().highlightInd).toEqual(null);
+  // have been called. there's a setTimeout on the highlighInd reset, so account for that.
   expect(toggleStub.mock.calls.length).toEqual(1);
 
+  setTimeout(() => {
+    expect(deepWrapper.state().highlightInd).toEqual(null);
+  }, 1100) // the timer in the component is 1000
 })
 
 it('should fire the submit function when "add to collection" button is clicked', () => {

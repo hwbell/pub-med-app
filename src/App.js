@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import './App.css';
+import './App.scss';
 
 // components
 import HomePage from './components/pages/HomePage';
