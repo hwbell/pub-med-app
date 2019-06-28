@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="article-result"
+>
+  <div
+    style={
+      Object {
+        "alignItems": "flex-start",
+        "display": "flex",
+        "flexDirection": "column",
+        "justifyContent": "space-around",
+        "width": "100%",
+      }
+    }
+  >
+    <p
+      className="article-title"
+    >
+      Agreement between self-reported and central cancer registry-recorded prevalence of cancer in the Alaska EARTH study.
+    </p>
+    <p
+      className="article-title"
+    >
+      Nash SH, Day G, Hiratsuka VY, Zimpelman GL, Koller KR.
+    </p>
+    <p
+      className="article-title"
+    >
+      International journal of circumpolar health  
+      <strong>
+          2019
+      </strong>
+    </p>
+  </div>
+  <div
+    style={
+      Object {
+        "alignSelf": "flex-start",
+        "marginLeft": "15px",
+      }
+    }
+  >
+    <button
+      aria-label={null}
+      className="article-button btn btn-secondary btn-sm"
+      onClick={[Function]}
+      type="button"
+    >
+      view article
+    </button>
+    <button
+      aria-label={null}
+      className="article-button add btn btn-secondary btn-sm"
+      onClick={[Function]}
+      type="button"
+    >
+      add to collection
+    </button>
+  </div>
+</div>
+`;

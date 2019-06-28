@@ -138,7 +138,7 @@ class SearchPage extends React.Component {
 
               return (
                 <div key={i} className="outline" style={styles.content}>
-                  <div className="" style={styles.titleHolder}>
+                  <div className="row" style={styles.titleHolder}>
 
                     <div className="row">
                       <p className="collection-title"><strong>{collection.name}</strong></p>
@@ -146,9 +146,9 @@ class SearchPage extends React.Component {
                     </div>
 
                     {/* email / download options for the article */}
-                    <ButtonGroup>
+                    <div style={styles.buttonHolder}>
                       <Button
-                        className="add" size="sm"
+                        className="add article-button" size="sm"
                         onClick={this.togglePreview}>
                         {!this.state.showPreview ? 'preview' : 'hide preview'}
                       </Button>
@@ -156,13 +156,13 @@ class SearchPage extends React.Component {
                         onClick={() => this.toggleEmailForm()}>
                         email
                       </Button> */}
-                      <Button className="add" size="sm">
-                        <PDFDownloadLink style={{ color: 'white' }} document={<GeneratedPdf collection={collection} />} fileName="somename.pdf">
+                      <Button className="add article-button" size="sm">
+                        <PDFDownloadLink style={{ color: 'white', textDecoration: 'none' }} document={<GeneratedPdf collection={collection} />} fileName="somename.pdf">
                           {({ blob, url, loading, error }) => (loading ? 'loading...' : 'download')}
                         </PDFDownloadLink>
                       </Button>
 
-                    </ButtonGroup>
+                    </div>
                   </div>
 
                   {this.state.showPreview &&
@@ -205,13 +205,11 @@ const styles = {
   titleHolder: {
     width: '100%',
     padding: '15px',
-    // marginLeft: '10px',
     borderRadius: '8px',
-    backgroundColor: 'whitesmoke',
-    // display: 'flex',
-    // flexDirection: 'row',
-    // justifyContent: 'space-between',
-    // alignItems: 'center'
+    backgroundColor: 'rgba(0, 0, 0, 0.24)'
+  },
+  buttonHolder: {
+    padding: '10px' 
   }
 }
 

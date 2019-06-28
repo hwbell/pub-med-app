@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Header from '../Header';
 import ArticleResult from '../ArticleResult';
 import CollectionForm from "../CollectionForm";
+import ArticleViewer from '../ArticleViewer';
 
 import { Input, Form, InputGroup, Button } from 'reactstrap';
 import Loader from 'react-loader-spinner';
@@ -24,6 +25,7 @@ const Div = posed.div({
 
 const initialState = {
   collectionModal: false,
+  articleModal: false,
   results: null,
   showLoading: true
 }
@@ -42,6 +44,7 @@ class SearchPage extends React.Component {
     this.addArticle = this.addArticle.bind(this);
     this.renderLoader = this.renderLoader.bind(this);
     this.toggleCollectionForm = this.toggleCollectionForm.bind(this);
+    this.toggleViewArticle = this.toggleViewArticle.bind(this);
 
     this.state = initialState;
 
@@ -144,12 +147,25 @@ class SearchPage extends React.Component {
 
   viewArticle(article) {
     console.log(`Viewing article: ${article.id}`)
+
+    this.setState({
+      selected: article
+    }, () => {
+      this.toggleViewArticle();
+    })
   }
 
   toggleCollectionForm() {
     console.log('toggling AddForm')
     this.setState(prevState => ({
       collectionModal: !prevState.collectionModal
+    }));
+  }
+
+  toggleViewArticle() {
+    console.log('toggling AddForm')
+    this.setState(prevState => ({
+      articleModal: !prevState.articleModal
     }));
   }
 
@@ -169,6 +185,14 @@ class SearchPage extends React.Component {
             collections={this.props.collections}
             createNewCollection={this.props.createNewCollection}
             modifyCollection={this.props.modifyCollection} />}
+
+        {/* modal for viewing any article */}
+        {this.state.selected &&
+          <ArticleViewer
+            article={this.state.selected}
+            isVisible={this.state.articleModal}
+            toggle={this.toggleViewArticle} />}
+        
         {/* ************************************************** */}
 
 

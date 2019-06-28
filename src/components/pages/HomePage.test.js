@@ -41,7 +41,6 @@ it('contains Header elements', async () => {
 // this also tests that the TextBlock elements are getting rendered
 it('contains .glass elements', async () => {
   let wrapper = mount(<HomePage />);
-  expect(wrapper.html()).toContain('div class=\"glass\"');
   expect(wrapper.find('.glass').length).toEqual(5);
 })
 
@@ -52,14 +51,14 @@ it('contains search results after fetch', async () => {
   expect(wrapper.state().newPublicationsInfo.paragraph.length).toBe(0)
 
   // then trigger the fetch
-  await wrapper.instance().componentDidMount();
+  await wrapper.instance().fetchArticles();
   
   // unfortunately it seems this is necessary? tried to find alternative, will
   // try again
-  await sleep(DELAY_MS)
+  // await sleep(DELAY_MS)
   
   // should have results
-  wrapper.update();
+  await wrapper.update();
   expect(wrapper.state().newPublicationsInfo.paragraph.length).not.toBe(0)
 });
 

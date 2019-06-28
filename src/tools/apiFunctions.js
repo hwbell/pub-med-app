@@ -25,10 +25,20 @@ const getArticles = async (query, sortParam) => {
     }
   }
 
-  let url = `https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=${query}${sorter}&format=json`;
-  // console.log(url)
-  let articles = await fetch(url, {
-    method: 'GET'
+  let searchUrl = `https://www.ebi.ac.uk/europepmc/webservices/rest/searchPOST?query=${query}${sorter}&resultType=core&pageSize=10&format=json`;
+  
+  // this url works too but gives less information. 
+  // let url = `https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=${query}${sorter}&format=json`;
+  
+  
+  // console.log(searchUrl)
+
+  let headers = {}
+  headers['Content-Type'] = 'application/x-www-form-urlencoded';
+
+  let articles = await fetch(searchUrl, {
+    method: 'POST',
+    headers
   })
     .then(response => response.json())
     .then((response) => {
@@ -40,6 +50,10 @@ const getArticles = async (query, sortParam) => {
   return articles;
 }
 
+// let results = getArticles('cancer').then((response) => {
+  // console.log(response.resultList.result[0])
+// })
+
 // parses the result of a search query to a simple array of the article titles
 const parseSearchToTitlesArray = (searchResults) => {
   let titlesArray = searchResults.resultList.result.map((result) => {
@@ -50,25 +64,5 @@ const parseSearchToTitlesArray = (searchResults) => {
 
 module.exports = {
   getArticles,
-  parseSearchToTitlesArray
+  parseSearchToTitlesArray,
 }
-
-
-let results = getArticles('biology', 'date').then((result) => {
-  // console.log( parseSearchToTitlesArray(result))
-})
-
-
-
-// for full text, need a xml parser ... 
-
-// .then(response => response.text())
-//     .then((response) => {
-//       // console.log(response || 'nothing')
-//       parseString(response, function (err, result) {
-//         if (err) throw err;
-
-//         console.log(result);
-//         return result;
-//       });
-//     })

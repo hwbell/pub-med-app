@@ -21,7 +21,7 @@ exports[`renders correctly 1`] = `
       href="#home"
       id="logo"
     >
-      PubMed
+      PubdddddMed
     </a>
   </div>
   <div
@@ -30,18 +30,33 @@ exports[`renders correctly 1`] = `
     <a
       className="nav-link"
       href="/about"
+      style={
+        Object {
+          "fontSize": "24px",
+        }
+      }
     >
       About
     </a>
     <a
       className="nav-link"
       href="/search"
+      style={
+        Object {
+          "fontSize": "24px",
+        }
+      }
     >
       Search
     </a>
     <a
       className="nav-link"
       href="/collections"
+      style={
+        Object {
+          "fontSize": "24px",
+        }
+      }
     >
       Collections
     </a>

@@ -39,13 +39,13 @@ class Navigator extends React.Component {
       <div className="fixed-top navigator" style={styles.main}>
 
         <div className="row">
-          <a href="#home" id="logo" className="nav-link">PubMed</a>
+          <a href="#home" id="logo" className="nav-link">PubdddddMed</a>
         </div>
 
         <div className="row links-holder">
           {links.map((link, i) => {
             return (
-              <a className="nav-link" key={i} href={link.link}>{link.title}</a>
+              <a className="nav-link" style={styles.link} key={i} href={link.link}>{link.title}</a>
             )
           })}
         </div>
@@ -64,6 +64,9 @@ const styles = {
     justifyContent: 'space-around',
     alignItems: 'center'
   },
+  link: {
+    fontSize: '24px'
+  }
 
 }
 

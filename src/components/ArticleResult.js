@@ -20,6 +20,30 @@ class ArticleResult extends React.Component {
     };
   }
 
+  renderText() {
+
+    let { title, authorString, journalInfo, pubYear } = this.props.article;
+
+    return (
+      <div style={styles.top}>
+
+        <p className="article-title">{title}</p>
+
+        <p className="article-title">{authorString}</p>
+
+        {journalInfo.journal.title ?
+          <p className="article-title">
+            {`${this.props.article.journalInfo.journal.title}  `}
+            <strong>{`  ${pubYear}`}</strong>
+          </p> :
+          <p className="article-title">
+            <strong>{`  ${pubYear}`}</strong>
+          </p>}
+
+      </div>
+    )
+  }
+
   renderButtons() {
     return (
       <div style={styles.buttonsHolder}>
@@ -46,23 +70,15 @@ class ArticleResult extends React.Component {
   }
 
   render() {
+
     return (
       <div className="article-result">
 
-        <div style={styles.top}>
-          
-          <p className="article-title">{this.props.article.title}</p>
-          <p className="article-title">{this.props.article.authorString}</p>
-          <p className="article-title">
-            {`${this.props.article.journalTitle}  `}
-            <strong>{`  ${this.props.article.pubYear}`}</strong>
-          </p>
-        
-        </div>
+        {this.renderText()}
 
         {this.renderButtons()}
 
-        
+
       </div>
     );
   }

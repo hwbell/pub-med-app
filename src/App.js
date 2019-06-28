@@ -114,7 +114,7 @@ class App extends Component {
           <div className="row links-holder">
             {links.map((link, i) => {
               return (
-                <Link className="nav-link" key={i} to={link.link}>{link.title}</Link>
+                <Link className="nav-link" style={styles.link} key={i} to={link.link}>{link.title}</Link>
               )
             })}
           </div>
@@ -171,5 +171,7 @@ const styles = {
     justifyContent: 'space-around',
     alignItems: 'center'
   },
-
+  link: {
+    fontSize: '22px'
+  }
 }

@@ -37,23 +37,6 @@ class CollectionForm extends React.Component {
       this.setState({ highlightInd: null })
     }
   }
-  renderSelectors() {
-
-    if (this.props.collections.length > 0) {
-
-      return (
-        <div className="center-all-col">
-          {this.props.collections.map((collection, i) =>
-            <Button key={i}
-              color="link" className="nav-link"
-              style={{ backgroundColor: i === this.state.highlightInd ? 'whitesmoke' : 'white' }}
-              onClick={() => this.highlight(i)}>{`${collection.name} ( ${collection.articles.length} )`}</Button>)}
-        </div>
-      )
-    } else {
-      return null;
-    }
-  }
 
   renderMessage() {
     console.log(this.props.collections)
@@ -72,11 +55,29 @@ class CollectionForm extends React.Component {
     )
   }
 
+  renderSelectors() {
+
+    if (this.props.collections.length > 0) {
+
+      return (
+        <div className="center-all-col">
+          {this.props.collections.map((collection, i) =>
+            <Button key={i}
+              color="link" className="nav-link"
+              style={{ backgroundColor: i === this.state.highlightInd ? 'whitesmoke' : 'white' }}
+              onClick={() => this.highlight(i)}>{`${collection.name} ( ${collection.articles.length} )`}</Button>)}
+        </div>
+      )
+    } else {
+      return null;
+    }
+  }
+
   renderInput() {
 
     if (this.state.highlightInd === null) {
       return (
-        <Form style={{ marginTop: '25px' }} onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit}>
 
           <InputGroup>
 
@@ -102,7 +103,7 @@ class CollectionForm extends React.Component {
     let title = this.props.article.title;
     let text = [`${title}`, 'will be added to the collection.']
     return (
-      <div>
+      <div id="article-preview">
         {text.map((str, i) => {
           return <p key={i} style={i === 0 ? styles.articleText : styles.text}>{str}</p>
         })}
@@ -143,7 +144,7 @@ class CollectionForm extends React.Component {
     }
 
 
-    // we make a new collection and register it with the function drilled from App
+    // otherwise, make a new collection and register it with the function drilled from App
     let collection = {
       name: this.state.name,
       articles: [this.props.article]
@@ -171,7 +172,7 @@ class CollectionForm extends React.Component {
   render() {
 
     return (
-      <Modal isOpen={this.props.isVisible} toggle={this.props.toggle}>
+      <Modal centered={true} isOpen={this.props.isVisible} toggle={this.props.toggle}>
 
         {/* <ModalHeader toggle={this.props.toggle}>Your Collections</ModalHeader> */}
         <ModalBody>
@@ -203,7 +204,7 @@ const styles = {
   },
   text: {
     color: 'black',
-    margin: '5px 20px'
+    margin: '18px 20px'
   },
   articleText: {
     color: 'blue',
