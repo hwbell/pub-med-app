@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProfilePage renders correctly 1`] = `
+<div
+  className="page"
+>
+  <div
+    className="glass"
+  >
+    <div
+      className="heading"
+    >
+      <h2
+        className="title"
+      >
+        Your Profile
+      </h2>
+      <h4
+        className="subtitle"
+      >
+        
+      </h4>
+    </div>
+    <div
+      className="outline"
+      style={
+        Object {
+          "padding": "20px",
+        }
+      }
+    >
+      <p
+        className="paragraph"
+      >
+        Create an account to start sharing resources with other researchers!
+      </p>
+      <p
+        className="paragraph"
+      >
+        If you don't already have an account, you can sign up by checking the new user box below
+          and confirming your password.
+      </p>
+      <form
+        className=""
+        onSubmit={[Function]}
+        style={
+          Object {
+            "margin": 0,
+            "maxWidth": "300px",
+            "padding": 0,
+            "width": "80%",
+          }
+        }
+      >
+        <input
+          className="form-control"
+          name="name"
+          onChange={[Function]}
+          placeholder="username"
+          style={
+            Object {
+              "margin": 0,
+              "marginTop": "8px",
+            }
+          }
+          type="text"
+        />
+        <input
+          className="form-control"
+          name="email"
+          onChange={[Function]}
+          placeholder="email"
+          style={
+            Object {
+              "margin": 0,
+              "marginTop": "8px",
+            }
+          }
+          type="email"
+        />
+        <input
+          className="form-control"
+          name="password"
+          onChange={[Function]}
+          placeholder="password"
+          style={
+            Object {
+              "margin": 0,
+              "marginTop": "8px",
+            }
+          }
+          type="password"
+        />
+        <span />
+        <div
+          className="form-check"
+          style={
+            Object {
+              "marginTop": "8px",
+            }
+          }
+        >
+          <label
+            className="form-check-label"
+          >
+            <input
+              checked={false}
+              className="form-check-input"
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <p>
+              new user?
+            </p>
+          </label>
+        </div>
+        <button
+          aria-label={null}
+          className="btn btn-primary"
+          onClick={[Function]}
+          type="submit"
+        >
+          sign up!
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+`;

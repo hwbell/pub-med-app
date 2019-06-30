@@ -1,40 +1,21 @@
 import React from 'react';
-import '../App.css';
+import '../App.scss';
 import 'bootstrap/dist/css/bootstrap.css';
 
-var ncbi = require('node-ncbi');
+// components
+import { Button } from 'reactstrap';
 
-// elements
-
-// styling
-// import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-
-// elements
-
-class Header extends React.Component {
+// ******************************************************************************
+class DefaultComponent extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      results: null
-
-    };
-  }
-
-  componentDidMount() {
-    const pubmed = ncbi.pubmed;
-    pubmed.search('actin', 0, 20).then((results) => {
-      console.log(results);
-      this.setState({ results })
-    });
   }
 
   render() {
+
     return (
-      <div className="glass full-width">
-        
-          <h2 className="title">{this.props.title}</h2>
-          <h4 className="subtitle">{this.props.subtitle}</h4>
+      <div className="article-result">
+
 
       </div>
     );
@@ -42,13 +23,7 @@ class Header extends React.Component {
 }
 
 const styles = {
-  main: {
-    padding: '10px'
-  },
-  text: {
-    color: 'white'
-  }
 
 }
 
-export default Header;
+export default DefaultComponent;

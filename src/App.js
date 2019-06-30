@@ -13,6 +13,7 @@ import posed, { PoseGroup } from 'react-pose';
 
 // routing
 import { Switch, Link } from 'react-router-dom';
+import ProfilePage from './components/pages/ProfilePage';
 // import Router from 'react-router-dom/BrowserRouter';
 const Router = require("react-router-dom").BrowserRouter;
 // import Route from 'react-router-dom/Route';
@@ -54,8 +55,6 @@ class App extends Component {
     this.createNewCollection = this.createNewCollection.bind(this);
     this.modifyCollection = this.modifyCollection.bind(this);
   }
-
-  setRef = ref => this.ref = ref;
 
   modifyCollection(article, collectionName, change, callback) {
 
@@ -120,7 +119,7 @@ class App extends Component {
               )
             })}
 
-            <Link className="nav-link" style={styles.link} to="/profile">
+            <Link className="nav-link" style={styles.link} to="/profile/">
               <i className="far fa-user"></i>
             </Link>
           </div>
@@ -132,8 +131,10 @@ class App extends Component {
 
           <Route render={({ location }) => (
 
+            // pose is awesome 
+            <PoseGroup>
 
-              <div key={location.pathname}>
+              <RoutesContainer key={location.pathname}>
 
                 <Switch location={location}>
                   <Route exact path="/" component={HomePage} />
@@ -150,10 +151,13 @@ class App extends Component {
                       modifyCollection={this.modifyCollection}
                     />
                   } />
+                  <Route path="/profile/" component={ProfilePage} />
 
                 </Switch>
 
-              </div>
+              </RoutesContainer>
+
+            </PoseGroup>
 
           )} />
 
@@ -163,7 +167,9 @@ class App extends Component {
   }
 }
 
-export default App;
+export default React.forwardRef((props, ref) => <App innerRef={ref} {...props}/>);
+
+// export default App;
 
 const styles = {
   main: {
