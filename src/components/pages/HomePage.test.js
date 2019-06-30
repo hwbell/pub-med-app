@@ -51,7 +51,7 @@ it('contains search results after fetch', async () => {
   expect(wrapper.state().newPublicationsInfo.paragraph.length).toBe(0)
 
   // then trigger the fetch
-  await wrapper.instance().fetchArticles();
+  await wrapper.instance().componentDidMount();
   
   // unfortunately it seems this is necessary? tried to find alternative, will
   // try again

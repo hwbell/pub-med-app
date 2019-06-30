@@ -55,6 +55,8 @@ class App extends Component {
     this.modifyCollection = this.modifyCollection.bind(this);
   }
 
+  setRef = ref => this.ref = ref;
+
   modifyCollection(article, collectionName, change, callback) {
 
     // if no collectionName / article, return
@@ -117,6 +119,10 @@ class App extends Component {
                 <Link className="nav-link" style={styles.link} key={i} to={link.link}>{link.title}</Link>
               )
             })}
+
+            <Link className="nav-link" style={styles.link} to="/profile">
+              <i className="far fa-user"></i>
+            </Link>
           </div>
 
 
@@ -126,10 +132,8 @@ class App extends Component {
 
           <Route render={({ location }) => (
 
-            // pose is awesome 
-            <PoseGroup>
 
-              <RoutesContainer key={location.pathname}>
+              <div key={location.pathname}>
 
                 <Switch location={location}>
                   <Route exact path="/" component={HomePage} />
@@ -149,9 +153,7 @@ class App extends Component {
 
                 </Switch>
 
-              </RoutesContainer>
-
-            </PoseGroup>
+              </div>
 
           )} />
 

@@ -1,7 +1,4 @@
-
-var ncbi = require('node-ncbi');
-var fetch = require('node-fetch')
-var parseString = require('xml2js').parseString;
+const fetch = require('node-fetch')
 
 // query and return based on date / citations
 const getArticles = async (query, sortParam) => {
@@ -27,12 +24,6 @@ const getArticles = async (query, sortParam) => {
 
   let searchUrl = `https://www.ebi.ac.uk/europepmc/webservices/rest/searchPOST?query=${query}${sorter}&resultType=core&pageSize=10&format=json`;
   
-  // this url works too but gives less information. 
-  // let url = `https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=${query}${sorter}&format=json`;
-  
-  
-  // console.log(searchUrl)
-
   let headers = {}
   headers['Content-Type'] = 'application/x-www-form-urlencoded';
 
@@ -50,10 +41,6 @@ const getArticles = async (query, sortParam) => {
   return articles;
 }
 
-// let results = getArticles('cancer').then((response) => {
-//   console.log(response.resultList.result.slice(0,2))
-// })
-
 // parses the result of a search query to a simple array of the article titles
 const parseSearchToTitlesArray = (searchResults) => {
   let titlesArray = searchResults.resultList.result.map((result) => {
@@ -61,6 +48,10 @@ const parseSearchToTitlesArray = (searchResults) => {
   })
   return titlesArray;
 }
+
+// let results = getArticles('cancer').then((response) => {
+//   console.log(response.resultList.result.slice(0,2))
+// })
 
 module.exports = {
   getArticles,

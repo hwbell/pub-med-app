@@ -92,7 +92,7 @@ class HomePage extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchArticles();
+    return this.fetchArticles();
   }
 
   render() {

@@ -38,6 +38,7 @@ class SearchPage extends React.Component {
   constructor(props) {
     super(props);
 
+    this.fetchSearch = this.fetchSearch.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.viewArticle = this.viewArticle.bind(this);
@@ -51,9 +52,14 @@ class SearchPage extends React.Component {
   }
 
   componentDidMount() {
-    getArticles('medicine')
+   return this.fetchSearch('medicine');
+  }
+
+  // get the results from the api
+  fetchSearch(query) {
+    return getArticles(query)
       .then((response) => {
-        console.log(response.resultList.result)
+        // console.log(response.resultList.result)
         // let articleTitles = parseSearchToTitlesArray(results);
         this.setState({
           results: response.resultList.result,
@@ -61,7 +67,10 @@ class SearchPage extends React.Component {
           // articleTitles
         })
       }).catch((e) => {
-        console.log(e)
+        // console.log(e)
+        this.setState({
+          error: e
+        })
       })
   }
 
@@ -84,32 +93,16 @@ class SearchPage extends React.Component {
 
   }
 
-  // get the results from the api
-  fetchSearch(query) {
-    getArticles(query)
-      .then((response) => {
-        console.log(response.resultList.result)
-        // let articleTitles = parseSearchToTitlesArray(results);
-        this.setState({
-          results: response.resultList.result,
-          showLoading: false
-          // articleTitles
-        })
-      }).catch((e) => {
-        console.log(e)
-      })
-  }
-
   renderLoader() {
     return (
-      <Div style={styles.loaderHolder} key="loader">
+      <div style={styles.loaderHolder} id="loader" key="loader">
         <Loader
           height={100}
           width={100}
           type="ThreeDots"
           color="whitesmoke"
         />
-      </Div>
+      </div>
     )
   }
 

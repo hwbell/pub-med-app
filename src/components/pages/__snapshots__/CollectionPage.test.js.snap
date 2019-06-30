@@ -258,6 +258,65 @@ exports[`CollectionPage renders correctly 1`] = `
           <p
             className="article-title"
           >
+            Culinary medicine and community partnership: hands-on culinary skills training to empower medical students to provide patient-centered nutrition education. 
+          </p>
+          <p
+            className="article-title"
+          >
+            Pang B, Memel Z, Diamant C, Clarke E, Chou S, Gregory H.
+          </p>
+          <p
+            className="article-title"
+          >
+            Medical education online  
+            <strong>
+                2019
+            </strong>
+          </p>
+        </div>
+        <div
+          style={
+            Object {
+              "alignSelf": "flex-start",
+              "marginLeft": "15px",
+            }
+          }
+        >
+          <button
+            aria-label={null}
+            className="article-button view btn btn-secondary btn-sm"
+            onClick={[Function]}
+            type="button"
+          >
+            view article
+          </button>
+          <button
+            aria-label={null}
+            className="article-button warn btn btn-secondary btn-sm"
+            onClick={[Function]}
+            type="button"
+          >
+            remove
+          </button>
+        </div>
+      </div>
+      <div
+        className="article-result"
+      >
+        <div
+          style={
+            Object {
+              "alignItems": "flex-start",
+              "display": "flex",
+              "flexDirection": "column",
+              "justifyContent": "space-around",
+              "width": "100%",
+            }
+          }
+        >
+          <p
+            className="article-title"
+          >
             First Case in Korea of a Patient With Anti-PP1Pk Antibodies: Successful Blood Management via Acute Normovolemic Hemodilution.
           </p>
           <p
@@ -564,65 +623,6 @@ exports[`CollectionPage renders correctly 1`] = `
             className="article-title"
           >
             Annals of laboratory medicine  
-            <strong>
-                2019
-            </strong>
-          </p>
-        </div>
-        <div
-          style={
-            Object {
-              "alignSelf": "flex-start",
-              "marginLeft": "15px",
-            }
-          }
-        >
-          <button
-            aria-label={null}
-            className="article-button view btn btn-secondary btn-sm"
-            onClick={[Function]}
-            type="button"
-          >
-            view article
-          </button>
-          <button
-            aria-label={null}
-            className="article-button warn btn btn-secondary btn-sm"
-            onClick={[Function]}
-            type="button"
-          >
-            remove
-          </button>
-        </div>
-      </div>
-      <div
-        className="article-result"
-      >
-        <div
-          style={
-            Object {
-              "alignItems": "flex-start",
-              "display": "flex",
-              "flexDirection": "column",
-              "justifyContent": "space-around",
-              "width": "100%",
-            }
-          }
-        >
-          <p
-            className="article-title"
-          >
-            ARTIFICIAL CELL evolves into nanomedicine, biotherapeutics, blood substitutes, drug delivery, enzyme/gene therapy, cancer therapy, cell/stem cell therapy, nanoparticles, liposomes, bioencapsulation, replicating synthetic cells, cell encapsulation/scaffold, biosorbent/immunosorbent haemoperfusion/plasmapheresis, regenerative medicine, encapsulated microbe, nanobiotechnology, nanotechnology.
-          </p>
-          <p
-            className="article-title"
-          >
-            Chang TMS.
-          </p>
-          <p
-            className="article-title"
-          >
-            Artificial cells, nanomedicine, and biotechnology  
             <strong>
                 2019
             </strong>
@@ -892,6 +892,65 @@ exports[`CollectionPage renders correctly 1`] = `
           <p
             className="article-title"
           >
+            Culinary medicine and community partnership: hands-on culinary skills training to empower medical students to provide patient-centered nutrition education. 
+          </p>
+          <p
+            className="article-title"
+          >
+            Pang B, Memel Z, Diamant C, Clarke E, Chou S, Gregory H.
+          </p>
+          <p
+            className="article-title"
+          >
+            Medical education online  
+            <strong>
+                2019
+            </strong>
+          </p>
+        </div>
+        <div
+          style={
+            Object {
+              "alignSelf": "flex-start",
+              "marginLeft": "15px",
+            }
+          }
+        >
+          <button
+            aria-label={null}
+            className="article-button view btn btn-secondary btn-sm"
+            onClick={[Function]}
+            type="button"
+          >
+            view article
+          </button>
+          <button
+            aria-label={null}
+            className="article-button warn btn btn-secondary btn-sm"
+            onClick={[Function]}
+            type="button"
+          >
+            remove
+          </button>
+        </div>
+      </div>
+      <div
+        className="article-result"
+      >
+        <div
+          style={
+            Object {
+              "alignItems": "flex-start",
+              "display": "flex",
+              "flexDirection": "column",
+              "justifyContent": "space-around",
+              "width": "100%",
+            }
+          }
+        >
+          <p
+            className="article-title"
+          >
             First Case in Korea of a Patient With Anti-PP1Pk Antibodies: Successful Blood Management via Acute Normovolemic Hemodilution.
           </p>
           <p
@@ -1198,65 +1257,6 @@ exports[`CollectionPage renders correctly 1`] = `
             className="article-title"
           >
             Annals of laboratory medicine  
-            <strong>
-                2019
-            </strong>
-          </p>
-        </div>
-        <div
-          style={
-            Object {
-              "alignSelf": "flex-start",
-              "marginLeft": "15px",
-            }
-          }
-        >
-          <button
-            aria-label={null}
-            className="article-button view btn btn-secondary btn-sm"
-            onClick={[Function]}
-            type="button"
-          >
-            view article
-          </button>
-          <button
-            aria-label={null}
-            className="article-button warn btn btn-secondary btn-sm"
-            onClick={[Function]}
-            type="button"
-          >
-            remove
-          </button>
-        </div>
-      </div>
-      <div
-        className="article-result"
-      >
-        <div
-          style={
-            Object {
-              "alignItems": "flex-start",
-              "display": "flex",
-              "flexDirection": "column",
-              "justifyContent": "space-around",
-              "width": "100%",
-            }
-          }
-        >
-          <p
-            className="article-title"
-          >
-            ARTIFICIAL CELL evolves into nanomedicine, biotherapeutics, blood substitutes, drug delivery, enzyme/gene therapy, cancer therapy, cell/stem cell therapy, nanoparticles, liposomes, bioencapsulation, replicating synthetic cells, cell encapsulation/scaffold, biosorbent/immunosorbent haemoperfusion/plasmapheresis, regenerative medicine, encapsulated microbe, nanobiotechnology, nanotechnology.
-          </p>
-          <p
-            className="article-title"
-          >
-            Chang TMS.
-          </p>
-          <p
-            className="article-title"
-          >
-            Artificial cells, nanomedicine, and biotechnology  
             <strong>
                 2019
             </strong>

@@ -11,9 +11,9 @@ it('renders without crashing', async () => {
 });
 
 // something needs fixing with pose here ... FIX IT!
-// it('renders correctly', async () => {
-  // const tree = await renderer
-    // .create(<App/>)
-    // .toJSON();
-  // expect(tree).toMatchSnapshot();
-// });
+it('renders correctly', async () => {
+  const tree = await renderer
+    .create(<App/>)
+    .toJSON();
+  expect(tree).toMatchSnapshot();
+});
