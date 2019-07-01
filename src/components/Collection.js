@@ -27,6 +27,8 @@ class Collection extends React.Component {
     }
 
     this.togglePreview = this.togglePreview.bind(this);
+    this.togglePostPreview = this.togglePostPreview.bind(this);
+    
   }
 
   togglePreview() {
@@ -37,6 +39,10 @@ class Collection extends React.Component {
 
   viewArticle(article) {
     console.log(`viewing article ${article.id}`)
+  }
+
+  togglePostPreview() {
+    console.log(`posting ${this.props.collection.name} to server`)
   }
 
   renderResults(collection) {
@@ -84,6 +90,11 @@ class Collection extends React.Component {
               className="add article-button" size="sm"
               onClick={this.togglePreview}>
               {!this.state.showPreview ? 'make pdf' : 'hide pdf'}
+            </Button>
+            <Button
+              className="add article-button" size="sm"
+              onClick={this.togglePostPreview}>
+              save to my collections
             </Button>
 
           </div>

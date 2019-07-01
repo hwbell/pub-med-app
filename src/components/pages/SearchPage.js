@@ -12,7 +12,7 @@ import { Input, Form, InputGroup, Button } from 'reactstrap';
 import Loader from 'react-loader-spinner';
 
 // tools
-import { getArticles, parseSearchToTitlesArray } from '../../tools/apiFunctions';
+import { getArticles, parseSearchToTitlesArray } from '../../tools/apiFunctions.js';
 
 // animation
 import posed, { PoseGroup } from 'react-pose';

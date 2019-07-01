@@ -12,7 +12,7 @@ import TextBlock from '../TextBlock';
 // import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 // tools
-import { getArticles, parseSearchToTitlesArray } from '../../tools/apiFunctions';
+import { getArticles, parseSearchToTitlesArray } from '../../tools/apiFunctions.js';
 
 // vars etc
 const aboutIntro = {

@@ -2,7 +2,7 @@ import React from 'react';
 import CollectionPage from './CollectionPage';
 import { shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
-import { getArticles } from '../../tools/apiFunctions';
+import { getArticles } from '../../tools/apiFunctions.js';
 
 describe('CollectionPage', () => {
 

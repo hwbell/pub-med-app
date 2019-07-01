@@ -54,6 +54,14 @@ exports[`CollectionPage renders correctly 1`] = `
           >
             make pdf
           </button>
+          <button
+            aria-label={null}
+            className="add article-button btn btn-secondary btn-sm"
+            onClick={[Function]}
+            type="button"
+          >
+            save to my collections
+          </button>
         </div>
       </div>
       <div
@@ -679,6 +687,14 @@ exports[`CollectionPage renders correctly 1`] = `
             type="button"
           >
             make pdf
+          </button>
+          <button
+            aria-label={null}
+            className="add article-button btn btn-secondary btn-sm"
+            onClick={[Function]}
+            type="button"
+          >
+            save to my collections
           </button>
         </div>
       </div>

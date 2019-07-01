@@ -118,7 +118,7 @@ class CollectionPage extends React.Component {
             :
             <div className="outline" style={styles.content}>
               <p className="paragraph">
-                {`It looks like you haven't made any collections yet! You can add
+                {`It looks like you haven't made any new collections yet! You can add
                 articles by searching the database, then organize, share & export them here. `}
               </p>
             </div>}

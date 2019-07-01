@@ -39,12 +39,14 @@ describe('Collection', () => {
 
     expect(wrapper.find('.collection').length).toEqual(1);
     expect(wrapper.find('.outline').length).toEqual(1);
+    expect(wrapper.find('Button').length).toEqual(2);
+
 
   });
 
-  it('should post a collection to the server', () => {
-    let wrapper = shallow(<Collection {...someProps} />);    
+  // it('should post a collection to the server', () => {
+  //   let wrapper = shallow(<Collection {...someProps} />);    
     
 
-  })
+  // })
 })
