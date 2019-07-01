@@ -50,26 +50,14 @@ describe('CollectionPage', () => {
       expect(wrapper.find(selector).length).toEqual(1);
     })
 
-    // one .outline div / .article-button for each collection
-    expect(wrapper.find('.outline').length).toEqual(someProps.collections.length);
-    expect(wrapper.find('.article-button').length).toEqual(someProps.collections.length);
-    expect(wrapper.find('.article-button').at(0).html()).toContain('preview');    
+
   });
 
-  it('should toggle the showPreview Boolean on .article-button click', () => {
-    let wrapper = shallow(<CollectionPage  {...someProps} />);
+  // it('should toggle the showPreview Boolean on .article-button click', () => {
+  //   let wrapper = shallow(<CollectionPage  {...someProps} />);
 
-    // it should be false to start
-    expect(wrapper.state().showPreview).toEqual(false);
 
-    // register a click and check it is true
-    wrapper.find('.article-button').at(0).simulate('click');
-    expect(wrapper.state().showPreview).toEqual(true);    
-
-    // flip it back to false
-    wrapper.find('.article-button').at(0).simulate('click');
-    expect(wrapper.state().showPreview).toEqual(false);    
-  })
+  // })
 
 });
 

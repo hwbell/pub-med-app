@@ -22,7 +22,7 @@ exports[`ProfilePage renders correctly 1`] = `
       </h4>
     </div>
     <div
-      className="outline"
+      className="outline signin"
       style={
         Object {
           "padding": "20px",

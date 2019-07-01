@@ -50,10 +50,26 @@ class App extends Component {
     super(props);
     this.state = {
       collections: [],
+      user: null
     };
 
+    // these functions are for collections that are only in the App state, not yet stored
+    // on the backend
     this.createNewCollection = this.createNewCollection.bind(this);
     this.modifyCollection = this.modifyCollection.bind(this);
+    this.registerSignIn = this.registerSignIn.bind(this);
+    
+  }
+
+  createNewCollection(collection, callback) {
+    console.log('creating new collection');
+
+    let collections = this.state.collections;
+    collections.push(collection);
+
+    this.setState({
+      collections
+    }, () => callback());
   }
 
   modifyCollection(article, collectionName, change, callback) {
@@ -87,16 +103,13 @@ class App extends Component {
     }, () => callback());
   }
 
-
-  createNewCollection(collection, callback) {
-    console.log('creating new collection');
-
-    let collections = this.state.collections;
-    collections.push(collection);
-
+  // when a user signs in from the user page it will fire this function
+  registerSignIn(user) {
     this.setState({
-      collections
-    }, () => callback());
+      user: user
+    }, () => {
+      console.log(this.state.user)
+    })
   }
 
   render() {
@@ -143,16 +156,22 @@ class App extends Component {
                     <SearchPage
                       collections={this.state.collections}
                       createNewCollection={this.createNewCollection}
-                      modifyCollection={this.modifyCollection} />
+                      modifyCollection={this.modifyCollection}
+                      user={this.state.user} />
                   } />
                   <Route path="/collections/" render={() =>
                     <CollectionPage
                       collections={this.state.collections}
                       modifyCollection={this.modifyCollection}
+                      user={this.state.user}
                     />
                   } />
-                  <Route path="/profile/" component={ProfilePage} />
-
+                  <Route path="/profile/" render={() =>
+                    <ProfilePage
+                      registerSignIn={this.registerSignIn}
+                      user={this.state.user}
+                    />
+                  } />
                 </Switch>
 
               </RoutesContainer>

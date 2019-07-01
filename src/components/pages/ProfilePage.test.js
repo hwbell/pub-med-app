@@ -3,6 +3,12 @@ import ProfilePage from './ProfilePage';
 import { shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 
+// sample props
+const user = {
+  name: 'Harry',
+  email: 'harry@example.com'
+};
+
 describe('ProfilePage', () => {
   // tests
   it('renders without crashing', async () => {
@@ -29,23 +35,44 @@ describe('ProfilePage', () => {
 
   it('shows the signin form if user is not signed in', () => {
     let wrapper = mount(<ProfilePage />);
+    wrapper.setProps({ signedIn: false });
+    wrapper.update();
+    expect(wrapper.find('.profile').length).toEqual(0);
+    expect(wrapper.find('.signin').length).toEqual(1);
 
-    expect(wrapper.find('Form').length).toEqual(1);
-    expect(wrapper.find('.paragraph').length).toEqual(2);
-    expect(wrapper.find('Input').length).toEqual(4);
-    expect(wrapper.find('FormGroup').length).toEqual(1);
-    expect(wrapper.find('Label').length).toEqual(1);
-    expect(wrapper.find('Button').length).toEqual(1);
+    // expect(wrapper.find('Form').length).toEqual(1);
+    // expect(wrapper.find('.paragraph').length).toEqual(2);
+    // expect(wrapper.find('Input').length).toEqual(4);
+    // expect(wrapper.find('FormGroup').length).toEqual(1);
+    // expect(wrapper.find('Label').length).toEqual(1);
+    // expect(wrapper.find('Button').length).toEqual(1);
 
+    // change the signedIn prop and provide a user 
     wrapper.setProps({
-      signedIn: true
+      signedIn: true,
+      user
     });
     wrapper.update();
+    // check for the change
+    expect(wrapper.find('.profile').length).toEqual(1);
+    expect(wrapper.find('.signin').length).toEqual(0);
 
-    ['.paragraph', 'Form', 'Input', 'Button', 'FormGroup', 'Label', 'Button'].forEach((selector) => {
-      expect(wrapper.find(selector).length).toEqual(0);
-    })
+  })
 
+  it('should show the users profile once signed in', async () => {
+    let wrapper = mount(<ProfilePage />);
+
+    // at first, no profile
+    expect(wrapper.find('.profile').length).toEqual(0);
+
+    // change the state and check for its appearance. need to supply
+    // a user as well
+
+    wrapper.setProps({ signedIn: true });
+    wrapper.setProps({ user });
+
+    wrapper.update();
+    expect(wrapper.find('.profile').length).toEqual(1);
   })
 
   it('handleCheck() should toggle the checkbox', () => {
@@ -67,6 +94,11 @@ describe('ProfilePage', () => {
     setTimeout(() => {
       expect(wrapper.find('Input').length).toEqual(4);
     }, 500)
+
+  })
+
+  it('should fire handleSubmit() when the ', () => {
+    let wrapper = mount(<ProfilePage />);
 
   })
 

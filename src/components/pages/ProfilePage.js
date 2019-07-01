@@ -22,7 +22,8 @@ class ProfilePage extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleCheck = this.handleCheck.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-
+    this.attemptSignIn = this.attemptSignIn.bind(this);
+    this.renderProfile = this.renderProfile.bind(this);
   }
 
   componentDidMount() {
@@ -31,7 +32,7 @@ class ProfilePage extends React.Component {
 
   renderSignIn() {
     return (
-      <div className="outline" style={{ padding: '20px' }}>
+      <div className="outline signin" style={{ padding: '20px' }}>
         <p className="paragraph">
           {`Create an account to start sharing resources with other researchers!`}
         </p>
@@ -90,8 +91,24 @@ class ProfilePage extends React.Component {
   }
 
   renderProfile() {
+
+    let user = this.props.user;
+
+    if (!user) {
+      return;
+    }
+
     return (
-      <div>Your Name</div>
+      <div className="outline profile" style={{ padding: '20px' }}>
+        <p className="article-title">
+          {`Signed in as: ${this.props.user.name}`}
+        </p>
+
+        <p className="paragraph">
+          {user.email}
+        </p>
+
+      </div>
     )
   }
 
@@ -103,7 +120,7 @@ class ProfilePage extends React.Component {
     obj[`${name}`] = value;
 
     this.setState({user: obj}, () => {
-      console.log(this.state.user)
+      // console.log(this.state.user)
     })
   }
 
@@ -126,34 +143,40 @@ class ProfilePage extends React.Component {
     let keys = Object.keys(user);
     keys.forEach((key) => {
       if (!user[key]) {
-        return alert('Username, email, and password are required!')
+        return console.log('Username, email, and password are required!')
       }
     })
 
-    // check for matching passwords if new user
+    // check for confirmed password if new user
     if (this.state.checked) {
       if(user.password !== user['confirm-password']) {
         return console.log('passwords dont match, you new user you!')
       }
     }
 
-    console.log('input looks ok')
+    console.log(`input looks ok for user: ${user.name}`)
+
+    return this.attemptSignIn(user);
   }
 
-  attemptSignIn() {
+  attemptSignIn(user) {
 
-    // get the results from the api
-    return signInUser()
+    // sign the user in via post to the server. get the token and store it for future requests
+    return signInUser(user)
       .then((response) => {
-        // console.log(response.resultList.result)
-        // let articleTitles = parseSearchToTitlesArray(results);
-        this.setState({
-          results: response.resultList.result,
-          showLoading: false
-          // articleTitles
-        })
+        console.log(response)
+
+        let {user, token} = response;
+
+        // save info to local storage
+        localStorage.setItem(`user`, JSON.stringify(user));
+        localStorage.setItem(`token`, JSON.stringify(token));
+
+        // register back in App
+        return this.props.registerSignIn(user);
+
       }).catch((e) => {
-        // console.log(e)
+        console.log(e)
         this.setState({
           error: e
         })
@@ -162,6 +185,7 @@ class ProfilePage extends React.Component {
 
   render() {
 
+    console.log(this.props)
     return (
       <div className="page">
 
