@@ -1,6 +1,9 @@
 {
   "name": "pub-med-app",
   "version": "0.1.0",
+  "engines": {
+    "node": "10.3.0"
+  },
   "private": true,
   "dependencies": {
     "@react-pdf/renderer": "^1.6.2",

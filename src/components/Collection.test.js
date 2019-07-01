@@ -34,11 +34,17 @@ describe('Collection', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('contains the corect elements', () => {
-    let wrapper = mount(<Collection {...someProps} />);
+  it('contains the correct elements', () => {
+    let wrapper = shallow(<Collection {...someProps} />);
 
     expect(wrapper.find('.collection').length).toEqual(1);
     expect(wrapper.find('.outline').length).toEqual(1);
 
   });
+
+  it('should post a collection to the server', () => {
+    let wrapper = shallow(<Collection {...someProps} />);    
+    
+
+  })
 })
