@@ -1,7 +1,7 @@
 const fetch = require('node-fetch')
 
 // query and return based on date / citations
-const getArticles = async (query, sortParam) => {
+export async function getArticles (query, sortParam) {
 
   // must have a query
   if (!query) return {};
@@ -42,10 +42,11 @@ const getArticles = async (query, sortParam) => {
 }
 
 // parses the result of a search query to a simple array of the article titles
-const parseSearchToTitlesArray = (searchResults) => {
+export function parseSearchToTitlesArray (searchResults) {
   let titlesArray = searchResults.resultList.result.map((result) => {
     return result.title;
   })
+
   return titlesArray;
 }
 
@@ -53,7 +54,7 @@ const parseSearchToTitlesArray = (searchResults) => {
 //   console.log(response.resultList.result.slice(0,2))
 // })
 
-module.exports = {
-  getArticles,
-  parseSearchToTitlesArray,
-}
+// module.exports = {
+//   getArticles,
+//   parseSearchToTitlesArray,
+// }
