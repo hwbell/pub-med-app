@@ -33,8 +33,8 @@ class CollectionPage extends React.Component {
 
     this.renderLoader = this.renderLoader.bind(this);
     this.toggleEmailForm = this.toggleEmailForm.bind(this);
-    this.togglePreviewIndex = this.togglePreviewIndex.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
 
     this.state = initialState;
 
@@ -59,7 +59,7 @@ class CollectionPage extends React.Component {
     )
   }
 
-  // for removing articles. submit registers the removal in App
+  // for removing articles, registers the removal in App
   handleSubmit(article, collection) {
     console.log(`removing article: ${article.id} from user's ${collection.name} collection`);
 
@@ -69,14 +69,17 @@ class CollectionPage extends React.Component {
 
   }
 
+  // deletes the entire collection, registers the removal in App
+  handleDelete(collection) {
+    this.props.deleteCollection(collection, () => {
+      console.log(`${collection.name} deleted from collecetions`)
+    });
+  }
+
   toggleEmailForm() {
     this.setState(prevState => ({
       emailModal: !prevState.emailModal
     }));
-  }
-
-  togglePreviewIndex(i) {
-    this.setState({previewIndex: i})
   }
 
   render() {
@@ -109,6 +112,8 @@ class CollectionPage extends React.Component {
                   key={i}
                   collection={collection}
                   handleSubmit={this.handleSubmit}  
+                  handleDelete={this.handleDelete}
+                  refreshUserCollections={this.props.refreshUserCollections}
                   />
               )
 

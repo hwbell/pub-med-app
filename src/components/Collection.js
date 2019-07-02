@@ -11,6 +11,9 @@ import GeneratedPdf from './GeneratedPdf';
 // animation
 import posed, { PoseGroup } from 'react-pose';
 
+// tools
+import { saveCollection } from '../tools/serverFunctions';
+
 // pose containers
 const Div = posed.div({
   hidden: { opacity: 0 },
@@ -27,8 +30,8 @@ class Collection extends React.Component {
     }
 
     this.togglePreview = this.togglePreview.bind(this);
-    this.togglePostPreview = this.togglePostPreview.bind(this);
-    
+    this.postCollection = this.postCollection.bind(this);
+
   }
 
   togglePreview() {
@@ -41,8 +44,36 @@ class Collection extends React.Component {
     console.log(`viewing article ${article.id}`)
   }
 
-  togglePostPreview() {
+  postCollection() {
     console.log(`posting ${this.props.collection.name} to server`)
+    let token = JSON.parse(localStorage.getItem('token'));
+    let headers = {
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    }
+
+    // Post the collection to save it to the server. Using the currently stored token
+    // will assign the user as the owner of the collection in mongodb on the backend
+    return saveCollection(this.props.collection, headers)
+      .then((response) => {
+        console.log(response)
+
+        // once we have successfully posted, we will: 
+
+        // 1. Refresh the userCollections - this will send the new collection list sent back
+        // from the server to the root App component to update all concerned components
+        this.props.refreshUserCollections(response);
+
+        // 2. Remove this collection from the 'New Collections' list 
+        this.props.handleDelete(this.props.collection);
+
+      }).catch((e) => {
+        console.log(e)
+        this.setState({
+          error: e
+        })
+      })
   }
 
   renderResults(collection) {
@@ -93,8 +124,13 @@ class Collection extends React.Component {
             </Button>
             <Button
               className="add article-button" size="sm"
-              onClick={this.togglePostPreview}>
+              onClick={this.postCollection}>
               save to my collections
+            </Button>
+            <Button
+              className="warn article-button" size="sm"
+              onClick={() => this.props.handleDelete(collection)}>
+              delete
             </Button>
 
           </div>

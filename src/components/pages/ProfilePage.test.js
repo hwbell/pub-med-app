@@ -78,7 +78,7 @@ describe('ProfilePage', () => {
   it('handleCheck() should toggle the checkbox', () => {
     let wrapper = mount(<ProfilePage />);
     expect(wrapper.state().checked).toBe(false);
-    expect(wrapper.find('Input').length).toEqual(4);
+    expect(wrapper.find('Input').length).toEqual(3);
 
     // check it
     wrapper.instance().handleCheck();
@@ -92,7 +92,7 @@ describe('ProfilePage', () => {
     expect(wrapper.state().checked).toBe(false);
     // wait for the css transition out
     setTimeout(() => {
-      expect(wrapper.find('Input').length).toEqual(4);
+      expect(wrapper.find('Input').length).toEqual(3);
     }, 500)
 
   })

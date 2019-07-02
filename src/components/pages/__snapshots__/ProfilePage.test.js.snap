@@ -25,14 +25,14 @@ exports[`ProfilePage renders correctly 1`] = `
       className="outline signin"
       style={
         Object {
-          "padding": "20px",
+          "padding": "40px",
         }
       }
     >
       <p
         className="paragraph"
       >
-        Create an account to start sharing resources with other researchers!
+        Sign in or create an account to start sharing resources with other researchers!
       </p>
       <p
         className="paragraph"
@@ -52,19 +52,6 @@ exports[`ProfilePage renders correctly 1`] = `
           }
         }
       >
-        <input
-          className="form-control"
-          name="name"
-          onChange={[Function]}
-          placeholder="username"
-          style={
-            Object {
-              "margin": 0,
-              "marginTop": "8px",
-            }
-          }
-          type="text"
-        />
         <input
           className="form-control"
           name="email"

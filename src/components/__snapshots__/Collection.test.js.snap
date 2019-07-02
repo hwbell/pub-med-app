@@ -42,6 +42,14 @@ exports[`Collection renders correctly 1`] = `
       >
         save to my collections
       </button>
+      <button
+        aria-label={null}
+        className="warn article-button btn btn-secondary btn-sm"
+        onClick={[Function]}
+        type="button"
+      >
+        delete
+      </button>
     </div>
   </div>
   <div
@@ -179,65 +187,6 @@ exports[`Collection renders correctly 1`] = `
       <p
         className="article-title"
       >
-        First Case in Korea of a Patient With Anti-PP1Pk Antibodies: Successful Blood Management via Acute Normovolemic Hemodilution.
-      </p>
-      <p
-        className="article-title"
-      >
-        Ha C, Choi S, Yu H, Chun S, Kim KH, Lee JH, Han IW, Cho D.
-      </p>
-      <p
-        className="article-title"
-      >
-        Annals of laboratory medicine  
-        <strong>
-            2019
-        </strong>
-      </p>
-    </div>
-    <div
-      style={
-        Object {
-          "alignSelf": "flex-start",
-          "marginLeft": "15px",
-        }
-      }
-    >
-      <button
-        aria-label={null}
-        className="article-button view btn btn-secondary btn-sm"
-        onClick={[Function]}
-        type="button"
-      >
-        view article
-      </button>
-      <button
-        aria-label={null}
-        className="article-button warn btn btn-secondary btn-sm"
-        onClick={[Function]}
-        type="button"
-      >
-        remove
-      </button>
-    </div>
-  </div>
-  <div
-    className="article-result"
-  >
-    <div
-      style={
-        Object {
-          "alignItems": "flex-start",
-          "display": "flex",
-          "flexDirection": "column",
-          "justifyContent": "space-around",
-          "width": "100%",
-        }
-      }
-    >
-      <p
-        className="article-title"
-      >
         Long-term safety and efficacy of deferasirox in patients with myelodysplastic syndrome, aplastic anemia and other rare anemia in Taiwan.
       </p>
       <p
@@ -308,6 +257,65 @@ exports[`Collection renders correctly 1`] = `
         className="article-title"
       >
         Medical education online  
+        <strong>
+            2019
+        </strong>
+      </p>
+    </div>
+    <div
+      style={
+        Object {
+          "alignSelf": "flex-start",
+          "marginLeft": "15px",
+        }
+      }
+    >
+      <button
+        aria-label={null}
+        className="article-button view btn btn-secondary btn-sm"
+        onClick={[Function]}
+        type="button"
+      >
+        view article
+      </button>
+      <button
+        aria-label={null}
+        className="article-button warn btn btn-secondary btn-sm"
+        onClick={[Function]}
+        type="button"
+      >
+        remove
+      </button>
+    </div>
+  </div>
+  <div
+    className="article-result"
+  >
+    <div
+      style={
+        Object {
+          "alignItems": "flex-start",
+          "display": "flex",
+          "flexDirection": "column",
+          "justifyContent": "space-around",
+          "width": "100%",
+        }
+      }
+    >
+      <p
+        className="article-title"
+      >
+        First Case in Korea of a Patient With Anti-PP1Pk Antibodies: Successful Blood Management via Acute Normovolemic Hemodilution.
+      </p>
+      <p
+        className="article-title"
+      >
+        Ha C, Choi S, Yu H, Chun S, Kim KH, Lee JH, Han IW, Cho D.
+      </p>
+      <p
+        className="article-title"
+      >
+        Annals of laboratory medicine  
         <strong>
             2019
         </strong>

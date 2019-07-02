@@ -32,9 +32,9 @@ class ProfilePage extends React.Component {
 
   renderSignIn() {
     return (
-      <div className="outline signin" style={{ padding: '20px' }}>
+      <div className="outline signin" style={{ padding: '40px' }}>
         <p className="paragraph">
-          {`Create an account to start sharing resources with other researchers!`}
+          {`Sign in or create an account to start sharing resources with other researchers!`}
         </p>
 
         <p className="paragraph">
@@ -51,9 +51,6 @@ class ProfilePage extends React.Component {
     return (
       <Form style={styles.form} onSubmit={this.handleSubmit}>
 
-        <Input style={styles.input} type="text" name="name" placeholder="username"
-          onChange={(e) => this.handleChange(e)}
-        />
         <Input style={styles.input} type="email" name="email" placeholder="email"
           onChange={(e) => this.handleChange(e)}
         />
@@ -61,20 +58,22 @@ class ProfilePage extends React.Component {
           onChange={(e) => this.handleChange(e)}
         />
 
-        {/* {this.state.checked &&
-          <Input style={styles.input} type="password" name="confirm-password" placeholder="confirm password"
-            onChange={(e) => this.handleChange(e)}
-          />} */}
-
-
         <CSSTransitionGroup
           transitionName="fade"
           transitionEnterTimeout={500}
           transitionLeaveTimeout={300}>
+
           {this.state.checked &&
             <Input key="confirm-password" style={styles.input} type="password" name="confirm-password" placeholder="confirm password"
               onChange={(e) => this.handleChange(e, true)}
             />}
+
+          {this.state.checked &&
+            <Input style={styles.input} type="text" name="name" placeholder="username (optional)"
+              onChange={(e) => this.handleChange(e)}
+            />}
+
+
         </CSSTransitionGroup>
 
         <FormGroup style={{ marginTop: '8px' }} check>
@@ -101,7 +100,7 @@ class ProfilePage extends React.Component {
     return (
       <div className="outline profile" style={{ padding: '20px' }}>
         <p className="article-title">
-          {`Signed in as: ${this.props.user.name}`}
+          {`Signed in as: ${this.props.user.name || this.props.user.email}`}
         </p>
 
         <p className="paragraph">
@@ -119,7 +118,7 @@ class ProfilePage extends React.Component {
     let obj = this.state.user || {};
     obj[`${name}`] = value;
 
-    this.setState({user: obj}, () => {
+    this.setState({ user: obj }, () => {
       // console.log(this.state.user)
     })
   }
@@ -138,18 +137,15 @@ class ProfilePage extends React.Component {
       return;
     }
 
-    // check for all fields
+    // check for all fields, with username being optional
     let user = this.state.user;
-    let keys = Object.keys(user);
-    keys.forEach((key) => {
-      if (!user[key]) {
-        return console.log('Username, email, and password are required!')
-      }
-    })
+    if (!user.email || !user.password) {
+      return console.log('Email and password are required!');
+    }
 
     // check for confirmed password if new user
     if (this.state.checked) {
-      if(user.password !== user['confirm-password']) {
+      if (user.password !== user['confirm-password']) {
         return console.log('passwords dont match, you new user you!')
       }
     }
@@ -161,12 +157,14 @@ class ProfilePage extends React.Component {
 
   attemptSignIn(user) {
 
+
     // sign the user in via post to the server. get the token and store it for future requests
-    return signInUser(user)
+    // pass this.state.checked as a boolean for whether it is a new user
+    return signInUser(user, this.state.checked)
       .then((response) => {
         console.log(response)
 
-        let {user, token} = response;
+        let { user, token } = response;
 
         // save info to local storage
         localStorage.setItem(`user`, JSON.stringify(user));
@@ -185,7 +183,7 @@ class ProfilePage extends React.Component {
 
   render() {
 
-    console.log(this.props)
+    // console.log(this.props)
     return (
       <div className="page">
 
@@ -197,7 +195,7 @@ class ProfilePage extends React.Component {
             subtitle={""}
           />
 
-          {!this.props.signedIn ?
+          {!this.props.user ?
             this.renderSignIn() :
             this.renderProfile()
           }

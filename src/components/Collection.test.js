@@ -4,6 +4,11 @@ import { shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 import { getArticles } from '../tools/apiFunctions';
 
+// stubs
+let handleDeleteStub = jest.fn();
+let toggleStub = jest.fn();
+let previewStub = jest.fn();
+
 describe('Collection', () => {
 
   let someProps;
@@ -16,7 +21,8 @@ describe('Collection', () => {
       collection: {
         name: 'sample collection',
         articles
-      }
+      },
+      handleDelete: handleDeleteStub,
     }
   });
 
@@ -39,14 +45,32 @@ describe('Collection', () => {
 
     expect(wrapper.find('.collection').length).toEqual(1);
     expect(wrapper.find('.outline').length).toEqual(1);
-    expect(wrapper.find('Button').length).toEqual(2);
+    expect(wrapper.find('Button').length).toEqual(3);
 
 
   });
 
-  // it('should post a collection to the server', () => {
-  //   let wrapper = shallow(<Collection {...someProps} />);    
-    
+  it('should fire the button functions correctly', async () => {
+    let wrapper = shallow(<Collection {...someProps} />);
 
-  // })
+    wrapper.instance().postCollection = jest.fn();
+    wrapper.instance().handleDelete = jest.fn();
+    
+    // the preview button
+    expect(wrapper.state().showPreview).toEqual(false);
+    wrapper.find('Button').at(0).simulate('click');
+    wrapper.update();
+    expect(wrapper.state().showPreview).toEqual(true);    
+
+    // the save button
+    wrapper.find('Button').at(1).simulate('click');
+    wrapper.update();
+    expect(wrapper.instance().postCollection.mock.calls.length).toEqual(1);
+
+    // the delete button
+    wrapper.find('Button').at(2).simulate('click');
+    wrapper.update();
+    expect(handleDeleteStub.mock.calls.length).toEqual(1);
+
+  })
 })

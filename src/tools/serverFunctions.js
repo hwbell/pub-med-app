@@ -4,7 +4,7 @@ const collectionServerUrl = process.env.REACT_APP_COLLECTION_SERVER_URL || 'http
 const fetch = require('node-fetch');
 
 
-export async function signInUser (user) {
+export async function signInUser (user, isNewUser) {
   if (!user) {
     return;
   }
@@ -12,7 +12,8 @@ export async function signInUser (user) {
   let headers = {}
   headers['content-type'] = 'application/application/json';
 
-  let response = await fetch(`${collectionServerUrl}users`, {
+  let url = isNewUser ? `${collectionServerUrl}users` : `${collectionServerUrl}users/login`;
+  let response = await fetch( url, {
     method: 'POST',
     body: JSON.stringify(user),
     headers: {
@@ -28,6 +29,39 @@ export async function signInUser (user) {
     .catch(err => console.log(err))
 
   return response;
+}
+
+// saves a collection to the server
+export async function saveCollection (collection, headers) {
+
+  let serverResponse = await fetch(`${collectionServerUrl}collections`, {
+    method: 'POST',
+    body: JSON.stringify(collection),
+    headers
+  })
+    .then(response => response.json())
+    .then((json) => {
+      // console.log(response)
+      return json;
+    })
+    .catch(err => console.log(err))
+
+  return serverResponse;
+}
+
+export async function getUserCollections(headers) {
+  let serverResponse = await fetch(`${collectionServerUrl}collections/me`, {
+    method: 'GET',
+    headers
+  })
+    .then(response => response.json())
+    .then((json) => {
+      // console.log(response)
+      return json;
+    })
+    .catch(err => console.log(err))
+
+  return serverResponse;
 }
 // let user = {
 //   "name": makeRandomString(6),
@@ -54,25 +88,6 @@ export async function signInUser (user) {
 
 //   console.log(localStorage.token)
 // })
-
-// saves a collection to the server
-export async function saveCollection (collection, headers) {
-
-  let serverResponse = await fetch(`${collectionServerUrl}collections`, {
-    method: 'POST',
-    body: JSON.stringify(collection),
-    headers
-  })
-    .then(response => response.json())
-    .then((json) => {
-      // console.log(response)
-      return json;
-    })
-    .catch(err => console.log(err))
-
-  return serverResponse;
-}
-
 
 // let headers = {
 //   Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZDFhN2VlMTkzYmI0ZTQyZWM1Mjk5MmQiLCJpYXQiOjE1NjIwMTc1MDV9.AT5W-Vu8LssYs3fmH3IpnWSbQFxS0zk8S2WdW-2OAcs',

@@ -14,9 +14,12 @@ import posed, { PoseGroup } from 'react-pose';
 // routing
 import { Switch, Link } from 'react-router-dom';
 import ProfilePage from './components/pages/ProfilePage';
-// import Router from 'react-router-dom/BrowserRouter';
+
+// tools
+import { getUserCollections } from './tools/serverFunctions';
+
+// more routing .... dev console warning said to change it to this instead of import?
 const Router = require("react-router-dom").BrowserRouter;
-// import Route from 'react-router-dom/Route';
 const Route = require("react-router-dom").Route;
 
 const RoutesContainer = posed.div({
@@ -50,15 +53,17 @@ class App extends Component {
     super(props);
     this.state = {
       collections: [],
-      user: null
+      user: null,
+      userCollections: []
     };
 
     // these functions are for collections that are only in the App state, not yet stored
     // on the backend
     this.createNewCollection = this.createNewCollection.bind(this);
     this.modifyCollection = this.modifyCollection.bind(this);
+    this.deleteCollection = this.deleteCollection.bind(this);
     this.registerSignIn = this.registerSignIn.bind(this);
-    
+    this.refreshUserCollections = this.refreshUserCollections.bind(this);
   }
 
   createNewCollection(collection, callback) {
@@ -70,6 +75,19 @@ class App extends Component {
     this.setState({
       collections
     }, () => callback());
+  }
+
+  deleteCollection(collectionToDelete, callback) {
+    let name = collectionToDelete.name;
+    console.log(name)
+    let collections = this.state.collections.filter( collection => collection.name !== name );
+
+    this.setState({
+      collections
+    }, () => {
+      callback();
+    })
+    
   }
 
   modifyCollection(article, collectionName, change, callback) {
@@ -92,9 +110,9 @@ class App extends Component {
         if (change > 0) {
           collection.articles.push(article);
         } else {
-          collection.articles.splice(i,1);
+          collection.articles.splice(i, 1);
         }
-        
+
       }
     });
 
@@ -104,11 +122,48 @@ class App extends Component {
   }
 
   // when a user signs in from the user page it will fire this function
+  // we'll save the user to the state, as well as retrieve the user's collections
+  // and save that too
   registerSignIn(user) {
     this.setState({
       user: user
     }, () => {
       console.log(this.state.user)
+    });
+
+    let token = JSON.parse(localStorage.getItem('token'));
+    let headers = {
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    }
+
+    return getUserCollections(headers)
+      .then((response) => {
+        console.log(response)
+
+        // save to state
+        this.setState({
+          userCollections: response
+        });
+        // save info to local storage
+        localStorage.setItem(`user-collections`, JSON.stringify(response));
+
+      }).catch((e) => {
+        console.log(e)
+        this.setState({
+          error: e
+        })
+      })
+  }
+
+  // this function is triggered from the CollectionPage when a user changes their collections
+  // on the server. The updated user collections are sent from the server upon update and sent 
+  // back to App to keep App as the root source of the current user data
+  refreshUserCollections (response) {
+    // all we have to do is set the response as the userCollections
+    this.setState({
+      userCollections: response
     })
   }
 
@@ -163,6 +218,8 @@ class App extends Component {
                     <CollectionPage
                       collections={this.state.collections}
                       modifyCollection={this.modifyCollection}
+                      deleteCollection={this.deleteCollection}
+                      refreshUserCollections={this.refreshUserCollections}
                       user={this.state.user}
                     />
                   } />
@@ -186,7 +243,7 @@ class App extends Component {
   }
 }
 
-export default React.forwardRef((props, ref) => <App innerRef={ref} {...props}/>);
+export default React.forwardRef((props, ref) => <App innerRef={ref} {...props} />);
 
 // export default App;
 
