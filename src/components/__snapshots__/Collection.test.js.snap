@@ -69,6 +69,183 @@ exports[`Collection renders correctly 1`] = `
       <p
         className="article-title"
       >
+        The Generative Presence of Relatedness.
+      </p>
+      <p
+        className="article-title"
+      >
+        Spiegel EB, Baker EL.
+      </p>
+      <p
+        className="article-title"
+      >
+        The American journal of clinical hypnosis  
+        <strong>
+            2020
+        </strong>
+      </p>
+    </div>
+    <div
+      style={
+        Object {
+          "alignSelf": "flex-start",
+          "marginLeft": "15px",
+        }
+      }
+    >
+      <button
+        aria-label={null}
+        className="article-button view btn btn-secondary btn-sm"
+        onClick={[Function]}
+        type="button"
+      >
+        view article
+      </button>
+      <button
+        aria-label={null}
+        className="article-button warn btn btn-secondary btn-sm"
+        onClick={[Function]}
+        type="button"
+      >
+        remove
+      </button>
+    </div>
+  </div>
+  <div
+    className="article-result"
+  >
+    <div
+      style={
+        Object {
+          "alignItems": "flex-start",
+          "display": "flex",
+          "flexDirection": "column",
+          "justifyContent": "space-around",
+          "width": "100%",
+        }
+      }
+    >
+      <p
+        className="article-title"
+      >
+        Dancing in the In-Between: Hypnosis, Transitional Space, and Therapeutic Action.
+      </p>
+      <p
+        className="article-title"
+      >
+        Baker EL, Spiegel EB.
+      </p>
+      <p
+        className="article-title"
+      >
+        The American journal of clinical hypnosis  
+        <strong>
+            2020
+        </strong>
+      </p>
+    </div>
+    <div
+      style={
+        Object {
+          "alignSelf": "flex-start",
+          "marginLeft": "15px",
+        }
+      }
+    >
+      <button
+        aria-label={null}
+        className="article-button view btn btn-secondary btn-sm"
+        onClick={[Function]}
+        type="button"
+      >
+        view article
+      </button>
+      <button
+        aria-label={null}
+        className="article-button warn btn btn-secondary btn-sm"
+        onClick={[Function]}
+        type="button"
+      >
+        remove
+      </button>
+    </div>
+  </div>
+  <div
+    className="article-result"
+  >
+    <div
+      style={
+        Object {
+          "alignItems": "flex-start",
+          "display": "flex",
+          "flexDirection": "column",
+          "justifyContent": "space-around",
+          "width": "100%",
+        }
+      }
+    >
+      <p
+        className="article-title"
+      >
+        Hypnosis and The Therapeutic Relationship: Relational Factors of Hypnosis in Psychotherapy.
+      </p>
+      <p
+        className="article-title"
+      >
+        Spiegel EB, Baker EL, Daitch C, Diamond MJ, Phillips M.
+      </p>
+      <p
+        className="article-title"
+      >
+        The American journal of clinical hypnosis  
+        <strong>
+            2020
+        </strong>
+      </p>
+    </div>
+    <div
+      style={
+        Object {
+          "alignSelf": "flex-start",
+          "marginLeft": "15px",
+        }
+      }
+    >
+      <button
+        aria-label={null}
+        className="article-button view btn btn-secondary btn-sm"
+        onClick={[Function]}
+        type="button"
+      >
+        view article
+      </button>
+      <button
+        aria-label={null}
+        className="article-button warn btn btn-secondary btn-sm"
+        onClick={[Function]}
+        type="button"
+      >
+        remove
+      </button>
+    </div>
+  </div>
+  <div
+    className="article-result"
+  >
+    <div
+      style={
+        Object {
+          "alignItems": "flex-start",
+          "display": "flex",
+          "flexDirection": "column",
+          "justifyContent": "space-around",
+          "width": "100%",
+        }
+      }
+    >
+      <p
+        className="article-title"
+      >
         Improving access to Indigenous medicine for patients in hospital-based settings: a challenge for health systems in northern Canada.
       </p>
       <p
@@ -187,17 +364,17 @@ exports[`Collection renders correctly 1`] = `
       <p
         className="article-title"
       >
-        Long-term safety and efficacy of deferasirox in patients with myelodysplastic syndrome, aplastic anemia and other rare anemia in Taiwan.
+        Culinary medicine and community partnership: hands-on culinary skills training to empower medical students to provide patient-centered nutrition education.
       </p>
       <p
         className="article-title"
       >
-        Ko BS, Chang MC, Chiou TJ, Chang TK, Chen YC, Lin SF, Chang CS, Lu YC, Yeh SP, Chen TY, Hwang WS.
+        Pang B, Memel Z, Diamant C, Clarke E, Chou S, Gregory H.
       </p>
       <p
         className="article-title"
       >
-        Hematology (Amsterdam, Netherlands)  
+        Medical education online  
         <strong>
             2019
         </strong>
@@ -246,17 +423,17 @@ exports[`Collection renders correctly 1`] = `
       <p
         className="article-title"
       >
-        Culinary medicine and community partnership: hands-on culinary skills training to empower medical students to provide patient-centered nutrition education. 
+        Long-term safety and efficacy of deferasirox in patients with myelodysplastic syndrome, aplastic anemia and other rare anemia in Taiwan.
       </p>
       <p
         className="article-title"
       >
-        Pang B, Memel Z, Diamant C, Clarke E, Chou S, Gregory H.
+        Ko BS, Chang MC, Chiou TJ, Chang TK, Chen YC, Lin SF, Chang CS, Lu YC, Yeh SP, Chen TY, Hwang WS.
       </p>
       <p
         className="article-title"
       >
-        Medical education online  
+        Hematology (Amsterdam, Netherlands)  
         <strong>
             2019
         </strong>
@@ -423,189 +600,12 @@ exports[`Collection renders correctly 1`] = `
       <p
         className="article-title"
       >
-        Development of Statistical Software for the Korean Laboratory Accreditation Program Using R Language: LaboStats.
-      </p>
-      <p
-        className="article-title"
-      >
-        Kim Y, Park HI, Lee HK, Nam HS, Lee YW, Lee SG, Park Y, Lee W, Nam MH, Song SH, Chung JW, Lee J.
-      </p>
-      <p
-        className="article-title"
-      >
-        Annals of laboratory medicine  
-        <strong>
-            2019
-        </strong>
-      </p>
-    </div>
-    <div
-      style={
-        Object {
-          "alignSelf": "flex-start",
-          "marginLeft": "15px",
-        }
-      }
-    >
-      <button
-        aria-label={null}
-        className="article-button view btn btn-secondary btn-sm"
-        onClick={[Function]}
-        type="button"
-      >
-        view article
-      </button>
-      <button
-        aria-label={null}
-        className="article-button warn btn btn-secondary btn-sm"
-        onClick={[Function]}
-        type="button"
-      >
-        remove
-      </button>
-    </div>
-  </div>
-  <div
-    className="article-result"
-  >
-    <div
-      style={
-        Object {
-          "alignItems": "flex-start",
-          "display": "flex",
-          "flexDirection": "column",
-          "justifyContent": "space-around",
-          "width": "100%",
-        }
-      }
-    >
-      <p
-        className="article-title"
-      >
         Comparison of Six Commercial Diagnostic Tests for the Detection of Dengue Virus Non-Structural-1 Antigen and IgM/IgG Antibodies.
       </p>
       <p
         className="article-title"
       >
         Lee H, Ryu JH, Park HS, Park KH, Bae H, Yun S, Choi AR, Cho SY, Park C, Lee DG, Lim J, Lee J, Lee S, Shin S, Park H, Oh EJ.
-      </p>
-      <p
-        className="article-title"
-      >
-        Annals of laboratory medicine  
-        <strong>
-            2019
-        </strong>
-      </p>
-    </div>
-    <div
-      style={
-        Object {
-          "alignSelf": "flex-start",
-          "marginLeft": "15px",
-        }
-      }
-    >
-      <button
-        aria-label={null}
-        className="article-button view btn btn-secondary btn-sm"
-        onClick={[Function]}
-        type="button"
-      >
-        view article
-      </button>
-      <button
-        aria-label={null}
-        className="article-button warn btn btn-secondary btn-sm"
-        onClick={[Function]}
-        type="button"
-      >
-        remove
-      </button>
-    </div>
-  </div>
-  <div
-    className="article-result"
-  >
-    <div
-      style={
-        Object {
-          "alignItems": "flex-start",
-          "display": "flex",
-          "flexDirection": "column",
-          "justifyContent": "space-around",
-          "width": "100%",
-        }
-      }
-    >
-      <p
-        className="article-title"
-      >
-        Improvement in External Quality Assessment Results for Qualitative Fecal Immunochemical Tests in Korea After Feedback to Manufacturers.
-      </p>
-      <p
-        className="article-title"
-      >
-        Lee W, Ryoo N, Suh HS, Jeon CH, Urinalysis and Routine Microscopy Subcommittee, Korean Association of External Quality Assessment Service.
-      </p>
-      <p
-        className="article-title"
-      >
-        Annals of laboratory medicine  
-        <strong>
-            2019
-        </strong>
-      </p>
-    </div>
-    <div
-      style={
-        Object {
-          "alignSelf": "flex-start",
-          "marginLeft": "15px",
-        }
-      }
-    >
-      <button
-        aria-label={null}
-        className="article-button view btn btn-secondary btn-sm"
-        onClick={[Function]}
-        type="button"
-      >
-        view article
-      </button>
-      <button
-        aria-label={null}
-        className="article-button warn btn btn-secondary btn-sm"
-        onClick={[Function]}
-        type="button"
-      >
-        remove
-      </button>
-    </div>
-  </div>
-  <div
-    className="article-result"
-  >
-    <div
-      style={
-        Object {
-          "alignItems": "flex-start",
-          "display": "flex",
-          "flexDirection": "column",
-          "justifyContent": "space-around",
-          "width": "100%",
-        }
-      }
-    >
-      <p
-        className="article-title"
-      >
-        First Isolation of Mycobacterium virginiense From a Human Pulmonary Specimen.
-      </p>
-      <p
-        className="article-title"
-      >
-        Jung J, Yoo IY, Jhun BW, Koh WJ, Lee NY, Huh HJ.
       </p>
       <p
         className="article-title"

@@ -66,7 +66,6 @@ class CollectionPage extends React.Component {
     this.props.modifyCollection(article, collection.name, -1, () => {
       console.log('article removed from collection')
     })
-
   }
 
   // deletes the entire collection, registers the removal in App
@@ -82,11 +81,29 @@ class CollectionPage extends React.Component {
     }));
   }
 
+  renderCollections() {
+    return (
+      this.props.collections.map((collection, i) => {
+
+        return (
+          <Collection
+            key={i}
+            collection={collection}
+            handleSubmit={this.handleSubmit}
+            handleDelete={this.handleDelete}
+            refreshUserCollections={this.props.refreshUserCollections}
+          />
+        )
+
+      })
+
+    )
+  }
+
   render() {
 
-    console.log(JSON.parse(localStorage.getItem('user')))
-    console.log(JSON.parse(localStorage.getItem('token')))
-
+    // console.log(JSON.parse(localStorage.getItem('user')))
+    // console.log(JSON.parse(localStorage.getItem('token')))
 
     return (
       <div className="search-page page">
@@ -105,19 +122,7 @@ class CollectionPage extends React.Component {
           {/* the collections when they appear */}
           {this.props.collections.length > 0 ?
 
-            this.props.collections.map((collection, i) => {
-
-              return (
-                <Collection 
-                  key={i}
-                  collection={collection}
-                  handleSubmit={this.handleSubmit}  
-                  handleDelete={this.handleDelete}
-                  refreshUserCollections={this.props.refreshUserCollections}
-                  />
-              )
-
-            })
+            this.renderCollections()
 
             // or if there aren't any collections yet
             :
@@ -127,9 +132,6 @@ class CollectionPage extends React.Component {
                 articles by searching the database, then organize, share & export them here. `}
               </p>
             </div>}
-
-
-
 
         </div>
       </div>

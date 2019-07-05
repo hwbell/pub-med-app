@@ -31,6 +31,8 @@ describe('ProfilePage', () => {
       expect(wrapper.find(selector).length).toEqual(1);
     })
 
+    expect(wrapper.find('Button').length).toEqual(1);
+
   });
 
   it('shows the signin form if user is not signed in', () => {
@@ -39,13 +41,6 @@ describe('ProfilePage', () => {
     wrapper.update();
     expect(wrapper.find('.profile').length).toEqual(0);
     expect(wrapper.find('.signin').length).toEqual(1);
-
-    // expect(wrapper.find('Form').length).toEqual(1);
-    // expect(wrapper.find('.paragraph').length).toEqual(2);
-    // expect(wrapper.find('Input').length).toEqual(4);
-    // expect(wrapper.find('FormGroup').length).toEqual(1);
-    // expect(wrapper.find('Label').length).toEqual(1);
-    // expect(wrapper.find('Button').length).toEqual(1);
 
     // change the signedIn prop and provide a user 
     wrapper.setProps({
@@ -97,9 +92,11 @@ describe('ProfilePage', () => {
 
   })
 
-  it('should fire handleSubmit() when the ', () => {
-    let wrapper = mount(<ProfilePage />);
+  // it('should fire handleSubmit() when the input in submitted', () => {
+  //   let wrapper = mount(<ProfilePage />);
 
-  })
+  // })
+
+  // it('should fire the ')
 
 })

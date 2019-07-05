@@ -10,6 +10,7 @@ import CollectionPage from './components/pages/CollectionPage';
 
 // pose animation
 import posed, { PoseGroup } from 'react-pose';
+import styled from "styled-components";
 
 // routing
 import { Switch, Link } from 'react-router-dom';
@@ -63,7 +64,19 @@ class App extends Component {
     this.modifyCollection = this.modifyCollection.bind(this);
     this.deleteCollection = this.deleteCollection.bind(this);
     this.registerSignIn = this.registerSignIn.bind(this);
+    this.registerSignOut = this.registerSignOut.bind(this);
     this.refreshUserCollections = this.refreshUserCollections.bind(this);
+  }
+
+  componentDidMount() {
+    // sign in on startup if there is a token in localStorage
+    if (!localStorage.getItem('user')) {
+      return;
+    } else {
+      let user = JSON.parse(localStorage.getItem('user'));
+      return this.registerSignIn(user);
+      // return user;
+    }
   }
 
   createNewCollection(collection, callback) {
@@ -80,14 +93,14 @@ class App extends Component {
   deleteCollection(collectionToDelete, callback) {
     let name = collectionToDelete.name;
     console.log(name)
-    let collections = this.state.collections.filter( collection => collection.name !== name );
+    let collections = this.state.collections.filter(collection => collection.name !== name);
 
     this.setState({
       collections
     }, () => {
       callback();
     })
-    
+
   }
 
   modifyCollection(article, collectionName, change, callback) {
@@ -121,16 +134,17 @@ class App extends Component {
     }, () => callback());
   }
 
-  // when a user signs in from the user page it will fire this function
-  // we'll save the user to the state, as well as retrieve the user's collections
+  // fire this function 
+  // 1. when a user signs in from the user page 
+  // 2. Upon startup if there is a localStorage user + token
+
+  // we'll save the user to the state / localStorage, as well as retrieve the user's collections
   // and save that too
   registerSignIn(user) {
-    this.setState({
-      user: user
-    }, () => {
-      console.log(this.state.user)
-    });
 
+    console.log(JSON.parse(localStorage.getItem('token')))
+
+    // console.log()
     let token = JSON.parse(localStorage.getItem('token'));
     let headers = {
       Authorization: `Bearer ${token}`,
@@ -142,12 +156,15 @@ class App extends Component {
       .then((response) => {
         console.log(response)
 
+        // attach it to the user object
+        user.collections = response;
+
         // save to state
         this.setState({
-          userCollections: response
+          user
         });
         // save info to local storage
-        localStorage.setItem(`user-collections`, JSON.stringify(response));
+        localStorage.setItem(`user`, JSON.stringify(user));
 
       }).catch((e) => {
         console.log(e)
@@ -157,10 +174,22 @@ class App extends Component {
       })
   }
 
+  // this will also be called from the Profile component
+  registerSignOut() {
+    this.setState({
+      collections: [],
+      user: null,
+      userCollections: []
+    });
+    // wipe the user from localStorage to prevent sign in on startup
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+  }
+
   // this function is triggered from the CollectionPage when a user changes their collections
   // on the server. The updated user collections are sent from the server upon update and sent 
   // back to App to keep App as the root source of the current user data
-  refreshUserCollections (response) {
+  refreshUserCollections(response) {
     // all we have to do is set the response as the userCollections
     this.setState({
       userCollections: response
@@ -168,6 +197,7 @@ class App extends Component {
   }
 
   render() {
+
     return (
       <Router>
 
@@ -226,6 +256,7 @@ class App extends Component {
                   <Route path="/profile/" render={() =>
                     <ProfilePage
                       registerSignIn={this.registerSignIn}
+                      registerSignOut={this.registerSignOut}
                       user={this.state.user}
                     />
                   } />
@@ -243,7 +274,7 @@ class App extends Component {
   }
 }
 
-export default React.forwardRef((props, ref) => <App innerRef={ref} {...props} />);
+export default App;
 
 // export default App;
 

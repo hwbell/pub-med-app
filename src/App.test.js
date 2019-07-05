@@ -4,16 +4,66 @@ import App from './App';
 import { shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 
-it('renders without crashing', async () => {
-  let wrapper = await shallow(<App />);
-  // wrapper.update();
-  
-});
+// stubs
+// const signI
 
-// something needs fixing with pose here ... FIX IT!
-// it('renders correctly', async () => {
-//   const tree = await renderer
-//     .create(<App/>)
-//     .toJSON();
-//   expect(tree).toMatchSnapshot();
-// });
+describe('App', () => {
+
+  it('renders without crashing', async () => {
+    let wrapper = await shallow(<App />);
+    // wrapper.update();
+
+  });
+
+  // something needs fixing with pose here ... FIX IT!
+  it('renders correctly', async () => {
+    let wrapper = mount(<App />);
+
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  // it('should not try to sign in user if there no user in local storage', async () => {
+  //   const wrapper = mount(<App />);
+  //   jest.spyOn(wrapper.instance(), 'registerSignIn');
+
+  //   // with no user it shouldn't get called
+  //   expect(wrapper.instance().registerSignIn).not.toHaveBeenCalled();
+
+  // })
+
+  it('should try to sign in user if there is a user in local storage', async () => {
+
+    const wrapper = mount(<App/>);
+    jest.spyOn(wrapper.instance(), 'registerSignIn');
+
+    // with no user it should not attempt
+    // there should be no user at the start
+    expect(localStorage.getItem('user')).not.toBeTruthy();
+
+    // without user => false
+    await wrapper.instance().componentDidMount();
+    wrapper.update();
+    expect(wrapper.instance().registerSignIn).not.toHaveBeenCalled();
+
+    // with fake user it should attempt
+    let user = {
+      name: 'Mark',
+      email: 'mark@example.com',
+      password: 'password'
+    }
+
+    // set a user
+    localStorage.setItem('user', JSON.stringify(user));
+
+    // componentDidMount is where the decision is made whether or not to sign in
+    await wrapper.instance().componentDidMount();
+    wrapper.update();
+
+    // with user => true
+    expect(wrapper.instance().registerSignIn).toHaveBeenCalled();
+
+  })
+
+})
+
+

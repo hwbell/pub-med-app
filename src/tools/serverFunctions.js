@@ -3,7 +3,8 @@ const makeRandomString = require('./stringFunctions').makeRandomString;
 const collectionServerUrl = process.env.REACT_APP_COLLECTION_SERVER_URL || 'http://localhost:8080/';
 const fetch = require('node-fetch');
 
-
+// this function will actually make a new user OR sign in an existing user, depending on the
+// context
 export async function signInUser (user, isNewUser) {
   if (!user) {
     return;

@@ -99,8 +99,11 @@ class ProfilePage extends React.Component {
 
     return (
       <div className="outline profile" style={{ padding: '20px' }}>
-        <p className="article-title">
-          {`Signed in as: ${this.props.user.name || this.props.user.email}`}
+
+        <Button className="warn" style={styles.button}
+          onClick={this.props.registerSignOut}>logout</Button>
+        <p className="collection-title">
+          {`${this.props.user.name || this.props.user.email}`}
         </p>
 
         <p className="paragraph">
@@ -126,8 +129,6 @@ class ProfilePage extends React.Component {
   handleCheck() {
     this.setState({
       checked: !this.state.checked
-    }, () => {
-      console.log(this.state.checked)
     })
   }
 
@@ -156,7 +157,6 @@ class ProfilePage extends React.Component {
   }
 
   attemptSignIn(user) {
-
 
     // sign the user in via post to the server. get the token and store it for future requests
     // pass this.state.checked as a boolean for whether it is a new user
@@ -218,6 +218,9 @@ const styles = {
   input: {
     margin: 0,
     marginTop: '8px'
+  },
+  button: {
+    alignSelf: 'flex-end'
   }
 }
 
