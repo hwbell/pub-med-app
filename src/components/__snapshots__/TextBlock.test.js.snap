@@ -41,7 +41,7 @@ exports[`renders correctly 1`] = `
   </p>
   <button
     aria-label={null}
-    className="block-button btn btn-secondary btn-sm"
+    className="block-button btn btn-primary btn-sm"
     onClick={[Function]}
   >
     read more

@@ -48,9 +48,7 @@ describe('CollectionPage', () => {
   });
 
   it('renders correctly', async () => {
-    const tree = await renderer
-      .create(<CollectionPage  {...someProps} />)
-      .toJSON();
+    const tree = await shallow(<CollectionPage {...someProps} />)
     expect(tree).toMatchSnapshot();
   });
 
@@ -61,7 +59,7 @@ describe('CollectionPage', () => {
       expect(wrapper.find(selector).length).toEqual(1);
     });
 
-    ['.collection-block', '.subtitle'].forEach((selector) => {
+    ['.collection-block', '.section-title'].forEach((selector) => {
       expect(wrapper.find(selector).length).toEqual(2);
     });
 
@@ -102,6 +100,22 @@ describe('CollectionPage', () => {
     });
 
   })
+
+  it('should toggle the ArticleViewer', () => {
+    let wrapper = shallow(<CollectionPage  {...someProps} />);
+
+    expect(wrapper.state().articleModal).not.toBeTruthy();
+    
+    wrapper.instance().toggleViewArticle();
+    wrapper.update();
+    expect(wrapper.state().articleModal).toBeTruthy();
+
+    wrapper.instance().toggleViewArticle();
+    wrapper.update();
+    expect(wrapper.state().articleModal).not.toBeTruthy();
+
+  })
+
 
 });
 

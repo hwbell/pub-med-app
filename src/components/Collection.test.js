@@ -43,8 +43,14 @@ describe('Collection', () => {
   it('contains the correct elements', () => {
     let wrapper = shallow(<Collection {...someProps} />);
 
-    expect(wrapper.find('.collection').length).toEqual(1);
-    expect(wrapper.find('.outline').length).toEqual(1);
+    ['.collection', '.outline', '.results-holder'].forEach( (selector) => {
+      expect(wrapper.find(selector).length).toEqual(1);
+    })
+
+    expect(wrapper.find('.collection-title').length).toEqual(2);    
+    expect(wrapper.find('.fa-edit').length).toEqual(1);    
+
+    expect(wrapper.find('.pdf-holder').length).toEqual(0);
 
     // if unspecified, we will have 3 buttons
     expect(wrapper.find('Button').length).toEqual(3);
@@ -72,7 +78,7 @@ describe('Collection', () => {
     expect(wrapper.state().showPreview).toEqual(false);
     wrapper.find('Button').at(0).simulate('click');
     wrapper.update();
-    expect(wrapper.state().showPreview).toEqual(true);    
+    expect(wrapper.state().showPreview).toEqual(true);   
 
     // the save button
     wrapper.find('Button').at(1).simulate('click');
@@ -89,9 +95,18 @@ describe('Collection', () => {
   it('should switch between pdf and list view', () => {
     let wrapper = shallow(<Collection {...someProps} />);
   
+    // show the list view initially
+    expect(wrapper.find('.results-holder').length).toEqual(1);
+    expect(wrapper.find('.pdf-holder').length).toEqual(0);    
+
+    // click the 'make pdf' button
     wrapper.find('Button').at(0).simulate('click');
     expect(wrapper.state().showPreview).toEqual(true);
   
+    // should be switched now
+    expect(wrapper.find('.results-holder').length).toEqual(0);  
+    expect(wrapper.find('.pdf-holder').length).toEqual(1);    
+    
   })
 
 })

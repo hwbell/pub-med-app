@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 // components
 import Header from '../Header';
-import ArticleResult from '../ArticleResult';
+import ArticleViewer from '../ArticleViewer';
 import EmailForm from "../EmailForm";
 import Collection from '../Collection';
 import { ButtonGroup, Button } from 'reactstrap';
@@ -23,6 +23,7 @@ const initialState = {
   pdfReady: false,
   showPreview: false,
   emailModal: false,
+  articleModal: false,
   exportSelected: true,
   previewIndex: null
 }
@@ -35,6 +36,8 @@ class CollectionPage extends React.Component {
     this.toggleEmailForm = this.toggleEmailForm.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.viewArticle = this.viewArticle.bind(this);
+    this.toggleViewArticle = this.toggleViewArticle.bind(this);
 
     this.state = initialState;
 
@@ -81,12 +84,29 @@ class CollectionPage extends React.Component {
     }));
   }
 
+  viewArticle(article) {
+    console.log(`Viewing article: ${article.id}`)
+
+    this.setState({
+      selected: article
+    }, () => {
+      this.toggleViewArticle();
+    })
+  }
+  toggleViewArticle() {
+    console.log('toggling ArticleViewer')
+    this.setState(prevState => ({
+      articleModal: !prevState.articleModal
+    }));
+  }
+
   renderCollections(collections, isSaved) {
+    const ref = React.createRef();
     return (
 
       <div className="collection-block">
 
-        <p className="subtitle">{ isSaved ? 'Saved' : 'New' }</p>
+        <p className="section-title">{isSaved ? 'Saved' : 'New'}</p>
         {collections.map((collection, i) => {
 
           return (
@@ -97,6 +117,7 @@ class CollectionPage extends React.Component {
               handleSubmit={this.handleSubmit}
               handleDelete={this.handleDelete}
               refreshUserCollections={this.props.refreshUserCollections}
+              viewArticle={this.viewArticle}
             />
           )
 
@@ -114,7 +135,14 @@ class CollectionPage extends React.Component {
     const user = this.props.user;
 
     return (
-      <div className="search-page page">
+      <div className="collection-page page">
+
+        {/* modal for viewing any article */}
+        {this.state.selected &&
+          <ArticleViewer
+            article={this.state.selected}
+            isVisible={this.state.articleModal}
+            toggle={this.toggleViewArticle} />}
 
         <div className="glass" >
 
@@ -136,8 +164,8 @@ class CollectionPage extends React.Component {
             :
             <div className="outline" style={styles.content}>
               <p className="paragraph">
-                {`It looks like you haven't made any new collections yet! You can add
-                articles by searching the database, then organize, share & export them here. `}
+                {`You don't have any new collections ... you can add create more by searching
+                 the database, then organize, share & export them here. `}
               </p>
             </div>}
 
@@ -174,3 +202,4 @@ const styles = {
 }
 
 export default CollectionPage;
+

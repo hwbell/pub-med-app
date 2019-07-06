@@ -40,7 +40,7 @@ class TextBlock extends React.Component {
           <p key={i} className="text" style={{ alignSelf: 'flex-start' }}>{el}</p>
         )}
 
-        <Button color='secondary' size="sm" className="block-button">{this.props.text.button}</Button>
+        <Button color='primary' size="sm" className="block-button">{this.props.text.button}</Button>
 
       </div>
 

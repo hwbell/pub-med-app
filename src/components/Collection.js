@@ -8,19 +8,9 @@ import ArticleResult from './ArticleResult';
 import { PDFViewer } from '@react-pdf/renderer';
 import GeneratedPdf from './GeneratedPdf';
 
-// animation
-import posed, { PoseGroup } from 'react-pose';
-import { CSSTransitionGroup } from 'react-transition-group' // ES6
-
-
 // tools
 import { saveCollection } from '../tools/serverFunctions';
-
-// pose containers
-const Div = posed.div({
-  hidden: { opacity: 0 },
-  visible: { opacity: 1 }
-});
+import { CSSTransitionGroup } from 'react-transition-group' // ES6
 
 // ******************************************************************************
 class Collection extends React.Component {
@@ -28,22 +18,25 @@ class Collection extends React.Component {
     super(props);
 
     this.state = {
+      editing: false,
       showPreview: false
     }
 
     this.togglePreview = this.togglePreview.bind(this);
     this.postCollection = this.postCollection.bind(this);
+    this.toggleEdit = this.toggleEdit.bind(this);
+  }
 
+  toggleEdit() {
+    this.setState({
+      editing: !this.state.editing
+    });
   }
 
   togglePreview() {
     this.setState({
       showPreview: !this.state.showPreview
     })
-  }
-
-  viewArticle(article) {
-    console.log(`viewing article ${article.id}`)
   }
 
   postCollection() {
@@ -83,7 +76,7 @@ class Collection extends React.Component {
     const collectionButtons = [
       {
         text: 'view article',
-        onClick: this.viewArticle
+        onClick: this.props.viewArticle
       },
       {
         text: 'remove',
@@ -103,7 +96,6 @@ class Collection extends React.Component {
   }
 
   render() {
-
     let collection = this.props.collection;
 
     return (
@@ -113,7 +105,11 @@ class Collection extends React.Component {
           <div className="row">
             <p className="collection-title">
               <strong>{`${collection.name} `}</strong>
-              {` [ ${collection.articles.length} ]`}
+            </p>
+            <i className="far fa-edit" style={styles.icon}
+              onClick={this.toggleEdit}></i>
+            <p className="collection-title">
+              {`${collection.articles.lenth}`}
             </p>
           </div>
 
@@ -139,18 +135,24 @@ class Collection extends React.Component {
           </div>
         </div>
 
+        <CSSTransitionGroup
+          transitionName="fade"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={300}>
 
-        {this.state.showPreview &&
-          <Div className="pdf-holder">
-            <PDFViewer className="pdf-viewer">
-              <GeneratedPdf collection={collection} />
-            </PDFViewer>
-          </Div>}
+          {this.state.showPreview &&
+            <div ref={this.props.ref} key="pdf" className="pdf-holder">
+              <PDFViewer className="pdf-viewer">
+                <GeneratedPdf collection={collection} />
+              </PDFViewer>
+            </div>}
 
+          {!this.state.showPreview &&
+            <div ref={this.props.ref} key="results" className="results-holder">
+              {this.renderResults(collection)}
+            </div>}
 
-        <div className="results-holder">
-          {this.renderResults(collection)}
-        </div>
+        </CSSTransitionGroup>
 
       </div>
 
@@ -161,6 +163,10 @@ class Collection extends React.Component {
 const styles = {
   buttonHolder: {
     padding: '10px'
+  },
+  icon: {
+    marginTop: '14px',
+    fontSize: '14px',
   }
 }
 

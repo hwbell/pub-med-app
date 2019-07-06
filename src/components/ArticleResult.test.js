@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 import ArticleResult from './ArticleResult';
-import { jsxEmptyExpression } from '@babel/types';
 
 // some sample props
 const article = { id: '30724720',

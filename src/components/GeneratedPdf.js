@@ -102,36 +102,36 @@ const styles = StyleSheet.create({
   },
   header: {
     textAlign: 'center',
-    fontSize: 24,
+    fontSize: 20,
     fontFamily: 'Quicksand-Medium'
   },
   titleBox: {
     width: '100%',
-    marginTop: 20,
+    marginTop: 18,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start'
   },
   number: {
     margin: 5,
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Quicksand-Medium'
   },
   title: {
     margin: 5,
     color: '#1565C0',
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Quicksand'
   },
   author: {
     paddingLeft: 25,
     paddingTop: 5,
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Quicksand'
   },
   journal: {
     paddingLeft: 25,
-    fontSize: 14,
+    fontSize: 12,
     color: 'grey',
     fontFamily: 'Quicksand'
   }

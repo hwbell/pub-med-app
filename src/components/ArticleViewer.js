@@ -95,8 +95,7 @@ class ArticleViewer extends React.Component {
 
         })}
 
-        {/* render the links to the article. They'll display the pdf here if we can get it,
-        otherwise it will link externally */}
+        {/* render the links to the article. They'll link externally to the pdf / access information */}
         <div>
 
           <p style={styles.subtitle}>Full Text:</p>
@@ -107,6 +106,7 @@ class ArticleViewer extends React.Component {
               // demand code and link
               if (!!link.availabilityCode && !!link.url) {
                 // set fa class
+                console.log(link)
                 let iconClass = link.availabilityCode === 'OA' ? 'fas fa-book-open' : 'fas fa-dollar-sign';
 
                 return (
