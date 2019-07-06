@@ -190,9 +190,12 @@ class App extends Component {
   // on the server. The updated user collections are sent from the server upon update and sent 
   // back to App to keep App as the root source of the current user data
   refreshUserCollections(response) {
-    // all we have to do is set the response as the userCollections
+    // all we have to do is set the response as the user's collections
+
+    let { user } = this.state;
+    user.collections = response;
     this.setState({
-      userCollections: response
+      user
     })
   }
 

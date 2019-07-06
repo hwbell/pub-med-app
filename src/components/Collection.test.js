@@ -45,7 +45,19 @@ describe('Collection', () => {
 
     expect(wrapper.find('.collection').length).toEqual(1);
     expect(wrapper.find('.outline').length).toEqual(1);
+
+    // if unspecified, we will have 3 buttons
     expect(wrapper.find('Button').length).toEqual(3);
+    expect(wrapper.find('Button').at(0).render().text()).toEqual('make pdf');
+    expect(wrapper.find('Button').at(1).render().text()).toEqual('save to my collections');
+    expect(wrapper.find('Button').at(2).render().text()).toEqual('delete');
+
+
+    // if we set the isSaved boolean=true, we should't see the save button
+    wrapper.setProps({
+      isSaved: true
+    });
+    expect(wrapper.find('Button').length).toEqual(2);
 
 
   });
@@ -73,4 +85,14 @@ describe('Collection', () => {
     expect(handleDeleteStub.mock.calls.length).toEqual(1);
 
   })
+
+  it('should switch between pdf and list view', () => {
+    let wrapper = shallow(<Collection {...someProps} />);
+  
+    wrapper.find('Button').at(0).simulate('click');
+    expect(wrapper.state().showPreview).toEqual(true);
+  
+  })
+
 })
+

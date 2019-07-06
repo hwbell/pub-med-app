@@ -27,6 +27,17 @@ describe('CollectionPage', () => {
           articles: articles
         }
       ],
+      user: {
+        name: 'Mark',
+        email: 'mark@mail.com',
+        age: 33,
+        collections: [
+          {
+            name: 'first collection',
+            articles: articles
+          }
+        ],
+      },
       modifyCollection: modifyStub
     }
   });
@@ -48,16 +59,49 @@ describe('CollectionPage', () => {
 
     ['.page', '.glass'].forEach((selector) => {
       expect(wrapper.find(selector).length).toEqual(1);
-    })
+    });
+
+    ['.collection-block', '.subtitle'].forEach((selector) => {
+      expect(wrapper.find(selector).length).toEqual(2);
+    });
 
 
   });
 
-  // it('should toggle the showPreview Boolean on .article-button click', () => {
-  //   let wrapper = shallow(<CollectionPage  {...someProps} />);
+  it('should change content when collections are empty', () => {
+    let wrapper = shallow(<CollectionPage  {...someProps} />);
 
+    // the explanations should not appear with collections present 
+    ['.outline', '.paragraph'].forEach((selector) => {
+      expect(wrapper.find(selector).length).toEqual(0);
+    });
 
-  // })
+    // set the user's collections to empty 
+    wrapper.setProps({
+      user: {
+        name: 'Mark',
+        email: 'mark@mail.com',
+        age: 33,
+        collections: []
+      }
+    });
+
+    // now the 1st segment appears
+    ['.outline', '.paragraph'].forEach((selector) => {
+      expect(wrapper.find(selector).length).toEqual(1);
+    });
+
+    //  set the new collections to empty 
+    wrapper.setProps({
+      collections: []
+    });
+
+    // now the second segment appears
+    ['.outline', '.paragraph'].forEach((selector) => {
+      expect(wrapper.find(selector).length).toEqual(2);
+    });
+
+  })
 
 });
 

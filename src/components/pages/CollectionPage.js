@@ -81,22 +81,27 @@ class CollectionPage extends React.Component {
     }));
   }
 
-  renderCollections() {
+  renderCollections(collections, isSaved) {
     return (
-      this.props.collections.map((collection, i) => {
 
-        return (
-          <Collection
-            key={i}
-            collection={collection}
-            handleSubmit={this.handleSubmit}
-            handleDelete={this.handleDelete}
-            refreshUserCollections={this.props.refreshUserCollections}
-          />
-        )
+      <div className="collection-block">
 
-      })
+        <p className="subtitle">{ isSaved ? 'Saved' : 'New' }</p>
+        {collections.map((collection, i) => {
 
+          return (
+            <Collection
+              key={i}
+              isSaved={isSaved}
+              collection={collection}
+              handleSubmit={this.handleSubmit}
+              handleDelete={this.handleDelete}
+              refreshUserCollections={this.props.refreshUserCollections}
+            />
+          )
+
+        })}
+      </div>
     )
   }
 
@@ -105,10 +110,13 @@ class CollectionPage extends React.Component {
     // console.log(JSON.parse(localStorage.getItem('user')))
     // console.log(JSON.parse(localStorage.getItem('token')))
 
+    console.log(this.props)
+    const user = this.props.user;
+
     return (
       <div className="search-page page">
 
-        <div className="glass">
+        <div className="glass" >
 
           {/* the header */}
           <Header
@@ -119,10 +127,10 @@ class CollectionPage extends React.Component {
 
           {/* results */}
 
-          {/* the collections when they appear */}
+          {/* the new collections when they are present */}
           {this.props.collections.length > 0 ?
 
-            this.renderCollections()
+            this.renderCollections(this.props.collections)
 
             // or if there aren't any collections yet
             :
@@ -130,6 +138,20 @@ class CollectionPage extends React.Component {
               <p className="paragraph">
                 {`It looks like you haven't made any new collections yet! You can add
                 articles by searching the database, then organize, share & export them here. `}
+              </p>
+            </div>}
+
+          {/* the user's collections when they are present */}
+          {user && user.collections.length > 0 ?
+
+            this.renderCollections(user.collections, true)
+
+            // or if there aren't any collections yet
+            :
+            <div className="outline" style={styles.content}>
+              <p className="paragraph">
+                {`You don't have any collections saved to your profile yet. You can save any new collection you make.
+                Just look for the 'save to my collections' button!`}
               </p>
             </div>}
 

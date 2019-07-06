@@ -50,7 +50,6 @@ class TextBlock extends React.Component {
 
 const styles = {
   content: {
-    margin: '0px 0px 0px 4px ',
     height: '100%',
   },
   text: {

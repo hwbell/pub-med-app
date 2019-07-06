@@ -10,6 +10,8 @@ import GeneratedPdf from './GeneratedPdf';
 
 // animation
 import posed, { PoseGroup } from 'react-pose';
+import { CSSTransitionGroup } from 'react-transition-group' // ES6
+
 
 // tools
 import { saveCollection } from '../tools/serverFunctions';
@@ -122,11 +124,12 @@ class Collection extends React.Component {
               onClick={this.togglePreview}>
               {!this.state.showPreview ? 'make pdf' : 'hide pdf'}
             </Button>
-            <Button
-              className="add article-button" size="sm"
-              onClick={this.postCollection}>
-              save to my collections
-            </Button>
+            {!this.props.isSaved &&
+              <Button
+                className="add article-button" size="sm"
+                onClick={this.postCollection}>
+                save to my collections
+            </Button>}
             <Button
               className="warn article-button" size="sm"
               onClick={() => this.props.handleDelete(collection)}>
@@ -136,6 +139,7 @@ class Collection extends React.Component {
           </div>
         </div>
 
+
         {this.state.showPreview &&
           <Div className="pdf-holder">
             <PDFViewer className="pdf-viewer">
@@ -144,7 +148,9 @@ class Collection extends React.Component {
           </Div>}
 
 
-        {this.renderResults(collection)}
+        <div className="results-holder">
+          {this.renderResults(collection)}
+        </div>
 
       </div>
 
