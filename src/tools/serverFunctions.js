@@ -5,7 +5,7 @@ const fetch = require('node-fetch');
 
 // this function will actually make a new user OR sign in an existing user, depending on the
 // context
-export async function signInUser (user, isNewUser) {
+export async function signInUser(user, isNewUser) {
   if (!user) {
     return;
   }
@@ -14,7 +14,7 @@ export async function signInUser (user, isNewUser) {
   headers['content-type'] = 'application/application/json';
 
   let url = isNewUser ? `${collectionServerUrl}users` : `${collectionServerUrl}users/login`;
-  let response = await fetch( url, {
+  let response = await fetch(url, {
     method: 'POST',
     body: JSON.stringify(user),
     headers: {
@@ -32,12 +32,34 @@ export async function signInUser (user, isNewUser) {
   return response;
 }
 
-// saves a collection to the server
-export async function saveCollection (collection, headers) {
+// saves a collection to the server, or patches an exisiting collection on the server
+export async function saveCollection(collection, headers, isExisting) {
 
-  let serverResponse = await fetch(`${collectionServerUrl}collections`, {
-    method: 'POST',
-    body: JSON.stringify(collection),
+  console.log(collection)
+  // assign the request params accoring to either PATCH for existing collections or 
+  // POST for new collections
+
+  // base url
+  let url = `${collectionServerUrl}collections`;
+  let method, body;
+
+  if (isExisting) {
+    // if its a patch, we only want to send allowed properties.
+    let { name, articles } = collection;
+    body = {
+      name, 
+      articles
+    }
+    method = 'PATCH';
+    url += `/${collection._id}`;
+  } else {
+    body = collection;
+    method = 'POST';
+  }
+
+  let serverResponse = await fetch(url, {
+    method,
+    body: JSON.stringify(body),
     headers
   })
     .then(response => response.json())
@@ -50,6 +72,7 @@ export async function saveCollection (collection, headers) {
   return serverResponse;
 }
 
+// gets a user's collections
 export async function getUserCollections(headers) {
   let serverResponse = await fetch(`${collectionServerUrl}collections/me`, {
     method: 'GET',
@@ -64,6 +87,32 @@ export async function getUserCollections(headers) {
 
   return serverResponse;
 }
+
+// patches an existing collection
+export async function patchCollection(collection, headers) {
+  let serverResponse = await fetch(`${collectionServerUrl}collections/${collection.id}`, {
+    method: 'PATCH',
+    body: JSON.stringify(collection),
+    headers
+  })
+    .then(response => response.json())
+    .then((json) => {
+      // console.log(response)
+      return json;
+    })
+    .catch(err => console.log(err))
+
+  return serverResponse;
+}
+
+
+
+
+
+
+
+
+
 // let user = {
 //   "name": makeRandomString(6),
 //   "password": makeRandomString(8),

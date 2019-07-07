@@ -4,11 +4,28 @@ exports[`Collection renders correctly 1`] = `
 <div
   className="outline collection"
 >
-  <div
-    className="row"
+  <span
+    style={
+      Object {
+        "alignItems": "center",
+        "display": "flex",
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "padding": "20px",
+      }
+    }
   >
     <div
-      className="row"
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "padding": "10px",
+          "position": "absolute",
+        }
+      }
     >
       <p
         className="collection-title"
@@ -16,26 +33,34 @@ exports[`Collection renders correctly 1`] = `
         <strong>
           sample collection 
         </strong>
+         (10)
       </p>
       <i
         className="far fa-edit"
         onClick={[Function]}
-        style={
-          Object {
-            "fontSize": "14px",
-            "marginTop": "14px",
-          }
-        }
       />
-      <p
-        className="collection-title"
-      >
-        undefined
-      </p>
     </div>
+  </span>
+  <div
+    className=""
+    style={
+      Object {
+        "alignItems": "center",
+        "display": "flex",
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "position": "relative",
+        "width": "100%",
+      }
+    }
+  >
     <div
       style={
         Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "row",
+          "justifyContent": "center",
           "padding": "10px",
         }
       }

@@ -6,16 +6,19 @@ import { getArticles } from '../tools/apiFunctions';
 
 // stubs
 let handleDeleteStub = jest.fn();
-let toggleStub = jest.fn();
-let previewStub = jest.fn();
 
 describe('Collection', () => {
 
   let someProps;
+  let e;
   beforeAll(async () => {
     let articles = await getArticles('medicine').then((response) => {
       return response.resultList.result;
     });
+
+    e = {
+      preventDefault: jest.fn()
+    }
 
     someProps = {
       collection: {
@@ -25,6 +28,13 @@ describe('Collection', () => {
       handleDelete: handleDeleteStub,
     }
   });
+
+  let wrapper;
+  let instance;
+  beforeEach( () => {
+    wrapper = shallow(<Collection {...someProps} />);
+    instance = wrapper.instance();
+  })
 
   // tests
   it('renders without crashing', async () => {
@@ -43,12 +53,12 @@ describe('Collection', () => {
   it('contains the correct elements', () => {
     let wrapper = shallow(<Collection {...someProps} />);
 
-    ['.collection', '.outline', '.results-holder'].forEach( (selector) => {
+    ['.collection', '.outline', '.results-holder'].forEach((selector) => {
       expect(wrapper.find(selector).length).toEqual(1);
     })
 
-    expect(wrapper.find('.collection-title').length).toEqual(2);    
-    expect(wrapper.find('.fa-edit').length).toEqual(1);    
+    expect(wrapper.find('.collection-title').length).toEqual(1);
+    expect(wrapper.find('.fa-edit').length).toEqual(1);
 
     expect(wrapper.find('.pdf-holder').length).toEqual(0);
 
@@ -73,12 +83,12 @@ describe('Collection', () => {
 
     wrapper.instance().postCollection = jest.fn();
     wrapper.instance().handleDelete = jest.fn();
-    
+
     // the preview button
     expect(wrapper.state().showPreview).toEqual(false);
     wrapper.find('Button').at(0).simulate('click');
     wrapper.update();
-    expect(wrapper.state().showPreview).toEqual(true);   
+    expect(wrapper.state().showPreview).toEqual(true);
 
     // the save button
     wrapper.find('Button').at(1).simulate('click');
@@ -94,20 +104,119 @@ describe('Collection', () => {
 
   it('should switch between pdf and list view', () => {
     let wrapper = shallow(<Collection {...someProps} />);
-  
+
     // show the list view initially
     expect(wrapper.find('.results-holder').length).toEqual(1);
-    expect(wrapper.find('.pdf-holder').length).toEqual(0);    
+    expect(wrapper.find('.pdf-holder').length).toEqual(0);
 
     // click the 'make pdf' button
     wrapper.find('Button').at(0).simulate('click');
     expect(wrapper.state().showPreview).toEqual(true);
-  
+
     // should be switched now
-    expect(wrapper.find('.results-holder').length).toEqual(0);  
-    expect(wrapper.find('.pdf-holder').length).toEqual(1);    
-    
+    expect(wrapper.find('.results-holder').length).toEqual(0);
+    expect(wrapper.find('.pdf-holder').length).toEqual(1);
+
   })
 
+  it('should toggle the editing boolean', () => {
+    let wrapper = shallow(<Collection {...someProps} />);
+    expect(wrapper.state().editing).not.toBeTruthy();
+
+    wrapper.find('.fa-edit').simulate('click');
+    wrapper.update();
+    expect(wrapper.state().editing).toBeTruthy();
+
+  })
+
+  it('should render an input with the collection title when editing', async () => {
+    let wrapper = shallow(<Collection {...someProps} />);
+
+    expect(wrapper.find('Form').length).toEqual(0);
+
+    wrapper.instance().toggleEdit();
+    expect(wrapper.state().editing).toBeTruthy();
+    expect(wrapper.find('Form').length).toEqual(1);
+    expect(wrapper.find('Input').length).toEqual(1);
+
+  })
+
+  it("should call focusInput when editing is true", () => {
+    const wrapper = shallow(<Collection {...someProps} />)
+    const instance = wrapper.instance()
+    instance.focusInput = jest.fn()
+
+    instance.toggleEdit()
+    // there's a 500ms timeout in the component
+    setTimeout(() => {
+      expect(instance.focusInput).toBeCalled()
+    }, 550)
+  })
+
+  it('should create an inputText variable upon handleChange()', () => {
+    const wrapper = shallow(<Collection {...someProps} />);
+    const instance = wrapper.instance();
+    
+    expect(wrapper.state().inputText).toEqual('');
+    instance.handleChange('h');
+    wrapper.update();
+    expect(wrapper.state().inputText).toEqual('h');
+
+  }) 
+  
+  it('should create a collectionEdits variable upon handleSubmit()', () => {
+    const wrapper = shallow(<Collection {...someProps} />);
+    const instance = wrapper.instance();
+    const e = {
+      preventDefault: jest.fn()
+    }
+    // at first it isnt there
+    expect(wrapper.state().tempTitle).toBe(undefined);
+    instance.handleChange('collection title');
+    wrapper.update();    
+    instance.handleSubmit(e);
+    wrapper.update();
+    // but now it should be
+    expect(wrapper.state().collectionEdits.name).toEqual('collection title');
+
+  }) 
+
+  it('should show the save option if a collection is modified', () => {
+    
+    expect(wrapper.find('.fa-save').length).toEqual(0);
+    instance.handleChange('collection title');
+    wrapper.update();    
+    instance.handleSubmit(e);
+    wrapper.update();
+
+    expect(wrapper.find('.fa-save').length).toEqual(1);
+
+  })
+
+  it('should fire the postCollection() method when the save icon is clicked', () => {
+    
+    // get some changes registered
+    instance.handleChange('collection title');
+    wrapper.update();    
+    instance.handleSubmit(e);
+    wrapper.update();
+
+    instance.postCollection = jest.fn()
+
+    // click to save
+    wrapper.find('.fa-save').simulate('click');
+    wrapper.update();
+
+    // there's a 500ms timeout in the component
+    setTimeout(() => {
+      expect(instance.postCollection).toBeCalled()
+    }, 550)
+  })
+
+  it('should toggle the alert modal', () => {
+    instance.toggleUniqueWarning();
+    wrapper.update;
+    expect(wrapper.state().uniqueWarning).toEqual(true);
+  })
 })
 
