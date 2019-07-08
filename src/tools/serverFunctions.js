@@ -72,6 +72,22 @@ export async function saveCollection(collection, headers, isExisting) {
   return serverResponse;
 }
 
+// deletes user's collection 
+export async function deleteCollection(collection, headers) {
+  let serverResponse = await fetch(`${collectionServerUrl}collections/${collection._id}`, {
+    method: 'DELETE',
+    headers
+  })
+    .then(response => response.json())
+    .then((json) => {
+      // console.log(response)
+      return json;
+    })
+    .catch(err => console.log(err))
+
+  return serverResponse;
+}
+
 // gets a user's collections
 export async function getUserCollections(headers) {
   let serverResponse = await fetch(`${collectionServerUrl}collections/me`, {

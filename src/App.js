@@ -25,11 +25,22 @@ const Route = require("react-router-dom").Route;
 
 const RoutesContainer = posed.div({
   enter: {
+    transition: {
+      ease: 'easeIn', duration: 300
+    },
     opacity: 1,
-    // delay: 300,
-    beforeChildren: true
+    scale: 1
+
   },
-  exit: { opacity: 0 }
+  exit: {
+    delay: 300,
+    transition: {
+      ease: 'easeOut', duration: 300
+    },
+    opacity: 0,
+    scale: 0.01
+
+  }
 });
 
 const links = [

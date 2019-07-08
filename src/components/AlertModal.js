@@ -29,7 +29,10 @@ class AlertModal extends React.Component {
 
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" size="sm" onClick={this.props.toggle}>OK</Button>
+          <Button color="primary" size="sm" onClick={this.props.confirm}>OK</Button>
+          {this.props.confirming &&
+            <Button color="secondary" size="sm" onClick={this.props.toggle}>cancel</Button>
+          }
         </ModalFooter>
 
       </Modal>

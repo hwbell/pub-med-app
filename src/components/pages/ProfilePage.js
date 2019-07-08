@@ -92,6 +92,7 @@ class ProfilePage extends React.Component {
   renderProfile() {
 
     let user = this.props.user;
+    console.log(user)
 
     if (!user) {
       return;
@@ -100,16 +101,20 @@ class ProfilePage extends React.Component {
     return (
       <div className="outline profile" style={{ padding: '20px' }}>
 
-        <Button className="warn" style={styles.button}
+        <Button className="warn article-button" style={styles.button}
           onClick={this.props.registerSignOut}>logout</Button>
         <p className="collection-title">
-          {`${this.props.user.name || this.props.user.email}`}
+          <strong>{`${this.props.user.name || this.props.user.email}`}</strong>
         </p>
 
         <p className="paragraph">
-          {user.email}
+          <strong>email: </strong>{user.email}
         </p>
 
+        <p className="paragraph">
+          {user.collections &&
+            `${user.collections.length} collections`}
+        </p>
       </div>
     )
   }

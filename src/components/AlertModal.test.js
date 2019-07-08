@@ -4,6 +4,7 @@ import { shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 
 const toggleStub = jest.fn();
+const confirmStub = jest.fn();
 
 describe('AlertModal', () => {
 
@@ -12,6 +13,7 @@ describe('AlertModal', () => {
   beforeAll(async () => {
     someProps = {
       message: 'Hey! You have to provide a unique name!',
+      confirm: confirmStub,
       toggle: toggleStub,
       isVisible: false
     }
@@ -40,7 +42,33 @@ describe('AlertModal', () => {
     ['Modal', 'ModalBody', 'ModalFooter', {color: "primary"}].forEach((selector) => {
       expect(wrapper.find(selector).length).toEqual(1);
     })
+
+    expect(wrapper.find('Button').length).toEqual(1);
+
+    // two buttons if this.props.confirming === true
+    wrapper.setProps({
+      confirming: true
+    });
+    expect(wrapper.find('Button').length).toEqual(2);
   })
+
+  it('fires the correct functions for confirm and cancel', () => {
+
+    wrapper.find('Button').at(0).simulate('click');
+    wrapper.update();
+    expect(confirmStub.mock.calls.length).toEqual(1);
+
+    wrapper.setProps({
+      confirming: true
+    })
+    wrapper.update();
+
+    wrapper.find('Button').at(1).simulate('click');
+    wrapper.update();
+    expect(toggleStub.mock.calls.length).toEqual(1);
+    
+  })
+
 
 })
 

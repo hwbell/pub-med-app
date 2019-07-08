@@ -29,13 +29,6 @@ describe('Collection', () => {
     }
   });
 
-  let wrapper;
-  let instance;
-  beforeEach( () => {
-    wrapper = shallow(<Collection {...someProps} />);
-    instance = wrapper.instance();
-  })
-
   // tests
   it('renders without crashing', async () => {
     let wrapper = shallow(<Collection {...someProps} />);
@@ -98,7 +91,7 @@ describe('Collection', () => {
     // the delete button
     wrapper.find('Button').at(2).simulate('click');
     wrapper.update();
-    expect(handleDeleteStub.mock.calls.length).toEqual(1);
+    expect(wrapper.instance().handleDelete.mock.calls.length).toEqual(1);
 
   })
 
@@ -156,15 +149,15 @@ describe('Collection', () => {
   it('should create an inputText variable upon handleChange()', () => {
     const wrapper = shallow(<Collection {...someProps} />);
     const instance = wrapper.instance();
-    
+
     expect(wrapper.state().inputText).toEqual('');
     instance.handleChange('h');
     wrapper.update();
     expect(wrapper.state().inputText).toEqual('h');
 
-  }) 
-  
-  it('should create a collectionEdits variable upon handleSubmit()', () => {
+  })
+
+  it('should create a collection variable in state upon handleSubmit()', () => {
     const wrapper = shallow(<Collection {...someProps} />);
     const instance = wrapper.instance();
     const e = {
@@ -173,50 +166,66 @@ describe('Collection', () => {
     // at first it isnt there
     expect(wrapper.state().tempTitle).toBe(undefined);
     instance.handleChange('collection title');
-    wrapper.update();    
+    wrapper.update();
     instance.handleSubmit(e);
     wrapper.update();
     // but now it should be
-    expect(wrapper.state().collectionEdits.name).toEqual('collection title');
+    expect(wrapper.state().collection.name).toEqual('collection title');
 
-  }) 
+  })
 
   it('should show the save option if a collection is modified', () => {
-    
+    const wrapper = shallow(<Collection {...someProps} />);
+    const instance = wrapper.instance();
+
     expect(wrapper.find('.fa-save').length).toEqual(0);
+    expect(wrapper.find('.fa-undo').length).toEqual(0);
+
     instance.handleChange('collection title');
-    wrapper.update();    
+    wrapper.setProps({
+      isSaved: true
+    })
+    wrapper.update();
     instance.handleSubmit(e);
     wrapper.update();
 
     expect(wrapper.find('.fa-save').length).toEqual(1);
+    expect(wrapper.find('.fa-undo').length).toEqual(1);
+
+    // 
 
   })
 
-  it('should fire the postCollection() method when the save icon is clicked', () => {
-    
-    // get some changes registered
-    instance.handleChange('collection title');
-    wrapper.update();    
-    instance.handleSubmit(e);
-    wrapper.update();
 
-    instance.postCollection = jest.fn()
+  // it('should fire the clearEdits() method when the undo icon is clicked', () => {
+  //   const wrapper = shallow(<Collection {...someProps} />);    
+  //   const instance = wrapper.instance();
 
-    // click to save
-    wrapper.find('.fa-save').simulate('click');
-    wrapper.update();
+  //   // get some changes registered
+  //   instance.handleChange('collection title');
+  //   wrapper.setProps({
+  //     isSaved: true
+  //   })
+  //   wrapper.update();    
+  //   instance.handleSubmit(e);
+  //   wrapper.update();
 
-    // there's a 500ms timeout in the component
-    setTimeout(() => {
-      expect(instance.postCollection).toBeCalled()
-    }, 550)
-  })
+  //   instance.clearEdits = jest.fn()
 
-  it('should toggle the alert modal', () => {
-    instance.toggleUniqueWarning();
-    wrapper.update;
-    expect(wrapper.state().uniqueWarning).toEqual(true);
-  })
+  //   // click to save
+  //   wrapper.find('.fa-undo').simulate('click');
+  //   wrapper.update();
+
+  // })
+
+  // it('should toggle the alert modal', () => {
+  //   const wrapper = shallow(<Collection {...someProps} />);
+  //   const instance = wrapper.instance();
+
+  //   instance.toggleUniqueWarning();
+  //   wrapper.update;
+  //   expect(wrapper.state().uniqueWarning).toEqual(true);
+  // })
+
 })
 

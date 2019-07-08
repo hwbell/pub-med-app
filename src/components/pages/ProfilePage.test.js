@@ -2,6 +2,7 @@ import React from 'react';
 import ProfilePage from './ProfilePage';
 import { shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
+import { getArticles } from '../../tools/apiFunctions.js';
 
 // sample props
 const user = {
@@ -10,6 +11,37 @@ const user = {
 };
 
 describe('ProfilePage', () => {
+  let articles;
+  let someProps;
+  beforeAll( async () => {
+    articles = await getArticles('medicine').then((response) => {
+      return response.resultList.result;
+    });
+
+    someProps = {
+      collections: [
+        {
+          name: 'first collection',
+          articles: articles
+        },
+        {
+          name: 'second collection',
+          articles: articles
+        }
+      ],
+      user: {
+        name: 'Mark',
+        email: 'mark@mail.com',
+        age: 33,
+        collections: [
+          {
+            name: 'first collection',
+            articles: articles
+          }
+        ],
+      }
+    }
+  }) 
   // tests
   it('renders without crashing', async () => {
     let wrapper = shallow(<ProfilePage />);
@@ -27,30 +59,30 @@ describe('ProfilePage', () => {
   it('contains the correct elements', () => {
     let wrapper = mount(<ProfilePage />);
 
-    ['.page', '.glass', , '.heading', '.outline'].forEach((selector) => {
+    ['.page', '.glass', '.heading', '.outline', 'Button'].forEach((selector) => {
       expect(wrapper.find(selector).length).toEqual(1);
     })
-
-    expect(wrapper.find('Button').length).toEqual(1);
 
   });
 
   it('shows the signin form if user is not signed in', () => {
-    let wrapper = mount(<ProfilePage />);
-    wrapper.setProps({ signedIn: false });
+    let wrapper = shallow(<ProfilePage {...someProps}/>);
+    
     wrapper.update();
-    expect(wrapper.find('.profile').length).toEqual(0);
-    expect(wrapper.find('.signin').length).toEqual(1);
-
-    // change the signedIn prop and provide a user 
-    wrapper.setProps({
-      signedIn: true,
-      user
-    });
-    wrapper.update();
-    // check for the change
     expect(wrapper.find('.profile').length).toEqual(1);
     expect(wrapper.find('.signin').length).toEqual(0);
+    expect(wrapper.find('.collection-title').length).toEqual(1);
+    expect(wrapper.find('Button').at(0).render().text()).toEqual('logout');
+
+    // change the signedIn prop and wipe the user
+    wrapper.setProps({ user: null });
+    wrapper.update();
+    // check for the change
+    expect(wrapper.find('.profile').length).toEqual(0);
+    expect(wrapper.find('.signin').length).toEqual(1);
+    expect(wrapper.find('.collection-title').length).toEqual(0);
+    expect(wrapper.find('Button').at(0).render().text()).toEqual('sign up!');
+
 
   })
 
@@ -92,11 +124,6 @@ describe('ProfilePage', () => {
 
   })
 
-  // it('should fire handleSubmit() when the input in submitted', () => {
-  //   let wrapper = mount(<ProfilePage />);
-
-  // })
-
-  // it('should fire the ')
+  
 
 })

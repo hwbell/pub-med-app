@@ -10,7 +10,7 @@ import GeneratedPdf from './GeneratedPdf';
 import AlertModal from './AlertModal'
 
 // tools
-import { saveCollection } from '../tools/serverFunctions';
+import { saveCollection, deleteCollection } from '../tools/serverFunctions';
 import { CSSTransitionGroup } from 'react-transition-group' // ES6
 
 // ******************************************************************************
@@ -21,16 +21,23 @@ class Collection extends React.Component {
     this.state = {
       inputText: '',
       editing: false,
-      showPreview: false
+      showPreview: false,
+      uniqueWarning: false,
+      deleteWarning: false,
+      confirming: false
     }
 
     this.togglePreview = this.togglePreview.bind(this);
     this.postCollection = this.postCollection.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
+    this.clearEdits = this.clearEdits.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.focusInput = this.focusInput.bind(this);
-    this.alertUniqueName = this.alertUniqueName.bind(this);
     this.toggleUniqueWarning = this.toggleUniqueWarning.bind(this);
+    this.toggleDeleteWarning = this.toggleDeleteWarning.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.deleteFromServer = this.deleteFromServer.bind(this);
+    this.editSavedCollection = this.editSavedCollection.bind(this);
   }
 
   toggleEdit() {
@@ -70,24 +77,42 @@ class Collection extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
 
+    let collection = JSON.parse(JSON.stringify(this.props.collection))
+    collection.name = this.state.inputText;
     this.setState({
-      collectionEdits: {
-        _id: this.props.collection._id,
-        name: this.state.inputText
-      }
+      collection
     }, () => {
       this.toggleEdit();
-      console.log(this.state.collectionEdits)
+      // console.log(this.state.collection)
     })
-    
+
   }
 
-  postCollection() {
-    
-    // if this.state.collectionEdits exists, we will send it to the server as a patch
-    // otherwise it is treated as a newly posted collection in the saveCollection function
-    let collection = this.state.collectionEdits || this.props.collection;
-    
+  // if it is a new collection, handle delete in state, back in App.
+  // if it is a saved collection, delete it from the server 
+  handleDelete() {
+    let collection = this.props.collection;
+
+    if (!this.props.isSaved) {
+      this.props.handleDelete(collection)
+    } else {
+      this.toggleDeleteWarning();
+    }
+
+  }
+
+  toggleDeleteWarning() {
+    this.setState({
+      confirming: !this.state.confirming,
+      deleteWarning: !this.state.deleteWarning
+    })
+  }
+
+  // this will delete a collection from the server and send the response
+  deleteFromServer() {
+
+    let collection = this.props.collection;
+
     let token = JSON.parse(localStorage.getItem('token'));
 
     let headers = {
@@ -96,31 +121,19 @@ class Collection extends React.Component {
       'Content-Type': 'application/json',
     }
 
-    let isExisting = !!this.state.collectionEdits;
-
-    // Post the collection to save it to the server. Using the currently stored token
-    // will assign the user as the owner of the collection in mongodb on the backend
-    return saveCollection(collection, headers, isExisting)
+    // Delete the collection from the server
+    return deleteCollection(collection, headers)
       .then((response) => {
         console.log(response)
 
-        // this will be the response for non-unique names
-        if (response.code === 11000) {
-          return this.alertUniqueName();
-        }
+        // once we have successfully deleted, we will: 
 
-        // once we have successfully posted, we will: 
-
-        // 1. Refresh the userCollections - this will send the new collection list sent back
+        // 1. Refresh the user's collections - this will send the new collection list sent back
         // from the server to the root App component to update all concerned components
         this.props.refreshUserCollections(response);
 
-        // 2. Remove this collection from the 'New Collections' list, if that's where it came from 
-        isExisting && this.props.handleDelete(this.props.collection);
-
-        this.setState({
-          collectionEdits: null
-        })
+        // toggle the modal - it should always be up at this point
+        this.state.deleteWarning && this.toggleDeleteWarning();
 
       }).catch((e) => {
         console.log(e)
@@ -130,14 +143,67 @@ class Collection extends React.Component {
       })
   }
 
-  alertUniqueName() {
-    this.toggleUniqueWarning();
+  // this function is called from the 'remove' button in ArticleResult if it is a saved collection.
+  // New collections just use this.props.handleDelete() assigned to the 'remove' button to adjust state.
+  // But for a saved collection, we will tell the server with the postCollection() function below  
+  editSavedCollection(index) {
+    // create a collection if it isn't in state yet
+    let collection = JSON.parse(JSON.stringify(this.state.collection || this.props.collection));
+
+    collection.articles = collection.articles.splice(index, 1);
+    this.setState({
+      collection
+    }, () => {
+      this.postCollection();
+    })
   }
 
-  toggleUniqueWarning() {
-    this.setState({
-      uniqueWarning: !this.state.uniqueWarning
-    })
+  postCollection() {
+
+    // if this.state.collection (edited from this.props.collection) exists, we will send it to the server as a patch
+    // otherwise it is treated as a newly posted collection in the saveCollection function
+    let collection = this.state.collection || this.props.collection;
+
+    let token = JSON.parse(localStorage.getItem('token'));
+
+    let headers = {
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    }
+
+    let isExisting = !!this.state.collection && this.props.isSaved;
+
+    // Post the collection to save it to the server. Using the currently stored token
+    // will assign the user as the owner of the collection in mongodb on the backend
+    return saveCollection(collection, headers, isExisting)
+      .then((response) => {
+        console.log(response)
+
+        // this will be the response for non-unique names
+        if (response.code === 11000) {
+          return this.toggleUniqueWarning();
+        }
+
+        // once we have successfully posted, we will: 
+
+        // 1. Refresh the user's collections - this will send the new collection list sent back
+        // from the server to the root App component to update all concerned components
+        this.props.refreshUserCollections(response);
+
+        // 2. Remove this collection from the 'New Collections' list, if that's where it came from 
+        !isExisting && this.props.handleDelete(this.props.collection);
+
+        this.setState({
+          collection: null
+        })
+
+      }).catch((e) => {
+        console.log(e)
+        this.setState({
+          error: e
+        })
+      })
   }
 
   renderResults(collection) {
@@ -149,7 +215,7 @@ class Collection extends React.Component {
       },
       {
         text: 'remove',
-        onClick: this.props.handleSubmit
+        onClick: this.editSavedCollection
       }
     ];
 
@@ -165,10 +231,12 @@ class Collection extends React.Component {
   }
 
   renderTitle() {
+    console.log('rendering title')
+    console.log(this.state.collection)
+    console.log(this.props.collection)
 
-    let collection = this.props.collection;
-    let title = this.state.collectionEdits ? this.state.collectionEdits.name: collection.name;
-    
+    let collection = this.state.collection || this.props.collection;
+    let title = collection.name;
     return (
       <div style={styles.title}>
         <p className="collection-title">
@@ -181,13 +249,16 @@ class Collection extends React.Component {
   }
 
   renderInput() {
-    let collection = this.props.collection;
+
+    let collection = this.state.collection || this.props.collection;
+    let placeholder = collection.name
+
     return (
       <div style={styles.title}>
         <Form onSubmit={this.handleSubmit}>
           <div style={styles.titleHolder}>
-            <Input type="text" name="text" id="exampleEmail" className="collection-edit" 
-              placeholder={ this.state.tempTitle || collection.name}
+            <Input type="text" name="text" id="exampleEmail" className="collection-edit"
+              placeholder={placeholder}
               onChange={(e) => this.handleChange(e.target.value)}
               ref={(input) => { this.nameInput = input }} >
             </Input>
@@ -199,48 +270,90 @@ class Collection extends React.Component {
     )
   }
 
+  // to show the save icon upon editing
   renderSaveOption() {
     return (
-      <i className="far fa-save" style={styles.icon}
-        onClick={this.postCollection}></i>
+      <div style={styles.iconHolder}>
+        <i className="far fa-save" style={styles.icon}
+          onClick={this.postCollection}></i>
+        <i className="fas fa-undo" style={styles.icon}
+          onClick={this.clearEdits}></i>
+      </div>
     )
   }
 
+  clearEdits() {
+    
+    this.setState({
+      collection: null
+    }, () => {
+      console.log('clearing edits')
+    })
+  }
+
+
+  toggleUniqueWarning() {
+    this.setState({
+      uniqueWarning: !this.state.uniqueWarning
+    })
+  }
+
+  // use the AlertModal for each of the alerts, just use different props
+  renderAlertModals() {
+    let uniqueWarningProps = {
+      message: 'Each collection must have a unique name! Try adjusting the name.',
+      isVisible: this.state.uniqueWarning,
+      confirming: this.state.confirming,
+      toggle: this.toggleUniqueWarning
+    }
+    let deleteWarningProps = {
+      message: `Are you sure you want to delete this item?`,
+      isVisible: this.state.deleteWarning,
+      confirming: this.state.confirming,
+      confirm: this.deleteFromServer,
+      toggle: this.toggleDeleteWarning
+    }
+
+    let propSets = [uniqueWarningProps, deleteWarningProps];
+
+    return propSets.map((props, i) => {
+      return <AlertModal key={i} {...props} />
+    })
+  }
+
   render() {
-    let collection = this.props.collection;
+    // if there is a collection in state, this means changes have been made and the props
+    // one copied to state to be edited
+    let collection = this.state.collection || this.props.collection;
 
     return (
       <div className="outline collection" style={styles.content}>
 
         {/* the save icon that appears once we have any edits */}
-        {this.state.collectionEdits && 
+        {this.state.collection && this.props.isSaved &&
           this.renderSaveOption()
         }
 
-        {/* the modal to alert for non-unique properties */}
-        <AlertModal 
-          message={'Each collection must have a unique name! Try adjusting the name.'}
-          isVisible={this.state.uniqueWarning}
-          toggle={this.toggleUniqueWarning}
-        />
+        {/* the modals to alert for non-unique properties / deletions */}
+        {this.renderAlertModals()}
 
         {/* User can toggle here to edit the title of a collection */}
         <CSSTransitionGroup
-            style={styles.titleHolder}
-            transitionName="replace"
-            transitionEnterTimeout={500}
-            transitionLeaveTimeout={300}>
+          style={styles.titleHolder}
+          transitionName="replace"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={300}>
 
-            
-            {!this.state.editing &&
-              this.renderTitle()}
-            {this.state.editing &&
-              this.renderInput()}
 
-          </CSSTransitionGroup>
+          {!this.state.editing &&
+            this.renderTitle()}
+          {this.state.editing &&
+            this.renderInput()}
+
+        </CSSTransitionGroup>
         <div className="" style={styles.titleRow}>
 
-          
+
 
           {/* preview / download options for the article */}
           <div style={styles.buttonHolder}>
@@ -257,7 +370,7 @@ class Collection extends React.Component {
             </Button>}
             <Button
               className="warn article-button" size="sm"
-              onClick={() => this.props.handleDelete(collection)}>
+              onClick={this.handleDelete}>
               delete
             </Button>
 
@@ -320,11 +433,15 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center'
   },
-  icon: {
+  iconHolder: {
     position: 'absolute',
     right: '20px',
     padding: '10px',
-    fontSize: '20px'
+  },
+  icon: {
+    fontSize: '20px',
+    padding: '10px',
+
   }
 }
 
