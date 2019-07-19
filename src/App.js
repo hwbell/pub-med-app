@@ -74,6 +74,8 @@ class App extends Component {
     this.createNewCollection = this.createNewCollection.bind(this);
     this.modifyCollection = this.modifyCollection.bind(this);
     this.deleteCollection = this.deleteCollection.bind(this);
+
+    // these actually communicate with our server
     this.registerSignIn = this.registerSignIn.bind(this);
     this.registerSignOut = this.registerSignOut.bind(this);
     this.refreshUserCollections = this.refreshUserCollections.bind(this);

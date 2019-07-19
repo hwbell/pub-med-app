@@ -9,27 +9,23 @@ import renderer from 'react-test-renderer';
 
 describe('App', () => {
 
+
+
   it('renders without crashing', async () => {
     let wrapper = await shallow(<App />);
-    // wrapper.update();
-
   });
 
-  // something needs fixing with pose here ... FIX IT!
   it('renders correctly', async () => {
     let wrapper = mount(<App />);
 
     expect(wrapper).toMatchSnapshot();
   });
 
-  // it('should not try to sign in user if there no user in local storage', async () => {
-  //   const wrapper = mount(<App />);
-  //   jest.spyOn(wrapper.instance(), 'registerSignIn');
+  it('should not have a user to start with', async () => {
+    let wrapper = mount(<App />);
 
-  //   // with no user it shouldn't get called
-  //   expect(wrapper.instance().registerSignIn).not.toHaveBeenCalled();
-
-  // })
+    expect(wrapper.state().user).toBe(null)
+  });
 
   it('should try to sign in user if there is a user in local storage', async () => {
 

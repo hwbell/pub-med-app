@@ -27,7 +27,7 @@ class Header extends React.Component {
 
   render() {
     return (
-      <div className={this.props.class || "col glass"}>
+      <div className={this.props.class || "glass"}>
         
           <h2 className="title">{this.props.title}</h2>
           <h4 className="subtitle">{this.props.subtitle}</h4>

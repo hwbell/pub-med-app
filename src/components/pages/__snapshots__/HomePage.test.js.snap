@@ -5,7 +5,7 @@ exports[`renders correctly 1`] = `
   className="page"
 >
   <div
-    className="col glass"
+    className="glass"
   >
     <h2
       className="title"

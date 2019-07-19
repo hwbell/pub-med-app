@@ -54,6 +54,7 @@ describe('AlertModal', () => {
 
   it('fires the correct functions for confirm and cancel', () => {
 
+    
     wrapper.find('Button').at(0).simulate('click');
     wrapper.update();
     expect(confirmStub.mock.calls.length).toEqual(1);

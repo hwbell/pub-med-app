@@ -306,15 +306,22 @@ class Collection extends React.Component {
       confirming: this.state.confirming,
       toggle: this.toggleUniqueWarning
     }
-    let deleteWarningProps = {
-      message: `Are you sure you want to delete this item?`,
+    let deleteCollectionWarningProps = {
+      message: `Are you sure you want to delete this collection?`,
+      isVisible: this.state.deleteWarning,
+      confirming: this.state.confirming,
+      confirm: this.deleteFromServer,
+      toggle: this.toggleDeleteWarning
+    }
+    let deleteArticleWarningProps = {
+      message: `Are you sure you want to remove this article?`,
       isVisible: this.state.deleteWarning,
       confirming: this.state.confirming,
       confirm: this.deleteFromServer,
       toggle: this.toggleDeleteWarning
     }
 
-    let propSets = [uniqueWarningProps, deleteWarningProps];
+    let propSets = [uniqueWarningProps, deleteCollectionWarningProps, deleteArticleWarningProps];
 
     return propSets.map((props, i) => {
       return <AlertModal key={i} {...props} />
