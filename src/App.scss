@@ -182,10 +182,12 @@ hr {
   /* color: rgb(253, 233, 255); */
   transition: all 0.3s ease;
 }
-.nav-link:hover {
+.nav-link:hover, .nav-link:active, .nav-link:focus {
   color: rgb(161, 161, 161);
 }
-
+.nav-link:focus {
+  text-decoration: underline;
+}
 
 /* the search page */
 .search-input {

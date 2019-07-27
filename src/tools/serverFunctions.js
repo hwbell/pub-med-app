@@ -1,6 +1,6 @@
 const makeRandomString = require('./stringFunctions').makeRandomString;
 
-const collectionServerUrl = process.env.REACT_APP_COLLECTION_SERVER_URL || 'http://localhost:8080/';
+const collectionServerUrl = process.env.REACT_APP_COLLECTION_SERVER_URL || 'http://localhost:3000/';
 const fetch = require('node-fetch');
 
 // this function will actually make a new user OR sign in an existing user, depending on the
@@ -35,7 +35,7 @@ export async function signInUser(user, isNewUser) {
 // saves a collection to the server, or patches an exisiting collection on the server
 export async function saveCollection(collection, headers, isExisting) {
 
-  console.log(collection)
+  // console.log(collection)
   // assign the request params accoring to either PATCH for existing collections or 
   // POST for new collections
 

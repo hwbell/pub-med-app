@@ -84,7 +84,7 @@ class CollectionForm extends React.Component {
             <p style={styles.text}>
               new collection:
             </p>
-            <Input style={{ borderRadius: '25px' }}
+            <Input style={{ margin: '10px', borderRadius: '25px' }}
               placeholder={" Ex - Cancer Biology "}
               value={this.state.name}
               onChange={(e) => this.handleChange(e.target.value)}

@@ -171,19 +171,19 @@ exports[`Collection renders correctly 1`] = `
           <p
             className="article-title"
           >
-            Hypnosis and The Therapeutic Relationship: Relational Factors of Hypnosis in Psychotherapy.
+            Improving access to Indigenous medicine for patients in hospital-based settings: a challenge for health systems in northern Canada.
           </p>
           <p
             className="article-title"
           >
-            Spiegel EB, Baker EL, Daitch C, Diamond MJ, Phillips M.
+            Redvers N, Marianayagam J, Blondin B.
           </p>
           <p
             className="article-title"
           >
-            The American journal of clinical hypnosis  
+            International journal of circumpolar health  
             <strong>
-                2020
+                2019
             </strong>
           </p>
         </div>
@@ -289,19 +289,19 @@ exports[`Collection renders correctly 1`] = `
           <p
             className="article-title"
           >
-            Improving access to Indigenous medicine for patients in hospital-based settings: a challenge for health systems in northern Canada.
+            Hypnosis and The Therapeutic Relationship: Relational Factors of Hypnosis in Psychotherapy.
           </p>
           <p
             className="article-title"
           >
-            Redvers N, Marianayagam J, Blondin B.
+            Spiegel EB, Baker EL, Daitch C, Diamond MJ, Phillips M.
           </p>
           <p
             className="article-title"
           >
-            International journal of circumpolar health  
+            The American journal of clinical hypnosis  
             <strong>
-                2019
+                2020
             </strong>
           </p>
         </div>
@@ -407,17 +407,17 @@ exports[`Collection renders correctly 1`] = `
           <p
             className="article-title"
           >
-            Long-term safety and efficacy of deferasirox in patients with myelodysplastic syndrome, aplastic anemia and other rare anemia in Taiwan.
+            First Case in Korea of a Patient With Anti-PP1Pk Antibodies: Successful Blood Management via Acute Normovolemic Hemodilution.
           </p>
           <p
             className="article-title"
           >
-            Ko BS, Chang MC, Chiou TJ, Chang TK, Chen YC, Lin SF, Chang CS, Lu YC, Yeh SP, Chen TY, Hwang WS.
+            Ha C, Choi S, Yu H, Chun S, Kim KH, Lee JH, Han IW, Cho D.
           </p>
           <p
             className="article-title"
           >
-            Hematology (Amsterdam, Netherlands)  
+            Annals of laboratory medicine  
             <strong>
                 2019
             </strong>
@@ -466,17 +466,17 @@ exports[`Collection renders correctly 1`] = `
           <p
             className="article-title"
           >
-            First Case in Korea of a Patient With Anti-PP1Pk Antibodies: Successful Blood Management via Acute Normovolemic Hemodilution.
+            Long-term safety and efficacy of deferasirox in patients with myelodysplastic syndrome, aplastic anemia and other rare anemia in Taiwan.
           </p>
           <p
             className="article-title"
           >
-            Ha C, Choi S, Yu H, Chun S, Kim KH, Lee JH, Han IW, Cho D.
+            Ko BS, Chang MC, Chiou TJ, Chang TK, Chen YC, Lin SF, Chang CS, Lu YC, Yeh SP, Chen TY, Hwang WS.
           </p>
           <p
             className="article-title"
           >
-            Annals of laboratory medicine  
+            Hematology (Amsterdam, Netherlands)  
             <strong>
                 2019
             </strong>
@@ -643,17 +643,17 @@ exports[`Collection renders correctly 1`] = `
           <p
             className="article-title"
           >
-            Improvement in External Quality Assessment Results for Qualitative Fecal Immunochemical Tests in Korea After Feedback to Manufacturers.
+            A Developmental Approach to Internal Medicine Residency Education: Lessons Learned from the Design and Implementation of a Novel Longitudinal Coaching Program.
           </p>
           <p
             className="article-title"
           >
-            Lee W, Ryoo N, Suh HS, Jeon CH, Urinalysis and Routine Microscopy Subcommittee, Korean Association of External Quality Assessment Service.
+            Gonzalo JD, Wolpaw DR, Krok KL, Pfeiffer MP, McCall-Hosenfeld JS.
           </p>
           <p
             className="article-title"
           >
-            Annals of laboratory medicine  
+            Medical education online  
             <strong>
                 2019
             </strong>

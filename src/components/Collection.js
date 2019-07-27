@@ -96,6 +96,7 @@ class Collection extends React.Component {
     if (!this.props.isSaved) {
       this.props.handleDelete(collection)
     } else {
+      console.log('show warning')
       this.toggleDeleteWarning();
     }
 
@@ -151,6 +152,7 @@ class Collection extends React.Component {
     let collection = JSON.parse(JSON.stringify(this.state.collection || this.props.collection));
 
     collection.articles = collection.articles.splice(index, 1);
+
     this.setState({
       collection
     }, () => {
@@ -207,7 +209,7 @@ class Collection extends React.Component {
   }
 
   renderResults(collection) {
-
+    // console.log(collection)
     const collectionButtons = [
       {
         text: 'view article',
@@ -215,7 +217,7 @@ class Collection extends React.Component {
       },
       {
         text: 'remove',
-        onClick: this.editSavedCollection
+        onClick: collection.owner ? this.editSavedCollection: this.props.modifyCollection
       }
     ];
 
@@ -232,8 +234,8 @@ class Collection extends React.Component {
 
   renderTitle() {
     console.log('rendering title')
-    console.log(this.state.collection)
-    console.log(this.props.collection)
+    // console.log(this.state.collection)
+    // console.log(this.props.collection)
 
     let collection = this.state.collection || this.props.collection;
     let title = collection.name;
@@ -313,15 +315,15 @@ class Collection extends React.Component {
       confirm: this.deleteFromServer,
       toggle: this.toggleDeleteWarning
     }
-    let deleteArticleWarningProps = {
-      message: `Are you sure you want to remove this article?`,
-      isVisible: this.state.deleteWarning,
-      confirming: this.state.confirming,
-      confirm: this.deleteFromServer,
-      toggle: this.toggleDeleteWarning
-    }
+    // let deleteArticleWarningProps = {
+    //   message: `Are you sure you want to remove this article?`,
+    //   isVisible: this.state.deleteWarning,
+    //   confirming: this.state.confirming,
+    //   confirm: this.props.handleDelete,
+    //   toggle: this.toggleDeleteWarning
+    // }
 
-    let propSets = [uniqueWarningProps, deleteCollectionWarningProps, deleteArticleWarningProps];
+    let propSets = [uniqueWarningProps, deleteCollectionWarningProps];
 
     return propSets.map((props, i) => {
       return <AlertModal key={i} {...props} />

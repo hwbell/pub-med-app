@@ -70,9 +70,8 @@ describe('CollectionPage', () => {
     let wrapper = shallow(<CollectionPage  {...someProps} />);
 
     // the explanations should not appear with collections present 
-    ['.outline', '.paragraph'].forEach((selector) => {
-      expect(wrapper.find(selector).length).toEqual(0);
-    });
+    expect(wrapper.find('.outline').length).toEqual(1);
+    expect(wrapper.find('.section-title').length).toEqual(2);
 
     // set the user's collections to empty 
     wrapper.setProps({
@@ -85,9 +84,7 @@ describe('CollectionPage', () => {
     });
 
     // now the 1st segment appears
-    ['.outline', '.paragraph'].forEach((selector) => {
-      expect(wrapper.find(selector).length).toEqual(1);
-    });
+    expect(wrapper.find('.paragraph').length).toEqual(1);
 
     //  set the new collections to empty 
     wrapper.setProps({
@@ -95,9 +92,7 @@ describe('CollectionPage', () => {
     });
 
     // now the second segment appears
-    ['.outline', '.paragraph'].forEach((selector) => {
-      expect(wrapper.find(selector).length).toEqual(2);
-    });
+    expect(wrapper.find('.paragraph').length).toEqual(2);
 
   })
 

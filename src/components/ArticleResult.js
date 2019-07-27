@@ -63,7 +63,7 @@ class ArticleResult extends React.Component {
 
           return (
             <Button key={i} className={buttonClass} size="sm"
-              onClick={() => button.onClick(this.props.article, this.props.collection)}>{button.text}</Button>
+              onClick={() => button.onClick(this.props.article, this.props.collection, -1)}>{button.text}</Button>
           )
         })}
 

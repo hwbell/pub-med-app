@@ -106,7 +106,6 @@ class CollectionPage extends React.Component {
 
       <div className="collection-block">
 
-        <p className="section-title">{isSaved ? 'Saved' : 'New'}</p>
         {collections.map((collection, i) => {
 
           return (
@@ -116,6 +115,7 @@ class CollectionPage extends React.Component {
               collection={collection}
               handleSubmit={this.handleSubmit}
               handleDelete={this.handleDelete}
+              modifyCollection={this.props.modifyCollection}
               refreshUserCollections={this.props.refreshUserCollections}
               viewArticle={this.viewArticle}
             />
@@ -128,11 +128,9 @@ class CollectionPage extends React.Component {
 
   render() {
 
-    // console.log(JSON.parse(localStorage.getItem('user')))
-    // console.log(JSON.parse(localStorage.getItem('token')))
-
-    console.log(this.props)
     const user = this.props.user;
+    // console.log(user)
+    const userCollections = user && user.collections && user.collections.length > 0;
 
     return (
       <div className="collection-page page">
@@ -155,33 +153,39 @@ class CollectionPage extends React.Component {
 
           {/* results */}
 
-          {/* the new collections when they are present */}
-          {this.props.collections.length > 0 ?
+          <div className="outline" style={styles.content}>
 
-            this.renderCollections(this.props.collections)
+            <p className="section-title">New Collections</p>
 
-            // or if there aren't any collections yet
-            :
-            <div className="outline" style={styles.content}>
+            {/* the new collections when they are present */}
+            {this.props.collections.length > 0 ?
+
+              this.renderCollections(this.props.collections)
+
+              // or if there aren't any collections yet
+              :
               <p className="paragraph">
-                {`You don't have any new collections ... you can add create more by searching
-                 the database, then organize, share & export them here. `}
+                {`You don't have any new collections made. You can create some by searching
+                 the database and adding any interesting articles to your collection. Then you can
+                  organize, share & export them here. `}
               </p>
-            </div>}
+            }
 
-          {/* the user's collections when they are present */}
-          {user && user.collections.length > 0 ?
+            <p className="section-title">Saved Collections</p>
 
-            this.renderCollections(user.collections, true)
+            {/* the user's collections when they are present */}
+            {userCollections ?
 
-            // or if there aren't any collections yet
-            :
-            <div className="outline" style={styles.content}>
+              this.renderCollections(user.collections, true)
+
+              // or if there aren't any collections yet
+              :
               <p className="paragraph">
                 {`You don't have any collections saved to your profile yet. You can save any new collection you make.
                 Just look for the 'save to my collections' button!`}
               </p>
-            </div>}
+            }
+          </div>
 
         </div>
       </div>

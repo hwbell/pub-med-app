@@ -123,8 +123,13 @@ class App extends Component {
       return;
     }
 
+    // to handle an object with 'name' key as well
+    if (collectionName.name) {
+      collectionName = collectionName.name
+    }
+
     let verb = change > 0 ? 'Adding' : 'Removing';
-    console.log(`${verb} article ${article.id} to user's ${collectionName} collection`)
+    console.log(`${verb} article ${article.id} in user's ${collectionName} collection`)
 
     // then find the matching collection and add / remove the article
     let collections = this.state.collections;
@@ -142,9 +147,13 @@ class App extends Component {
       }
     });
 
-    this.setState({
-      collections
-    }, () => callback());
+    if (callback) {
+      this.setState({
+        collections
+      }, () => callback());  
+    } else {
+      this.setState({collections});
+    }
   }
 
   // fire this function 
