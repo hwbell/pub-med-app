@@ -5,10 +5,11 @@ import { CSSTransitionGroup } from 'react-transition-group' // ES6
 
 // components
 import Header from '../Header';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import ProfileForm from '../ProfileForm';
+import { Button, Form, FormGroup, Label, Input, Fade } from 'reactstrap';
 
 // tools
-import { signInUser } from '../../tools/serverFunctions';
+import { signInUser, patchUser } from '../../tools/serverFunctions';
 
 // ******************************************************************************
 class ProfilePage extends React.Component {
@@ -17,15 +18,18 @@ class ProfilePage extends React.Component {
 
     this.state = {
       checked: false,
-      editText: false
+      editText: false,
+      showProfileForm: false
     }
 
     this.handleChange = this.handleChange.bind(this);
     this.handleCheck = this.handleCheck.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmitUser = this.handleSubmitUser.bind(this);
     this.attemptSignIn = this.attemptSignIn.bind(this);
     this.renderProfile = this.renderProfile.bind(this);
     this.toggleEditText = this.toggleEditText.bind(this);
+    this.toggleProfileForm = this.toggleProfileForm.bind(this);
   }
 
   componentDidMount() {
@@ -113,15 +117,18 @@ class ProfilePage extends React.Component {
 
           <i className="profile-title fas fa-user-edit" style={styles.icon}
             onMouseOver={this.toggleEditText}
-            onMouseLeave={this.toggleEditText}></i>
+            onMouseLeave={this.toggleEditText}
+            onClick={this.toggleProfileForm}></i>
 
-          { this.state.editText &&
-            <p className="profile-title">edit your profile</p>
-          }
+          <Fade in={this.state.editText} className="profile-title">
+            <p style={{color: 'white'}}>
+              add to your profile!
+            </p>
+          </Fade>
         </div>
 
         <p className="profile-title">
-          <strong>email: </strong>{user.email}
+          {user.email}
         </p>
 
         <p className="profile-title">
@@ -150,6 +157,7 @@ class ProfilePage extends React.Component {
     })
   }
 
+  // this one is for the Login Form
   handleSubmit(e) {
     e.preventDefault()
     if (!this.state.user) {
@@ -205,17 +213,78 @@ class ProfilePage extends React.Component {
     })
   }
 
+  toggleProfileForm() {
+    this.setState({
+      showProfileForm: !this.state.showProfileForm
+    })
+  }
+
+  // this one is for the Profile Form
+  handleSubmitUser() {
+    if (!this.state.profileInfo) {
+      return;
+    }
+
+    // filter out any empty entries
+    let info = this.state.profileInfo;
+    let patch = {};
+    Object.keys(info).forEach((key) => {
+      if (info[key]) {
+        patch[key] = info[key]
+      }
+    })
+
+    let token = JSON.parse(localStorage.getItem('token'));
+    let headers = {
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    }
+
+    // Send the patch to save it to the server. Using the currently stored token
+    // will assign the user as the owner of the collection in mongodb on the backend
+    return patchUser(patch, headers)
+      .then((response) => {
+        console.log(response)
+
+        // once we have successfully patched, we will: 
+
+        // 1. Refresh the user - this will send the new collection list sent back
+        // from the server to the root App component to update all concerned components
+        this.props.refreshUser(response);
+
+        this.setState({
+          profileInfo: {}
+        })
+
+      }).catch((e) => {
+        console.log(e)
+        this.setState({
+          error: e
+        })
+      })
+  }
+
+
   render() {
 
     // console.log(this.props)
     return (
       <div className="page">
 
+        {/* the edit modal, for user that is logged in */}
+        <ProfileForm
+          isVisible={this.state.showProfileForm}
+          user={this.props.user}
+          toggle={this.toggleProfileForm}
+          confirm={this.handleSubmitUser}
+        />
+
         <div className="glass">
 
           <Header
             class="heading"
-            title={this.props.username || "Your Profile"}
+            title={"Your Profile"}
             subtitle={""}
           />
 

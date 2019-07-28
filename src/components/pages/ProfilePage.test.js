@@ -42,10 +42,15 @@ describe('ProfilePage', () => {
       }
     }
   }) 
+
+  let wrapper;
+  beforeEach(() => {
+    wrapper = shallow(<ProfilePage {...someProps}/>);
+  })
+
   // tests
   it('renders without crashing', async () => {
-    let wrapper = shallow(<ProfilePage />);
-    // wrapper.update();
+    wrapper.update();
 
   });
 
@@ -66,12 +71,12 @@ describe('ProfilePage', () => {
   });
 
   it('shows the signin form if user is not signed in', () => {
-    let wrapper = shallow(<ProfilePage {...someProps}/>);
     
     wrapper.update();
     expect(wrapper.find('.profile').length).toEqual(1);
     expect(wrapper.find('.signin').length).toEqual(0);
-    expect(wrapper.find('.profile-title').length).toEqual(4);
+    expect(wrapper.find('.profile-title').length).toEqual(5);
+    expect(wrapper.find('Fade').length).toEqual(1);
     expect(wrapper.find('.fa-user-edit').length).toEqual(1);    
     expect(wrapper.find('Button').at(0).render().text()).toEqual('logout');
 
@@ -126,20 +131,29 @@ describe('ProfilePage', () => {
   })
 
   it('toggleEditText() should toggle the edit text', () => {
-    let wrapper = shallow(<ProfilePage {...someProps}/>);
+    // let wrapper = shallow(<ProfilePage {...someProps}/>);
 
-    wrapper.update();
     expect(wrapper.state().editText).toBe(false);
-    expect(wrapper.find('.profile-title').length).toEqual(4);
 
     wrapper.instance().toggleEditText();
     wrapper.update();
 
-    // now state is changed and there's another profile-title, the icon
     expect(wrapper.state().editText).toBe(true);    
-    expect(wrapper.find('.profile-title').length).toEqual(5);
-    expect(wrapper.find('.fa-user-edit').length).toEqual(1);
     
+  })
+
+  it('toggles the ProfileForm modal when the edit icon is clicked', () => {
+
+    expect(wrapper.state().showProfileForm).toBe(false);
+    
+    wrapper.instance().toggleProfileForm();
+    wrapper.update();
+    expect(wrapper.state().showProfileForm).toBe(true);
+
+    wrapper.instance().toggleProfileForm();    
+    wrapper.update();
+    expect(wrapper.state().showProfileForm).toBe(false);
+
   })
 
   

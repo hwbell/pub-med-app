@@ -78,16 +78,14 @@ class App extends Component {
     this.registerSignIn = this.registerSignIn.bind(this);
     this.registerSignOut = this.registerSignOut.bind(this);
     this.refreshUserCollections = this.refreshUserCollections.bind(this);
+    this.refreshUser = this.refreshUser.bind(this);
   }
 
   componentDidMount() {
     // sign in on startup if there is a token in localStorage
-    if (!localStorage.getItem('user')) {
-      return;
-    } else {
+    if (localStorage.getItem('user')) {
       let user = JSON.parse(localStorage.getItem('user'));
       return this.registerSignIn(user);
-      // return user;
     }
   }
 
@@ -217,6 +215,16 @@ class App extends Component {
     })
   }
 
+  // this function is triggered from the ProfileForm in ProfilePage when a user changes their info
+  // The updated user is sent from the server upon update and sent 
+  // back to App to keep App as the root source of the current user data
+  refreshUser(response) {
+    // all we have to do is set the response as the user
+    this.setState({
+      user: response
+    })
+  }
+
   render() {
 
     return (
@@ -278,6 +286,7 @@ class App extends Component {
                     <ProfilePage
                       registerSignIn={this.registerSignIn}
                       registerSignOut={this.registerSignOut}
+                      refreshUser={this.refreshUser}
                       user={this.state.user}
                     />
                   } />

@@ -121,6 +121,22 @@ export async function patchCollection(collection, headers) {
   return serverResponse;
 }
 
+// patches the user's profile
+export async function patchUser(patch, headers) {
+  let serverResponse = await fetch('users/me', {
+    method: 'PATCH',
+    body: JSON.stringify(patch),
+    headers
+  })
+    .then(response => response.json())
+    .then((json) => {
+      // console.log(response)
+      return json;
+    })
+    .catch(err => console.log(err))
+
+  return serverResponse;
+} 
 
 
 
