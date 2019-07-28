@@ -9,10 +9,10 @@ let handleDeleteStub = jest.fn();
 
 describe('Collection', () => {
 
-  let someProps;
-  let e;
+  let e, articles, someProps;
+
   beforeAll(async () => {
-    let articles = await getArticles('medicine').then((response) => {
+    articles = await getArticles('medicine').then((response) => {
       return response.resultList.result;
     });
 
@@ -29,10 +29,17 @@ describe('Collection', () => {
     }
   });
 
+  let wrapper, instance;
+
+  beforeEach(() => {
+    wrapper = shallow(<Collection {...someProps} />);
+    instance = wrapper.instance()
+  })
+
   // tests
   it('renders without crashing', async () => {
-    let wrapper = shallow(<Collection {...someProps} />);
-    // wrapper.update();
+    // let wrapper = shallow(<Collection {...someProps} />);
+    wrapper.update();
 
   });
 
@@ -44,7 +51,6 @@ describe('Collection', () => {
   });
 
   it('contains the correct elements', () => {
-    let wrapper = shallow(<Collection {...someProps} />);
 
     ['.collection', '.outline', '.results-holder'].forEach((selector) => {
       expect(wrapper.find(selector).length).toEqual(1);
@@ -72,7 +78,6 @@ describe('Collection', () => {
   });
 
   it('should fire the button functions correctly', async () => {
-    let wrapper = shallow(<Collection {...someProps} />);
 
     wrapper.instance().postCollection = jest.fn();
     wrapper.instance().handleDelete = jest.fn();
@@ -96,7 +101,6 @@ describe('Collection', () => {
   })
 
   it('should switch between pdf and list view', () => {
-    let wrapper = shallow(<Collection {...someProps} />);
 
     // show the list view initially
     expect(wrapper.find('.results-holder').length).toEqual(1);
@@ -113,7 +117,6 @@ describe('Collection', () => {
   })
 
   it('should toggle the editing boolean', () => {
-    let wrapper = shallow(<Collection {...someProps} />);
     expect(wrapper.state().editing).not.toBeTruthy();
 
     wrapper.find('.fa-edit').simulate('click');
@@ -123,7 +126,6 @@ describe('Collection', () => {
   })
 
   it('should render an input with the collection title when editing', async () => {
-    let wrapper = shallow(<Collection {...someProps} />);
 
     expect(wrapper.find('Form').length).toEqual(0);
 
@@ -135,8 +137,6 @@ describe('Collection', () => {
   })
 
   it("should call focusInput when editing is true", () => {
-    const wrapper = shallow(<Collection {...someProps} />)
-    const instance = wrapper.instance()
     instance.focusInput = jest.fn()
 
     instance.toggleEdit()
@@ -147,8 +147,6 @@ describe('Collection', () => {
   })
 
   it('should create an inputText variable upon handleChange()', () => {
-    const wrapper = shallow(<Collection {...someProps} />);
-    const instance = wrapper.instance();
 
     expect(wrapper.state().inputText).toEqual('');
     instance.handleChange('h');
@@ -158,8 +156,6 @@ describe('Collection', () => {
   })
 
   it('should create a collection variable in state upon handleSubmit()', () => {
-    const wrapper = shallow(<Collection {...someProps} />);
-    const instance = wrapper.instance();
     const e = {
       preventDefault: jest.fn()
     }
@@ -174,9 +170,14 @@ describe('Collection', () => {
 
   })
 
+  it('should create a collection variable in state upon editSavedCollection()', () =>{
+    expect(wrapper.state().collection).toBeNull();
+
+    instance.editSavedCollection(articles[0]);
+    expect(wrapper.state().collection).not.toBeNull();
+  })
+
   it('should show the save option if a collection is modified', () => {
-    const wrapper = shallow(<Collection {...someProps} />);
-    const instance = wrapper.instance();
 
     expect(wrapper.find('.fa-save').length).toEqual(0);
     expect(wrapper.find('.fa-undo').length).toEqual(0);

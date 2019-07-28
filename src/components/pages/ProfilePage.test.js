@@ -71,7 +71,8 @@ describe('ProfilePage', () => {
     wrapper.update();
     expect(wrapper.find('.profile').length).toEqual(1);
     expect(wrapper.find('.signin').length).toEqual(0);
-    expect(wrapper.find('.collection-title').length).toEqual(1);
+    expect(wrapper.find('.profile-title').length).toEqual(4);
+    expect(wrapper.find('.fa-user-edit').length).toEqual(1);    
     expect(wrapper.find('Button').at(0).render().text()).toEqual('logout');
 
     // change the signedIn prop and wipe the user
@@ -80,7 +81,7 @@ describe('ProfilePage', () => {
     // check for the change
     expect(wrapper.find('.profile').length).toEqual(0);
     expect(wrapper.find('.signin').length).toEqual(1);
-    expect(wrapper.find('.collection-title').length).toEqual(0);
+    expect(wrapper.find('.profile-title').length).toEqual(0);
     expect(wrapper.find('Button').at(0).render().text()).toEqual('sign up!');
 
 
@@ -122,6 +123,23 @@ describe('ProfilePage', () => {
       expect(wrapper.find('Input').length).toEqual(3);
     }, 500)
 
+  })
+
+  it('toggleEditText() should toggle the edit text', () => {
+    let wrapper = shallow(<ProfilePage {...someProps}/>);
+
+    wrapper.update();
+    expect(wrapper.state().editText).toBe(false);
+    expect(wrapper.find('.profile-title').length).toEqual(4);
+
+    wrapper.instance().toggleEditText();
+    wrapper.update();
+
+    // now state is changed and there's another profile-title, the icon
+    expect(wrapper.state().editText).toBe(true);    
+    expect(wrapper.find('.profile-title').length).toEqual(5);
+    expect(wrapper.find('.fa-user-edit').length).toEqual(1);
+    
   })
 
   

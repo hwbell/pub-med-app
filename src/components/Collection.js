@@ -19,6 +19,7 @@ class Collection extends React.Component {
     super(props);
 
     this.state = {
+      collection: null,
       inputText: '',
       editing: false,
       showPreview: false,
@@ -145,18 +146,25 @@ class Collection extends React.Component {
   }
 
   // this function is called from the 'remove' button in ArticleResult if it is a saved collection.
-  // New collections just use this.props.handleDelete() assigned to the 'remove' button to adjust state.
-  // But for a saved collection, we will tell the server with the postCollection() function below  
-  editSavedCollection(index) {
-    // create a collection if it isn't in state yet
+  // New collections, i.e. state collections, use this.props.modifyCollection() assigned 
+  // to the 'remove' button to adjust state. But for a saved collection, we will tell the server 
+  // with the postCollection() function below  
+
+  editSavedCollection(article) {
+
+    // create a state collection with props if it isn't in state yet, 
+    // otherwise grab the state collection. We use the collection in state as a holder for 
+    // changes that the user can save. This function makes changes in the UI, but doesn't 
+    // save them to the server.  
     let collection = JSON.parse(JSON.stringify(this.state.collection || this.props.collection));
 
-    collection.articles = collection.articles.splice(index, 1);
+    let name = collection.name;
+    console.log(`removing article ${article.id} saved collection ${name}`)
+
+    collection.articles = collection.articles.filter(item => item.id !== article.id)
 
     this.setState({
       collection
-    }, () => {
-      this.postCollection();
     })
   }
 
@@ -217,7 +225,7 @@ class Collection extends React.Component {
       },
       {
         text: 'remove',
-        onClick: collection.owner ? this.editSavedCollection: this.props.modifyCollection
+        onClick: collection.owner ? this.editSavedCollection : this.props.modifyCollection
       }
     ];
 
@@ -285,7 +293,7 @@ class Collection extends React.Component {
   }
 
   clearEdits() {
-    
+
     this.setState({
       collection: null
     }, () => {
@@ -306,6 +314,7 @@ class Collection extends React.Component {
       message: 'Each collection must have a unique name! Try adjusting the name.',
       isVisible: this.state.uniqueWarning,
       confirming: this.state.confirming,
+      confirm: this.toggleUniqueWarning,
       toggle: this.toggleUniqueWarning
     }
     let deleteCollectionWarningProps = {
@@ -331,6 +340,10 @@ class Collection extends React.Component {
   }
 
   render() {
+
+    console.log(this.props.collection)
+    console.log(this.state.collection)
+
     // if there is a collection in state, this means changes have been made and the props
     // one copied to state to be edited
     let collection = this.state.collection || this.props.collection;
@@ -391,6 +404,7 @@ class Collection extends React.Component {
           transitionEnterTimeout={500}
           transitionLeaveTimeout={300}>
 
+          {/* the pdf, when the preview button is clicked */}
           {this.state.showPreview &&
             <div ref={this.props.ref} key="pdf" className="pdf-holder">
               <PDFViewer className="pdf-viewer">
@@ -398,6 +412,7 @@ class Collection extends React.Component {
               </PDFViewer>
             </div>}
 
+          {/* the articles in the collection, in ArticleResult format */}
           {!this.state.showPreview &&
             <div ref={this.props.ref} key="results" className="results-holder">
               {this.renderResults(collection)}

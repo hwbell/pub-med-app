@@ -24,6 +24,9 @@ body {
 * > span {
   width: 100%;
 }
+* > i {
+  transition: all 0.3s ease;
+}
 
 hr {
   /* border: 0; */
@@ -230,7 +233,7 @@ input {
   background-color: whitesmoke;
 }
 
-.fa-edit, .fa-times, .fa-save, .fa-undo {
+.fa-edit, .fa-times, .fa-save, .fa-undo, .fa-user-edit {
   color: whitesmoke;
   transition: all 0.3s ease;
   &:hover {
@@ -238,15 +241,26 @@ input {
     cursor: pointer;
     color: orange;
   }
+  font-size: 24px;
 }
 .section-title {
   font-size: 30px;
-  margin: 0px;
-  margin-top: 20px;
+  margin: 20px;
+  align-self: flex-start;
 }
 .collection-block {
   width: 100%;
 }
+
+// the profile page
+.profile-title {
+  margin: 10px;
+  font-size: 18px;
+  // &:hover {
+  //   cursor: pointer;
+  // }
+}
+
 
 /* reactstrap modals */
 /* this setting prevents the jumpy shift when the scrollbar disappears on modal popup */

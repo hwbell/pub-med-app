@@ -16,7 +16,8 @@ class ProfilePage extends React.Component {
     super(props);
 
     this.state = {
-      checked: false
+      checked: false,
+      editText: false
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -24,6 +25,7 @@ class ProfilePage extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.attemptSignIn = this.attemptSignIn.bind(this);
     this.renderProfile = this.renderProfile.bind(this);
+    this.toggleEditText = this.toggleEditText.bind(this);
   }
 
   componentDidMount() {
@@ -99,19 +101,30 @@ class ProfilePage extends React.Component {
     }
 
     return (
-      <div className="outline profile" style={{ padding: '20px' }}>
+      <div className="outline profile" style={styles.profileInfo}>
 
         <Button className="warn article-button" style={styles.button}
           onClick={this.props.registerSignOut}>logout</Button>
-        <p className="collection-title">
-          <strong>{`${this.props.user.name || this.props.user.email}`}</strong>
-        </p>
 
-        <p className="paragraph">
+        <div style={styles.nameAndIcon}>
+          <p className="profile-title">
+            <strong>{`${this.props.user.name || this.props.user.email}`}</strong>
+          </p>
+
+          <i className="profile-title fas fa-user-edit" style={styles.icon}
+            onMouseOver={this.toggleEditText}
+            onMouseLeave={this.toggleEditText}></i>
+
+          { this.state.editText &&
+            <p className="profile-title">edit your profile</p>
+          }
+        </div>
+
+        <p className="profile-title">
           <strong>email: </strong>{user.email}
         </p>
 
-        <p className="paragraph">
+        <p className="profile-title">
           {user.collections &&
             `${user.collections.length} collections`}
         </p>
@@ -186,6 +199,12 @@ class ProfilePage extends React.Component {
       })
   }
 
+  toggleEditText() {
+    this.setState({
+      editText: !this.state.editText
+    })
+  }
+
   render() {
 
     // console.log(this.props)
@@ -204,7 +223,6 @@ class ProfilePage extends React.Component {
             this.renderSignIn() :
             this.renderProfile()
           }
-
 
         </div>
 
@@ -226,6 +244,14 @@ const styles = {
   },
   button: {
     alignSelf: 'flex-end'
+  },
+  profileInfo: {
+    padding: '20px',
+    alignItems: 'flex-start'
+  },
+  nameAndIcon: {
+    display: 'flex',
+    flexDirection: 'row',
   }
 }
 

@@ -17,8 +17,8 @@ it('renders correctly', async () => {
 
 it('contains the correct elements', () => {
   let wrapper = shallow( <Navigator/>);
-  expect(wrapper.html()).toContain('div class=\"fixed-top navigator\"');
-  expect(wrapper.html()).toContain('a href=\"#home\" id=\"logo\" class=\"nav-link\"')
+
+  expect(wrapper.find('.links-holder').length).toEqual(1);
   expect(wrapper.find('.nav-link').length).toEqual(4);
 
 })

@@ -18,6 +18,7 @@ import ProfilePage from './components/pages/ProfilePage';
 
 // tools
 import { getUserCollections } from './tools/serverFunctions';
+import { addArticle, removeArticle } from './tools/arrayFunctions';
 
 // more routing .... dev console warning said to change it to this instead of import?
 const Router = require("react-router-dom").BrowserRouter;
@@ -30,7 +31,6 @@ const RoutesContainer = posed.div({
     },
     opacity: 1,
     scale: 1
-
   },
   exit: {
     delay: 300,
@@ -39,7 +39,6 @@ const RoutesContainer = posed.div({
     },
     opacity: 0,
     scale: 0.01
-
   }
 });
 
@@ -116,6 +115,9 @@ class App extends Component {
 
   }
 
+  // this will be called:
+  //   1. when adding an article from the search page
+  //   2. when removing an article from the collection page (only state collections, not server collections)
   modifyCollection(article, collectionName, change, callback) {
 
     // if no collectionName / article, return
@@ -131,28 +133,22 @@ class App extends Component {
     let verb = change > 0 ? 'Adding' : 'Removing';
     console.log(`${verb} article ${article.id} in user's ${collectionName} collection`)
 
-    // then find the matching collection and add / remove the article
     let collections = this.state.collections;
-    collections.forEach((collection, i) => {
 
-      if (collection.name === collectionName) {
-        console.log('found matching collection')
+    if (change > 0) {
+      collections = addArticle(collections, collectionName, article)
+    } else {
+      collections = removeArticle(collections, collectionName, article)
+    }
 
-        if (change > 0) {
-          collection.articles.push(article);
-        } else {
-          collection.articles.splice(i, 1);
-        }
-
-      }
-    });
+    console.log(collections)
 
     if (callback) {
       this.setState({
         collections
-      }, () => callback());  
+      }, () => callback());
     } else {
-      this.setState({collections});
+      this.setState({ collections });
     }
   }
 
@@ -243,7 +239,7 @@ class App extends Component {
             })}
 
             <Link className="nav-link" style={styles.link} to="/profile/">
-              <i className="far fa-user"></i>
+              <i className="fas fa-user-cog"></i>
             </Link>
           </div>
 
