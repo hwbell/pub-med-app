@@ -158,9 +158,8 @@ class App extends Component {
   // and save that too
   registerSignIn(user) {
 
-    console.log(JSON.parse(localStorage.getItem('token')))
+    // console.log(JSON.parse(localStorage.getItem('token')))
 
-    // console.log()
     let token = JSON.parse(localStorage.getItem('token'));
     let headers = {
       Authorization: `Bearer ${token}`,
@@ -168,19 +167,21 @@ class App extends Component {
       'Content-Type': 'application/json',
     }
 
+    // we actually get the collections as well as the profile here, maybe change the name
     return getUserCollections(headers)
       .then((response) => {
         console.log(response)
 
-        // attach it to the user object
-        user.collections = response;
+        // attach the collections to the user object
+        let profile = response.user;
+        profile.collections = response.collections;
 
         // save to state
         this.setState({
-          user
+          user: profile
         });
         // save info to local storage
-        localStorage.setItem(`user`, JSON.stringify(user));
+        localStorage.setItem(`user`, JSON.stringify(profile));
 
       }).catch((e) => {
         console.log(e)
@@ -219,10 +220,17 @@ class App extends Component {
   // The updated user is sent from the server upon update and sent 
   // back to App to keep App as the root source of the current user data
   refreshUser(response) {
+
     // all we have to do is set the response as the user
+    // but remember to re-attach the user's collections to the user object
+    response.collections = this.state.user.collections;
     this.setState({
       user: response
-    })
+    }, () => {
+      // save to local storage
+      localStorage.setItem(`user`, JSON.stringify(response));
+    });
+
   }
 
   render() {

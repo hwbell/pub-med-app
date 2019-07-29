@@ -23,7 +23,7 @@ class ProfileForm extends React.Component {
     let { name, value } = e.target;
 
     // use the target name as the key for the value in profileInfo
-    let obj = this.state.user || {};
+    let obj = this.state.profileInfo;
     obj[`${name}`] = value;
 
     this.setState({ profileInfo: obj }, () => {
@@ -31,8 +31,13 @@ class ProfileForm extends React.Component {
     })
   }
 
-  handleSubmit () {
-    this.props.handleSubmitUser(this.state.profileInfo)
+  handleSubmit() {
+    this.props.handleSubmitUser(this.state.profileInfo);
+
+    // wipe the state - we only need it before it is sent to the server
+    // this.setState({
+    // profileInfo: {}
+    // })
   }
 
   render() {
@@ -48,25 +53,33 @@ class ProfileForm extends React.Component {
           <Form style={styles.form} onSubmit={this.handleSubmit}>
 
             <p style={{ color: 'black' }}>About</p>
-            <Input style={styles.inputLarge} type="textarea" name="about" 
+            <Input style={styles.inputLarge} type="textarea" name="about"
               maxLength={200}
               placeholder="Say something about yourself!"
               onChange={(e) => this.handleChange(e)}
             />
 
             <p style={{ color: 'black' }}>Research</p>
-            <Input style={styles.input} type="text" name="research" 
+            <Input style={styles.input} type="text" name="research"
               maxLength={50}
               placeholder="What is your area of expertise?"
               onChange={(e) => this.handleChange(e)}
             />
 
             <p style={{ color: 'black' }}>Affiliations</p>
-            <Input style={styles.input} type="text" name="affiliations" 
+            <Input style={styles.input} type="text" name="affiliations"
               maxLength={50}
               placeholder="Where do you conduct your research?"
               onChange={(e) => this.handleChange(e)}
             />
+
+            <p style={{ color: 'black' }}>Interests</p>
+            <Input style={styles.input} type="text" name="interests"
+              maxLength={50}
+              placeholder="What are your interests outside of research?"
+              onChange={(e) => this.handleChange(e)}
+            />
+
           </Form>
 
         </ModalBody>

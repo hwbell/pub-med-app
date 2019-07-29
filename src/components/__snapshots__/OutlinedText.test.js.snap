@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
+exports[`OutlinedText renders correctly 1`] = `
 <div
   className="outline"
   style={
     Object {
-      "margin": "10px",
-      "width": "90%",
+      "margin": "10px auto",
+      "width": "100%",
     }
   }
 >
@@ -14,6 +14,7 @@ exports[`renders correctly 1`] = `
     className="paragraph"
     style={
       Object {
+        "alignSelf": "",
         "paddingTop": "10px",
       }
     }

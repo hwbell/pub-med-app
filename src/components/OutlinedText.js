@@ -26,28 +26,34 @@ class OutlinedText extends React.Component {
 
   render() {
 
-
+    let alignSelf = this.props.alignLeft ? 'flex-start' : '';
+    const styles = {
+      content: {
+        width: '100%',
+        margin: '10px auto'
+      },
+      text: {
+        paddingTop: '10px',
+        alignSelf
+      },
+      title: {
+        alignSelf
+      }
+    }
 
     return (
       <div className="outline" style={styles.content}>
-        
-        <p className="paragraph" style={styles.text}>{ this.props.text }</p>
+
+        {this.props.title &&
+          <p className="profile-title" style={styles.title}>{this.props.title}</p>
+        }
+
+        <p className="paragraph" style={styles.text}>{this.props.text}</p>
 
       </div>
 
     );
   }
-}
-
-const styles = {
-  content: {
-    width: '90%',
-    margin: '10px'
-  },
-  text: {
-    paddingTop: '10px',
-  },
-
 }
 
 export default OutlinedText;

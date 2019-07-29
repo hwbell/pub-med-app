@@ -1,5 +1,3 @@
-const makeRandomString = require('./stringFunctions').makeRandomString;
-
 const collectionServerUrl = process.env.REACT_APP_COLLECTION_SERVER_URL || 'http://localhost:3000/';
 const fetch = require('node-fetch');
 
@@ -123,14 +121,14 @@ export async function patchCollection(collection, headers) {
 
 // patches the user's profile
 export async function patchUser(patch, headers) {
-  let serverResponse = await fetch('users/me', {
+  let serverResponse = await fetch(`${collectionServerUrl}users/me`, {
     method: 'PATCH',
     body: JSON.stringify(patch),
     headers
   })
     .then(response => response.json())
     .then((json) => {
-      // console.log(response)
+      console.log(json)
       return json;
     })
     .catch(err => console.log(err))

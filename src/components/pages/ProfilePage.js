@@ -6,6 +6,8 @@ import { CSSTransitionGroup } from 'react-transition-group' // ES6
 // components
 import Header from '../Header';
 import ProfileForm from '../ProfileForm';
+import OutlinedText from '../OutlinedText';
+
 import { Button, Form, FormGroup, Label, Input, Fade } from 'reactstrap';
 
 // tools
@@ -104,6 +106,12 @@ class ProfilePage extends React.Component {
       return;
     }
 
+    let { about, research, interests, affiliations } = user;
+
+    let userProps = {
+      about, research, interests, affiliations
+    }
+
     return (
       <div className="outline profile" style={styles.profileInfo}>
 
@@ -135,6 +143,26 @@ class ProfilePage extends React.Component {
           {user.collections &&
             `${user.collections.length} collections`}
         </p>
+
+        {Object.keys(userProps).map((prop, i) => {
+          
+          let title = prop[0].toUpperCase() + prop.slice(1);
+          let text = userProps[prop];
+
+          if (text) {
+            return (
+              <OutlinedText 
+                key={i}
+                title={title}
+                text={text}
+                alignLeft={true}
+              />
+            )
+          } else {
+            return null
+          }
+
+        })}
       </div>
     )
   }
@@ -221,6 +249,8 @@ class ProfilePage extends React.Component {
 
   // this one is for the Profile Form
   handleSubmitUser(profileInfo) {
+
+    console.log('patching user info')
     if (!profileInfo || Object.keys(profileInfo).length === 0) {
       return;
     }
@@ -228,8 +258,8 @@ class ProfilePage extends React.Component {
     // filter out any empty entries
     let patch = {};
     Object.keys(profileInfo).forEach((key) => {
-      if (info[key]) {
-        patch[key] = info[key]
+      if (profileInfo[key]) {
+        patch[key] = profileInfo[key]
       }
     })
 
@@ -251,11 +281,6 @@ class ProfilePage extends React.Component {
         // 1. Refresh the user - this will send the new collection list sent back
         // from the server to the root App component to update all concerned components
         this.props.refreshUser(response);
-
-        // clear the info - we only need it in state before its sent to the server
-        this.setState({
-          profileInfo: {}
-        })
 
       }).catch((e) => {
         console.log(e)

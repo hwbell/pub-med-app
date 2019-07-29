@@ -42,10 +42,12 @@ describe('ProfileForm', () => {
       expect(wrapper.find(selector).length).toEqual(1);
     });
 
-    expect(wrapper.find('Input').length).toBe(3);
+    expect(wrapper.find('Input').length).toBe(4);
     expect(wrapper.find('Input').at(0).props().placeholder).toBe("Say something about yourself!");
     expect(wrapper.find('Input').at(1).props().placeholder).toBe("What is your area of expertise?")
     expect(wrapper.find('Input').at(2).props().placeholder).toBe("Where do you conduct your research?")
+    expect(wrapper.find('Input').at(3).props().placeholder).toBe("What are your interests outside of research?")
+
 
   });
 
