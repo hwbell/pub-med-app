@@ -121,7 +121,7 @@ class ProfilePage extends React.Component {
             onClick={this.toggleProfileForm}></i>
 
           <Fade in={this.state.editText} className="profile-title">
-            <p style={{color: 'white'}}>
+            <p style={{ color: 'white' }}>
               add to your profile!
             </p>
           </Fade>
@@ -220,15 +220,14 @@ class ProfilePage extends React.Component {
   }
 
   // this one is for the Profile Form
-  handleSubmitUser() {
-    if (!this.state.profileInfo) {
+  handleSubmitUser(profileInfo) {
+    if (!profileInfo || Object.keys(profileInfo).length === 0) {
       return;
     }
 
     // filter out any empty entries
-    let info = this.state.profileInfo;
     let patch = {};
-    Object.keys(info).forEach((key) => {
+    Object.keys(profileInfo).forEach((key) => {
       if (info[key]) {
         patch[key] = info[key]
       }
@@ -253,6 +252,7 @@ class ProfilePage extends React.Component {
         // from the server to the root App component to update all concerned components
         this.props.refreshUser(response);
 
+        // clear the info - we only need it in state before its sent to the server
         this.setState({
           profileInfo: {}
         })
@@ -277,7 +277,7 @@ class ProfilePage extends React.Component {
           isVisible={this.state.showProfileForm}
           user={this.props.user}
           toggle={this.toggleProfileForm}
-          confirm={this.handleSubmitUser}
+          handleSubmitUser={this.handleSubmitUser}
         />
 
         <div className="glass">

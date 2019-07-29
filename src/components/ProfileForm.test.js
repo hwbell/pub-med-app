@@ -5,12 +5,14 @@ import renderer from 'react-test-renderer';
 
 // stub for toggling
 const toggleStub = jest.fn();
-const confirmStub = jest.fn();
+const handleSubmitUserStub = jest.fn();
+const handleChangeStub = jest.fn();
 
 const someProps = {
   isVisible: false,
   toggle: toggleStub,
-  confirm: confirmStub
+  handleSubmitUser: handleSubmitUserStub,
+  handleChange: handleChangeStub
 }
 
 describe('ProfileForm', () => {
@@ -47,13 +49,6 @@ describe('ProfileForm', () => {
 
   });
 
-  it('should fire the provided toggle when the cancel button is clicked', () => {
-
-    wrapper.find({ color: "secondary" }).simulate('click');
-    expect(toggleStub.mock.calls.length).toBe(1);
-
-  })
-
   it('should have an empty profileInfo in state to start', () => { 
     expect(wrapper.state().profileInfo).toMatchObject({})
   })
@@ -65,21 +60,28 @@ describe('ProfileForm', () => {
         value: 'My name is mark!'
       }
     }
-    
     wrapper.instance().handleChange(e)
     wrapper.update();
+
     expect(wrapper.state().profileInfo).toMatchObject({
       about: 'My name is mark!'
-    });
-
+    })
   })
 
-  it('should fire the provided this.props.confirm function when OK is clicked', () => {
+  it('should fire the provided handleSumbitUser() function when OK is clicked', () => {
 
     wrapper.find({color: 'primary'}).simulate('click');
     wrapper.update();
 
-    expect(confirmStub.mock.calls.length).toBe(1)
+    expect(handleSubmitUserStub.mock.calls.length).toBe(1)
+    expect(handleSubmitUserStub).toBeCalledWith(wrapper.state().profileInfo)
+  })
+
+  it('should fire the provided toggle when the cancel button is clicked', () => {
+
+    wrapper.find({ color: "secondary" }).simulate('click');
+    expect(toggleStub.mock.calls.length).toBe(1);
+
   })
 
 })

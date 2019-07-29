@@ -15,18 +15,24 @@ class ProfileForm extends React.Component {
     }
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
 
     let { name, value } = e.target;
 
+    // use the target name as the key for the value in profileInfo
     let obj = this.state.user || {};
     obj[`${name}`] = value;
 
     this.setState({ profileInfo: obj }, () => {
       // console.log(this.state.user)
     })
+  }
+
+  handleSubmit () {
+    this.props.handleSubmitUser(this.state.profileInfo)
   }
 
   render() {
@@ -65,7 +71,7 @@ class ProfileForm extends React.Component {
 
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" size="sm" onClick={this.props.confirm}>save</Button>
+          <Button color="primary" size="sm" onClick={this.handleSubmit}>save</Button>
           <Button color="secondary" size="sm" onClick={this.props.toggle}>cancel</Button>
         </ModalFooter>
 

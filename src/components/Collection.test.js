@@ -12,9 +12,17 @@ describe('Collection', () => {
   let e, articles, someProps;
 
   beforeAll(async () => {
-    articles = await getArticles('medicine').then((response) => {
-      return response.resultList.result;
-    });
+    articles = [
+      {
+        id: '013091283'
+      },
+      {
+        id: '446264632'
+      },
+      {
+        id: '651753334'
+      }
+    ]
 
     e = {
       preventDefault: jest.fn()
