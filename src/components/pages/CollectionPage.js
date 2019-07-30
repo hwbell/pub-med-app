@@ -142,7 +142,7 @@ class CollectionPage extends React.Component {
             isVisible={this.state.articleModal}
             toggle={this.toggleViewArticle} />}
 
-        <div className="glass" >
+        <div className="glass page-content" >
 
           {/* the header */}
           <Header

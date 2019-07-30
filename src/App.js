@@ -7,6 +7,7 @@ import HomePage from './components/pages/HomePage';
 import AboutPage from './components/pages/AboutPage';
 import SearchPage from './components/pages/SearchPage'
 import CollectionPage from './components/pages/CollectionPage';
+import ThreadPage from './components/pages/ThreadPage';
 
 // pose animation
 import posed, { PoseGroup } from 'react-pose';
@@ -55,7 +56,10 @@ const links = [
     title: 'Collections',
     link: '/collections'
   },
-
+  {
+    title: 'Threads',
+    link: '/threads'
+  },
 ]
 
 class App extends Component {
@@ -64,6 +68,7 @@ class App extends Component {
     super(props);
     this.state = {
       collections: [],
+      threads: [],
       user: null,
       userCollections: []
     };
@@ -290,6 +295,13 @@ class App extends Component {
                       user={this.state.user}
                     />
                   } />
+                  <Route path="/threads/" render={() =>
+                    <ThreadPage
+                      threads={this.state.threads}
+                      user={this.state.user}
+                    />
+
+                  } />
                   <Route path="/profile/" render={() =>
                     <ProfilePage
                       registerSignIn={this.registerSignIn}
@@ -297,6 +309,7 @@ class App extends Component {
                       refreshUser={this.refreshUser}
                       user={this.state.user}
                     />
+
                   } />
                 </Switch>
 

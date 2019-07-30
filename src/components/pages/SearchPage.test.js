@@ -41,7 +41,7 @@ describe('SearchPage', () => {
   it('contains the correct elements', () => {
     let wrapper = shallow(<SearchPage  {...someProps} />);
 
-    ['.page', '.glass', '.outline', '#loader', 'Form'].forEach((selector) => {
+    ['.page', '.page-content', '.glass', '.outline', '#loader', 'Form'].forEach((selector) => {
       expect(wrapper.find(selector).length).toEqual(1);
     })
 

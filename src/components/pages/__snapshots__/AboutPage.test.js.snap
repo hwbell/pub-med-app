@@ -5,7 +5,7 @@ exports[`renders correctly 1`] = `
   className="about-page page"
 >
   <div
-    className="glass"
+    className="glass page-content"
   >
     <div
       className="heading"

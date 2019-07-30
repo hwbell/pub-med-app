@@ -27,7 +27,7 @@ class AboutPage extends React.Component {
   render() {
     return (
       <div className="about-page page">
-        <div className="glass">
+        <div className="glass page-content">
 
           <Header
             class="heading"

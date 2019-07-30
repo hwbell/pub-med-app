@@ -5,7 +5,7 @@ exports[`ProfilePage renders correctly 1`] = `
   className="page"
 >
   <div
-    className="glass"
+    className="glass page-content"
   >
     <div
       className="heading"

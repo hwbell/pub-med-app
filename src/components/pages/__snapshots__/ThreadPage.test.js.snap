@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ThreadPage renders correctly 1`] = `
+<div
+  className="page"
+>
+  <div
+    className="glass page-content"
+  >
+    <div
+      className="heading"
+    >
+      <h2
+        className="title"
+      >
+        PMC Threads
+      </h2>
+      <h4
+        className="subtitle"
+      >
+        post a thread to start a discussion
+      </h4>
+    </div>
+    <div
+      className="outline"
+    />
+    <div
+      className="outline"
+    />
+    <div
+      className="outline"
+    />
+  </div>
+</div>
+`;

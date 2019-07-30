@@ -10,9 +10,18 @@ const user = {
   email: 'harry@example.com'
 };
 
+const newThread = {
+  name: 'Figure 5 in PMID: 83470572093',
+  article: '83470572093'
+}
+
 describe('ProfilePage', () => {
+  
   let articles;
+  let threads;
+  let collections;
   let someProps;
+
   beforeAll( async () => {
     articles = [
       {
@@ -26,27 +35,39 @@ describe('ProfilePage', () => {
       }
     ]
 
+    threads = [
+      {
+        name: 'Sourcing of PMID: 013091283',
+        article: '013091283'
+      },
+      {
+        name: 'Data in figure 1 of PMID: 013091283',
+        article: '013091283'
+      },
+      {
+        name: 'Figure 3 in PMID: 013091283',
+        article: '013091283'
+      }
+    ]
+
+    collections = [
+      {
+        name: 'first collection',
+        articles: articles
+      },
+      {
+        name: 'second collection',
+        articles: articles
+      }
+    ]
+
     someProps = {
-      collections: [
-        {
-          name: 'first collection',
-          articles: articles
-        },
-        {
-          name: 'second collection',
-          articles: articles
-        }
-      ],
       user: {
         name: 'Mark',
         email: 'mark@mail.com',
         age: 33,
-        collections: [
-          {
-            name: 'first collection',
-            articles: articles
-          }
-        ],
+        threads,
+        collections
       }
     }
   }) 
@@ -72,7 +93,7 @@ describe('ProfilePage', () => {
   it('contains the correct elements', () => {
     let wrapper = mount(<ProfilePage />);
 
-    ['.page', '.glass', '.heading', '.outline', 'Button'].forEach((selector) => {
+    ['.page', '.page-content', '.glass', '.heading', '.outline', 'Button'].forEach((selector) => {
       expect(wrapper.find(selector).length).toEqual(1);
     })
 
@@ -164,11 +185,33 @@ describe('ProfilePage', () => {
 
   })
 
-  it('should show dna icons representing how many collections the user has', () => {
+  it('should show atom icons representing the number of user collections', () => {
 
-    expect(wrapper.find('fa-atom').length).toBe(0);
+    // we gave the user 2 collections
+    expect(wrapper.find('.fa-atom').length).toBe(2);
 
+    // add another collection
+    let user = someProps.user;
+    user.collections.push(articles[0]);
+    wrapper.setProps({user});
+    wrapper.update();
+   
+    expect(wrapper.find('.fa-atom').length).toBe(3);
 
+  })
+
+  it('should show dna icons representing the number of user threads', () => {
+
+    // we gave the user 3 threads
+    expect(wrapper.find('.fa-dna').length).toBe(3);
+
+    // add another thread
+    let user = someProps.user;
+    user.threads.push(newThread);
+    wrapper.setProps({user});
+    wrapper.update();
+   
+    expect(wrapper.find('.fa-dna').length).toBe(4);
   })
   
 

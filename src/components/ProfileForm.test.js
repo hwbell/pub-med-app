@@ -43,13 +43,15 @@ describe('ProfileForm', () => {
     });
 
     expect(wrapper.find('Input').length).toBe(4);
+
+  });
+
+  it('should have this.props.user as text in the inputs', () => {
     expect(wrapper.find('Input').at(0).props().placeholder).toBe("Say something about yourself!");
     expect(wrapper.find('Input').at(1).props().placeholder).toBe("What is your area of expertise?")
     expect(wrapper.find('Input').at(2).props().placeholder).toBe("Where do you conduct your research?")
     expect(wrapper.find('Input').at(3).props().placeholder).toBe("What are your interests outside of research?")
-
-
-  });
+  })
 
   it('should have an empty profileInfo in state to start', () => { 
     expect(wrapper.state().profileInfo).toMatchObject({})

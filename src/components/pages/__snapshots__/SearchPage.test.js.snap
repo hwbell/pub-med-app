@@ -2,10 +2,10 @@
 
 exports[`SearchPage renders correctly 1`] = `
 <div
-  className="search-page page"
+  className="page"
 >
   <div
-    className="glass"
+    className="glass page-content"
   >
     <div
       className="heading"

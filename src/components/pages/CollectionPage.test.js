@@ -63,7 +63,7 @@ describe('CollectionPage', () => {
   it('contains the correct elements', () => {
     let wrapper = shallow(<CollectionPage  {...someProps} />);
 
-    ['.page', '.glass'].forEach((selector) => {
+    ['.page', '.page-content', '.glass'].forEach((selector) => {
       expect(wrapper.find(selector).length).toEqual(1);
     });
 

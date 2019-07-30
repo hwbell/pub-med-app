@@ -100,7 +100,7 @@ class ProfilePage extends React.Component {
   renderProfile() {
 
     let user = this.props.user;
-    console.log(user)
+    // console.log(user)
 
     if (!user) {
       return;
@@ -135,6 +135,17 @@ class ProfilePage extends React.Component {
           </Fade>
         </div>
 
+        {user.collections &&
+          <div className="row">
+            {user.collections.map((item, i) => <i key={i} className="fas fa-atom"></i>)}
+          </div>}
+
+        {user.threads &&
+          <div className="row">
+            {user.threads.map((item, i) => <i key={i} className="fas fa-dna"></i>)}
+          </div>}
+
+
         <p className="profile-title">
           {user.email}
         </p>
@@ -145,13 +156,13 @@ class ProfilePage extends React.Component {
         </p>
 
         {Object.keys(userProps).map((prop, i) => {
-          
+
           let title = prop[0].toUpperCase() + prop.slice(1);
           let text = userProps[prop];
 
           if (text) {
             return (
-              <OutlinedText 
+              <OutlinedText
                 key={i}
                 title={title}
                 text={text}
@@ -305,7 +316,7 @@ class ProfilePage extends React.Component {
           handleSubmitUser={this.handleSubmitUser}
         />
 
-        <div className="glass">
+        <div className="glass page-content">
 
           <Header
             class="heading"

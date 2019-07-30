@@ -165,7 +165,7 @@ class SearchPage extends React.Component {
   render() {
 
     return (
-      <div className="search-page page">
+      <div className="page">
 
         {/* modal for adding articles to collections. The additions are passed back to App 
           as either new collections or additions to existing collections. pass the current
@@ -190,7 +190,7 @@ class SearchPage extends React.Component {
 
 
         {/* **********the main page area************* */}
-        <div className="glass">
+        <div className="glass page-content">
 
           {/* the header */}
           <Header

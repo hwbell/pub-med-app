@@ -20,6 +20,7 @@ it('renders correctly', async () => {
 it('contains the corect elements', () => {
   let wrapper = mount(<AboutPage />);
   expect(wrapper.find('.page').length).toEqual(1);
+  expect(wrapper.find('.page-content').length).toEqual(1);
   expect(wrapper.find('.glass').length).toEqual(1);
   expect(wrapper.find('.heading').length).toEqual(1);
 
