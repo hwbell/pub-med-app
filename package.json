@@ -11,7 +11,7 @@
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "node-fetch": "^2.6.0",
-    "node-ncbi": "^0.5.1",
+    "node-ncbi": "^0.7.0",
     "node-sass": "^4.12.0",
     "nodemon": "^1.19.1",
     "pose": "^2.3.1",
@@ -31,7 +31,7 @@
     "xml2js": "^0.4.19"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "env-cmd -f ./dev.env react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -52,6 +52,7 @@
     ]
   },
   "devDependencies": {
+    "env-cmd": "^9.0.3",
     "jest-localstorage-mock": "^2.4.0"
   }
 }

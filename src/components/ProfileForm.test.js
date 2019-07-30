@@ -8,7 +8,16 @@ const toggleStub = jest.fn();
 const handleSubmitUserStub = jest.fn();
 const handleChangeStub = jest.fn();
 
+const user = {
+  name: 'Mark',
+  email: 'mark@junkmail.com',
+  about: 'My name is mark',
+  research: 'Biology',
+  affiliations: 'CU Denver',
+  interests: 'the mountains!'
+}
 const someProps = {
+  user,
   isVisible: false,
   toggle: toggleStub,
   handleSubmitUser: handleSubmitUserStub,
@@ -46,11 +55,18 @@ describe('ProfileForm', () => {
 
   });
 
-  it('should have this.props.user as text in the inputs', () => {
+  it('should have the correct placeholder values', () => {
     expect(wrapper.find('Input').at(0).props().placeholder).toBe("Say something about yourself!");
     expect(wrapper.find('Input').at(1).props().placeholder).toBe("What is your area of expertise?")
     expect(wrapper.find('Input').at(2).props().placeholder).toBe("Where do you conduct your research?")
     expect(wrapper.find('Input').at(3).props().placeholder).toBe("What are your interests outside of research?")
+  })
+
+  it('should use values from this.props.user if there is not profileInfo in state', () => {
+    expect(wrapper.find('Input').at(0).props().value).toBe(user.about);
+    expect(wrapper.find('Input').at(1).props().value).toBe(user.research)
+    expect(wrapper.find('Input').at(2).props().value).toBe(user.affiliations)
+    expect(wrapper.find('Input').at(3).props().value).toBe(user.interests)
   })
 
   it('should have an empty profileInfo in state to start', () => { 

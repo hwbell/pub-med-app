@@ -163,7 +163,7 @@ class App extends Component {
   // and save that too
   registerSignIn(user) {
 
-    // console.log(JSON.parse(localStorage.getItem('token')))
+    this.setState({user});
 
     let token = JSON.parse(localStorage.getItem('token'));
     let headers = {

@@ -35,12 +35,36 @@ class ProfileForm extends React.Component {
     this.props.handleSubmitUser(this.state.profileInfo);
 
     // wipe the state - we only need it before it is sent to the server
-    // this.setState({
-    // profileInfo: {}
-    // })
+    this.setState({
+      profileInfo: {}
+    })
   }
 
   render() {
+
+    // set the current value of the inputs from this.state.profileInfo, if available.
+    // this means we have changed something 
+    let user = this.props.user;
+    let profile = this.state.profileInfo;
+
+    let userProps = ['about', 'research', 'affiliations', 'interests'];
+    let userInfo = {};
+
+    userProps.forEach((prop) => {
+
+      if (profile[prop]) {
+        userInfo[prop] = profile[prop];
+      } else if ( user && user[prop]) {
+        userInfo[prop] = user[prop];
+      } else {
+        userInfo[prop] = ''
+      }
+
+    })
+
+
+
+    console.log(this.state.profileInfo)
 
     return (
       <Modal centered={true}
@@ -54,7 +78,8 @@ class ProfileForm extends React.Component {
 
             <p style={{ color: 'black' }}>About</p>
             <Input style={styles.inputLarge} type="textarea" name="about"
-              maxLength={200}
+              maxLength={500}
+              value={userInfo.about || null}
               placeholder="Say something about yourself!"
               onChange={(e) => this.handleChange(e)}
             />
@@ -62,6 +87,7 @@ class ProfileForm extends React.Component {
             <p style={{ color: 'black' }}>Research</p>
             <Input style={styles.input} type="text" name="research"
               maxLength={50}
+              value={userInfo.research}
               placeholder="What is your area of expertise?"
               onChange={(e) => this.handleChange(e)}
             />
@@ -69,6 +95,7 @@ class ProfileForm extends React.Component {
             <p style={{ color: 'black' }}>Affiliations</p>
             <Input style={styles.input} type="text" name="affiliations"
               maxLength={50}
+              value={userInfo.affiliations}
               placeholder="Where do you conduct your research?"
               onChange={(e) => this.handleChange(e)}
             />
@@ -76,6 +103,7 @@ class ProfileForm extends React.Component {
             <p style={{ color: 'black' }}>Interests</p>
             <Input style={styles.input} type="text" name="interests"
               maxLength={50}
+              value={userInfo.interests}
               placeholder="What are your interests outside of research?"
               onChange={(e) => this.handleChange(e)}
             />
