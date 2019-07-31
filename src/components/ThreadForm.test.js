@@ -19,7 +19,8 @@ const someProps = {
   isVisible: false,
   toggle: toggleStub,
   handleSubmitThread: handleSubmitThreadStub,
-  handleChange: handleChangeStub
+  handleChange: handleChangeStub,
+  showUniqueWarning: false
 }
 
 describe('ThreadForm', () => {
@@ -45,9 +46,11 @@ describe('ThreadForm', () => {
 
   it('contains the correct elements', () => {
 
-    ['Modal', 'ModalBody', 'ModalFooter', 'Form',{ color: "primary" }, { color: "primary" }].forEach((selector) => {
+    ['Modal', 'ModalBody', 'ModalFooter', 'Form', '.add', '.back'].forEach((selector) => {
       expect(wrapper.find(selector).length).toEqual(1);
     });
+
+    expect(wrapper.find('Fade').length).toBe(1);
 
     // one input for each property of the thread
     expect(wrapper.find('Input').length).toBe(3);
@@ -88,7 +91,7 @@ describe('ThreadForm', () => {
 
   it('should fire the provided handleSumbitThread() function when OK is clicked', () => {
 
-    wrapper.find({color: 'primary'}).simulate('click');
+    wrapper.find('.add').simulate('click');
     wrapper.update();
 
     expect(handleSubmitThreadStub.mock.calls.length).toBe(1)
@@ -97,8 +100,22 @@ describe('ThreadForm', () => {
 
   it('should fire the provided toggle when the cancel button is clicked', () => {
 
-    wrapper.find({ color: "secondary" }).simulate('click');
+    wrapper.find('.back').simulate('click');
     expect(toggleStub.mock.calls.length).toBe(1);
+
+  })
+
+  it('should show the Fade element when this.props.showUniqueWarning === true', () => {
+    
+    expect(wrapper.find('Fade').props().in).toBe(false);
+
+    wrapper.setProps({
+      showUniqueWarning: true
+    });
+    wrapper.update();
+
+    expect(wrapper.find('Fade').props().in).toBe(true);
+
 
   })
 

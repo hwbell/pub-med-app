@@ -23,12 +23,12 @@ exports[`ThreadPage renders correctly 1`] = `
     </div>
     <button
       aria-label={null}
-      className="btn btn-primary"
+      className="add article-button btn btn-secondary"
       onClick={[Function]}
+      siz="md"
       style={
         Object {
-          "alignSelf": "flex-start",
-          "margin": "20px",
+          "margin": "24px",
         }
       }
       type="button"
@@ -38,7 +38,18 @@ exports[`ThreadPage renders correctly 1`] = `
     <div
       className="outline"
     >
-      <div>
+      <div
+        style={
+          Object {
+            "alignItems": "flex-start",
+            "alignSelf": "flex-start",
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "flex-start",
+            "width": "100%",
+          }
+        }
+      >
         <p
           className="profile-title"
         >
@@ -47,17 +58,119 @@ exports[`ThreadPage renders correctly 1`] = `
         <p
           className="paragraph"
         >
-          013091283
+          thread by: undefined, concerning 013091283
         </p>
-        <p
-          className="paragraph"
-        />
+        <span
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flexDirection": "column",
+              "justifyContent": "center",
+              "padding": "20px",
+            }
+          }
+        >
+          <div
+            className="collapse"
+            style={Object {}}
+          >
+            <div
+              style={
+                Object {
+                  "marginTop": "25px",
+                }
+              }
+            >
+              <p
+                style={
+                  Object {
+                    "color": "black",
+                    "margin": "5px 20px",
+                  }
+                }
+              >
+                Have something to say about this thread? Add a comment to join the discussion.
+              </p>
+              <textarea
+                className="form-control"
+                onChange={[Function]}
+                placeholder="Your comment here"
+                style={
+                  Object {
+                    "borderRadius": "6px",
+                    "margin": "15px auto",
+                    "padding": "8px",
+                    "width": "95%",
+                  }
+                }
+              />
+              <div
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "alignSelf": "flex-end",
+                    "display": "flex",
+                    "flexDirection": "row",
+                    "justifyContent": "center",
+                  }
+                }
+              >
+                <button
+                  aria-label={null}
+                  className="add article-button btn btn-secondary btn-sm"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  post comment
+                </button>
+                <button
+                  aria-label={null}
+                  className="back article-button btn btn-secondary btn-sm"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  cancel
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            className="fade"
+          >
+            <button
+              aria-label={null}
+              className="view article-button btn btn-secondary btn-sm"
+              onClick={[Function]}
+              style={
+                Object {
+                  "alignSelf": "flex-end",
+                  "margin": "10px",
+                }
+              }
+              type="button"
+            >
+              comment
+            </button>
+          </div>
+        </span>
       </div>
     </div>
     <div
       className="outline"
     >
-      <div>
+      <div
+        style={
+          Object {
+            "alignItems": "flex-start",
+            "alignSelf": "flex-start",
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "flex-start",
+            "width": "100%",
+          }
+        }
+      >
         <p
           className="profile-title"
         >
@@ -66,17 +179,119 @@ exports[`ThreadPage renders correctly 1`] = `
         <p
           className="paragraph"
         >
-          013091283
+          thread by: undefined, concerning 013091283
         </p>
-        <p
-          className="paragraph"
-        />
+        <span
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flexDirection": "column",
+              "justifyContent": "center",
+              "padding": "20px",
+            }
+          }
+        >
+          <div
+            className="collapse"
+            style={Object {}}
+          >
+            <div
+              style={
+                Object {
+                  "marginTop": "25px",
+                }
+              }
+            >
+              <p
+                style={
+                  Object {
+                    "color": "black",
+                    "margin": "5px 20px",
+                  }
+                }
+              >
+                Have something to say about this thread? Add a comment to join the discussion.
+              </p>
+              <textarea
+                className="form-control"
+                onChange={[Function]}
+                placeholder="Your comment here"
+                style={
+                  Object {
+                    "borderRadius": "6px",
+                    "margin": "15px auto",
+                    "padding": "8px",
+                    "width": "95%",
+                  }
+                }
+              />
+              <div
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "alignSelf": "flex-end",
+                    "display": "flex",
+                    "flexDirection": "row",
+                    "justifyContent": "center",
+                  }
+                }
+              >
+                <button
+                  aria-label={null}
+                  className="add article-button btn btn-secondary btn-sm"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  post comment
+                </button>
+                <button
+                  aria-label={null}
+                  className="back article-button btn btn-secondary btn-sm"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  cancel
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            className="fade"
+          >
+            <button
+              aria-label={null}
+              className="view article-button btn btn-secondary btn-sm"
+              onClick={[Function]}
+              style={
+                Object {
+                  "alignSelf": "flex-end",
+                  "margin": "10px",
+                }
+              }
+              type="button"
+            >
+              comment
+            </button>
+          </div>
+        </span>
       </div>
     </div>
     <div
       className="outline"
     >
-      <div>
+      <div
+        style={
+          Object {
+            "alignItems": "flex-start",
+            "alignSelf": "flex-start",
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "flex-start",
+            "width": "100%",
+          }
+        }
+      >
         <p
           className="profile-title"
         >
@@ -85,11 +300,102 @@ exports[`ThreadPage renders correctly 1`] = `
         <p
           className="paragraph"
         >
-          013091283
+          thread by: undefined, concerning 013091283
         </p>
-        <p
-          className="paragraph"
-        />
+        <span
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flexDirection": "column",
+              "justifyContent": "center",
+              "padding": "20px",
+            }
+          }
+        >
+          <div
+            className="collapse"
+            style={Object {}}
+          >
+            <div
+              style={
+                Object {
+                  "marginTop": "25px",
+                }
+              }
+            >
+              <p
+                style={
+                  Object {
+                    "color": "black",
+                    "margin": "5px 20px",
+                  }
+                }
+              >
+                Have something to say about this thread? Add a comment to join the discussion.
+              </p>
+              <textarea
+                className="form-control"
+                onChange={[Function]}
+                placeholder="Your comment here"
+                style={
+                  Object {
+                    "borderRadius": "6px",
+                    "margin": "15px auto",
+                    "padding": "8px",
+                    "width": "95%",
+                  }
+                }
+              />
+              <div
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "alignSelf": "flex-end",
+                    "display": "flex",
+                    "flexDirection": "row",
+                    "justifyContent": "center",
+                  }
+                }
+              >
+                <button
+                  aria-label={null}
+                  className="add article-button btn btn-secondary btn-sm"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  post comment
+                </button>
+                <button
+                  aria-label={null}
+                  className="back article-button btn btn-secondary btn-sm"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  cancel
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            className="fade"
+          >
+            <button
+              aria-label={null}
+              className="view article-button btn btn-secondary btn-sm"
+              onClick={[Function]}
+              style={
+                Object {
+                  "alignSelf": "flex-end",
+                  "margin": "10px",
+                }
+              }
+              type="button"
+            >
+              comment
+            </button>
+          </div>
+        </span>
       </div>
     </div>
   </div>

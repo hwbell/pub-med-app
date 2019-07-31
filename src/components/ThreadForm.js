@@ -3,7 +3,7 @@ import '../App.scss';
 import 'bootstrap/dist/css/bootstrap.css';
 
 // components
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Form } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Form, Fade } from 'reactstrap';
 
 // ******************************************************************************
 class ThreadForm extends React.Component {
@@ -36,12 +36,12 @@ class ThreadForm extends React.Component {
   handleSubmit() {
 
     this.props.handleSubmitThread(this.state.threadInfo);
-    console.log(this.state.threadInfo)
+    // console.log(this.state.threadInfo)
 
     // wipe the state - we only need it before it is sent to the server
-    this.setState({
-      threadInfo: {}
-    });
+    // this.setState({
+    //   threadInfo: {}
+    // });
 
   }
 
@@ -52,7 +52,7 @@ class ThreadForm extends React.Component {
     let threadUpdates = this.state.threadInfo;
 
     let threadProps = ['name', 'article', 'paragraph'];
-    
+
     let placeholders = {
       name: 'Give your post a clear, searchable name!',
       article: 'Include the PMID or PMCID of related articles.',
@@ -74,9 +74,9 @@ class ThreadForm extends React.Component {
     })
 
     return Object.keys(threadInfo).map((name, i) => {
-      console.log(placeholders[name])
+      // console.log(placeholders[name])
 
-      console.log(i, name)
+      // console.log(i, name)
 
       let title = name[0].toUpperCase() + name.slice(1);
       if (title === 'Name' || title === 'Paragraph') {
@@ -107,12 +107,14 @@ class ThreadForm extends React.Component {
 
   render() {
 
+    let warning = this.props.showUniqueWarning;
+
     return (
       <Modal centered={true}
         isOpen={this.props.isVisible}
         toggle={this.props.toggle}>
 
-        <ModalHeader>Add some info to your profile</ModalHeader>
+        <ModalHeader>Start a discussion with other researchers</ModalHeader>
         <ModalBody>
 
           <Form style={styles.form} onSubmit={this.handleSubmit}>
@@ -122,9 +124,17 @@ class ThreadForm extends React.Component {
           </Form>
 
         </ModalBody>
-        <ModalFooter>
-          <Button color="primary" size="sm" onClick={this.handleSubmit}>save</Button>
-          <Button color="secondary" size="sm" onClick={this.props.toggle}>cancel</Button>
+        <ModalFooter >
+
+          <div >
+            <Fade style={{color: 'red'}} in={this.props.showUniqueWarning}>
+              Names must be unique!
+            </Fade>
+          </div>
+          <div>
+            <Button className="add article-button" size="sm" onClick={this.handleSubmit}>save</Button>
+            <Button className="back article-button" size="sm" onClick={this.props.toggle}>cancel</Button>
+          </div>
         </ModalFooter>
 
       </Modal>

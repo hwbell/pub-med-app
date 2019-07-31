@@ -52,16 +52,53 @@ describe('Thread', () => {
     expect(wrapper.find('.outline').length).toBe(1)
 
     expect(wrapper.find('.profile-title').length).toBe(1)
-    expect(wrapper.find('.paragraph').length).toBe(3)
+    expect(wrapper.find('.paragraph').length).toBe(2)
+    expect(wrapper.find('.view').length).toBe(1)
+    expect(wrapper.find('Fade').length).toBe(1)
 
     // these three cover information that we would always have - the name, article, and user
     expect(wrapper.find('.profile-title').text()).toBe(thread.name);
-    expect(wrapper.find('.paragraph').at(0).text()).toBe(thread.article);
-    expect(wrapper.find('.paragraph').at(1).text()).toBe(thread.user);
+
+    let text = `thread by: ${thread.user}, concerning ${thread.article}`
+    expect(wrapper.find('.paragraph').at(0).text()).toBe(text);
 
     // this one we may or may not have
-    expect(wrapper.find('.paragraph').at(2).text()).toBe(thread.paragraph);
+    let paragraph = thread.paragraph.slice(0,50);
+    expect(wrapper.find('.paragraph').at(1).text()).toBe(paragraph + ` ...`);
 
+  })
+
+  it('should toggle the comment form', () => {
+    expect(wrapper.state().showCommentForm).toBe(false);
+
+    wrapper.instance().toggleCommentForm();
+    wrapper.update();
+
+    expect(wrapper.state().showCommentForm).toBe(true);
+    
+    wrapper.instance().toggleCommentForm();
+    wrapper.update();
+
+    expect(wrapper.state().showCommentForm).toBe(false);
+  })
+
+  it('should change hide the comment button when it is clicked', () => {
+    wrapper.find('.view').simulate('click');
+    wrapper.update();
+
+    expect(wrapper.state().showCommentForm).toBe(true);
+    expect(wrapper.find('Fade').props().in).toBe(false);
+  })
+
+  it('should change / hide the Collapse holding CommentForm when the comment button it is clicked', () => {
+
+    expect(wrapper.find('Collapse').props().isOpen).toBe(false);
+
+    wrapper.find('.view').simulate('click');
+    wrapper.update();
+
+    expect(wrapper.state().showCommentForm).toBe(true);
+    expect(wrapper.find('Collapse').props().isOpen).toBe(true);
   })
 
 

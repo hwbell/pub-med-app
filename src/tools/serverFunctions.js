@@ -103,7 +103,7 @@ export async function deleteCollection(collection, headers) {
   return serverResponse;
 }
 
-// gets a user's collections
+// gets a user's profile / collections / threads
 export async function getUserCollections(headers) {
   let serverResponse = await fetch(`${collectionServerUrl}collections/me`, {
     method: 'GET',

@@ -4,7 +4,18 @@ exports[`Thread renders correctly 1`] = `
 <div
   className="outline"
 >
-  <div>
+  <div
+    style={
+      Object {
+        "alignItems": "flex-start",
+        "alignSelf": "flex-start",
+        "display": "flex",
+        "flexDirection": "column",
+        "justifyContent": "flex-start",
+        "width": "100%",
+      }
+    }
+  >
     <p
       className="profile-title"
     >
@@ -13,48 +24,137 @@ exports[`Thread renders correctly 1`] = `
     <p
       className="paragraph"
     >
-      013091283
+      thread by: The Creator, concerning 013091283
     </p>
     <p
       className="paragraph"
     >
-      The Creator
+      I found the source material for the basis of this  ...
     </p>
-    <p
-      className="paragraph"
+    <span
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "column",
+          "justifyContent": "center",
+          "padding": "20px",
+        }
+      }
     >
-      I found the source material for the basis of this study to be lacking. Does anyone else agree?
-    </p>
-    <div
-      className="comment"
-    >
-      <p
-        className="profile-title"
+      <div
+        className="collapse"
+        style={Object {}}
       >
-        Jeff
-      </p>
-      <p
-        className="paragraph"
+        <div
+          style={
+            Object {
+              "marginTop": "25px",
+            }
+          }
+        >
+          <p
+            style={
+              Object {
+                "color": "black",
+                "margin": "5px 20px",
+              }
+            }
+          >
+            Have something to say about this thread? Add a comment to join the discussion.
+          </p>
+          <textarea
+            className="form-control"
+            onChange={[Function]}
+            placeholder="Your comment here"
+            style={
+              Object {
+                "borderRadius": "6px",
+                "margin": "15px auto",
+                "padding": "8px",
+                "width": "95%",
+              }
+            }
+          />
+          <div
+            style={
+              Object {
+                "alignItems": "center",
+                "alignSelf": "flex-end",
+                "display": "flex",
+                "flexDirection": "row",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <button
+              aria-label={null}
+              className="add article-button btn btn-secondary btn-sm"
+              onClick={[Function]}
+              type="button"
+            >
+              post comment
+            </button>
+            <button
+              aria-label={null}
+              className="back article-button btn btn-secondary btn-sm"
+              onClick={[Function]}
+              type="button"
+            >
+              cancel
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        className="fade"
       >
-        This article seems to lack source material for the conclusions drawn in the discussion.
-      </p>
-      <hr />
-    </div>
-    <div
-      className="comment"
-    >
-      <p
-        className="profile-title"
+        <button
+          aria-label={null}
+          className="view article-button btn btn-secondary btn-sm"
+          onClick={[Function]}
+          style={
+            Object {
+              "alignSelf": "flex-end",
+              "margin": "10px",
+            }
+          }
+          type="button"
+        >
+          comment
+        </button>
+      </div>
+      <div
+        className="comment"
       >
-        mark
-      </p>
-      <p
-        className="paragraph"
+        <p
+          className="profile-title"
+        >
+          Jeff
+        </p>
+        <p
+          className="paragraph"
+        >
+          This article seems to lack source material for the conclusions drawn in the discussion.
+        </p>
+        <hr />
+      </div>
+      <div
+        className="comment"
       >
-        Does anyone else find figure 5 really confusing?
-      </p>
-      <hr />
-    </div>
+        <p
+          className="profile-title"
+        >
+          mark
+        </p>
+        <p
+          className="paragraph"
+        >
+          Does anyone else find figure 5 really confusing?
+        </p>
+        <hr />
+      </div>
+    </span>
   </div>
 </div>
 `;

@@ -17,19 +17,37 @@ class ThreadPage extends React.Component {
     super(props);
 
     this.state = {
-      showThreadForm: false
+      showThreadForm: false,
+      showUniqueWarning: false
     }
 
     this.renderThreads = this.renderThreads.bind(this);
     this.toggleThreadForm = this.toggleThreadForm.bind(this);
     this.handleSubmitThread = this.handleSubmitThread.bind(this);
+    this.toggleUniqueWarning = this.toggleUniqueWarning.bind(this);
   }
 
   renderThreads() {
-    let threads = this.props.threads;
+    let threads = this.props.user.threads;
 
     return threads.map((thread, i) => {
       return <Thread key={i} thread={thread} />
+    })
+  }
+
+  toggleUniqueWarning() {
+    this.setState({
+      showUniqueWarning: !this.state.showUniqueWarning
+    }, () => {
+
+      // if its now set to true, change it back after 2.4 s
+      if (this.state.showUniqueWarning) {
+        setTimeout(() => {
+          this.setState({
+            showUniqueWarning: false
+          })
+        }, 2400)
+      }
     })
   }
 
@@ -93,11 +111,14 @@ class ThreadPage extends React.Component {
       .then((response) => {
         console.log(response)
 
-        // once we have successfully posted, we will: 
+        // once we have posted, we will: 
 
-        // 1. Refresh the threads - this will send the new thread list sent back
+        // Success => refresh the threads. This will send the new thread list sent back
         // from the server to the root App component to update all concerned components
         response.createdAt && this.props.refreshUserThreads(response);
+
+        // Fail => show the fail message / reason
+        response.code = 11000 && this.toggleUniqueWarning();
 
       }).catch((e) => {
         console.log(e)
@@ -109,6 +130,10 @@ class ThreadPage extends React.Component {
 
   render() {
 
+    const user = this.props.user;
+    const userThreads = user && user.threads && user.threads.length > 0;
+    console.log(user)
+
     return (
       <div className="page">
 
@@ -116,6 +141,8 @@ class ThreadPage extends React.Component {
           toggle={this.toggleThreadForm}
           isVisible={this.state.showThreadForm}
           handleSubmitThread={this.handleSubmitThread}
+          showUniqueWarning={this.state.showUniqueWarning}
+          toggleUniqueWarning={this.toggleUniqueWarning}
         />
 
         <div className="glass page-content" >
@@ -128,10 +155,10 @@ class ThreadPage extends React.Component {
           />
 
           {/* make a new thread */}
-          <Button color="primary" style={styles.button}
+          <Button className="add article-button" siz="md" style={styles.button}
             onClick={this.toggleThreadForm}>start a new thread</Button>
 
-          {this.props.threads.length > 0 && this.renderThreads()}
+          {userThreads && this.renderThreads()}
 
         </div>
 
@@ -142,8 +169,8 @@ class ThreadPage extends React.Component {
 
 const styles = {
   button: {
-    margin: '20px',
-    alignSelf: 'flex-start'
+    margin: '24px',
+    // alignSelf: 'flex-start'
   }
 }
 

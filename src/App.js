@@ -176,15 +176,18 @@ class App extends Component {
     // we actually get the collections as well as the profile here, maybe change the name
     return getUserCollections(headers)
       .then((response) => {
-        console.log(response)
 
         // attach the collections to the user object
         let profile = response.user;
         profile.collections = response.collections;
+        profile.threads = response.threads;
+
 
         // save to state
         this.setState({
           user: profile
+        }, () => {
+          console.log(this.state.user)
         });
         // save info to local storage
         localStorage.setItem(`user`, JSON.stringify(profile));

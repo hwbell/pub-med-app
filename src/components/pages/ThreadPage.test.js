@@ -5,6 +5,7 @@ import { shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 
 const refreshUserThreadsStub = jest.fn();
+const renderThreadsStub = jest.fn();
 
 const handleSubmitThreadStub = (threadInfo) => {
   return new Promise((resolve, reject) => {
@@ -20,9 +21,9 @@ const handleSubmitThreadStub = (threadInfo) => {
 describe('ThreadPage', () => {
 
   let someProps;
-  let threads;
+  let user = {};
   beforeAll(() => {
-    threads = [
+    user.threads = [
       {
         name: 'Sourcing of PMID: 013091283',
         article: '013091283'
@@ -37,14 +38,14 @@ describe('ThreadPage', () => {
       }
     ]
     someProps = {
-      threads,
+      user,
       refreshUserThreads: refreshUserThreadsStub
     };
   })
 
   let wrapper;
   beforeEach(() => {
-    wrapper = shallow(<ThreadPage {...someProps}/>);
+    wrapper = shallow(<ThreadPage {...someProps} />);
   })
 
   it('renders without crashing', async () => {
@@ -69,7 +70,7 @@ describe('ThreadPage', () => {
 
   it('should contain one <Thread /> for each user thread', () => {
 
-    expect(wrapper.find({color: 'primary'}).length).toBe(1);
+    expect(wrapper.find('.add').length).toBe(1);
     expect(wrapper.find('Thread').length).toBe(3);
 
   })
@@ -78,13 +79,27 @@ describe('ThreadPage', () => {
 
     expect(wrapper.state().showThreadForm).toBe(false);
 
-    wrapper.find({color: 'primary'}).simulate('click');
+    wrapper.find('.add').simulate('click');
     wrapper.update();
     expect(wrapper.state().showThreadForm).toBe(true);
 
-    wrapper.find({color: 'primary'}).simulate('click');
+    wrapper.find('.add').simulate('click');
     wrapper.update();
     expect(wrapper.state().showThreadForm).toBe(false);
+
+  })
+
+  it('should toggle the showUniqueWarning boolean', () => {
+
+    expect(wrapper.state().showUniqueWarning).toBe(false);
+
+    wrapper.instance().toggleUniqueWarning();
+    wrapper.update();
+    expect(wrapper.state().showUniqueWarning).toBe(true);
+    // 
+    wrapper.instance().toggleUniqueWarning();
+    wrapper.update();
+    expect(wrapper.state().showUniqueWarning).toBe(false);
 
   })
 
@@ -96,10 +111,21 @@ describe('ThreadPage', () => {
     wrapper.instance().handleSubmitThread({
       name: 'Sourcing of PMID: 013091283',
       article: '013091283'
-    },)
+    })
     wrapper.update();
 
     expect(refreshUserThreadsStub.mock.calls.length).toBe(1);
 
   })
+
+  it('should not render Threads if there are no user threads', () => {
+    someProps.user.threads = [];
+
+    const newWrapper = shallow(<ThreadPage {...someProps}/>);
+    newWrapper.instance().renderThreads = renderThreadsStub;
+
+    expect(newWrapper.find('Thread').length).toBe(0);
+
+  })
+
 })
