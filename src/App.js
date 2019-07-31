@@ -163,7 +163,7 @@ class App extends Component {
   // and save that too
   registerSignIn(user) {
 
-    this.setState({user});
+    this.setState({ user });
 
     let token = JSON.parse(localStorage.getItem('token'));
     let headers = {
@@ -219,6 +219,17 @@ class App extends Component {
     this.setState({
       user
     })
+  }
+
+  refreshUserThreads(response) {
+    // all we have to do is set the response as the user's threads
+
+    let { user } = this.state;
+    user.threads = response;
+    this.setState({
+      user
+    })
+
   }
 
   // this function is triggered from the ProfileForm in ProfilePage when a user changes their info

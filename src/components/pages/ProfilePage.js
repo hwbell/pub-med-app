@@ -115,45 +115,48 @@ class ProfilePage extends React.Component {
     return (
       <div className="outline profile" style={styles.profileInfo}>
 
-        <Button className="warn article-button" style={styles.button}
-          onClick={this.props.registerSignOut}>logout</Button>
-
-        <div style={styles.nameAndIcon}>
-          <p className="profile-title">
-            <strong>{`${this.props.user.name || this.props.user.email}`}</strong>
-          </p>
-
-          <i className="profile-title fas fa-user-edit" style={styles.icon}
+        <div style={styles.buttonHolder}>
+          <Button className="view article-button" size="sm"
             onMouseOver={this.toggleEditText}
             onMouseLeave={this.toggleEditText}
-            onClick={this.toggleProfileForm}></i>
+            onClick={this.toggleProfileForm}>edit profile</Button>
 
-          <Fade in={this.state.editText} className="profile-title">
-            <p style={{ color: 'white' }}>
-              add to your profile!
-            </p>
-          </Fade>
+          <Button className="warn article-button" size="sm"
+            onClick={this.props.registerSignOut}>logout</Button>
+
         </div>
 
+        <p className="section-title">
+          <strong>{`${this.props.user.name || this.props.user.email}`}</strong>
+        </p>
+
+
         {user.collections &&
-          <div className="row">
+          <div style={styles.iconRow} className="row">
             {user.collections.map((item, i) => <i key={i} className="fas fa-atom"></i>)}
           </div>}
 
         {user.threads &&
-          <div className="row">
+          <div style={styles.iconRow} className="row">
             {user.threads.map((item, i) => <i key={i} className="fas fa-dna"></i>)}
           </div>}
 
+        <div style={styles.nameAndIcon}>
 
-        <p className="profile-title">
-          {user.email}
-        </p>
+          <div>
+            <p className="profile-title">
+              {user.email}
+            </p>
 
-        <p className="profile-title">
-          {user.collections &&
-            `${user.collections.length} collections`}
-        </p>
+            <p className="profile-title">
+              {user.collections &&
+                `${user.collections.length} collections`}
+            </p>
+          </div>
+
+
+
+        </div>
 
         {Object.keys(userProps).map((prop, i) => {
 
@@ -347,8 +350,15 @@ const styles = {
     margin: 0,
     marginTop: '8px'
   },
-  button: {
-    alignSelf: 'flex-end'
+  buttonHolder: {
+    position: 'absolute',
+    top: '10px',
+    right: '10px',
+    display: 'flex',
+    flexDirection: 'row'
+  },
+  iconRow: {
+    paddingLeft: '24px'
   },
   profileInfo: {
     padding: '20px',
@@ -357,6 +367,7 @@ const styles = {
   nameAndIcon: {
     display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'space-between'
   }
 }
 

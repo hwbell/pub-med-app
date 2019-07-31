@@ -67,7 +67,7 @@ describe('CollectionPage', () => {
       expect(wrapper.find(selector).length).toEqual(1);
     });
 
-    ['.collection-block', '.section-title'].forEach((selector) => {
+    ['.collection-block', '.profile-title'].forEach((selector) => {
       expect(wrapper.find(selector).length).toEqual(2);
     });
 
@@ -79,7 +79,7 @@ describe('CollectionPage', () => {
 
     // the explanations should not appear with collections present 
     expect(wrapper.find('.outline').length).toEqual(1);
-    expect(wrapper.find('.section-title').length).toEqual(2);
+    expect(wrapper.find('.profile-title').length).toEqual(2);
 
     // set the user's collections to empty 
     wrapper.setProps({

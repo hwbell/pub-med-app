@@ -21,15 +21,77 @@ exports[`ThreadPage renders correctly 1`] = `
         post a thread to start a discussion
       </h4>
     </div>
+    <button
+      aria-label={null}
+      className="btn btn-primary"
+      onClick={[Function]}
+      style={
+        Object {
+          "alignSelf": "flex-start",
+          "margin": "20px",
+        }
+      }
+      type="button"
+    >
+      start a new thread
+    </button>
     <div
       className="outline"
-    />
+    >
+      <div>
+        <p
+          className="profile-title"
+        >
+          Sourcing of PMID: 013091283
+        </p>
+        <p
+          className="paragraph"
+        >
+          013091283
+        </p>
+        <p
+          className="paragraph"
+        />
+      </div>
+    </div>
     <div
       className="outline"
-    />
+    >
+      <div>
+        <p
+          className="profile-title"
+        >
+          Data in figure 1 of PMID: 013091283
+        </p>
+        <p
+          className="paragraph"
+        >
+          013091283
+        </p>
+        <p
+          className="paragraph"
+        />
+      </div>
+    </div>
     <div
       className="outline"
-    />
+    >
+      <div>
+        <p
+          className="profile-title"
+        >
+          Figure 3 in PMID: 013091283
+        </p>
+        <p
+          className="paragraph"
+        >
+          013091283
+        </p>
+        <p
+          className="paragraph"
+        />
+      </div>
+    </div>
   </div>
 </div>
 `;

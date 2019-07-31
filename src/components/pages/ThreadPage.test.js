@@ -54,8 +54,14 @@ describe('ThreadPage', () => {
   })
 
   it('should contain one <Thread /> for each user thread', () => {
+
+    expect(wrapper.find({color: 'primary'}).length).toBe(1);
     expect(wrapper.find('Thread').length).toBe(3);
 
   })
 
+  it('should toggle the showThreadForm boolean', () => {
+
+    expect(wrapper.state().showThreadForm).toBe(false);
+  })
 })

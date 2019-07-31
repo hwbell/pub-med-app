@@ -155,7 +155,7 @@ class CollectionPage extends React.Component {
 
           <div className="outline" style={styles.content}>
 
-            <p className="section-title">New Collections</p>
+            <p className="profile-title">New Collections</p>
 
             {/* the new collections when they are present */}
             {this.props.collections.length > 0 ?
@@ -171,7 +171,7 @@ class CollectionPage extends React.Component {
               </p>
             }
 
-            <p className="section-title">Saved Collections</p>
+            <p className="profile-title">Saved Collections</p>
 
             {/* the user's collections when they are present */}
             {userCollections ?

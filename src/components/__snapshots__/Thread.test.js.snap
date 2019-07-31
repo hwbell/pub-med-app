@@ -3,5 +3,58 @@
 exports[`Thread renders correctly 1`] = `
 <div
   className="outline"
-/>
+>
+  <div>
+    <p
+      className="profile-title"
+    >
+      Sourcing of PMID: 013091283
+    </p>
+    <p
+      className="paragraph"
+    >
+      013091283
+    </p>
+    <p
+      className="paragraph"
+    >
+      The Creator
+    </p>
+    <p
+      className="paragraph"
+    >
+      I found the source material for the basis of this study to be lacking. Does anyone else agree?
+    </p>
+    <div
+      className="comment"
+    >
+      <p
+        className="profile-title"
+      >
+        Jeff
+      </p>
+      <p
+        className="paragraph"
+      >
+        This article seems to lack source material for the conclusions drawn in the discussion.
+      </p>
+      <hr />
+    </div>
+    <div
+      className="comment"
+    >
+      <p
+        className="profile-title"
+      >
+        mark
+      </p>
+      <p
+        className="paragraph"
+      >
+        Does anyone else find figure 5 really confusing?
+      </p>
+      <hr />
+    </div>
+  </div>
+</div>
 `;

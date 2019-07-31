@@ -260,10 +260,10 @@ input {
 // the profile page
 .profile-title {
   margin: 10px;
+  margin-left: 20px;
   font-size: 18px;
-  // &:hover {
-  //   cursor: pointer;
-  // }
+  align-self: flex-start;
+  font-weight: 600;
 }
 
 .fa-atom, .fa-dna {
@@ -275,7 +275,7 @@ input {
     color: silver;
   }
   font-size: 24px;
-  margin-left: 24px;
+  margin: 10px;
 }
 
 

@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Comment renders correctly 1`] = `
+<div
+  className="comment"
+>
+  <p
+    className="profile-title"
+  >
+    Jeff
+  </p>
+  <p
+    className="paragraph"
+  >
+    This article seems to lack source material for the conclusions drawn in the discussion.
+  </p>
+  <hr />
+</div>
+`;

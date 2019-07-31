@@ -104,10 +104,11 @@ describe('ProfilePage', () => {
     wrapper.update();
     expect(wrapper.find('.profile').length).toEqual(1);
     expect(wrapper.find('.signin').length).toEqual(0);
-    expect(wrapper.find('.profile-title').length).toEqual(5);
-    expect(wrapper.find('Fade').length).toEqual(1);
-    expect(wrapper.find('.fa-user-edit').length).toEqual(1);    
-    expect(wrapper.find('Button').at(0).render().text()).toEqual('logout');
+    expect(wrapper.find('.profile-title').length).toEqual(2);
+    expect(wrapper.find('.section-title').length).toEqual(1);
+    expect(wrapper.find('Button').length).toEqual(2);    
+    expect(wrapper.find('Button').at(0).render().text()).toEqual('edit profile');
+    expect(wrapper.find('Button').at(1).render().text()).toEqual('logout');
 
     // change the signedIn prop and wipe the user
     wrapper.setProps({ user: null });
