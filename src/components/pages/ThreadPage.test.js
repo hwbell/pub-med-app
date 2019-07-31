@@ -4,6 +4,19 @@ import ThreadPage from './ThreadPage';
 import { shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 
+const refreshUserThreadsStub = jest.fn();
+
+const handleSubmitThreadStub = (threadInfo) => {
+  return new Promise((resolve, reject) => {
+
+    if (!threadInfo || Object.keys(threadInfo).length === 0) {
+      reject('invalid input');
+    } else {
+      resolve(refreshUserThreadsStub());
+    }
+  });
+}
+
 describe('ThreadPage', () => {
 
   let someProps;
@@ -24,7 +37,8 @@ describe('ThreadPage', () => {
       }
     ]
     someProps = {
-      threads
+      threads,
+      refreshUserThreads: refreshUserThreadsStub
     };
   })
 
@@ -63,5 +77,29 @@ describe('ThreadPage', () => {
   it('should toggle the showThreadForm boolean', () => {
 
     expect(wrapper.state().showThreadForm).toBe(false);
+
+    wrapper.find({color: 'primary'}).simulate('click');
+    wrapper.update();
+    expect(wrapper.state().showThreadForm).toBe(true);
+
+    wrapper.find({color: 'primary'}).simulate('click');
+    wrapper.update();
+    expect(wrapper.state().showThreadForm).toBe(false);
+
+  })
+
+  it('should fire this.props.refreshUserThreads when this.handleSubmitThread is called', () => {
+
+    expect(refreshUserThreadsStub.mock.calls.length).toBe(0);
+
+    wrapper.instance().handleSubmitThread = handleSubmitThreadStub;
+    wrapper.instance().handleSubmitThread({
+      name: 'Sourcing of PMID: 013091283',
+      article: '013091283'
+    },)
+    wrapper.update();
+
+    expect(refreshUserThreadsStub.mock.calls.length).toBe(1);
+
   })
 })

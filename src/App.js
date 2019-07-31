@@ -83,6 +83,7 @@ class App extends Component {
     this.registerSignIn = this.registerSignIn.bind(this);
     this.registerSignOut = this.registerSignOut.bind(this);
     this.refreshUserCollections = this.refreshUserCollections.bind(this);
+    this.refreshUserThreads = this.refreshUserThreads.bind(this);
     this.refreshUser = this.refreshUser.bind(this);
   }
 
@@ -228,6 +229,8 @@ class App extends Component {
     user.threads = response;
     this.setState({
       user
+    }, () => {
+      console.log(user)
     })
 
   }
@@ -240,6 +243,8 @@ class App extends Component {
     // all we have to do is set the response as the user
     // but remember to re-attach the user's collections to the user object
     response.collections = this.state.user.collections;
+    response.threads = this.state.user.threads;
+
     this.setState({
       user: response
     }, () => {
@@ -310,6 +315,7 @@ class App extends Component {
                     <ThreadPage
                       threads={this.state.threads}
                       user={this.state.user}
+                      refreshUserThreads={this.refreshUserThreads}
                     />
 
                   } />

@@ -6,12 +6,13 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Form } from 'reactstrap';
 
 // ******************************************************************************
-class ProfileForm extends React.Component {
+class ThreadForm extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      threadUpdates: {}
+      threadInfo: {},
+      isNewThread: !this.props.thread
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -24,36 +25,38 @@ class ProfileForm extends React.Component {
     let { name, value } = e.target;
 
     // use the target name as the key for the value in profileInfo
-    let obj = this.state.threadUpdates;
+    let obj = this.state.threadInfo;
     obj[`${name}`] = value;
 
-    this.setState({ threadUpdates: obj }, () => {
+    this.setState({ threadInfo: obj }, () => {
       // console.log(this.state.user)
     })
   }
 
   handleSubmit() {
-    this.props.handleSubmitThread(this.state.threadUpdates);
+
+    this.props.handleSubmitThread(this.state.threadInfo);
+    console.log(this.state.threadInfo)
 
     // wipe the state - we only need it before it is sent to the server
     this.setState({
-      threadUpdates: {}
-    })
+      threadInfo: {}
+    });
+
   }
 
   renderInputs() {
-    // set the current value of the inputs from this.state.profileInfo, if available.
+    // set the current value of the inputs from this.state.threadUpdates, if available.
     // this means we have changed something 
     let thread = this.props.thread;
-    let threadUpdates = this.state.threadUpdates;
+    let threadUpdates = this.state.threadInfo;
 
-    let threadProps = ['name', 'article', 'paragraph', 'comment'];
+    let threadProps = ['name', 'article', 'paragraph'];
+    
     let placeholders = {
       name: 'Give your post a clear, searchable name!',
       article: 'Include the PMID or PMCID of related articles.',
-      // user: '',
       paragraph: 'Give a short description of the topic of your thread.',
-      comment: 'Add a comment to your thread'
     }
 
     let threadInfo = {};
@@ -76,6 +79,9 @@ class ProfileForm extends React.Component {
       console.log(i, name)
 
       let title = name[0].toUpperCase() + name.slice(1);
+      if (title === 'Name' || title === 'Paragraph') {
+        title += ` *`
+      }
 
       let type = 'text';
       let style = styles.input;
@@ -100,9 +106,6 @@ class ProfileForm extends React.Component {
   }
 
   render() {
-
-    // set the current value of the inputs from this.state.profileInfo, if available.
-    // this means we have changed something 
 
     return (
       <Modal centered={true}
@@ -142,4 +145,4 @@ const styles = {
   }
 }
 
-export default ProfileForm;
+export default ThreadForm;

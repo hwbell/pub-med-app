@@ -50,7 +50,7 @@ describe('ThreadForm', () => {
     });
 
     // one input for each property of the thread
-    expect(wrapper.find('Input').length).toBe(4);
+    expect(wrapper.find('Input').length).toBe(3);
 
   });
 
@@ -58,21 +58,20 @@ describe('ThreadForm', () => {
     expect(wrapper.find('Input').at(0).props().placeholder).toBe("Give your post a clear, searchable name!");
     expect(wrapper.find('Input').at(1).props().placeholder).toBe("Include the PMID or PMCID of related articles.")
     expect(wrapper.find('Input').at(2).props().placeholder).toBe("Give a short description of the topic of your thread.")
-    expect(wrapper.find('Input').at(3).props().placeholder).toBe("Add a comment to your thread")
 
   })
 
-  it('should use values from this.props.user if there is not threadUpdates in state', () => {
+  it('should use values from this.props.user if there is not threadInfo in state', () => {
     expect(wrapper.find('Input').at(0).props().value).toBe(thread.name);
     expect(wrapper.find('Input').at(1).props().value).toBe(thread.article)
     expect(wrapper.find('Input').at(2).props().value).toBe(thread.paragraph)
   })
 
-  it('should have an empty threadUpdates in state to start', () => { 
-    expect(wrapper.state().threadUpdates).toMatchObject({})
+  it('should have an empty threadInfo in state to start', () => { 
+    expect(wrapper.state().threadInfo).toMatchObject({})
   })
 
-  it('should save threadUpdates in state when user types in info', () => { 
+  it('should save threadInfo in state when user types in info', () => { 
     let e = {
       target: {
         name: 'about',
@@ -82,18 +81,18 @@ describe('ThreadForm', () => {
     wrapper.instance().handleChange(e)
     wrapper.update();
 
-    expect(wrapper.state().threadUpdates).toMatchObject({
+    expect(wrapper.state().threadInfo).toMatchObject({
       about: e.paragraph
     })
   })
 
-  it('should fire the provided handleSumbitUser() function when OK is clicked', () => {
+  it('should fire the provided handleSumbitThread() function when OK is clicked', () => {
 
     wrapper.find({color: 'primary'}).simulate('click');
     wrapper.update();
 
     expect(handleSubmitThreadStub.mock.calls.length).toBe(1)
-    expect(handleSubmitThreadStub).toBeCalledWith(wrapper.state().threadUpdates)
+    expect(handleSubmitThreadStub).toBeCalledWith(wrapper.state().threadInfo)
   })
 
   it('should fire the provided toggle when the cancel button is clicked', () => {

@@ -1,5 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ProfileForm renders correctly 1`] = `null`;
-
 exports[`ThreadForm renders correctly 1`] = `null`;

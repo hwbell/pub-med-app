@@ -30,6 +30,23 @@ export async function signInUser(user, isNewUser) {
   return response;
 }
 
+// patches the user's profile
+export async function patchUser(patch, headers) {
+  let serverResponse = await fetch(`${collectionServerUrl}users/me`, {
+    method: 'PATCH',
+    body: JSON.stringify(patch),
+    headers
+  })
+    .then(response => response.json())
+    .then((json) => {
+      console.log(json)
+      return json;
+    })
+    .catch(err => console.log(err))
+
+  return serverResponse;
+} 
+
 // saves a collection to the server, or patches an exisiting collection on the server
 export async function saveCollection(collection, headers, isExisting) {
 
@@ -119,22 +136,47 @@ export async function patchCollection(collection, headers) {
   return serverResponse;
 }
 
-// patches the user's profile
-export async function patchUser(patch, headers) {
-  let serverResponse = await fetch(`${collectionServerUrl}users/me`, {
-    method: 'PATCH',
-    body: JSON.stringify(patch),
+// saves a collection to the server, or patches an exisiting collection on the server
+export async function saveThread(thread, headers, isExisting) {
+
+  // assign the request params accoring to either PATCH for existing thread or 
+  // POST for new thread
+
+  // base url
+  let url = `${collectionServerUrl}threads`;
+  let method, body;
+
+  if (isExisting) {
+    // if its a patch, we only want to send allowed properties.
+    let { name, article, comments, paragraph } = thread;
+
+    body = {
+      name, 
+      article,
+      comments,
+      paragraph
+    }
+    method = 'PATCH';
+    url += `/${thread._id}`;
+  } else {
+    body = thread;
+    method = 'POST';
+  }
+
+  let serverResponse = await fetch(url, {
+    method,
+    body: JSON.stringify(body),
     headers
   })
     .then(response => response.json())
     .then((json) => {
-      console.log(json)
+      // console.log(response)
       return json;
     })
     .catch(err => console.log(err))
 
   return serverResponse;
-} 
+}
 
 
 
