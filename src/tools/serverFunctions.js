@@ -137,7 +137,7 @@ export async function patchCollection(collection, headers) {
 }
 
 // saves a collection to the server, or patches an exisiting collection on the server
-export async function saveThread(thread, headers, isExisting) {
+export async function saveThread(thread, headers, isComment) {
 
   // assign the request params accoring to either PATCH for existing thread or 
   // POST for new thread
@@ -146,18 +146,16 @@ export async function saveThread(thread, headers, isExisting) {
   let url = `${collectionServerUrl}threads`;
   let method, body;
 
-  if (isExisting) {
+  if (isComment) {
     // if its a patch, we only want to send allowed properties.
-    let { name, article, comments, paragraph } = thread;
-
     body = {
-      name, 
-      article,
-      comments,
-      paragraph
-    }
+      user: thread.user,
+      text: thread.text,
+      add: thread.add
+    };
     method = 'PATCH';
-    url += `/${thread._id}`;
+    url += `/comments/${thread._id}`;
+
   } else {
     body = thread;
     method = 'POST';
@@ -170,7 +168,7 @@ export async function saveThread(thread, headers, isExisting) {
   })
     .then(response => response.json())
     .then((json) => {
-      // console.log(response)
+      console.log(json)
       return json;
     })
     .catch(err => console.log(err))

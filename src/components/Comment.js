@@ -17,12 +17,9 @@ class Comment extends React.Component {
     return (
       <div className="comment">
 
-        <p className="profile-title">{user}</p>
+        <p className="comment-title">{`${user} - `}</p>
 
-        <p className="paragraph">{text}</p>
-
-        <hr></hr>
-
+        <p className="comment-text">{text}</p>
 
       </div>
     );

@@ -31,9 +31,9 @@ describe('Comment', () => {
 
   it('contains the correct elements', () => {
     expect(wrapper.find('.comment').length).toBe(1);
-    expect(wrapper.find('.profile-title').length).toBe(1);
-    expect(wrapper.find('.paragraph').length).toBe(1);
-    expect(wrapper.find('hr').length).toBe(1);
+    expect(wrapper.find('.comment-title').length).toBe(1);
+    expect(wrapper.find('.comment-text').length).toBe(1);
   })
+
 
 })

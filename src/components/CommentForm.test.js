@@ -17,6 +17,14 @@ describe('CommentForm', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = shallow(<CommentForm {...someProps} />)
+    let user = {
+      name: 'Mark',
+      email: 'mark@example.com',
+      password: 'password'
+    }
+
+    // set a user
+    localStorage.setItem('user', JSON.stringify(user));
   })
 
   it('renders without crashing', () => {

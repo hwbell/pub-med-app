@@ -19,6 +19,7 @@
     "react-dom": "^16.8.6",
     "react-editext": "^3.3.0",
     "react-loader-spinner": "^2.3.0",
+    "react-media": "^1.9.2",
     "react-pdf": "^4.1.0",
     "react-pose": "^4.0.8",
     "react-router-dom": "^5.0.1",

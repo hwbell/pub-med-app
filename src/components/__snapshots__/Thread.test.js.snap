@@ -12,36 +12,78 @@ exports[`Thread renders correctly 1`] = `
         "display": "flex",
         "flexDirection": "column",
         "justifyContent": "flex-start",
+        "padding": "10px",
         "width": "100%",
       }
     }
   >
     <p
-      className="profile-title"
+      className="thread-title"
     >
       Sourcing of PMID: 013091283
     </p>
     <p
-      className="paragraph"
+      className="thread-text"
     >
-      thread by: The Creator, concerning 013091283
+      <i
+        className=" far fa-user"
+      />
+        The Creator
     </p>
     <p
-      className="paragraph"
+      className="thread-text"
     >
       I found the source material for the basis of this  ...
     </p>
+    <div
+      className="thread-detail"
+    />
     <span
       style={
         Object {
-          "alignItems": "center",
+          "alignItems": "flex-start",
           "display": "flex",
           "flexDirection": "column",
-          "justifyContent": "center",
+          "justifyContent": "flex-start",
           "padding": "20px",
         }
       }
     >
+      <div>
+        <p
+          className=""
+        >
+          Comments
+        </p>
+        <div
+          className="comment"
+        >
+          <p
+            className="comment-title"
+          >
+            Jeff - 
+          </p>
+          <p
+            className="comment-text"
+          >
+            This article seems to lack source material for the conclusions drawn in the discussion.
+          </p>
+        </div>
+        <div
+          className="comment"
+        >
+          <p
+            className="comment-title"
+          >
+            mark - 
+          </p>
+          <p
+            className="comment-text"
+          >
+            Does anyone else find figure 5 really confusing?
+          </p>
+        </div>
+      </div>
       <div
         className="collapse"
         style={Object {}}
@@ -108,51 +150,21 @@ exports[`Thread renders correctly 1`] = `
       </div>
       <div
         className="fade"
+        style={
+          Object {
+            "alignSelf": "flex-end",
+          }
+        }
       >
         <button
           aria-label={null}
           className="view article-button btn btn-secondary btn-sm"
+          disabled={false}
           onClick={[Function]}
-          style={
-            Object {
-              "alignSelf": "flex-end",
-              "margin": "10px",
-            }
-          }
           type="button"
         >
           comment
         </button>
-      </div>
-      <div
-        className="comment"
-      >
-        <p
-          className="profile-title"
-        >
-          Jeff
-        </p>
-        <p
-          className="paragraph"
-        >
-          This article seems to lack source material for the conclusions drawn in the discussion.
-        </p>
-        <hr />
-      </div>
-      <div
-        className="comment"
-      >
-        <p
-          className="profile-title"
-        >
-          mark
-        </p>
-        <p
-          className="paragraph"
-        >
-          Does anyone else find figure 5 really confusing?
-        </p>
-        <hr />
       </div>
     </span>
   </div>

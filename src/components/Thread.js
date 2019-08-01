@@ -17,7 +17,7 @@ class Thread extends React.Component {
 
     this.state = {
       expanded: false,
-      showCommentForm: false
+      showCommentForm: false,
     }
 
     this.renderThread = this.renderThread.bind(this);
@@ -42,27 +42,31 @@ class Thread extends React.Component {
   }
 
   submitComment(comment) {
-    console.log(`submitting ${comment.user}'s comment to ${this.props.thread.name} thread:
+    console.log(comment)
+    console.log(`submitting ${comment.user.name}'s comment to ${this.props.thread.name} thread:
     ${comment.text}`)
+
+    comment._id = this.props.thread._id;
+    this.props.handleSubmitThread(comment);
   }
 
   renderThread() {
 
     let thread = this.props.thread;
 
-    let subtitle = `thread by: ${thread.user}`;
-
-    if (thread.article) {
-      subtitle += `, concerning ${thread.article}`
-    }
     return (
       <div style={styles.threadContainer}>
 
-        <p className="profile-title" style={styles.text}>{thread.name}</p>
-        <p className="paragraph" style={styles.text}>{subtitle}</p>
+        <p className="thread-title" style={styles.text}>{thread.name}</p>
+        <p className="thread-text">
+          <i className=" far fa-user"></i>{`  ${thread.user}`}
+        </p>
 
-        {thread.paragraph && <p className="paragraph" style={styles.text}>{thread.paragraph.slice(0, 50) + ` ...`}</p>}
+        {thread.paragraph && <p className="thread-text" >{thread.paragraph.slice(0, 50) + ` ...`}</p>}
 
+        <div className="thread-detail">
+
+        </div>
 
         <CSSTransitionGroup
           style={styles.transitionGroup}
@@ -70,20 +74,20 @@ class Thread extends React.Component {
           transitionEnterTimeout={500}
           transitionLeaveTimeout={300}>
 
+          <div>
+            <p className="">Comments</p>
+            {thread.comments &&
+              this.renderComments(thread)}
+          </div>
+
           {/* the boolean for this is inside the function, since we are using a Collapse element */}
           {this.renderCommentForm()}
 
-          {/* {!this.state.showCommentForm && */}
-
-
-          <Fade in={!this.state.showCommentForm}>
-            <Button className="view article-button" size="sm"
-              style={styles.button}
+          {/* this uses the same boolean, flipped */}
+          <Fade style={styles.button} in={!this.state.showCommentForm}>
+            <Button disabled={this.state.showCommentForm} className="view article-button" size="sm"
               onClick={this.toggleCommentForm}>comment</Button>
           </Fade>
-
-          {thread.comments &&
-            this.renderComments(thread)}
 
         </CSSTransitionGroup>
       </div>
@@ -117,6 +121,7 @@ class Thread extends React.Component {
 const styles = {
   threadContainer: {
     width: '100%',
+    padding: '10px',
     alignSelf: 'flex-start',
     display: 'flex',
     flexDirection: 'column',
@@ -125,14 +130,14 @@ const styles = {
   },
   button: {
     alignSelf: 'flex-end',
-    margin: '10px'
+    // margin: '10px'
   },
   transitionGroup: {
     padding: '20px',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start'
   },
 }
 

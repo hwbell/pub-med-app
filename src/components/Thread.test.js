@@ -51,20 +51,19 @@ describe('Thread', () => {
   it('contains the correct elements', () => {
     expect(wrapper.find('.outline').length).toBe(1)
 
-    expect(wrapper.find('.profile-title').length).toBe(1)
-    expect(wrapper.find('.paragraph').length).toBe(2)
+    expect(wrapper.find('.thread-title').length).toBe(1)
+    expect(wrapper.find('.thread-text').length).toBe(2)
     expect(wrapper.find('.view').length).toBe(1)
     expect(wrapper.find('Fade').length).toBe(1)
 
     // these three cover information that we would always have - the name, article, and user
-    expect(wrapper.find('.profile-title').text()).toBe(thread.name);
+    expect(wrapper.find('.thread-title').text()).toBe(thread.name);
 
-    let text = `thread by: ${thread.user}, concerning ${thread.article}`
-    expect(wrapper.find('.paragraph').at(0).text()).toBe(text);
+    expect(wrapper.find('.thread-text').at(0).text()).toBe(`  ${thread.user}`);
 
     // this one we may or may not have
     let paragraph = thread.paragraph.slice(0,50);
-    expect(wrapper.find('.paragraph').at(1).text()).toBe(paragraph + ` ...`);
+    expect(wrapper.find('.thread-text').at(1).text()).toBe(paragraph + ` ...`);
 
   })
 
@@ -101,5 +100,7 @@ describe('Thread', () => {
     expect(wrapper.find('Collapse').props().isOpen).toBe(true);
   })
 
-
+  it('should show how many comments a thread has', () => {
+    expect(wrapper.find('.thread-detail').length).toBe(1);
+  })
 })

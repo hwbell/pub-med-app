@@ -107,8 +107,6 @@ class ThreadForm extends React.Component {
 
   render() {
 
-    let warning = this.props.showUniqueWarning;
-
     return (
       <Modal centered={true}
         isOpen={this.props.isVisible}

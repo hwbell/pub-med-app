@@ -31,7 +31,9 @@ class ThreadPage extends React.Component {
     let threads = this.props.user.threads;
 
     return threads.map((thread, i) => {
-      return <Thread key={i} thread={thread} />
+      return <Thread key={i}
+        thread={thread}
+        handleSubmitThread={this.handleSubmitThread} />
     })
   }
 
@@ -68,6 +70,9 @@ class ThreadPage extends React.Component {
   // this will post our thread and relay the response back to App
   handleSubmitThread(threadInfo) {
 
+    // If the thread is tagged with the isComment property, it came from the CommentForm
+    let isComment = threadInfo.isComment;
+
     let user = JSON.parse(localStorage.getItem('user'));
     let token = JSON.parse(localStorage.getItem('token'));
 
@@ -86,12 +91,18 @@ class ThreadPage extends React.Component {
       user: user.name || user.email
     };
 
-    // Add all the non-empty entries
-    Object.keys(threadInfo).forEach((key) => {
-      if (threadInfo[key]) {
-        post[key] = threadInfo[key]
-      }
-    })
+    if (!threadInfo.isComment) {
+      // Add all the non-empty entries
+      Object.keys(threadInfo).forEach((key) => {
+        if (threadInfo[key]) {
+          post[key] = threadInfo[key]
+        }
+      })
+    } else {
+      // this means we are just posting a comment straight from the Comment Form,
+      // we don't need to change it
+      post = threadInfo;
+    }
 
     let headers = {
       Authorization: `Bearer ${token}`,
@@ -102,12 +113,9 @@ class ThreadPage extends React.Component {
     // Post the thread to the server. Using the currently stored token
     // will assign the user as the owner of the thread in mongodb on the backend.
 
-    // If the thread has an owner already, that means its been posted before => its a patch
-    // this is handled inside saveThread() with the isExisiting boolean
-    let isExisting = !!post._id;
 
     console.log(post)
-    return saveThread(post, headers, isExisting)
+    return saveThread(post, headers, isComment)
       .then((response) => {
         console.log(response)
 
@@ -115,10 +123,17 @@ class ThreadPage extends React.Component {
 
         // Success => refresh the threads. This will send the new thread list sent back
         // from the server to the root App component to update all concerned components
-        response.createdAt && this.props.refreshUserThreads(response);
+        if (response.code !== 11000) {
+          this.props.refreshUserThreads(response);
+
+          if (this.state.showThreadForm) {
+            this.toggleThreadForm();
+          }
+        } else {
+          this.toggleUniqueWarning()
+        }
 
         // Fail => show the fail message / reason
-        response.code = 11000 && this.toggleUniqueWarning();
 
       }).catch((e) => {
         console.log(e)

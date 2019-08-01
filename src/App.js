@@ -8,6 +8,8 @@ import AboutPage from './components/pages/AboutPage';
 import SearchPage from './components/pages/SearchPage'
 import CollectionPage from './components/pages/CollectionPage';
 import ThreadPage from './components/pages/ThreadPage';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import Media from "react-media";
 
 // pose animation
 import posed, { PoseGroup } from 'react-pose';
@@ -70,9 +72,13 @@ class App extends Component {
       collections: [],
       threads: [],
       user: null,
-      userCollections: []
+      userCollections: [],
+      dropdownOpen: false
     };
 
+    this.toggle = this.toggle.bind(this);
+    this.renderNavigator = this.renderNavigator.bind(this);
+    this.renderDropdown = this.renderDropdown.bind(this);
     // these functions are for collections that are only in the App state, not yet stored
     // on the backend
     this.createNewCollection = this.createNewCollection.bind(this);
@@ -257,21 +263,40 @@ class App extends Component {
 
   }
 
-  render() {
-
+  renderNavigator() {
     return (
-      <Router>
+      <div className="fixed-top navigator" id="full-nav" style={styles.nav}>
 
-        {/* Try and put this Navigator in its own component if necessary? Its not resuasable so maybe
-          not. There was an issue with the router(I think just w. enzyme tests) so it is here for now */}
+        <Link to="/" id="logo" className="nav-link">PubMed</Link>
 
-        <div className="fixed-top navigator" style={styles.main}>
+        <div className="row links-holder">
+          {links.map((link, i) => {
+            return (
+              <Link className="nav-link" style={styles.link} key={i} to={link.link}>{link.title}</Link>
+            )
+          })}
 
-          <div className="row">
-            <Link to="/" id="logo" className="nav-link">PubMed</Link>
-          </div>
+          <Link className="nav-link" style={styles.link} to="/profile/">
+            <i className="fas fa-user-cog"></i>
+          </Link>
+        </div>
 
-          <div className="row links-holder">
+
+      </div>
+    )
+  }
+
+  renderDropdown() {
+    return (
+      <div className="fixed-top navigator" id="dropdown" style={styles.nav}>
+
+        <Link to="/" id="logo" className="nav-link">PubMed</Link>
+
+        <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+          <DropdownToggle color="primary" caret>
+            go to
+        </DropdownToggle>
+          <DropdownMenu>
             {links.map((link, i) => {
               return (
                 <Link className="nav-link" style={styles.link} key={i} to={link.link}>{link.title}</Link>
@@ -281,10 +306,35 @@ class App extends Component {
             <Link className="nav-link" style={styles.link} to="/profile/">
               <i className="fas fa-user-cog"></i>
             </Link>
-          </div>
+          </DropdownMenu>
+        </Dropdown>
 
 
-        </div>
+      </div>
+    )
+  }
+
+  toggle() {
+    this.setState(state => ({ dropdownOpen: !state.dropdownOpen }));
+  }
+
+  render() {
+
+    return (
+      <Router>
+
+        {/* Try and put this Navigator in its own component if necessary? Its not resuasable so maybe
+          not. There was an issue with the router(I think just w. enzyme tests) so it is here for now */}
+
+        <Media query="(max-width: 649px)">
+          {matches =>
+            matches ? (
+              this.renderDropdown()
+            ) : (
+                this.renderNavigator()
+              )
+          }
+        </Media>
 
         <div id="App">
 
@@ -350,7 +400,7 @@ export default App;
 // export default App;
 
 const styles = {
-  main: {
+  nav: {
     padding: '10px',
     display: 'flex',
     flexDirection: 'row',
@@ -358,6 +408,6 @@ const styles = {
     alignItems: 'center'
   },
   link: {
-    fontSize: '22px'
+    fontSize: ' 18px'
   }
 }

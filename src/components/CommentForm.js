@@ -8,10 +8,13 @@ import { Button, Input, Form, InputGroup, Modal, ModalHeader, ModalBody, ModalFo
 // this form is toggled visible by the 'add to collection' button on the search page
 class CommentForm extends React.Component {
   constructor(props) {
+
     super(props);
 
     this.state = {
-      comment: {},
+      comment: {
+        add: true
+      },
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -32,11 +35,18 @@ class CommentForm extends React.Component {
     })
   }
 
-  // handleSubmit will fire the email
+  // handleSubmit will fire the post request back in the ThreadPage
   handleSubmit() {
+    let patch = this.state.comment;
 
-    if (this.state.comment.text) {
-      this.props.confirm(this.state.comment);
+    // we'll catch this in the server function saveThread
+    patch.isComment = true;
+    let user = JSON.parse(localStorage.getItem('user')).name;
+
+    if (patch.text && user) {
+      patch.user = user;
+      
+      this.props.confirm(patch);
     }
     this.props.toggle();
   }

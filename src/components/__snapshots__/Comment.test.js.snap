@@ -5,15 +5,14 @@ exports[`Comment renders correctly 1`] = `
   className="comment"
 >
   <p
-    className="profile-title"
+    className="comment-title"
   >
-    Jeff
+    Jeff - 
   </p>
   <p
-    className="paragraph"
+    className="comment-text"
   >
     This article seems to lack source material for the conclusions drawn in the discussion.
   </p>
-  <hr />
 </div>
 `;

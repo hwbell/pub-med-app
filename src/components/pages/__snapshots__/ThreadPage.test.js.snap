@@ -46,31 +46,45 @@ exports[`ThreadPage renders correctly 1`] = `
             "display": "flex",
             "flexDirection": "column",
             "justifyContent": "flex-start",
+            "padding": "10px",
             "width": "100%",
           }
         }
       >
         <p
-          className="profile-title"
+          className="thread-title"
         >
           Sourcing of PMID: 013091283
         </p>
         <p
-          className="paragraph"
+          className="thread-text"
         >
-          thread by: undefined, concerning 013091283
+          <i
+            className=" far fa-user"
+          />
+            undefined
         </p>
+        <div
+          className="thread-detail"
+        />
         <span
           style={
             Object {
-              "alignItems": "center",
+              "alignItems": "flex-start",
               "display": "flex",
               "flexDirection": "column",
-              "justifyContent": "center",
+              "justifyContent": "flex-start",
               "padding": "20px",
             }
           }
         >
+          <div>
+            <p
+              className=""
+            >
+              Comments
+            </p>
+          </div>
           <div
             className="collapse"
             style={Object {}}
@@ -137,17 +151,17 @@ exports[`ThreadPage renders correctly 1`] = `
           </div>
           <div
             className="fade"
+            style={
+              Object {
+                "alignSelf": "flex-end",
+              }
+            }
           >
             <button
               aria-label={null}
               className="view article-button btn btn-secondary btn-sm"
+              disabled={false}
               onClick={[Function]}
-              style={
-                Object {
-                  "alignSelf": "flex-end",
-                  "margin": "10px",
-                }
-              }
               type="button"
             >
               comment
@@ -167,31 +181,45 @@ exports[`ThreadPage renders correctly 1`] = `
             "display": "flex",
             "flexDirection": "column",
             "justifyContent": "flex-start",
+            "padding": "10px",
             "width": "100%",
           }
         }
       >
         <p
-          className="profile-title"
+          className="thread-title"
         >
           Data in figure 1 of PMID: 013091283
         </p>
         <p
-          className="paragraph"
+          className="thread-text"
         >
-          thread by: undefined, concerning 013091283
+          <i
+            className=" far fa-user"
+          />
+            undefined
         </p>
+        <div
+          className="thread-detail"
+        />
         <span
           style={
             Object {
-              "alignItems": "center",
+              "alignItems": "flex-start",
               "display": "flex",
               "flexDirection": "column",
-              "justifyContent": "center",
+              "justifyContent": "flex-start",
               "padding": "20px",
             }
           }
         >
+          <div>
+            <p
+              className=""
+            >
+              Comments
+            </p>
+          </div>
           <div
             className="collapse"
             style={Object {}}
@@ -258,17 +286,17 @@ exports[`ThreadPage renders correctly 1`] = `
           </div>
           <div
             className="fade"
+            style={
+              Object {
+                "alignSelf": "flex-end",
+              }
+            }
           >
             <button
               aria-label={null}
               className="view article-button btn btn-secondary btn-sm"
+              disabled={false}
               onClick={[Function]}
-              style={
-                Object {
-                  "alignSelf": "flex-end",
-                  "margin": "10px",
-                }
-              }
               type="button"
             >
               comment
@@ -288,31 +316,45 @@ exports[`ThreadPage renders correctly 1`] = `
             "display": "flex",
             "flexDirection": "column",
             "justifyContent": "flex-start",
+            "padding": "10px",
             "width": "100%",
           }
         }
       >
         <p
-          className="profile-title"
+          className="thread-title"
         >
           Figure 3 in PMID: 013091283
         </p>
         <p
-          className="paragraph"
+          className="thread-text"
         >
-          thread by: undefined, concerning 013091283
+          <i
+            className=" far fa-user"
+          />
+            undefined
         </p>
+        <div
+          className="thread-detail"
+        />
         <span
           style={
             Object {
-              "alignItems": "center",
+              "alignItems": "flex-start",
               "display": "flex",
               "flexDirection": "column",
-              "justifyContent": "center",
+              "justifyContent": "flex-start",
               "padding": "20px",
             }
           }
         >
+          <div>
+            <p
+              className=""
+            >
+              Comments
+            </p>
+          </div>
           <div
             className="collapse"
             style={Object {}}
@@ -379,17 +421,17 @@ exports[`ThreadPage renders correctly 1`] = `
           </div>
           <div
             className="fade"
+            style={
+              Object {
+                "alignSelf": "flex-end",
+              }
+            }
           >
             <button
               aria-label={null}
               className="view article-button btn btn-secondary btn-sm"
+              disabled={false}
               onClick={[Function]}
-              style={
-                Object {
-                  "alignSelf": "flex-end",
-                  "margin": "10px",
-                }
-              }
               type="button"
             >
               comment

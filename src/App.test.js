@@ -5,31 +5,41 @@ import { shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 
 // stubs
-// const signI
+const renderDropDownStub = jest.fn();
+const renderNavigatorStub = jest.fn();
+
+const resizeWindow = (x, y) => {
+  window.innerWidth = x;
+  window.innerHeight = y;
+  window.dispatchEvent(new Event('resize'));
+}
 
 describe('App', () => {
 
+  let wrapper;
+  beforeEach(() => {
+    wrapper = shallow(<App />);
+  })
 
 
   it('renders without crashing', async () => {
-    let wrapper = await shallow(<App />);
+    wrapper.update();
   });
 
   it('renders correctly', async () => {
-    let wrapper = mount(<App />);
-
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should not have a user to start with', async () => {
-    let wrapper = mount(<App />);
-
     expect(wrapper.state().user).toBe(null)
   });
 
+  it('contains the correct elements', () => {
+    expect(wrapper.find('#App').length).toBe(1)
+  })
+
   it('should try to sign in user if there is a user in local storage', async () => {
 
-    const wrapper = mount(<App/>);
     jest.spyOn(wrapper.instance(), 'registerSignIn');
 
     // with no user it should not attempt
@@ -59,6 +69,50 @@ describe('App', () => {
     expect(wrapper.instance().registerSignIn).toHaveBeenCalled();
 
   })
+
+  it('should render full navigator menu when screen width > 649px', () => {
+    const wrapper = mount(<App />);
+
+    resizeWindow(1000, 800);
+
+    wrapper.update();
+
+    // there should always only be one navigator
+    expect(wrapper.find('.navigator').length).toBe(1);
+
+    expect(wrapper.find('#full-nav').length).toBe(1);
+
+
+  })
+
+  // it('should render dropdown menu when screen width < 649px', () => {
+  //   const wrapper = mount(<App />);
+
+  //   resizeWindow(600, 400);
+
+  //   wrapper.update();
+
+  //   // there should always only be one navigator
+  //   expect(wrapper.find('.navigator').length).toBe(1);
+
+  //   expect(wrapper.find('#dropdown').length).toBe(1);
+
+
+  // })
+
+
+  //   it('should render the dang thing', () => {
+  //     const component = mount(
+  //         <div>
+  //             <Media query="(max-width: 721px)">
+  //                 { matches => matches ? (
+  //                     <div>This matches</div>
+  //                 ) : <div>This doesn't match</div> }
+  //             </Media>
+  //         </div>
+  //     );
+  //     expect(component).toMatchSnapshot();
+  // });
 
 })
 
