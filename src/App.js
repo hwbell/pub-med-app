@@ -70,7 +70,7 @@ class App extends Component {
     super(props);
     this.state = {
       collections: [],
-      threads: [],
+      serverThreads: null,
       user: null,
       userCollections: [],
       dropdownOpen: false
@@ -91,6 +91,8 @@ class App extends Component {
     this.refreshUserCollections = this.refreshUserCollections.bind(this);
     this.refreshUserThreads = this.refreshUserThreads.bind(this);
     this.refreshUser = this.refreshUser.bind(this);
+
+    this.refreshServerThreads = this.refreshServerThreads.bind(this);
   }
 
   componentDidMount() {
@@ -263,6 +265,14 @@ class App extends Component {
 
   }
 
+  refreshServerThreads(response) {
+    this.setState({
+      serverThreads: response
+    }, () => {
+      console.log(this.state.serverThreads)
+    })
+  }
+
   renderNavigator() {
     return (
       <div className="fixed-top navigator" id="full-nav" style={styles.nav}>
@@ -366,9 +376,10 @@ class App extends Component {
                   } />
                   <Route path="/threads/" render={() =>
                     <ThreadPage
-                      threads={this.state.threads}
+                      serverThreads={this.state.serverThreads}
                       user={this.state.user}
                       refreshUserThreads={this.refreshUserThreads}
+                      refreshServerThreads={this.refreshServerThreads}
                     />
 
                   } />

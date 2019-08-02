@@ -4,8 +4,19 @@ import ThreadPage from './ThreadPage';
 import { shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 
+// mock server functions
+jest.mock('../../tools/serverFunctions.js');
+
+const user = {
+  name: 'Mark',
+  email: 'mark@example.com',
+  password: 'password'
+}
+const token = '2e8298fgj.23d454543524.2524523542134';
+
 const refreshUserThreadsStub = jest.fn();
 const renderThreadsStub = jest.fn();
+const refreshServerThreadsStub = jest.fn();
 
 const handleSubmitThreadStub = (threadInfo) => {
   return new Promise((resolve, reject) => {
@@ -26,7 +37,8 @@ describe('ThreadPage', () => {
     user.threads = [
       {
         name: 'Sourcing of PMID: 013091283',
-        article: '013091283'
+        article: '013091283',
+
       },
       {
         name: 'Data in figure 1 of PMID: 013091283',
@@ -39,12 +51,14 @@ describe('ThreadPage', () => {
     ]
     someProps = {
       user,
-      refreshUserThreads: refreshUserThreadsStub
+      refreshUserThreads: refreshUserThreadsStub,
+      refreshServerThreads: refreshServerThreadsStub
     };
   })
 
   let wrapper;
   beforeEach(() => {
+    jest.clearAllMocks();
     wrapper = shallow(<ThreadPage {...someProps} />);
   })
 
@@ -119,13 +133,47 @@ describe('ThreadPage', () => {
   })
 
   it('should not render Threads if there are no user threads', () => {
-    someProps.user.threads = [];
+    someProps.user.threads = null;
 
-    const newWrapper = shallow(<ThreadPage {...someProps}/>);
+    const newWrapper = shallow(<ThreadPage {...someProps} />);
     newWrapper.instance().renderThreads = renderThreadsStub;
 
     expect(newWrapper.find('Thread').length).toBe(0);
 
   })
 
+  // if there are server collections in props, this is a result of fetching them previously and
+  // passing the result back to App, which then provides them as props.
+  it('should fire fetchServerThreads() on startup if there are no serverThreads as props', async () => {
+
+    
+    someProps.serverThreads = null;
+
+    const newWrapper = shallow(<ThreadPage {...someProps} />);
+
+    let fetchServerThreadsStub = jest.fn();
+    newWrapper.instance().fetchServerThreads = fetchServerThreadsStub;
+    newWrapper.instance().componentDidMount();
+
+    expect(fetchServerThreadsStub.mock.calls.length).toBe(1)
+  })
+
+  it('should not fire fetchServerThreads() on startup if there are serverThreads as props', async () => {
+
+    let fetchServerThreadsStub = jest.fn();
+
+    someProps.serverThreads = user.threads;
+    const newWrapper = shallow(<ThreadPage {...someProps} />);
+    wrapper.update();
+
+    expect(fetchServerThreadsStub.mock.calls.length).toBe(0)
+  })
+
+  it('should fire this.props.refreshServerThreads() when fetchServerThreads() is fired', async () => {
+    refreshServerThreadsStub.mockClear();
+
+    await wrapper.instance().fetchServerThreads();
+
+    expect(refreshServerThreadsStub.mock.calls.length).toBe(1)
+  })
 })

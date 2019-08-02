@@ -9,7 +9,16 @@ import ThreadForm from '../ThreadForm';
 import { Button } from 'reactstrap';
 
 // functions
-import { saveThread } from '../../tools/serverFunctions';
+import { getPublicThreads, saveThread } from '../../tools/serverFunctions';
+
+// for server requests
+const user = JSON.parse(localStorage.getItem('user'));
+const token = JSON.parse(localStorage.getItem('token'));
+const headers = {
+  Authorization: `Bearer ${token}`,
+  Accept: 'application/json',
+  'Content-Type': 'application/json',
+}
 
 // ******************************************************************************
 class ThreadPage extends React.Component {
@@ -17,19 +26,54 @@ class ThreadPage extends React.Component {
     super(props);
 
     this.state = {
+      sorter: '',
       showThreadForm: false,
-      showUniqueWarning: false
+      showUniqueWarning: false,
+      threadPage: 1,
+      threadSorter: 'date'
     }
 
+    this.fetchServerThreads = this.fetchServerThreads.bind(this);
     this.renderThreads = this.renderThreads.bind(this);
     this.toggleThreadForm = this.toggleThreadForm.bind(this);
     this.handleSubmitThread = this.handleSubmitThread.bind(this);
     this.toggleUniqueWarning = this.toggleUniqueWarning.bind(this);
   }
 
-  renderThreads() {
-    let threads = this.props.user.threads;
+  componentDidMount() {
 
+    console.log(!this.props.serverThreads)
+
+    if (!this.props.serverThreads) {
+      console.log('there are no serverThreads in props')
+      this.fetchServerThreads();
+    }
+  }
+
+  fetchServerThreads() {
+    console.log('fetching server threads');
+
+    let { threadSorter, threadPage } = this.state;
+
+    return getPublicThreads(headers, threadSorter, threadPage)
+      .then((response) => {
+        console.log(response)
+
+        // once we have posted, we will refresh in App
+        this.props.refreshServerThreads(response)
+
+
+        // Fail => show the fail message / reason
+
+      }).catch((e) => {
+        console.log(e)
+        this.setState({
+          error: e
+        })
+      })
+  }
+
+  renderThreads(threads) {
     return threads.map((thread, i) => {
       return <Thread key={i}
         thread={thread}
@@ -73,9 +117,6 @@ class ThreadPage extends React.Component {
     // If the thread is tagged with the isComment property, it came from the CommentForm
     let isComment = threadInfo.isComment;
 
-    let user = JSON.parse(localStorage.getItem('user'));
-    let token = JSON.parse(localStorage.getItem('token'));
-
     // must be logged in
     if (!user || !token) {
       return;
@@ -104,16 +145,8 @@ class ThreadPage extends React.Component {
       post = threadInfo;
     }
 
-    let headers = {
-      Authorization: `Bearer ${token}`,
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    }
-
     // Post the thread to the server. Using the currently stored token
     // will assign the user as the owner of the thread in mongodb on the backend.
-
-
     console.log(post)
     return saveThread(post, headers, isComment)
       .then((response) => {
@@ -145,9 +178,8 @@ class ThreadPage extends React.Component {
 
   render() {
 
-    const user = this.props.user;
-    const userThreads = user && user.threads && user.threads.length > 0;
-    console.log(user)
+    const { user, serverThreads } = this.props;
+    const haveUserThreads = user && user.threads && user.threads.length > 0;
 
     return (
       <div className="page">
@@ -173,7 +205,9 @@ class ThreadPage extends React.Component {
           <Button className="add article-button" siz="md" style={styles.button}
             onClick={this.toggleThreadForm}>start a new thread</Button>
 
-          {userThreads && this.renderThreads()}
+          {serverThreads && this.renderThreads(serverThreads)}
+
+          {haveUserThreads && this.renderThreads(user.threads)}
 
         </div>
 

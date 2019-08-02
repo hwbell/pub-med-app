@@ -45,7 +45,7 @@ export async function patchUser(patch, headers) {
     .catch(err => console.log(err))
 
   return serverResponse;
-} 
+}
 
 // saves a collection to the server, or patches an exisiting collection on the server
 export async function saveCollection(collection, headers, isExisting) {
@@ -62,7 +62,7 @@ export async function saveCollection(collection, headers, isExisting) {
     // if its a patch, we only want to send allowed properties.
     let { name, articles } = collection;
     body = {
-      name, 
+      name,
       articles
     }
     method = 'PATCH';
@@ -135,6 +135,32 @@ export async function patchCollection(collection, headers) {
 
   return serverResponse;
 }
+
+// get the threads on the server, 10 at a time, according to the sortBy param
+export async function getPublicThreads(headers, sortBy, page) {
+
+  if (!sortBy || !page) {
+    return console.log('Missing sortBy or page parameter.');
+  }
+  // page represents results 1-10, 11-20, 21-30, etc. 
+  let url = `${collectionServerUrl}threads/all/${sortBy}/${page}`;
+  let method = 'GET';
+
+  let serverResponse = await fetch(url, {
+    method,
+    headers
+  })
+    .then(response => response.json())
+    .then((json) => {
+      console.log(json)
+      return json;
+    })
+    .catch(err => console.log(err))
+
+  return serverResponse;
+}
+
+
 
 // saves a collection to the server, or patches an exisiting collection on the server
 export async function saveThread(thread, headers, isComment) {
