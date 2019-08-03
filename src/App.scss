@@ -12,7 +12,6 @@ body {
   background-size: 1600px auto;
   min-height: 100vh;
   overflow-x: hidden;
-
 }
 * > p {
   color: $text-color;
@@ -40,6 +39,13 @@ hr {
 .padding-0 {
   padding-right:0;
   padding-left:0;
+}
+
+.center-all-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 // common uses
@@ -190,7 +196,7 @@ hr {
 }
 #logo {
   font-size: 32px;
-  color: rgba(0, 60, 255, 0.94)
+  color: rgba(0, 60, 255, 0.94);
 }
 .nav-link {
   /* color: rgb(253, 233, 255); */
@@ -244,19 +250,20 @@ input {
   background-color: whitesmoke;
 }
 
-.fa-edit, .fa-times, .fa-save, .fa-undo, .fa-user-edit {
+.fa-edit, .fa-trash-alt, .fa-times, .fa-save, .fa-undo, .fa-user-edit {
   color: whitesmoke;
   transition: all 0.3s ease;
   &:hover {
     transform: translateX(-2px);
     cursor: pointer;
-    color: orange;
+    color: rgb(167, 167, 167);
   }
   font-size: 24px;
 }
 .section-title {
-  font-size: 30px;
-  margin: 20px;
+  font-weight: bolder;
+  font-size: 20px;
+  margin: 20px 34px;
   align-self: flex-start;
 }
 .collection-block {
@@ -298,6 +305,16 @@ input {
 }
 .thread-text {
 
+}
+
+.fa-edit {
+  
+}
+.fa-trash-alt {
+  color: rgb(180, 67, 86);
+  &:hover {
+    color: rgb(146, 54, 69);  
+  }
 }
 
 .comment {

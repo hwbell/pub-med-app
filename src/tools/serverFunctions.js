@@ -202,6 +202,25 @@ export async function saveThread(thread, headers, isComment) {
   return serverResponse;
 }
 
+export async function deleteThread(headers, thread) {
+
+  let { _id } = thread;
+  let method = 'DELETE';
+  let url = `${collectionServerUrl}threads/${_id}`;
+
+  let serverResponse = await fetch(url, {
+    method,
+    headers
+  })
+    .then(response => response.json())
+    .then((json) => {
+      console.log(json)
+      return json;
+    })
+    .catch(err => console.log(err))
+
+  return serverResponse;
+}
 
 
 
@@ -245,8 +264,3 @@ export async function saveThread(thread, headers, isComment) {
 //   console.log(response);
 // })
 
-
-// module.exports = {
-//   signInUser,
-//   saveCollection
-// }

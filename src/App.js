@@ -187,6 +187,9 @@ class App extends Component {
 
         // attach the collections to the user object
         let profile = response.user;
+        if (!user) {
+          return;
+        }
         profile.collections = response.collections;
         profile.threads = response.threads;
 

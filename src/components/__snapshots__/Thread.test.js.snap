@@ -35,9 +35,6 @@ exports[`Thread renders correctly 1`] = `
     >
       I found the source material for the basis of this  ...
     </p>
-    <div
-      className="thread-detail"
-    />
     <span
       style={
         Object {
@@ -51,9 +48,9 @@ exports[`Thread renders correctly 1`] = `
     >
       <div>
         <p
-          className=""
+          className="thread-text"
         >
-          Comments
+          2 comments
         </p>
         <div
           className="comment"

@@ -73,12 +73,25 @@ class ThreadPage extends React.Component {
       })
   }
 
-  renderThreads(threads) {
-    return threads.map((thread, i) => {
-      return <Thread key={i}
-        thread={thread}
-        handleSubmitThread={this.handleSubmitThread} />
-    })
+  // we use the isUsers flag to determine if this is the user's thread or not
+  // this will allow the user to edit their own thread info, but not others (its also restricted on the backend)
+  // comments are public, so any user can comment on any thread. 
+  // nly thread info - name, article, paragraph - is restricted
+  renderThreads(threads, isUsers) {
+    let title = isUsers ? 'your threads' : 'recent threads';
+    return (
+      <div className="center-all-col">
+        <p className="section-title">{title}</p>
+        {threads.map((thread, i) => {
+          return <Thread key={i}
+            allowEdit={isUsers}
+            thread={thread}
+            handleSubmitThread={this.handleSubmitThread} 
+            refreshServerThreads={this.props.refreshServerThreads}
+            />
+        })}
+      </div>
+    )
   }
 
   toggleUniqueWarning() {
@@ -180,6 +193,7 @@ class ThreadPage extends React.Component {
 
     const { user, serverThreads } = this.props;
     const haveUserThreads = user && user.threads && user.threads.length > 0;
+    const haveServerThreads = serverThreads && serverThreads.length > 0;
 
     return (
       <div className="page">
@@ -205,9 +219,9 @@ class ThreadPage extends React.Component {
           <Button className="add article-button" siz="md" style={styles.button}
             onClick={this.toggleThreadForm}>start a new thread</Button>
 
-          {serverThreads && this.renderThreads(serverThreads)}
+          {haveServerThreads && this.renderThreads(serverThreads)}
 
-          {haveUserThreads && this.renderThreads(user.threads)}
+          {haveUserThreads && this.renderThreads(user.threads, true)}
 
         </div>
 

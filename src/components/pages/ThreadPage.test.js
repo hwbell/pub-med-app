@@ -76,6 +76,8 @@ describe('ThreadPage', () => {
   it('contains the correct elements', () => {
     expect(wrapper.find('.page-content').length).toBe(1)
     expect(wrapper.find('.glass').length).toBe(1)
+    expect(wrapper.find('.add').length).toBe(1);
+
     expect(wrapper.find('Header').length).toBe(1)
 
     expect(wrapper.find('Header').props().title).toBe('PMC Threads');
@@ -83,9 +85,33 @@ describe('ThreadPage', () => {
   })
 
   it('should contain one <Thread /> for each user thread', () => {
-
-    expect(wrapper.find('.add').length).toBe(1);
     expect(wrapper.find('Thread').length).toBe(3);
+  })
+
+  it('should containe one <Thread/> for each server thread', () => {
+    wrapper.setProps({
+      serverThreads: user.threads
+    });
+    // now there is an additional 3
+    wrapper.update();
+    expect(wrapper.find('Thread').length).toBe(6);
+  })
+
+  it('should show the correct section titles for user / serverThreads', () => {
+    
+    // first, there's only one
+    expect(wrapper.find('.section-title').length).toBe(1);
+    expect(wrapper.find('.section-title').text()).toBe('your threads');
+    
+    wrapper.setProps({
+      serverThreads: user.threads
+    });
+    wrapper.update();
+
+    // now another appears with the serverThreads, but serverThreads are on top
+    expect(wrapper.find('.section-title').length).toBe(2);
+    expect(wrapper.find('.section-title').at(0).text()).toBe('recent threads');
+    expect(wrapper.find('.section-title').at(1).text()).toBe('your threads');
 
   })
 

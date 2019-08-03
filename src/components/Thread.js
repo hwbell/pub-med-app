@@ -6,9 +6,21 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Comment from './Comment';
 import { Button, Fade, Collapse } from 'reactstrap';
 import CommentForm from './CommentForm';
+import AlertModal from './AlertModal';
 
 // enter / exit transitions
 import { CSSTransitionGroup } from 'react-transition-group' // ES6
+
+// functions
+import { deleteThread } from '../tools/serverFunctions';
+
+// for server requests
+const token = JSON.parse(localStorage.getItem('token'));
+const headers = {
+  Authorization: `Bearer ${token}`,
+  Accept: 'application/json',
+  'Content-Type': 'application/json',
+}
 
 // ******************************************************************************
 class Thread extends React.Component {
@@ -18,6 +30,7 @@ class Thread extends React.Component {
     this.state = {
       expanded: false,
       showCommentForm: false,
+      showDeleteWarning: false
     }
 
     this.renderThread = this.renderThread.bind(this);
@@ -25,12 +38,42 @@ class Thread extends React.Component {
     this.toggleCommentForm = this.toggleCommentForm.bind(this);
     this.renderCommentForm = this.renderCommentForm.bind(this);
     this.submitComment = this.submitComment.bind(this);
+    this.toggleDeleteWarning = this.toggleDeleteWarning.bind(this);
+    this.handleDeleteThread = this.handleDeleteThread.bind(this);
   }
 
   toggleCommentForm() {
     this.setState({
       showCommentForm: !this.state.showCommentForm
     })
+  }
+
+  toggleDeleteWarning() {
+    console.log('toggling delete warning!')
+    this.setState({
+      showDeleteWarning: !this.state.showDeleteWarning
+    })
+  }
+
+  handleDeleteThread() {
+    return deleteThread(headers, this.props.thread)
+      .then((response) => {
+        console.log(response)
+
+        // once we have posted, we will refresh in App
+        this.props.refreshServerThreads(response);
+
+        // and also re-fetch the public threads
+        
+
+        // Fail => show the fail message / reason
+
+      }).catch((e) => {
+        console.log(e)
+        this.setState({
+          error: e
+        })
+      })
   }
 
   renderCommentForm() {
@@ -42,9 +85,9 @@ class Thread extends React.Component {
   }
 
   submitComment(comment) {
-    console.log(comment)
-    console.log(`submitting ${comment.user.name}'s comment to ${this.props.thread.name} thread:
-    ${comment.text}`)
+    // console.log(comment)
+    // console.log(`submitting ${comment.user.name}'s comment to ${this.props.thread.name} thread:
+    // ${comment.text}`)
 
     comment._id = this.props.thread._id;
     this.props.handleSubmitThread(comment);
@@ -57,16 +100,23 @@ class Thread extends React.Component {
     return (
       <div style={styles.threadContainer}>
 
+        {/* these will show if the user owns the thread */}
+        {this.props.allowEdit &&
+          <div style={styles.buttonHolder}>
+            <i className="fas fa-edit article-button"
+              onClick={this.props.toggleThreadForm}></i>
+
+            <i className="fas fa-trash-alt article-button"
+              onClick={this.toggleDeleteWarning}></i>
+
+          </div>}
+
         <p className="thread-title" style={styles.text}>{thread.name}</p>
         <p className="thread-text">
           <i className=" far fa-user"></i>{`  ${thread.user}`}
         </p>
 
         {thread.paragraph && <p className="thread-text" >{thread.paragraph.slice(0, 50) + ` ...`}</p>}
-
-        <div className="thread-detail">
-
-        </div>
 
         <CSSTransitionGroup
           style={styles.transitionGroup}
@@ -75,7 +125,7 @@ class Thread extends React.Component {
           transitionLeaveTimeout={300}>
 
           <div>
-            <p className="">Comments</p>
+            <p className="thread-text">{`${thread.commentsCount} comments`}</p>
             {thread.comments &&
               this.renderComments(thread)}
           </div>
@@ -97,7 +147,7 @@ class Thread extends React.Component {
   renderComments(thread) {
     return thread.comments.map((comment, i) => {
 
-      console.log(comment)
+      // console.log(comment)
 
       return (
         <Comment key={i} comment={comment} />
@@ -110,6 +160,14 @@ class Thread extends React.Component {
 
     return (
       <div className="outline">
+
+        <AlertModal
+          message={`Are you sure you want to delete this thread?`}
+          isVisible={this.state.showDeleteWarning}
+          confirm={this.handleDeleteThread}
+          confirming={true}
+          toggle={this.toggleDeleteWarning}
+        />
 
         {this.renderThread(this.props.thread)}
 
@@ -138,6 +196,13 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'flex-start'
+  },
+  buttonHolder: {
+    position: 'absolute',
+    top: '10px',
+    right: '10px',
+    display: 'flex',
+    flexDirection: 'row'
   },
 }
 

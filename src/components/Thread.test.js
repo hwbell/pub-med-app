@@ -4,6 +4,9 @@ import Thread from './Thread';
 import { shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 
+// stubs
+const toggleDeleteWarningStub = jest.fn();
+
 describe('Thread', () => {
 
   let someProps;
@@ -23,9 +26,8 @@ describe('Thread', () => {
           text: 'Does anyone else find figure 5 really confusing?',
           user: 'mark'
         }
-
       ],
-
+      commentsCount: 2
     }
     someProps = {
       thread
@@ -52,9 +54,10 @@ describe('Thread', () => {
     expect(wrapper.find('.outline').length).toBe(1)
 
     expect(wrapper.find('.thread-title').length).toBe(1)
-    expect(wrapper.find('.thread-text').length).toBe(2)
+    expect(wrapper.find('.thread-text').length).toBe(3)
     expect(wrapper.find('.view').length).toBe(1)
     expect(wrapper.find('Fade').length).toBe(1)
+    expect(wrapper.find('AlertModal').length).toBe(1);
 
     // these three cover information that we would always have - the name, article, and user
     expect(wrapper.find('.thread-title').text()).toBe(thread.name);
@@ -100,7 +103,34 @@ describe('Thread', () => {
     expect(wrapper.find('Collapse').props().isOpen).toBe(true);
   })
 
-  it('should show how many comments a thread has', () => {
-    expect(wrapper.find('.thread-detail').length).toBe(1);
+  it('should render delete + edit buttons if its a user-owned thread', () => {
+    expect(wrapper.find('.fa-edit').length).toBe(0);
+    expect(wrapper.find('.fa-trash-alt').length).toBe(0);
+
+    wrapper.setProps({
+      allowEdit: true
+    });
+
+    wrapper.update();
+
+    expect(wrapper.find('.fa-edit').length).toBe(1);
+    expect(wrapper.find('.fa-trash-alt').length).toBe(1);
   })
+
+  it('should fire this.toggleDeleteWarning() when the trash icon is clicked', () => {
+    // get the buttons in there
+    wrapper.setProps({
+      allowEdit: true
+    });
+    wrapper.update();
+
+    expect(wrapper.state().showDeleteWarning).toBe(false);
+
+    wrapper.find('.fa-trash-alt').simulate('click');
+    wrapper.update();
+
+    expect(wrapper.state().showDeleteWarning).toBe(true);
+  })
+
+
 })
