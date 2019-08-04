@@ -42,6 +42,7 @@ hr {
 }
 
 .center-all-col {
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -303,13 +304,13 @@ input {
   font-weight: 400;
 
 }
-.thread-text {
+// .thread-text {
 
-}
+// }
 
-.fa-edit {
+// .fa-edit {
   
-}
+// }
 .fa-trash-alt {
   color: rgb(180, 67, 86);
   &:hover {
@@ -328,9 +329,9 @@ input {
   font-weight: 400;
 
 }
-.comment-text {
+// .comment-text {
 
-}
+// }
 
 
 

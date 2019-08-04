@@ -28,6 +28,13 @@ const addArticle = (collections, collectionName, article) => {
   return collections;
 }
 
+// this will find the object with matching properties of obj 
+// within an array of objects, and replace it with obj
+// useful for dealing with patch responses
+const replaceObjInArray = (obj, array) => {
+  
+}
+
 module.exports = {
   removeArticle,
   addArticle

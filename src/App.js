@@ -240,7 +240,8 @@ class App extends Component {
     // all we have to do is set the response as the user's threads
 
     let { user } = this.state;
-    user.threads = response;
+    user.threads = response.filter(item => item.owner === user._id);
+
     this.setState({
       user
     }, () => {
@@ -268,6 +269,7 @@ class App extends Component {
 
   }
 
+  // this function is triggered when a thread is saved / modified from the ThreadPage
   refreshServerThreads(response) {
     this.setState({
       serverThreads: response

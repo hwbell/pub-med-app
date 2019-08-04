@@ -63,8 +63,8 @@ class Thread extends React.Component {
         // once we have posted, we will refresh in App
         this.props.refreshServerThreads(response);
 
-        // and also re-fetch the public threads
-        
+        // and also re-fetch the public threads in ThreadPage
+        this.props.fetchServerThreads();
 
         // Fail => show the fail message / reason
 
@@ -90,6 +90,7 @@ class Thread extends React.Component {
     // ${comment.text}`)
 
     comment._id = this.props.thread._id;
+    comment.owner = this.props.thread.owner;
     this.props.handleSubmitThread(comment);
   }
 

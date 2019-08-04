@@ -127,6 +127,13 @@ class ThreadPage extends React.Component {
   // this will post our thread and relay the response back to App
   handleSubmitThread(threadInfo) {
 
+    // we need to know if its one of the logged in user's threads. this will control
+    // whether we need to update the user's threads or not
+    let isUsers = threadInfo.owner === user._id; 
+
+    // need to know if its a new thread. If it is, it won't have an owner
+    let isNewThread = !!threadInfo.owner;
+
     // If the thread is tagged with the isComment property, it came from the CommentForm
     let isComment = threadInfo.isComment;
 
@@ -170,7 +177,12 @@ class ThreadPage extends React.Component {
         // Success => refresh the threads. This will send the new thread list sent back
         // from the server to the root App component to update all concerned components
         if (response.code !== 11000) {
-          this.props.refreshUserThreads(response);
+          this.props.refreshServerThreads(response);
+
+          // refresh for the user if this was a user thread, or a new thread
+          if (isUsers || isNewThread) {
+            this.props.refreshUserThreads(response);
+          }
 
           if (this.state.showThreadForm) {
             this.toggleThreadForm();
