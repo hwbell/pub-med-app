@@ -91,6 +91,7 @@ class ThreadPage extends React.Component {
             handleSubmitThread={this.handleSubmitThread}
             refreshServerThreads={this.props.refreshServerThreads}
             deleteThread={this.props.deleteThread}
+            toggleThreadForm={this.toggleThreadForm}
           />
         })}
       </div>
@@ -113,14 +114,11 @@ class ThreadPage extends React.Component {
     })
   }
 
-  toggleThreadForm() {
+  toggleThreadForm(thread) {
 
-    // set the selected thread if we are about to show the modal
-    if (!this.state.showThreadForm) {
-
-    }
-
+    let selected = thread ? thread: null;
     this.setState({
+      selected,
       showThreadForm: !this.state.showThreadForm
     }, () => {
       // console.log(this.state.showThreadForm)
@@ -172,8 +170,8 @@ class ThreadPage extends React.Component {
 
     // Post the thread to the server. Using the currently stored token
     // will assign the user as the owner of the thread in mongodb on the backend.
-    console.log(post)
-    return saveThread(post, headers, isComment)
+    console.log(isUsers)
+    return saveThread(post, headers, isComment, isUsers)
       .then((response) => {
         console.log(response)
 
@@ -189,10 +187,9 @@ class ThreadPage extends React.Component {
           if (isUsers || isNewThread) {
             this.props.refreshUserThreads(response);
           }
-          // refresh for the server threads if this was a NOT user thread, or a new thread
-          if (!isUsers || isNewThread) {
-            this.props.refreshServerThreads(response);
-          }
+
+          // and always refresh the server threads
+          this.props.refreshServerThreads(response);
 
 
           // take down the form if it is up - this is only for new threads, or patching 
@@ -225,6 +222,7 @@ class ThreadPage extends React.Component {
       <div className="page">
 
         <ThreadForm
+          thread={this.state.selected}
           toggle={this.toggleThreadForm}
           isVisible={this.state.showThreadForm}
           handleSubmitThread={this.handleSubmitThread}
@@ -245,9 +243,10 @@ class ThreadPage extends React.Component {
           <Button className="add article-button" siz="md" style={styles.button}
             onClick={this.toggleThreadForm}>start a new thread</Button>
 
+          {haveUserThreads && this.renderThreads(user.threads, true)}
+
           {haveServerThreads && this.renderThreads(serverThreads)}
 
-          {haveUserThreads && this.renderThreads(user.threads, true)}
 
         </div>
 

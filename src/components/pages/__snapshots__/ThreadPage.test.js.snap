@@ -72,6 +72,7 @@ exports[`ThreadPage renders correctly 1`] = `
           >
             <i
               className="fas fa-edit article-button"
+              onClick={[Function]}
             />
             <i
               className="fas fa-trash-alt article-button"
@@ -223,6 +224,7 @@ exports[`ThreadPage renders correctly 1`] = `
           >
             <i
               className="fas fa-edit article-button"
+              onClick={[Function]}
             />
             <i
               className="fas fa-trash-alt article-button"
@@ -374,6 +376,7 @@ exports[`ThreadPage renders correctly 1`] = `
           >
             <i
               className="fas fa-edit article-button"
+              onClick={[Function]}
             />
             <i
               className="fas fa-trash-alt article-button"

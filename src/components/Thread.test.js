@@ -5,13 +5,15 @@ import { shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 
 // stubs
-const toggleDeleteWarningStub = jest.fn();
+const toggleThreadFormStub = jest.fn();
 
 describe('Thread', () => {
 
   let someProps;
   let thread;
-  beforeAll(() => {
+  let wrapper;
+
+  beforeEach(() => {
     thread = {
       name: 'Sourcing of PMID: 013091283',
       article: '013091283',
@@ -30,12 +32,10 @@ describe('Thread', () => {
       commentsCount: 2
     }
     someProps = {
-      thread
+      thread,
+      toggleThreadForm: toggleThreadFormStub
     };
-  })
 
-  let wrapper;
-  beforeEach(() => {
     wrapper = shallow(<Thread {...someProps}/>);
   })
 
@@ -117,7 +117,7 @@ describe('Thread', () => {
     expect(wrapper.find('.fa-trash-alt').length).toBe(1);
   })
 
-  it('should fire this.toggleDeleteWarning() when the trash icon is clicked', () => {
+  it('should toggle the showDeleteWarning boolean when the trash icon is clicked', () => {
     // get the buttons in there
     wrapper.setProps({
       allowEdit: true
@@ -130,6 +130,27 @@ describe('Thread', () => {
     wrapper.update();
 
     expect(wrapper.state().showDeleteWarning).toBe(true);
+  })
+
+  it('should show how many comments a thread has', () => {
+    expect(wrapper.find('Comment').length).toBe(2);
+
+    expect(wrapper.find('.thread-text').at(2).text()).toBe(`${thread.commentsCount} comments`)
+  })
+
+  it('should toggle the ThreadForm when the edit button is clicked', () => {
+    jest.clearAllMocks();
+
+    // get the buttons in there
+    wrapper.setProps({
+      allowEdit: true
+    });
+    wrapper.update();
+    
+    wrapper.find('.fa-edit').simulate('click');
+
+    expect(toggleThreadFormStub.mock.calls.length).toBe(1)
+  
   })
 
 

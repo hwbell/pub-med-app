@@ -5,6 +5,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 // components
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Form, Fade } from 'reactstrap';
 
+// functions
+import { combineObjects } from '../tools/objectFunctions'
+
 // ******************************************************************************
 class ThreadForm extends React.Component {
   constructor(props) {
@@ -34,20 +37,24 @@ class ThreadForm extends React.Component {
   }
 
   handleSubmit() {
+    // this means the user changed something - it now makes sense to submit
+    if (this.state.threadInfo) {
 
-    this.props.handleSubmitThread(this.state.threadInfo);
-    // console.log(this.state.threadInfo)
+      let thread = this.props.thread;
+      let threadUpdates = this.state.threadInfo;
 
-    // wipe the state - we only need it before it is sent to the server
-    // this.setState({
-    //   threadInfo: {}
-    // });
+      // combine the two for the properties available, giving priprity to updates
+      let threadProps = ['name', 'article', 'paragraph'];
+      let combined = combineObjects(threadUpdates, thread, threadProps);
 
+      this.props.handleSubmitThread(combined);
+    }
   }
 
   renderInputs() {
     // set the current value of the inputs from this.state.threadUpdates, if available.
     // this means we have changed something 
+    // otherwise get them from props, or just set an empty string
     let thread = this.props.thread;
     let threadUpdates = this.state.threadInfo;
 
@@ -74,9 +81,6 @@ class ThreadForm extends React.Component {
     })
 
     return Object.keys(threadInfo).map((name, i) => {
-      // console.log(placeholders[name])
-
-      // console.log(i, name)
 
       let title = name[0].toUpperCase() + name.slice(1);
       if (title === 'Name' || title === 'Paragraph') {
@@ -125,7 +129,7 @@ class ThreadForm extends React.Component {
         <ModalFooter >
 
           <div >
-            <Fade style={{color: 'red'}} in={this.props.showUniqueWarning}>
+            <Fade style={{ color: 'red' }} in={this.props.showUniqueWarning}>
               Names must be unique!
             </Fade>
           </div>

@@ -163,7 +163,10 @@ export async function getPublicThreads(headers, sortBy, page) {
 
 
 // saves a thread to the server, or patches an exisiting thread on the server
-export async function saveThread(thread, headers, isComment) {
+// isUserEdit being true will send it to the thread patch route (private)
+// isComment being true will send it to the comments route (public) instead of the 
+// thread patch route (private)
+export async function saveThread(thread, headers, isComment, isUserEdit) {
 
   // assign the request params accoring to either PATCH for existing thread or 
   // POST for new thread
@@ -172,7 +175,11 @@ export async function saveThread(thread, headers, isComment) {
   let url = `${collectionServerUrl}threads`;
   let method, body;
 
-  if (isComment) {
+  if (isUserEdit) {
+    body = thread;
+    method = 'PATCH';
+    url += `/${thread._id}`;
+  } else if (isComment) {
     // if its a patch, we only want to send allowed properties.
     body = {
       user: thread.user,

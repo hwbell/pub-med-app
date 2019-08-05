@@ -106,7 +106,7 @@ class Thread extends React.Component {
         {this.props.allowEdit &&
           <div style={styles.buttonHolder}>
             <i className="fas fa-edit article-button"
-              onClick={this.props.toggleThreadForm}></i>
+              onClick={() => this.props.toggleThreadForm(this.props.thread)}></i>
 
             <i className="fas fa-trash-alt article-button"
               onClick={this.toggleDeleteWarning}></i>
@@ -148,8 +148,6 @@ class Thread extends React.Component {
 
   renderComments(thread) {
     return thread.comments.map((comment, i) => {
-
-      // console.log(comment)
 
       return (
         <Comment key={i} comment={comment} />

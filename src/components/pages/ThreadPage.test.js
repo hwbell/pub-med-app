@@ -114,8 +114,8 @@ describe('ThreadPage', () => {
 
     // now another appears with the serverThreads, but serverThreads are on top
     expect(wrapper.find('.section-title').length).toBe(2);
-    expect(wrapper.find('.section-title').at(0).text()).toBe('recent threads');
-    expect(wrapper.find('.section-title').at(1).text()).toBe('your threads');
+    expect(wrapper.find('.section-title').at(0).text()).toBe('your threads');
+    expect(wrapper.find('.section-title').at(1).text()).toBe('recent threads');
 
   })
 
