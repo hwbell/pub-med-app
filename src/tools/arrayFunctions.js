@@ -5,7 +5,7 @@ const removeArticle = (collections, collectionName, article) => {
   collections.forEach((collection, i) => {
 
     if (collection.name === collectionName) {
-      collection.articles = collection.articles.filter(item => item.id !== article.id)
+      collection.articles = collection.articles.filter(item => item._id !== article._id)
     }
 
   });
@@ -28,14 +28,48 @@ const addArticle = (collections, collectionName, article) => {
   return collections;
 }
 
-// this will find the object with matching properties of obj 
-// within an array of objects, and replace it with obj
-// useful for dealing with patch responses
-const replaceObjInArray = (obj, array) => {
+// this will either: 
+
+// find the object with matching properties of replacementObj within an array of objects, 
+// and replace it with replacementObj
+// OR
+// if a match is not found, this will just add the object to the array, at the 0 index
+// useful for dealing with patch responses.
+
+const updateObjInArray = (array, replacementObj) => {
   
+  // if the array is undefined or empty, return an array containing replacementObj
+  if (!array || !array.length) {
+    return [replacementObj];
+  }
+
+  // otherwise, attempt to find and replace
+  let arrayCopy = array.slice();
+  let replaced = false;
+  arrayCopy.forEach((obj, i) => {
+    // console.log(i)
+    let idsMatch = obj._id === replacementObj._id;
+    let ownersMatch = obj.owner === replacementObj.owner;
+
+    if (idsMatch && ownersMatch) {
+      // console.log(`found a match @ ${i}`)
+      arrayCopy[i] = replacementObj;
+      replaced = true;
+    }
+
+  });
+
+  // if there was no replacement, just add it to the start of the array
+  if (!replaced) {
+    arrayCopy.unshift(replacementObj);
+  }
+  // console.log(array)
+
+  return arrayCopy;
 }
 
 module.exports = {
   removeArticle,
-  addArticle
+  addArticle,
+  updateObjInArray
 }

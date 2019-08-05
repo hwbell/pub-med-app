@@ -162,7 +162,7 @@ export async function getPublicThreads(headers, sortBy, page) {
 
 
 
-// saves a collection to the server, or patches an exisiting collection on the server
+// saves a thread to the server, or patches an exisiting thread on the server
 export async function saveThread(thread, headers, isComment) {
 
   // assign the request params accoring to either PATCH for existing thread or 

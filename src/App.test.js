@@ -4,6 +4,9 @@ import App from './App';
 import { shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 
+// mock the server functions
+jest.mock('./tools/serverFunctions.js');
+
 // stubs
 const renderDropDownStub = jest.fn();
 const renderNavigatorStub = jest.fn();
@@ -19,6 +22,7 @@ describe('App', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = shallow(<App />);
+    wrapper.instance().registerSignIn = jest.fn();
   })
 
 

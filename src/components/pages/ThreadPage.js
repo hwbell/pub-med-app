@@ -59,8 +59,10 @@ class ThreadPage extends React.Component {
       .then((response) => {
         console.log(response)
 
-        // once we have posted, we will refresh in App
-        this.props.refreshServerThreads(response)
+        // once we have posted, we will register in App. 
+        // This is handled separately from patches / posts, because when we fetch the entire list,
+        // we can just register that as the serverThreads in App
+        this.props.registerServerThreads(response)
 
 
         // Fail => show the fail message / reason
@@ -86,9 +88,10 @@ class ThreadPage extends React.Component {
           return <Thread key={i}
             allowEdit={isUsers}
             thread={thread}
-            handleSubmitThread={this.handleSubmitThread} 
+            handleSubmitThread={this.handleSubmitThread}
             refreshServerThreads={this.props.refreshServerThreads}
-            />
+            deleteThread={this.props.deleteThread}
+          />
         })}
       </div>
     )
@@ -120,7 +123,7 @@ class ThreadPage extends React.Component {
     this.setState({
       showThreadForm: !this.state.showThreadForm
     }, () => {
-      console.log(this.state.showThreadForm)
+      // console.log(this.state.showThreadForm)
     })
   }
 
@@ -129,10 +132,12 @@ class ThreadPage extends React.Component {
 
     // we need to know if its one of the logged in user's threads. this will control
     // whether we need to update the user's threads or not
-    let isUsers = threadInfo.owner === user._id; 
+    let isUsers = threadInfo.owner === user._id;
+    console.log(threadInfo)
+    console.log(user._id)
 
     // need to know if its a new thread. If it is, it won't have an owner
-    let isNewThread = !!threadInfo.owner;
+    let isNewThread = !threadInfo.owner;
 
     // If the thread is tagged with the isComment property, it came from the CommentForm
     let isComment = threadInfo.isComment;
@@ -174,20 +179,29 @@ class ThreadPage extends React.Component {
 
         // once we have posted, we will: 
 
-        // Success => refresh the threads. This will send the new thread list sent back
+        // Success => refresh the threads. This will relay the new thread sent back
         // from the server to the root App component to update all concerned components
         if (response.code !== 11000) {
-          this.props.refreshServerThreads(response);
+
+          console.log(isUsers, isNewThread)
 
           // refresh for the user if this was a user thread, or a new thread
           if (isUsers || isNewThread) {
             this.props.refreshUserThreads(response);
           }
+          // refresh for the server threads if this was a NOT user thread, or a new thread
+          if (!isUsers || isNewThread) {
+            this.props.refreshServerThreads(response);
+          }
 
+
+          // take down the form if it is up - this is only for new threads, or patching 
+          // thread info (not comments)
           if (this.state.showThreadForm) {
             this.toggleThreadForm();
           }
         } else {
+          // this means the thread name is not unique
           this.toggleUniqueWarning()
         }
 

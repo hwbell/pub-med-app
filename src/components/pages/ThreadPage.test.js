@@ -14,6 +14,9 @@ const user = {
 }
 const token = '2e8298fgj.23d454543524.2524523542134';
 
+const registerServerThreadsStub = jest.fn();
+const fetchServerThreadsStub = jest.fn();
+
 const refreshUserThreadsStub = jest.fn();
 const renderThreadsStub = jest.fn();
 const refreshServerThreadsStub = jest.fn();
@@ -52,7 +55,8 @@ describe('ThreadPage', () => {
     someProps = {
       user,
       refreshUserThreads: refreshUserThreadsStub,
-      refreshServerThreads: refreshServerThreadsStub
+      refreshServerThreads: refreshServerThreadsStub,
+      registerServerThreads: registerServerThreadsStub
     };
   })
 
@@ -186,20 +190,22 @@ describe('ThreadPage', () => {
 
   it('should not fire fetchServerThreads() on startup if there are serverThreads as props', async () => {
 
-    let fetchServerThreadsStub = jest.fn();
-
     someProps.serverThreads = user.threads;
     const newWrapper = shallow(<ThreadPage {...someProps} />);
+
+    newWrapper.instance().fetchServerThreads = fetchServerThreadsStub;
+
     wrapper.update();
 
     expect(fetchServerThreadsStub.mock.calls.length).toBe(0)
   })
 
-  it('should fire this.props.refreshServerThreads() when fetchServerThreads() is fired', async () => {
-    refreshServerThreadsStub.mockClear();
-
+  it('should fire this.props.registerServerTheads() when fetchServerThreads() is fired', async () => {
+    registerServerThreadsStub.mockClear();
+    
     await wrapper.instance().fetchServerThreads();
+    wrapper.update();
 
-    expect(refreshServerThreadsStub.mock.calls.length).toBe(1)
+    expect(registerServerThreadsStub.mock.calls.length).toBe(1)
   })
 })

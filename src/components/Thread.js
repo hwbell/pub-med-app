@@ -61,10 +61,11 @@ class Thread extends React.Component {
         console.log(response)
 
         // once we have posted, we will refresh in App
-        this.props.refreshServerThreads(response);
+        this.props.deleteThread(this.props.thread);
 
-        // and also re-fetch the public threads in ThreadPage
-        this.props.fetchServerThreads();
+        if (this.state.showDeleteWarning) {
+          this.toggleDeleteWarning();
+        }
 
         // Fail => show the fail message / reason
 

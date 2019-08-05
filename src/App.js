@@ -19,9 +19,9 @@ import styled from "styled-components";
 import { Switch, Link } from 'react-router-dom';
 import ProfilePage from './components/pages/ProfilePage';
 
-// tools
+// tools / functions
 import { getUserCollections } from './tools/serverFunctions';
-import { addArticle, removeArticle } from './tools/arrayFunctions';
+import { addArticle, removeArticle, updateObjInArray } from './tools/arrayFunctions';
 
 // more routing .... dev console warning said to change it to this instead of import?
 const Router = require("react-router-dom").BrowserRouter;
@@ -92,7 +92,10 @@ class App extends Component {
     this.refreshUserThreads = this.refreshUserThreads.bind(this);
     this.refreshUser = this.refreshUser.bind(this);
 
+    this.registerServerThreads = this.registerServerThreads.bind(this);
     this.refreshServerThreads = this.refreshServerThreads.bind(this);
+    this.deleteThread = this.deleteThread.bind(this);
+
   }
 
   componentDidMount() {
@@ -239,13 +242,17 @@ class App extends Component {
   refreshUserThreads(response) {
     // all we have to do is set the response as the user's threads
 
+    console.log('refreshing users threads')
     let { user } = this.state;
-    user.threads = response.filter(item => item.owner === user._id);
+
+    // the updateObjInArray function will handle whether the response is a new thread or an update
+    user.threads = updateObjInArray(user.threads, response);
 
     this.setState({
       user
     }, () => {
-      console.log(user)
+      // save to local storage
+      localStorage.setItem(`user`, JSON.stringify(user));
     })
 
   }
@@ -264,18 +271,49 @@ class App extends Component {
       user: response
     }, () => {
       // save to local storage
-      localStorage.setItem(`user`, JSON.stringify(response));
+      localStorage.setItem(`user`, JSON.stringify(this.state.user));
     });
 
   }
 
-  // this function is triggered when a thread is saved / modified from the ThreadPage
-  refreshServerThreads(response) {
+  // this function is fired from ThreadPage when we get the whole list of server threads
+  registerServerThreads(response) {
     this.setState({
       serverThreads: response
+    })
+  }
+
+  // this function is triggered when a thread is saved / modified from the ThreadPage
+  refreshServerThreads(response) {
+
+    let { serverThreads } = this.state;
+
+    // the updateObjInArray function will handle whether the response is a new thread or an update
+    let updatedThreads = updateObjInArray(serverThreads, response);
+
+    this.setState({
+      serverThreads: updatedThreads
     }, () => {
       console.log(this.state.serverThreads)
     })
+  }
+
+  // delete the thread from user + serverThreads
+  deleteThread(thread) {
+    let { user, serverThreads } = this.state;
+
+    // filter out the thread from user and serverThreads. 
+    user.threads = user.threads.filter(item => item.name !== thread.name);
+    serverThreads = serverThreads.filter(item => item.name !== thread.name);
+
+    this.setState({
+      user,
+      serverThreads
+    })
+
+    // This single item response from the server + update in state may not be the best, since we are not making 
+    // a clean refresh straight from the server. But it is less intensive for the server, and there are spots 
+    // where refreshing naturally happens anyhow. Maybe change this later, though.
   }
 
   renderNavigator() {
@@ -385,6 +423,8 @@ class App extends Component {
                       user={this.state.user}
                       refreshUserThreads={this.refreshUserThreads}
                       refreshServerThreads={this.refreshServerThreads}
+                      registerServerThreads={this.registerServerThreads}
+                      deleteThread={this.deleteThread}
                     />
 
                   } />
