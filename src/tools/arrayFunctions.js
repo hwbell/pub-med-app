@@ -28,8 +28,10 @@ const addArticle = (collections, collectionName, article) => {
   return collections;
 }
 
-// this will either: 
+// updateObjInArray will either: 
 
+// return [replacementObj] if the array was empty or undefined
+// OR
 // find the object with matching properties of replacementObj within an array of objects, 
 // and replace it with replacementObj
 // OR

@@ -117,6 +117,10 @@ hr {
   flex-wrap: wrap;
 }
 
+.row-eq-height > .col-12 {
+  margin-top: 4px;
+}
+
 /* some common text / button classes */
 .title, .subtitle {
   color: whitesmoke;
@@ -299,18 +303,19 @@ input {
 
 .thread {
   align-self: flex-start;
+  border: 1px solid white;
 }
 .thread-title {
-  font-weight: 400;
+  font-weight: 600;
 
 }
-// .thread-text {
+.thread-text {
+  font-size: 14px;
+}
 
-// }
-
-// .fa-edit {
-  
-// }
+.fa-edit, .fa-trash-alt {
+  font-size: 14px;  
+}
 .fa-trash-alt {
   color: rgb(180, 67, 86);
   &:hover {
@@ -323,11 +328,12 @@ input {
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
-
+}
+.comment-title, .comment-text {
+  font-size: 14px;
 }
 .comment-title {
-  font-weight: 400;
-
+  font-weight: 600;
 }
 // .comment-text {
 

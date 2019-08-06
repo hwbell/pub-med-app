@@ -120,6 +120,8 @@ class Thread extends React.Component {
 
         {thread.paragraph && <p className="thread-text" >{thread.paragraph.slice(0, 50) + ` ...`}</p>}
 
+        <hr style={styles.hr}></hr>
+
         <CSSTransitionGroup
           style={styles.transitionGroup}
           transitionName="drop"
@@ -204,6 +206,11 @@ const styles = {
     display: 'flex',
     flexDirection: 'row'
   },
+  hr: {
+    backgroundColor: 'rgba(245,245,245,0.1)',
+    margin: 0, 
+    padding: 0
+  }
 }
 
 export default Thread;

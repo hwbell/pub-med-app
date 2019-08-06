@@ -176,7 +176,11 @@ export async function saveThread(thread, headers, isComment, isUserEdit) {
   let method, body;
 
   if (isUserEdit) {
-    body = thread;
+    body = {
+      name: thread.name,
+      article: thread.article,
+      paragraph: thread.paragraph
+    };
     method = 'PATCH';
     url += `/${thread._id}`;
   } else if (isComment) {

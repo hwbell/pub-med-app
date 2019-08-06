@@ -18,6 +18,7 @@ const thread = {
   paragraph: 'I found the source material for the basis of this study to be lacking. Does anyone else agree?',
 }
 
+const userId = '2893dffrbv8.f4308fhv34.4308fg343';
 
 describe('ThreadForm', () => {
 
@@ -25,6 +26,9 @@ describe('ThreadForm', () => {
 
   beforeEach(() => {
     someProps = {
+      user: {
+        _id: userId
+      },
       thread,
       isVisible: false,
       toggle: toggleStub,
@@ -115,11 +119,11 @@ describe('ThreadForm', () => {
     wrapper.update();
 
     // inside the component, the info should be combined when submitting
-    let keys = ['name', 'article', 'paragraph'];
 
     let { threadInfo } = wrapper.state();
 
-    let combinedInfo = combineObjects(threadInfo, thread, keys)
+    let combinedInfo = combineObjects(threadInfo, thread, Object.keys(thread));
+    combinedInfo.owner = userId;
 
     expect(handleSubmitThreadStub.mock.calls.length).toBe(1)
     expect(handleSubmitThreadStub).toBeCalledWith(combinedInfo)

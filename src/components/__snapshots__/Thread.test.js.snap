@@ -35,6 +35,15 @@ exports[`Thread renders correctly 1`] = `
     >
       I found the source material for the basis of this  ...
     </p>
+    <hr
+      style={
+        Object {
+          "backgroundColor": "rgba(245,245,245,0.1)",
+          "margin": 0,
+          "padding": 0,
+        }
+      }
+    />
     <span
       style={
         Object {

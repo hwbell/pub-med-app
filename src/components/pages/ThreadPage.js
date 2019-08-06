@@ -81,6 +81,12 @@ class ThreadPage extends React.Component {
   // nly thread info - name, article, paragraph - is restricted
   renderThreads(threads, isUsers) {
     let title = isUsers ? 'your threads' : 'recent threads';
+
+    // for the server threads, filter out the user's own threads
+    // we can already access them in the user section
+    if (!isUsers) {
+      threads = threads.filter(thread => thread.owner !== this.props.user._id)
+    }
     return (
       <div className="center-all-col">
         <p className="section-title">{title}</p>
@@ -116,7 +122,7 @@ class ThreadPage extends React.Component {
 
   toggleThreadForm(thread) {
 
-    let selected = thread ? thread: null;
+    let selected = thread ? thread : null;
     this.setState({
       selected,
       showThreadForm: !this.state.showThreadForm
@@ -127,12 +133,20 @@ class ThreadPage extends React.Component {
 
   // this will post our thread and relay the response back to App
   handleSubmitThread(threadInfo) {
+    console.log(threadInfo)
+
+    // get local storage info
+    const user = JSON.parse(localStorage.getItem('user'));
+    const token = JSON.parse(localStorage.getItem('token'));
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    }
 
     // we need to know if its one of the logged in user's threads. this will control
     // whether we need to update the user's threads or not
     let isUsers = threadInfo.owner === user._id;
-    console.log(threadInfo)
-    console.log(user._id)
 
     // need to know if its a new thread. If it is, it won't have an owner
     let isNewThread = !threadInfo.owner;
@@ -222,6 +236,7 @@ class ThreadPage extends React.Component {
       <div className="page">
 
         <ThreadForm
+          user={this.props.user}
           thread={this.state.selected}
           toggle={this.toggleThreadForm}
           isVisible={this.state.showThreadForm}

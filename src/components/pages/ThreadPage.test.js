@@ -32,26 +32,50 @@ const handleSubmitThreadStub = (threadInfo) => {
   });
 }
 
+// to compare the serverThreads owner prop to the user _id prop.
+// the component should filter the user threads out of the server threads
+const userId = '98scvy97svh.4r49w8h4s.3dwfw3';
+const otherId = '23e8h928f48.298293gf.2dh293';
+const serverThreads = [
+  {
+    name: 'Sourcing of PMID: 013091283',
+    article: '013091283',
+    owner: otherId
+  },
+  {
+    name: 'Data in figure 1 of PMID: 013091283',
+    article: '013091283',
+    owner: userId
+  },
+  {
+    name: 'Figure 3 in PMID: 013091283',
+    article: '013091283',
+    owner: otherId
+  }
+];
+
 describe('ThreadPage', () => {
 
   let someProps;
   let user = {};
   beforeAll(() => {
-    user.threads = [
-      {
-        name: 'Sourcing of PMID: 013091283',
-        article: '013091283',
-
-      },
-      {
-        name: 'Data in figure 1 of PMID: 013091283',
-        article: '013091283'
-      },
-      {
-        name: 'Figure 3 in PMID: 013091283',
-        article: '013091283'
-      }
-    ]
+    user = {
+      _id: userId,
+      threads: [
+        {
+          name: 'Sourcing of PMID: 013091283',
+          article: '013091283',
+        },
+        {
+          name: 'Data in figure 1 of PMID: 013091283',
+          article: '013091283'
+        },
+        {
+          name: 'Figure 3 in PMID: 013091283',
+          article: '013091283'
+        }
+      ]
+    }
     someProps = {
       user,
       refreshUserThreads: refreshUserThreadsStub,
@@ -92,23 +116,23 @@ describe('ThreadPage', () => {
     expect(wrapper.find('Thread').length).toBe(3);
   })
 
-  it('should containe one <Thread/> for each server thread', () => {
+  it('should contain one <Thread/> for each server thread that is not a user thread', () => {
     wrapper.setProps({
-      serverThreads: user.threads
+      serverThreads
     });
     // now there is an additional 3
     wrapper.update();
-    expect(wrapper.find('Thread').length).toBe(6);
+    expect(wrapper.find('Thread').length).toBe(5);
   })
 
   it('should show the correct section titles for user / serverThreads', () => {
-    
+
     // first, there's only one
     expect(wrapper.find('.section-title').length).toBe(1);
     expect(wrapper.find('.section-title').text()).toBe('your threads');
-    
+
     wrapper.setProps({
-      serverThreads: user.threads
+      serverThreads
     });
     wrapper.update();
 
@@ -176,7 +200,7 @@ describe('ThreadPage', () => {
   // passing the result back to App, which then provides them as props.
   it('should fire fetchServerThreads() on startup if there are no serverThreads as props', async () => {
 
-    
+
     someProps.serverThreads = null;
 
     const newWrapper = shallow(<ThreadPage {...someProps} />);
@@ -202,7 +226,7 @@ describe('ThreadPage', () => {
 
   it('should fire this.props.registerServerTheads() when fetchServerThreads() is fired', async () => {
     registerServerThreadsStub.mockClear();
-    
+
     await wrapper.instance().fetchServerThreads();
     wrapper.update();
 
