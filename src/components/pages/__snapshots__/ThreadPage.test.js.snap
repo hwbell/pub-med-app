@@ -21,509 +21,525 @@ exports[`ThreadPage renders correctly 1`] = `
         post a thread to start a discussion
       </h4>
     </div>
-    <button
-      aria-label={null}
-      className="add article-button btn btn-secondary"
-      onClick={[Function]}
-      siz="md"
+    <div
       style={
         Object {
-          "margin": "24px",
+          "position": "relative",
+          "width": "100%",
         }
       }
-      type="button"
     >
-      start a new thread
-    </button>
-    <div
-      className="center-all-col"
-    >
-      <p
-        className="section-title"
-      >
-        your threads
-      </p>
       <div
-        className="outline"
-      >
-        <div
-          style={
-            Object {
-              "alignItems": "flex-start",
-              "alignSelf": "flex-start",
-              "display": "flex",
-              "flexDirection": "column",
-              "justifyContent": "flex-start",
-              "padding": "10px",
-              "width": "100%",
-            }
+        className="fade"
+        style={
+          Object {
+            "display": "flex",
+            "flexDirection": "row",
+            "position": "absolute",
+            "right": "30px",
+            "top": "18px",
           }
+        }
+      >
+        <button
+          aria-label={null}
+          className="add article-button btn btn-secondary btn-sm"
+          onClick={[Function]}
+          type="button"
         >
-          <div
-            style={
-              Object {
-                "display": "flex",
-                "flexDirection": "row",
-                "position": "absolute",
-                "right": "10px",
-                "top": "10px",
-              }
-            }
-          >
-            <i
-              className="fas fa-edit article-button"
-              onClick={[Function]}
-            />
-            <i
-              className="fas fa-trash-alt article-button"
-              onClick={[Function]}
-            />
-          </div>
-          <p
-            className="thread-title"
-          >
-            Sourcing of PMID: 013091283
-          </p>
-          <p
-            className="thread-text"
-          >
-            <i
-              className=" far fa-user"
-            />
-              undefined
-          </p>
-          <hr
-            style={
-              Object {
-                "backgroundColor": "rgba(245,245,245,0.1)",
-                "margin": 0,
-                "padding": 0,
-              }
-            }
-          />
-          <span
-            style={
-              Object {
-                "alignItems": "flex-start",
-                "display": "flex",
-                "flexDirection": "column",
-                "justifyContent": "flex-start",
-                "padding": "20px",
-              }
-            }
-          >
-            <div>
-              <p
-                className="thread-text"
-              >
-                undefined comments
-              </p>
-            </div>
-            <div
-              className="collapse"
-              style={Object {}}
-            >
-              <div
-                style={
-                  Object {
-                    "marginTop": "25px",
-                  }
-                }
-              >
-                <p
-                  style={
-                    Object {
-                      "color": "black",
-                      "margin": "5px 20px",
-                    }
-                  }
-                >
-                  Have something to say about this thread? Add a comment to join the discussion.
-                </p>
-                <textarea
-                  className="form-control"
-                  onChange={[Function]}
-                  placeholder="Your comment here"
-                  style={
-                    Object {
-                      "borderRadius": "6px",
-                      "margin": "15px auto",
-                      "padding": "8px",
-                      "width": "95%",
-                    }
-                  }
-                />
-                <div
-                  style={
-                    Object {
-                      "alignItems": "center",
-                      "alignSelf": "flex-end",
-                      "display": "flex",
-                      "flexDirection": "row",
-                      "justifyContent": "center",
-                    }
-                  }
-                >
-                  <button
-                    aria-label={null}
-                    className="add article-button btn btn-secondary btn-sm"
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    post comment
-                  </button>
-                  <button
-                    aria-label={null}
-                    className="back article-button btn btn-secondary btn-sm"
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    cancel
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div
-              className="fade"
-              style={
-                Object {
-                  "alignSelf": "flex-end",
-                }
-              }
-            >
-              <button
-                aria-label={null}
-                className="view article-button btn btn-secondary btn-sm"
-                disabled={false}
-                onClick={[Function]}
-                type="button"
-              >
-                comment
-              </button>
-            </div>
-          </span>
-        </div>
+          + new
+        </button>
       </div>
       <div
-        className="outline"
+        className="center-all-col"
       >
+        <p
+          className="section-title"
+        >
+          your threads
+        </p>
         <div
-          style={
-            Object {
-              "alignItems": "flex-start",
-              "alignSelf": "flex-start",
-              "display": "flex",
-              "flexDirection": "column",
-              "justifyContent": "flex-start",
-              "padding": "10px",
-              "width": "100%",
-            }
-          }
+          className="outline"
         >
           <div
             style={
               Object {
-                "display": "flex",
-                "flexDirection": "row",
-                "position": "absolute",
-                "right": "10px",
-                "top": "10px",
-              }
-            }
-          >
-            <i
-              className="fas fa-edit article-button"
-              onClick={[Function]}
-            />
-            <i
-              className="fas fa-trash-alt article-button"
-              onClick={[Function]}
-            />
-          </div>
-          <p
-            className="thread-title"
-          >
-            Data in figure 1 of PMID: 013091283
-          </p>
-          <p
-            className="thread-text"
-          >
-            <i
-              className=" far fa-user"
-            />
-              undefined
-          </p>
-          <hr
-            style={
-              Object {
-                "backgroundColor": "rgba(245,245,245,0.1)",
-                "margin": 0,
-                "padding": 0,
-              }
-            }
-          />
-          <span
-            style={
-              Object {
                 "alignItems": "flex-start",
+                "alignSelf": "flex-start",
                 "display": "flex",
                 "flexDirection": "column",
                 "justifyContent": "flex-start",
-                "padding": "20px",
+                "padding": "10px",
+                "width": "100%",
               }
             }
           >
-            <div>
-              <p
-                className="thread-text"
-              >
-                undefined comments
-              </p>
-            </div>
             <div
-              className="collapse"
-              style={Object {}}
-            >
-              <div
-                style={
-                  Object {
-                    "marginTop": "25px",
-                  }
-                }
-              >
-                <p
-                  style={
-                    Object {
-                      "color": "black",
-                      "margin": "5px 20px",
-                    }
-                  }
-                >
-                  Have something to say about this thread? Add a comment to join the discussion.
-                </p>
-                <textarea
-                  className="form-control"
-                  onChange={[Function]}
-                  placeholder="Your comment here"
-                  style={
-                    Object {
-                      "borderRadius": "6px",
-                      "margin": "15px auto",
-                      "padding": "8px",
-                      "width": "95%",
-                    }
-                  }
-                />
-                <div
-                  style={
-                    Object {
-                      "alignItems": "center",
-                      "alignSelf": "flex-end",
-                      "display": "flex",
-                      "flexDirection": "row",
-                      "justifyContent": "center",
-                    }
-                  }
-                >
-                  <button
-                    aria-label={null}
-                    className="add article-button btn btn-secondary btn-sm"
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    post comment
-                  </button>
-                  <button
-                    aria-label={null}
-                    className="back article-button btn btn-secondary btn-sm"
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    cancel
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div
-              className="fade"
               style={
                 Object {
-                  "alignSelf": "flex-end",
+                  "display": "flex",
+                  "flexDirection": "row",
+                  "position": "absolute",
+                  "right": "10px",
+                  "top": "10px",
                 }
               }
             >
-              <button
-                aria-label={null}
-                className="view article-button btn btn-secondary btn-sm"
-                disabled={false}
+              <i
+                className="fas fa-edit article-button"
                 onClick={[Function]}
-                type="button"
-              >
-                comment
-              </button>
+              />
+              <i
+                className="fas fa-trash-alt article-button"
+                onClick={[Function]}
+              />
             </div>
-          </span>
+            <p
+              className="thread-title"
+            >
+              Sourcing of PMID: 013091283
+            </p>
+            <p
+              className="thread-text"
+            >
+              <i
+                className=" far fa-user"
+              />
+                undefined
+            </p>
+            <hr
+              style={
+                Object {
+                  "backgroundColor": "rgba(245,245,245,0.1)",
+                  "margin": 0,
+                  "padding": 0,
+                }
+              }
+            />
+            <span
+              style={
+                Object {
+                  "alignItems": "flex-start",
+                  "display": "flex",
+                  "flexDirection": "column",
+                  "justifyContent": "flex-start",
+                  "padding": "20px",
+                }
+              }
+            >
+              <div>
+                <p
+                  className="thread-text"
+                >
+                  undefined comments
+                </p>
+              </div>
+              <div
+                className="collapse"
+                style={Object {}}
+              >
+                <div
+                  style={
+                    Object {
+                      "marginTop": "25px",
+                    }
+                  }
+                >
+                  <p
+                    style={
+                      Object {
+                        "color": "black",
+                        "margin": "5px 20px",
+                      }
+                    }
+                  >
+                    Have something to say about this thread? Add a comment to join the discussion.
+                  </p>
+                  <textarea
+                    className="form-control"
+                    onChange={[Function]}
+                    placeholder="Your comment here"
+                    style={
+                      Object {
+                        "borderRadius": "6px",
+                        "margin": "15px auto",
+                        "padding": "8px",
+                        "width": "95%",
+                      }
+                    }
+                  />
+                  <div
+                    style={
+                      Object {
+                        "alignItems": "center",
+                        "alignSelf": "flex-end",
+                        "display": "flex",
+                        "flexDirection": "row",
+                        "justifyContent": "center",
+                      }
+                    }
+                  >
+                    <button
+                      aria-label={null}
+                      className="add article-button btn btn-secondary btn-sm"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      post comment
+                    </button>
+                    <button
+                      aria-label={null}
+                      className="back article-button btn btn-secondary btn-sm"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      cancel
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="fade"
+                style={
+                  Object {
+                    "alignSelf": "flex-end",
+                  }
+                }
+              >
+                <button
+                  aria-label={null}
+                  className="view article-button btn btn-secondary btn-sm"
+                  disabled={false}
+                  onClick={[Function]}
+                  type="button"
+                >
+                  comment
+                </button>
+              </div>
+            </span>
+          </div>
         </div>
-      </div>
-      <div
-        className="outline"
-      >
         <div
-          style={
-            Object {
-              "alignItems": "flex-start",
-              "alignSelf": "flex-start",
-              "display": "flex",
-              "flexDirection": "column",
-              "justifyContent": "flex-start",
-              "padding": "10px",
-              "width": "100%",
-            }
-          }
+          className="outline"
         >
           <div
             style={
               Object {
-                "display": "flex",
-                "flexDirection": "row",
-                "position": "absolute",
-                "right": "10px",
-                "top": "10px",
-              }
-            }
-          >
-            <i
-              className="fas fa-edit article-button"
-              onClick={[Function]}
-            />
-            <i
-              className="fas fa-trash-alt article-button"
-              onClick={[Function]}
-            />
-          </div>
-          <p
-            className="thread-title"
-          >
-            Figure 3 in PMID: 013091283
-          </p>
-          <p
-            className="thread-text"
-          >
-            <i
-              className=" far fa-user"
-            />
-              undefined
-          </p>
-          <hr
-            style={
-              Object {
-                "backgroundColor": "rgba(245,245,245,0.1)",
-                "margin": 0,
-                "padding": 0,
-              }
-            }
-          />
-          <span
-            style={
-              Object {
                 "alignItems": "flex-start",
+                "alignSelf": "flex-start",
                 "display": "flex",
                 "flexDirection": "column",
                 "justifyContent": "flex-start",
-                "padding": "20px",
+                "padding": "10px",
+                "width": "100%",
               }
             }
           >
-            <div>
-              <p
-                className="thread-text"
-              >
-                undefined comments
-              </p>
-            </div>
             <div
-              className="collapse"
-              style={Object {}}
-            >
-              <div
-                style={
-                  Object {
-                    "marginTop": "25px",
-                  }
-                }
-              >
-                <p
-                  style={
-                    Object {
-                      "color": "black",
-                      "margin": "5px 20px",
-                    }
-                  }
-                >
-                  Have something to say about this thread? Add a comment to join the discussion.
-                </p>
-                <textarea
-                  className="form-control"
-                  onChange={[Function]}
-                  placeholder="Your comment here"
-                  style={
-                    Object {
-                      "borderRadius": "6px",
-                      "margin": "15px auto",
-                      "padding": "8px",
-                      "width": "95%",
-                    }
-                  }
-                />
-                <div
-                  style={
-                    Object {
-                      "alignItems": "center",
-                      "alignSelf": "flex-end",
-                      "display": "flex",
-                      "flexDirection": "row",
-                      "justifyContent": "center",
-                    }
-                  }
-                >
-                  <button
-                    aria-label={null}
-                    className="add article-button btn btn-secondary btn-sm"
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    post comment
-                  </button>
-                  <button
-                    aria-label={null}
-                    className="back article-button btn btn-secondary btn-sm"
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    cancel
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div
-              className="fade"
               style={
                 Object {
-                  "alignSelf": "flex-end",
+                  "display": "flex",
+                  "flexDirection": "row",
+                  "position": "absolute",
+                  "right": "10px",
+                  "top": "10px",
                 }
               }
             >
-              <button
-                aria-label={null}
-                className="view article-button btn btn-secondary btn-sm"
-                disabled={false}
+              <i
+                className="fas fa-edit article-button"
                 onClick={[Function]}
-                type="button"
-              >
-                comment
-              </button>
+              />
+              <i
+                className="fas fa-trash-alt article-button"
+                onClick={[Function]}
+              />
             </div>
-          </span>
+            <p
+              className="thread-title"
+            >
+              Data in figure 1 of PMID: 013091283
+            </p>
+            <p
+              className="thread-text"
+            >
+              <i
+                className=" far fa-user"
+              />
+                undefined
+            </p>
+            <hr
+              style={
+                Object {
+                  "backgroundColor": "rgba(245,245,245,0.1)",
+                  "margin": 0,
+                  "padding": 0,
+                }
+              }
+            />
+            <span
+              style={
+                Object {
+                  "alignItems": "flex-start",
+                  "display": "flex",
+                  "flexDirection": "column",
+                  "justifyContent": "flex-start",
+                  "padding": "20px",
+                }
+              }
+            >
+              <div>
+                <p
+                  className="thread-text"
+                >
+                  undefined comments
+                </p>
+              </div>
+              <div
+                className="collapse"
+                style={Object {}}
+              >
+                <div
+                  style={
+                    Object {
+                      "marginTop": "25px",
+                    }
+                  }
+                >
+                  <p
+                    style={
+                      Object {
+                        "color": "black",
+                        "margin": "5px 20px",
+                      }
+                    }
+                  >
+                    Have something to say about this thread? Add a comment to join the discussion.
+                  </p>
+                  <textarea
+                    className="form-control"
+                    onChange={[Function]}
+                    placeholder="Your comment here"
+                    style={
+                      Object {
+                        "borderRadius": "6px",
+                        "margin": "15px auto",
+                        "padding": "8px",
+                        "width": "95%",
+                      }
+                    }
+                  />
+                  <div
+                    style={
+                      Object {
+                        "alignItems": "center",
+                        "alignSelf": "flex-end",
+                        "display": "flex",
+                        "flexDirection": "row",
+                        "justifyContent": "center",
+                      }
+                    }
+                  >
+                    <button
+                      aria-label={null}
+                      className="add article-button btn btn-secondary btn-sm"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      post comment
+                    </button>
+                    <button
+                      aria-label={null}
+                      className="back article-button btn btn-secondary btn-sm"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      cancel
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="fade"
+                style={
+                  Object {
+                    "alignSelf": "flex-end",
+                  }
+                }
+              >
+                <button
+                  aria-label={null}
+                  className="view article-button btn btn-secondary btn-sm"
+                  disabled={false}
+                  onClick={[Function]}
+                  type="button"
+                >
+                  comment
+                </button>
+              </div>
+            </span>
+          </div>
+        </div>
+        <div
+          className="outline"
+        >
+          <div
+            style={
+              Object {
+                "alignItems": "flex-start",
+                "alignSelf": "flex-start",
+                "display": "flex",
+                "flexDirection": "column",
+                "justifyContent": "flex-start",
+                "padding": "10px",
+                "width": "100%",
+              }
+            }
+          >
+            <div
+              style={
+                Object {
+                  "display": "flex",
+                  "flexDirection": "row",
+                  "position": "absolute",
+                  "right": "10px",
+                  "top": "10px",
+                }
+              }
+            >
+              <i
+                className="fas fa-edit article-button"
+                onClick={[Function]}
+              />
+              <i
+                className="fas fa-trash-alt article-button"
+                onClick={[Function]}
+              />
+            </div>
+            <p
+              className="thread-title"
+            >
+              Figure 3 in PMID: 013091283
+            </p>
+            <p
+              className="thread-text"
+            >
+              <i
+                className=" far fa-user"
+              />
+                undefined
+            </p>
+            <hr
+              style={
+                Object {
+                  "backgroundColor": "rgba(245,245,245,0.1)",
+                  "margin": 0,
+                  "padding": 0,
+                }
+              }
+            />
+            <span
+              style={
+                Object {
+                  "alignItems": "flex-start",
+                  "display": "flex",
+                  "flexDirection": "column",
+                  "justifyContent": "flex-start",
+                  "padding": "20px",
+                }
+              }
+            >
+              <div>
+                <p
+                  className="thread-text"
+                >
+                  undefined comments
+                </p>
+              </div>
+              <div
+                className="collapse"
+                style={Object {}}
+              >
+                <div
+                  style={
+                    Object {
+                      "marginTop": "25px",
+                    }
+                  }
+                >
+                  <p
+                    style={
+                      Object {
+                        "color": "black",
+                        "margin": "5px 20px",
+                      }
+                    }
+                  >
+                    Have something to say about this thread? Add a comment to join the discussion.
+                  </p>
+                  <textarea
+                    className="form-control"
+                    onChange={[Function]}
+                    placeholder="Your comment here"
+                    style={
+                      Object {
+                        "borderRadius": "6px",
+                        "margin": "15px auto",
+                        "padding": "8px",
+                        "width": "95%",
+                      }
+                    }
+                  />
+                  <div
+                    style={
+                      Object {
+                        "alignItems": "center",
+                        "alignSelf": "flex-end",
+                        "display": "flex",
+                        "flexDirection": "row",
+                        "justifyContent": "center",
+                      }
+                    }
+                  >
+                    <button
+                      aria-label={null}
+                      className="add article-button btn btn-secondary btn-sm"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      post comment
+                    </button>
+                    <button
+                      aria-label={null}
+                      className="back article-button btn btn-secondary btn-sm"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      cancel
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="fade"
+                style={
+                  Object {
+                    "alignSelf": "flex-end",
+                  }
+                }
+              >
+                <button
+                  aria-label={null}
+                  className="view article-button btn btn-secondary btn-sm"
+                  disabled={false}
+                  onClick={[Function]}
+                  type="button"
+                >
+                  comment
+                </button>
+              </div>
+            </span>
+          </div>
         </div>
       </div>
     </div>

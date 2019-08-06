@@ -4,6 +4,12 @@ import TextBlock from './TextBlock';
 import { shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 
+// react router context
+import { MemoryRouter } from 'react-router-dom';
+
+// stub for the navigateToResource function
+const navigateToResourceStub = jest.fn();
+
 // some mock data. test with data that has different lengths for the paragraph array
 const aboutIntro = {
   title: 'About PMC',
@@ -35,34 +41,71 @@ const resourcesIntro = {
   button: 'find a resource'
 }
 
-it('renders without crashing', async () => {
-  let wrapper = mount(<TextBlock text={aboutIntro}/>);
-});
 
-it('renders correctly', async () => {
-  const tree = await renderer
-    .create(<TextBlock text={aboutIntro}/>)
-    .toJSON();
-  expect(tree).toMatchSnapshot();
-});
+describe('TextBlock', () => {
 
-it('contains the correct elements for different data', () => {
-  let wrapper = mount( <TextBlock text={aboutIntro}/>);
-  
-  expect(wrapper.html()).toContain('div class=\"glass\"');
-  expect(wrapper.html()).toContain('h4 class=\"subtitle\"');
-  
-  expect(wrapper.find('.subtitle').length).toEqual(1);
-  expect(wrapper.find('Button').length).toEqual(1);
-  expect(wrapper.find('.text').length).toEqual(1);
+  let wrapper;
+  let someProps;
+  beforeEach(() => {
+    someProps = {
+      text: aboutIntro,
+      navigateToResource: navigateToResourceStub,
+      linkTo: '/threads/'
+    }
 
-  wrapper = mount( <TextBlock text={resourcesIntro}/>);
-  
-  expect(wrapper.html()).toContain('div class=\"glass\"');
-  expect(wrapper.html()).toContain('h4 class=\"subtitle\"');
-  
-  expect(wrapper.find('.subtitle').length).toEqual(1);
-  expect(wrapper.find('Button').length).toEqual(1);
-  expect(wrapper.find('.text').length).toEqual(6);
+    wrapper = mount(
+      <MemoryRouter>
+        <TextBlock {...someProps} />
+      </MemoryRouter>
+    );
 
+  })
+
+  // tests
+  it('renders without crashing', async () => {
+    wrapper.update();
+  });
+
+  it('renders correctly', async () => {
+    const tree = await renderer
+      .create(
+        <MemoryRouter>
+          <TextBlock {...someProps} />
+        </MemoryRouter>)
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('contains the correct elements for different data', () => {
+
+    expect(wrapper.find('.glass').length).toEqual(1);
+    expect(wrapper.find('.profile-title').length).toEqual(1);
+    expect(wrapper.find('Button').length).toEqual(1);
+    expect(wrapper.find('Link').length).toEqual(1);
+    expect(wrapper.find('.paragraph').length).toEqual(1);
+
+    someProps.text = resourcesIntro;
+    let newWrapper = mount(
+      <MemoryRouter>
+        <TextBlock {...someProps} />
+      </MemoryRouter>
+    );
+
+    expect(newWrapper.find('.glass').length).toEqual(1);
+    expect(newWrapper.find('.profile-title').length).toEqual(1);
+    expect(newWrapper.find('Button').length).toEqual(1);
+    expect(newWrapper.find('Link').length).toEqual(1);
+
+    console.log(newWrapper.props().paragraph)
+    expect(newWrapper.find('.paragraph').length).toEqual(6);
+
+  })
+
+  // it('fires this.props.navigateToResource() when the button is clicked', () => {
+
+  //   wrapper.find('Button').simulate('click');
+  //   wrapper.update();
+
+  //   expect(navigateToResourceStub).toHaveBeenCalled();
+  // })
 })

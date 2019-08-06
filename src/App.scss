@@ -57,6 +57,9 @@ hr {
   justify-content: space-between;
   align-items: center;
 }
+.glass, .outline, .article-result {
+  box-shadow: -2px 2px 3 px 1px rgba(24,24,24,0.2);
+}
 
 .article-result {
   width: 100%; 
@@ -112,7 +115,7 @@ hr {
 
 /* to make bootstrap columns equal height */
 .row-eq-height{
-  margin-top: 4px;
+  // margin-top: 4px;
   display: flex;
   flex-wrap: wrap;
 }
@@ -127,20 +130,19 @@ hr {
   padding: 10px 25px;
 }
 .title {
-  font-size: 40px;
+  font-size: 28px;
 }
 .subtitle {
   padding-top: 0px;
-  font-size: 24px;
+  font-size: 18px;
 }
-.text, .paragraph {
+.paragraph {
   font-size: 16px;
+  padding: 2px 20px;
+  align-self: flex-start;
 }
 .text {
   padding: 0px 25px;
-}
-.paragraph {
-  padding: 10px 20px;
 }
 .article-title {
   padding: 0px 20px;
@@ -213,6 +215,39 @@ hr {
 .nav-link:focus {
   text-decoration: underline;
 }
+// 
+
+/* the about page */
+.about-img {
+  width: 90%;
+  margin: 10px;
+  border-radius: 2px;
+  box-shadow: -2px 2px 6px 1px rgba(24,24,24,0.4);
+}
+.fa-file-alt, .fa-users {
+  color: whitesmoke;
+  transition: all 0.3s ease;
+  font-size: 30px;
+  margin: 20px;
+}
+.fa-project-diagram {
+  color: whitesmoke;
+  transition: all 1s ease;
+  &:hover {
+    transform: translateX(40px) translateY(-15px) rotate(390deg);
+    cursor: pointer;
+    color: $main-blue;
+  }
+  font-size: 20px;
+  margin: 25px 5px;
+}
+.fa-gradient {
+  background: -webkit-gradient(linear, left top, right bottom, from(rgb(255, 255, 255)), to(rgb(81, 90, 141)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+//
 
 /* the search page */
 .search-input {
@@ -277,8 +312,7 @@ input {
 
 // the profile page
 .profile-title {
-  margin: 10px;
-  margin-left: 20px;
+  margin: 10px 20px;
   font-size: 18px;
   align-self: flex-start;
   font-weight: 600;
@@ -296,6 +330,7 @@ input {
   margin: 10px;
 }
 
+
 // the ThreadPage
 .thread-title, .thread-text, .comment-title, .comment-text {
   margin-left: 24px;
@@ -303,7 +338,6 @@ input {
 
 .thread {
   align-self: flex-start;
-  border: 1px solid white;
 }
 .thread-title {
   font-weight: 600;

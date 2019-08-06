@@ -4,14 +4,11 @@ import HomePage from './HomePage';
 import { shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 
-// tools
-import { getArticles, parseSearchToTitlesArray } from '../../tools/apiFunctions';
+// react router context
+import { MemoryRouter } from 'react-router-dom';
 
-const DELAY_MS = 2000
-
-const sleep = (ms) => {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+// mock server functions
+jest.mock('../../tools/apiFunctions.js');
 
 // tests
 it('renders without crashing', async () => {
@@ -22,25 +19,26 @@ it('renders without crashing', async () => {
 
 it('renders correctly', async () => {
   const tree = await renderer
-    .create(<HomePage />)
+    .create(<MemoryRouter>
+      <HomePage />
+    </MemoryRouter>)
     .toJSON();
   expect(tree).toMatchSnapshot();
 });
 
 it('contains the .page div', () => {
-  let wrapper = shallow(<HomePage />);
-  expect(wrapper.html()).toContain('div class=\"page\"')
-});
+  let wrapper = mount(
+    <MemoryRouter>
+      <HomePage />
+    </MemoryRouter>);
 
-it('contains Header elements', async () => {
-  let wrapper = mount(<HomePage />);
-  expect(wrapper.html()).toContain('h2 class=\"title\"');
-  expect(wrapper.html()).toContain('h4 class=\"subtitle\"');
-})
+  // these are in the header
+  expect(wrapper.find('.title').length).toBe(1);
+  expect(wrapper.find('.subtitle').length).toBe(1);
 
-// this also tests that the TextBlock elements are getting rendered
-it('contains .glass elements', async () => {
-  let wrapper = mount(<HomePage />);
+  // these are direct children
+  expect(wrapper.find('.page').length).toBe(1);
+  expect(wrapper.find('.profile-title').length).toBe(4);
   expect(wrapper.find('.glass').length).toEqual(5);
 })
 
@@ -52,11 +50,11 @@ it('contains search results after fetch', async () => {
 
   // then trigger the fetch
   await wrapper.instance().componentDidMount();
-  
+
   // unfortunately it seems this is necessary? tried to find alternative, will
   // try again
   // await sleep(DELAY_MS)
-  
+
   // should have results
   await wrapper.update();
   expect(wrapper.state().newPublicationsInfo.paragraph.length).not.toBe(0)

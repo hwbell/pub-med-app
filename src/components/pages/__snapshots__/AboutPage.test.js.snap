@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
+exports[`AboutPage renders correctly 1`] = `
 <div
   className="about-page page"
 >
@@ -13,23 +13,175 @@ exports[`renders correctly 1`] = `
       <h2
         className="title"
       >
-        About PubMed Central
+        About this Site
       </h2>
       <h4
         className="subtitle"
       >
-        medical & life sciences literature for the public
+        medical & life sciences literature for everyone
       </h4>
     </div>
     <div
       className="outline"
     >
+      <div>
+        <div
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flexDirection": "row",
+              "justifyContent": "flex-start",
+            }
+          }
+        >
+          <p
+            className="profile-title"
+          >
+            Why make this site?
+          </p>
+          <div
+            className="row"
+          >
+            <i
+              className="far fa-file-alt"
+            />
+            <i
+              className="fas fa-project-diagram"
+            />
+            <i
+              className="fas fa-users"
+            />
+          </div>
+        </div>
+        <p
+          className="paragraph"
+        >
+          Any researcher has a constant need for scientific literature. Whether is 
+    is to research something new, gain background knowledge on an existing topic, or
+    purely out of curiosity, we all need the resources that PubMed provides. However,
+    I think it should be easier and more seamless for scientists to gather resources and
+    share them in a public forum. There are several such websites out there, but there is an
+    air of exclusivity surrounding them. I believe research, especially publicly funded
+    research, should be as available and free as we can make it. Please join the site and
+    help me make this part of the human experience more accessible for everyone!
+        </p>
+      </div>
+      <div>
+        <div
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flexDirection": "row",
+              "justifyContent": "flex-start",
+            }
+          }
+        >
+          <p
+            className="profile-title"
+          >
+            What can you do with this site?
+          </p>
+          <div
+            className="row"
+          />
+        </div>
+        <p
+          className="paragraph"
+        >
+          The first thing you should do is make a user profile! It only takes a few seconds, and 
+    you just need to provide an email address and password. Once you are logged in, you can 
+    use all the features of the site.
+          Use this site as you would PubMed to find abstracts, articles, and more! If you are
+    compiling a list of papers / publications, you will find the collection page very useful! 
+    If you are looking to connect with other researchers to discuss publications or other topics,
+    you will want to explore the threads page! Read more below ... 
+        </p>
+      </div>
+      <div>
+        <div
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flexDirection": "row",
+              "justifyContent": "flex-start",
+            }
+          }
+        >
+          <p
+            className="profile-title"
+          >
+            Collections
+          </p>
+          <div
+            className="row"
+          >
+            <i
+              className="fas fa-atom"
+            />
+          </div>
+        </div>
+        <p
+          className="paragraph"
+        >
+          Add any articles from a search to your collections. Then, organize and export your 
+    collections as a pdf. You can also save them to your user account if you'd like to come back 
+    later.
+        </p>
+      </div>
+      <div>
+        <div
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flexDirection": "row",
+              "justifyContent": "flex-start",
+            }
+          }
+        >
+          <p
+            className="profile-title"
+          >
+            Threads
+          </p>
+          <div
+            className="row"
+          >
+            <i
+              className="fas fa-dna"
+            />
+          </div>
+        </div>
+        <p
+          className="paragraph"
+        >
+          Start a thread about any topic! We strongly encourage people to keep the discussion 
+    scientific. We ask that users begin their discussion concerning specific resources found here
+    on PubMed, but we also realize this always leads to a broader discussion, and that is 
+    a good thing! Anyone will be able to comment on your thread, but only you may edit it.
+        </p>
+      </div>
+    </div>
+    <div
+      className="outline"
+    >
+      <p
+        className="profile-title"
+      >
+        About PMC
+      </p>
       <p
         className="paragraph"
       >
         From Wikipedia, the free encyclopedia:
-
-      PubMed Central (PMC) is a free digital repository that archives publicly 
+      </p>
+      <p
+        className="paragraph"
+      >
+        PubMed Central (PMC) is a free digital repository that archives publicly 
       accessible full-text scholarly articles that have been published within 
       the biomedical and life sciences journal literature. As one of the major 
       research databases within the suite of resources that have been developed 
@@ -41,47 +193,24 @@ exports[`renders correctly 1`] = `
       interlinked to many other NCBI databases and accessed via Entrez search 
       and retrieval systems, further enhancing the public's ability to freely 
       discover, read and build upon this portfolio of biomedical knowledge.[2]
-      
-
-      
-
-      
-      PubMed Central is very distinct from PubMed.[3] PubMed Central is a free 
-      digital archive of full articles, accessible to anyone from anywhere via 
-      a web browser (with varying provisions for reuse). Conversely, although 
-      PubMed is a searchable database of biomedical citations and abstracts, 
-      the full-text article physically resides elsewhere (in print or online, 
-      free or behind a subscriber paywall).
       </p>
     </div>
     <img
+      className="about-img"
       src="about-page.png"
-      style={
-        Object {
-          "borderRadius": "10px",
-          "margin": "15px",
-        }
-      }
     />
     <div
       className="outline"
-      style={
-        Object {
-          "margin": "10px auto",
-          "width": "100%",
-        }
-      }
     >
       <p
         className="paragraph"
-        style={
-          Object {
-            "alignSelf": "",
-            "paddingTop": "10px",
-          }
-        }
       >
-        As of December 2018, the PMC archive contained over 5.2 million 
+        PubMed Central is very distinct from PubMed.[3] PubMed Central is a free 
+    digital archive of full articles, accessible to anyone from anywhere via 
+    a web browser (with varying provisions for reuse). Conversely, although 
+    PubMed is a searchable database of biomedical citations and abstracts, 
+    the full-text article physically resides elsewhere (in print or online, 
+    free or behind a subscriber paywall). As of December 2018, the PMC archive contained over 5.2 million 
     articles,[4] with contributions coming directly from publishers or authors 
     depositing their own manuscripts into the repository per the NIH Public 
     Access Policy. Older data shows that from Jan 2013 to Jan 2014 

@@ -106,6 +106,7 @@ describe('ThreadPage', () => {
     expect(wrapper.find('.glass').length).toBe(1)
     expect(wrapper.find('.add').length).toBe(1);
 
+    expect(wrapper.find('Fade').length).toBe(1)
     expect(wrapper.find('Header').length).toBe(1)
 
     expect(wrapper.find('Header').props().title).toBe('PMC Threads');
@@ -142,6 +143,22 @@ describe('ThreadPage', () => {
     expect(wrapper.find('.section-title').at(1).text()).toBe('recent threads');
 
   })
+
+  it('should not display the "start new thread" button if there is no user in props', () => {
+
+    // first we have a user so .in will be true 
+    expect(wrapper.find('Fade').props().in).toBe(true);
+
+    wrapper.setProps({
+      user: null
+    });
+
+    // now there is no user, and the fade disappears, .in = false
+    wrapper.update();
+    expect(wrapper.find('Fade').props().in).toBe(false);
+  })
+
+
 
   it('should toggle the showThreadForm boolean', () => {
 
@@ -199,8 +216,6 @@ describe('ThreadPage', () => {
   // if there are server collections in props, this is a result of fetching them previously and
   // passing the result back to App, which then provides them as props.
   it('should fire fetchServerThreads() on startup if there are no serverThreads as props', async () => {
-
-
     someProps.serverThreads = null;
 
     const newWrapper = shallow(<ThreadPage {...someProps} />);

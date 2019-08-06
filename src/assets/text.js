@@ -14,11 +14,60 @@ const aboutPageText = {
     of Health (NIH) freely accessible to anyone, and, in addition, many 
     publishers are working cooperatively with the NIH to provide free access 
     to their works.`,
-
   full: {
-    top: `From Wikipedia, the free encyclopedia:
+    top: [
+      {
+        title: 'Why make this site?',
+        icons: ['far fa-file-alt', 'fas fa-project-diagram', 'fas fa-users'],
+        text: [
+          `Any researcher has a constant need for scientific literature. Whether is 
+    is to research something new, gain background knowledge on an existing topic, or
+    purely out of curiosity, we all need the resources that PubMed provides. However,
+    I think it should be easier and more seamless for scientists to gather resources and
+    share them in a public forum. There are several such websites out there, but there is an
+    air of exclusivity surrounding them. I believe research, especially publicly funded
+    research, should be as available and free as we can make it. Please join the site and
+    help me make this part of the human experience more accessible for everyone!`
+        ]
+      },
+      {
+        title: 'What can you do with this site?',
+        icons: [],
+        text: [
+          `The first thing you should do is make a user profile! It only takes a few seconds, and 
+    you just need to provide an email address and password. Once you are logged in, you can 
+    use all the features of the site.`,
+          `Use this site as you would PubMed to find abstracts, articles, and more! If you are
+    compiling a list of papers / publications, you will find the collection page very useful! 
+    If you are looking to connect with other researchers to discuss publications or other topics,
+    you will want to explore the threads page! Read more below ... `
+        ]
+      },
+      {
+        title: 'Collections',
+        icons: ['fas fa-atom'],
+        text: [
+          `Add any articles from a search to your collections. Then, organize and export your 
+    collections as a pdf. You can also save them to your user account if you'd like to come back 
+    later.`
+        ]
+      },
 
-      PubMed Central (PMC) is a free digital repository that archives publicly 
+      {
+        title: 'Threads',
+        icons: ['fas fa-dna'],
+        text: [
+          `Start a thread about any topic! We strongly encourage people to keep the discussion 
+    scientific. We ask that users begin their discussion concerning specific resources found here
+    on PubMed, but we also realize this always leads to a broader discussion, and that is 
+    a good thing! Anyone will be able to comment on your thread, but only you may edit it.`
+        ]
+      }
+    ],
+
+    middle: [`From Wikipedia, the free encyclopedia:`,
+
+      `PubMed Central (PMC) is a free digital repository that archives publicly 
       accessible full-text scholarly articles that have been published within 
       the biomedical and life sciences journal literature. As one of the major 
       research databases within the suite of resources that have been developed 
@@ -29,17 +78,14 @@ const aboutPageText = {
       data for each article on deposit.[1] Content within PMC can easily be 
       interlinked to many other NCBI databases and accessed via Entrez search 
       and retrieval systems, further enhancing the public's ability to freely 
-      discover, read and build upon this portfolio of biomedical knowledge.[2]
-      \n
-      \n
-      
-      PubMed Central is very distinct from PubMed.[3] PubMed Central is a free 
-      digital archive of full articles, accessible to anyone from anywhere via 
-      a web browser (with varying provisions for reuse). Conversely, although 
-      PubMed is a searchable database of biomedical citations and abstracts, 
-      the full-text article physically resides elsewhere (in print or online, 
-      free or behind a subscriber paywall).`,
-    bottom: `As of December 2018, the PMC archive contained over 5.2 million 
+      discover, read and build upon this portfolio of biomedical knowledge.[2]`],
+
+    bottom: `PubMed Central is very distinct from PubMed.[3] PubMed Central is a free 
+    digital archive of full articles, accessible to anyone from anywhere via 
+    a web browser (with varying provisions for reuse). Conversely, although 
+    PubMed is a searchable database of biomedical citations and abstracts, 
+    the full-text article physically resides elsewhere (in print or online, 
+    free or behind a subscriber paywall). As of December 2018, the PMC archive contained over 5.2 million 
     articles,[4] with contributions coming directly from publishers or authors 
     depositing their own manuscripts into the repository per the NIH Public 
     Access Policy. Older data shows that from Jan 2013 to Jan 2014 

@@ -138,10 +138,11 @@ class Thread extends React.Component {
           {this.renderCommentForm()}
 
           {/* this uses the same boolean, flipped */}
-          <Fade style={styles.button} in={!this.state.showCommentForm}>
-            <Button disabled={this.state.showCommentForm} className="view article-button" size="sm"
-              onClick={this.toggleCommentForm}>comment</Button>
-          </Fade>
+          {this.props.user &&
+            <Fade style={styles.button} in={!this.state.showCommentForm}>
+              <Button disabled={this.state.showCommentForm} className="view article-button" size="sm"
+                onClick={this.toggleCommentForm}>comment</Button>
+            </Fade>}
 
         </CSSTransitionGroup>
       </div>
@@ -208,7 +209,7 @@ const styles = {
   },
   hr: {
     backgroundColor: 'rgba(245,245,245,0.1)',
-    margin: 0, 
+    margin: 0,
     padding: 0
   }
 }

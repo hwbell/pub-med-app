@@ -64,7 +64,7 @@ class HomePage extends React.Component {
     super(props);
 
     this.fetchArticles = this.fetchArticles.bind(this);
-    
+
     this.state = {
       newPublicationsInfo: {
         title: 'New Publications',
@@ -78,7 +78,7 @@ class HomePage extends React.Component {
     return getArticles('medicine', 'date')
       .then((results) => {
         // console.log(results)
-        let articleTitles = parseSearchToTitlesArray(results).slice(0,4);
+        let articleTitles = parseSearchToTitlesArray(results).slice(0, 4);
         this.setState({
           newPublicationsInfo: {
             title: 'New Publications',
@@ -108,12 +108,14 @@ class HomePage extends React.Component {
 
           <div className="col col-12 col-md-8">
             <TextBlock
+              linkTo={'/about/'}
               text={aboutIntro}
             />
           </div>
 
           <div className="col col-12 col-md-4">
             <TextBlock
+              linkTo={'/search/'}
               text={resourcesIntro}
             />
           </div>
@@ -123,6 +125,7 @@ class HomePage extends React.Component {
 
           <div className="col-12 col-md-4">
             <TextBlock
+              linkTo={'/search/'}
               text={journalsIntro}
             />
           </div>
@@ -130,6 +133,7 @@ class HomePage extends React.Component {
           <div className="col-12 col-md-8">
             {this.state.newPublicationsInfo &&
               <TextBlock
+                linkTo={'/search/'}
                 text={this.state.newPublicationsInfo}
               />}
           </div>

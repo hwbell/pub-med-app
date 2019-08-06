@@ -175,7 +175,7 @@ export async function saveThread(thread, headers, isComment, isUserEdit) {
   let url = `${collectionServerUrl}threads`;
   let method, body;
 
-  if (isUserEdit) {
+  if (isUserEdit && !isComment) {
     body = {
       name: thread.name,
       article: thread.article,
@@ -198,6 +198,8 @@ export async function saveThread(thread, headers, isComment, isUserEdit) {
     method = 'POST';
   }
 
+  console.log(body)
+  console.log(url)
   let serverResponse = await fetch(url, {
     method,
     body: JSON.stringify(body),

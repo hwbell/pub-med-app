@@ -4,12 +4,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { aboutPageText } from "../../assets/text";
 // components
 import Header from '../Header';
-import OutlinedText from '../OutlinedText';
-
-// elements
-
-// styling
-// import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class AboutPage extends React.Component {
   constructor(props) {
@@ -31,21 +25,47 @@ class AboutPage extends React.Component {
 
           <Header
             class="heading"
-            title={"About PubMed Central"}
-            subtitle={"medical & life sciences literature for the public"}
+            title={"About this Site"}
+            subtitle={"medical & life sciences literature for everyone"}
           />
 
           <div className="outline" style={styles.content}>
 
-            <p className="paragraph" style={styles.text}>{aboutPageText.full.top}</p>
+            {aboutPageText.full.top.map((section) => {
+              return (
+                <div>
+                  <div style={styles.titleHolder}>
+                    <p className="profile-title">{section.title}</p>
+
+                    <div className="row">
+                      {section.icons.map((icon) => {
+                        return <i className={icon}></i>
+                      })}
+                    </div>
+                  </div>
+
+                  <p className="paragraph">{section.text}</p>
+                </div>
+              )
+            })}
 
           </div>
 
-          <img style={{ margin: '15px', borderRadius: '10px' }} src={require('../../assets/about-page.png')}></img>
+          <div className="outline" style={styles.content}>
 
-          <OutlinedText
-            text={aboutPageText.full.bottom}
-          />
+            <p className="profile-title">About PMC</p>
+            <p className="paragraph">{aboutPageText.full.middle[0]}</p>
+            <p className="paragraph">{aboutPageText.full.middle[1]}</p>
+
+          </div>
+
+          <img className="about-img" src={require('../../assets/about-page.png')}></img>
+
+          <div className="outline" style={styles.content}>
+
+            <p className="paragraph">{aboutPageText.full.bottom}</p>
+
+          </div>
 
         </div>
       </div>
@@ -56,6 +76,12 @@ class AboutPage extends React.Component {
 const styles = {
   main: {
     width: '100%'
+  },
+  titleHolder: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
   }
 }
 

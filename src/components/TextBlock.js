@@ -4,15 +4,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 // components
 import { Button } from 'reactstrap';
+import { Link } from 'react-router-dom';
+const Router = require("react-router-dom").BrowserRouter;
 
-var ncbi = require('node-ncbi');
-
-// elements
-
-// styling
-// import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-
-// elements
 
 class TextBlock extends React.Component {
   constructor(props) {
@@ -20,27 +14,24 @@ class TextBlock extends React.Component {
 
     this.state = {
       results: null
-
     };
   }
 
-  componentDidMount() {
-    // 
-  }
-
   render() {
-
-
+    console.log(this.props.linkTo)
 
     return (
       <div className={this.props.class || "glass"} style={styles.content}>
-        <h4 className="subtitle" style={{ alignSelf: 'flex-start', margin: '10px' }}>{this.props.text.title}</h4>
+        <p className="profile-title">{this.props.text.title}</p>
 
         {this.props.text.paragraph.map((el, i) =>
-          <p key={i} className="text" style={{ alignSelf: 'flex-start' }}>{el}</p>
+          <p key={i} className="paragraph" style={{ alignSelf: 'flex-start' }}>{el}</p>
         )}
 
-        <Button color='primary' size="sm" className="block-button">{this.props.text.button}</Button>
+          <Button color='primary' size="sm" className="block-button"
+            onClick={this.props.navigateToResource}>
+            <Link to={this.props.linkTo || '/about'} style={{color: 'white'}}>{this.props.text.button}</Link>
+          </Button>
 
       </div>
 
@@ -52,10 +43,6 @@ const styles = {
   content: {
     height: '100%',
   },
-  text: {
-    color: 'white'
-  },
-
 }
 
 export default TextBlock;

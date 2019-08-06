@@ -52,7 +52,7 @@ class SearchPage extends React.Component {
   }
 
   componentDidMount() {
-   return this.fetchSearch('medicine');
+   return this.fetchSearch('medicine', 'date');
   }
 
   // get the results from the api

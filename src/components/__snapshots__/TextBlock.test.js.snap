@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
+exports[`TextBlock renders correctly 1`] = `
 <div
   className="glass"
   style={
@@ -9,19 +9,13 @@ exports[`renders correctly 1`] = `
     }
   }
 >
-  <h4
-    className="subtitle"
-    style={
-      Object {
-        "alignSelf": "flex-start",
-        "margin": "10px",
-      }
-    }
+  <p
+    className="profile-title"
   >
     About PMC
-  </h4>
+  </p>
   <p
-    className="text"
+    className="paragraph"
     style={
       Object {
         "alignSelf": "flex-start",
@@ -43,8 +37,19 @@ exports[`renders correctly 1`] = `
     aria-label={null}
     className="block-button btn btn-primary btn-sm"
     onClick={[Function]}
+    type="button"
   >
-    read more
+    <a
+      href="/threads/"
+      onClick={[Function]}
+      style={
+        Object {
+          "color": "white",
+        }
+      }
+    >
+      read more
+    </a>
   </button>
 </div>
 `;

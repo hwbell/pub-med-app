@@ -14,15 +14,6 @@ var ncbi = require('node-ncbi');
 class Header extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      results: null
-
-    };
-  }
-
-  componentDidMount() {
-  // 
   }
 
   render() {

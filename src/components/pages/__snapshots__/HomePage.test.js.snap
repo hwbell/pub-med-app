@@ -32,19 +32,13 @@ exports[`renders correctly 1`] = `
           }
         }
       >
-        <h4
-          className="subtitle"
-          style={
-            Object {
-              "alignSelf": "flex-start",
-              "margin": "10px",
-            }
-          }
+        <p
+          className="profile-title"
         >
           About PMC
-        </h4>
+        </p>
         <p
-          className="text"
+          className="paragraph"
           style={
             Object {
               "alignSelf": "flex-start",
@@ -67,7 +61,17 @@ exports[`renders correctly 1`] = `
           className="block-button btn btn-primary btn-sm"
           onClick={[Function]}
         >
-          read more
+          <a
+            href="/about/"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "white",
+              }
+            }
+          >
+            read more
+          </a>
         </button>
       </div>
     </div>
@@ -82,19 +86,13 @@ exports[`renders correctly 1`] = `
           }
         }
       >
-        <h4
-          className="subtitle"
-          style={
-            Object {
-              "alignSelf": "flex-start",
-              "margin": "10px",
-            }
-          }
+        <p
+          className="profile-title"
         >
           Resources
-        </h4>
+        </p>
         <p
-          className="text"
+          className="paragraph"
           style={
             Object {
               "alignSelf": "flex-start",
@@ -104,7 +102,7 @@ exports[`renders correctly 1`] = `
           abstracts &gt; 34 million
         </p>
         <p
-          className="text"
+          className="paragraph"
           style={
             Object {
               "alignSelf": "flex-start",
@@ -114,7 +112,7 @@ exports[`renders correctly 1`] = `
           full text articles &gt; 5 million
         </p>
         <p
-          className="text"
+          className="paragraph"
           style={
             Object {
               "alignSelf": "flex-start",
@@ -124,7 +122,7 @@ exports[`renders correctly 1`] = `
           patents &gt; 4 million
         </p>
         <p
-          className="text"
+          className="paragraph"
           style={
             Object {
               "alignSelf": "flex-start",
@@ -134,7 +132,7 @@ exports[`renders correctly 1`] = `
           preprints &gt; 74,000
         </p>
         <p
-          className="text"
+          className="paragraph"
           style={
             Object {
               "alignSelf": "flex-start",
@@ -144,7 +142,7 @@ exports[`renders correctly 1`] = `
           agricola records &gt; 700,000
         </p>
         <p
-          className="text"
+          className="paragraph"
           style={
             Object {
               "alignSelf": "flex-start",
@@ -158,7 +156,17 @@ exports[`renders correctly 1`] = `
           className="block-button btn btn-primary btn-sm"
           onClick={[Function]}
         >
-          find a resource
+          <a
+            href="/search/"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "white",
+              }
+            }
+          >
+            find a resource
+          </a>
         </button>
       </div>
     </div>
@@ -177,19 +185,13 @@ exports[`renders correctly 1`] = `
           }
         }
       >
-        <h4
-          className="subtitle"
-          style={
-            Object {
-              "alignSelf": "flex-start",
-              "margin": "10px",
-            }
-          }
+        <p
+          className="profile-title"
         >
           Journals
-        </h4>
+        </p>
         <p
-          className="text"
+          className="paragraph"
           style={
             Object {
               "alignSelf": "flex-start",
@@ -199,7 +201,7 @@ exports[`renders correctly 1`] = `
           Nature
         </p>
         <p
-          className="text"
+          className="paragraph"
           style={
             Object {
               "alignSelf": "flex-start",
@@ -209,7 +211,7 @@ exports[`renders correctly 1`] = `
           Science
         </p>
         <p
-          className="text"
+          className="paragraph"
           style={
             Object {
               "alignSelf": "flex-start",
@@ -219,7 +221,7 @@ exports[`renders correctly 1`] = `
           Cardiology and Therapy
         </p>
         <p
-          className="text"
+          className="paragraph"
           style={
             Object {
               "alignSelf": "flex-start",
@@ -229,7 +231,7 @@ exports[`renders correctly 1`] = `
           Anatomy and Cell Biology
         </p>
         <p
-          className="text"
+          className="paragraph"
           style={
             Object {
               "alignSelf": "flex-start",
@@ -239,7 +241,7 @@ exports[`renders correctly 1`] = `
           Journal of Applied Physics
         </p>
         <p
-          className="text"
+          className="paragraph"
           style={
             Object {
               "alignSelf": "flex-start",
@@ -249,7 +251,7 @@ exports[`renders correctly 1`] = `
           PLoS Genetics
         </p>
         <p
-          className="text"
+          className="paragraph"
           style={
             Object {
               "alignSelf": "flex-start",
@@ -263,7 +265,17 @@ exports[`renders correctly 1`] = `
           className="block-button btn btn-primary btn-sm"
           onClick={[Function]}
         >
-          search literature
+          <a
+            href="/search/"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "white",
+              }
+            }
+          >
+            search literature
+          </a>
         </button>
       </div>
     </div>
@@ -278,23 +290,27 @@ exports[`renders correctly 1`] = `
           }
         }
       >
-        <h4
-          className="subtitle"
-          style={
-            Object {
-              "alignSelf": "flex-start",
-              "margin": "10px",
-            }
-          }
+        <p
+          className="profile-title"
         >
           New Publications
-        </h4>
+        </p>
         <button
           aria-label={null}
           className="block-button btn btn-primary btn-sm"
           onClick={[Function]}
         >
-          more articles
+          <a
+            href="/search/"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "white",
+              }
+            }
+          >
+            more articles
+          </a>
         </button>
       </div>
     </div>

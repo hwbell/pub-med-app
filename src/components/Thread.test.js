@@ -32,6 +32,10 @@ describe('Thread', () => {
       commentsCount: 2
     }
     someProps = {
+      user: {
+        name: 'mark',
+        _id: '9898y23e23ee20389u'
+      },
       thread,
       toggleThreadForm: toggleThreadFormStub
     };
@@ -68,6 +72,15 @@ describe('Thread', () => {
     let paragraph = thread.paragraph.slice(0,50);
     expect(wrapper.find('.thread-text').at(1).text()).toBe(paragraph + ` ...`);
 
+  })
+
+  it('should not display the comment button if there is no user in props', () => {
+    wrapper.setProps({
+      user: null
+    });
+    wrapper.update();
+
+    expect(wrapper.find('.view').length).toBe(0);
   })
 
   it('should toggle the comment form', () => {

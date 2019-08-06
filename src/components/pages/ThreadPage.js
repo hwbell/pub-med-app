@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Header from '../Header';
 import Thread from '../Thread';
 import ThreadForm from '../ThreadForm';
-import { Button } from 'reactstrap';
+import { Button, Fade } from 'reactstrap';
 
 // functions
 import { getPublicThreads, saveThread } from '../../tools/serverFunctions';
@@ -30,7 +30,8 @@ class ThreadPage extends React.Component {
       showThreadForm: false,
       showUniqueWarning: false,
       threadPage: 1,
-      threadSorter: 'date'
+      threadSorter: 'date',
+      loading: 'false'
     }
 
     this.fetchServerThreads = this.fetchServerThreads.bind(this);
@@ -42,11 +43,16 @@ class ThreadPage extends React.Component {
 
   componentDidMount() {
 
-    console.log(!this.props.serverThreads)
+    // console.log(!this.props.serverThreads)
 
     if (!this.props.serverThreads) {
       console.log('there are no serverThreads in props')
-      this.fetchServerThreads();
+      this.setState({
+        loading: true
+      }, () => {
+        this.fetchServerThreads();
+      })
+
     }
   }
 
@@ -62,8 +68,10 @@ class ThreadPage extends React.Component {
         // once we have posted, we will register in App. 
         // This is handled separately from patches / posts, because when we fetch the entire list,
         // we can just register that as the serverThreads in App
-        this.props.registerServerThreads(response)
-
+        this.props.registerServerThreads(response);
+        this.setState({
+          loading: false
+        })
 
         // Fail => show the fail message / reason
 
@@ -82,9 +90,9 @@ class ThreadPage extends React.Component {
   renderThreads(threads, isUsers) {
     let title = isUsers ? 'your threads' : 'recent threads';
 
-    // for the server threads, filter out the user's own threads
-    // we can already access them in the user section
-    if (!isUsers) {
+    // for the server threads, filter out the user's own threads if the user
+    // is logged in - we can already access them in the user section
+    if (!isUsers && this.props.user) {
       threads = threads.filter(thread => thread.owner !== this.props.user._id)
     }
     return (
@@ -92,6 +100,7 @@ class ThreadPage extends React.Component {
         <p className="section-title">{title}</p>
         {threads.map((thread, i) => {
           return <Thread key={i}
+            user={this.props.user}
             allowEdit={isUsers}
             thread={thread}
             handleSubmitThread={this.handleSubmitThread}
@@ -232,6 +241,7 @@ class ThreadPage extends React.Component {
     const haveUserThreads = user && user.threads && user.threads.length > 0;
     const haveServerThreads = serverThreads && serverThreads.length > 0;
 
+    const headerSubtitle = this.props.user ? "post a thread to start a discussion" : "login and post a thread to start a discussion";
     return (
       <div className="page">
 
@@ -247,20 +257,27 @@ class ThreadPage extends React.Component {
 
         <div className="glass page-content" >
 
+
           {/* the header */}
           <Header
             class="heading"
             title={"PMC Threads"}
-            subtitle={"post a thread to start a discussion"}
+            subtitle={headerSubtitle}
           />
 
-          {/* make a new thread */}
-          <Button className="add article-button" siz="md" style={styles.button}
-            onClick={this.toggleThreadForm}>start a new thread</Button>
+          <div style={styles.threadsHolder}>
+            {/* the button for new threads - only present when logged in */}
+            <Fade in={!!this.props.user} style={styles.buttonHolder}>
+              <Button className="add article-button" size="sm"
+                onClick={this.toggleThreadForm}>+ new</Button>
+            </Fade>
 
-          {haveUserThreads && this.renderThreads(user.threads, true)}
+            {haveUserThreads && this.renderThreads(user.threads, true)}
 
-          {haveServerThreads && this.renderThreads(serverThreads)}
+            {haveServerThreads && this.renderThreads(serverThreads)}
+
+
+          </div>
 
 
         </div>
@@ -271,9 +288,16 @@ class ThreadPage extends React.Component {
 }
 
 const styles = {
-  button: {
-    margin: '24px',
-    // alignSelf: 'flex-start'
+  buttonHolder: {
+    position: 'absolute',
+    top: '18px',
+    right: '30px',
+    display: 'flex',
+    flexDirection: 'row'
+  },
+  threadsHolder: {
+    position: 'relative',
+    width: '100%'
   }
 }
 
