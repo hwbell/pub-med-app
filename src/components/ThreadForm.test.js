@@ -13,6 +13,7 @@ const handleChangeStub = jest.fn();
 
 const thread = {
   name: 'Sourcing of PMID: 013091283',
+  _id: '488ut3t',
   article: '013091283',
   user: 'The Creator',
   paragraph: 'I found the source material for the basis of this study to be lacking. Does anyone else agree?',
@@ -100,7 +101,7 @@ describe('ThreadForm', () => {
     })
   })
 
-  it('should fire the provided handleSumbitThread() function when OK is clicked', () => {
+  it('should fire the provided handleSubmitThread() function when OK is clicked', () => {
     wrapper.setProps({
       thread
     });

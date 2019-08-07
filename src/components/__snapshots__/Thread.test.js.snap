@@ -33,6 +33,18 @@ exports[`Thread renders correctly 1`] = `
     <p
       className="thread-text"
     >
+      articles mentioned: 
+      <button
+        aria-label={null}
+        className="article-button btn btn-link"
+        onClick={[Function]}
+      >
+        013091283
+      </button>
+    </p>
+    <p
+      className="thread-text"
+    >
       I found the source material for the basis of this  ...
     </p>
     <hr

@@ -97,7 +97,7 @@ class Thread extends React.Component {
 
   renderThread() {
 
-    let thread = this.props.thread;
+    let thread = JSON.parse(JSON.stringify(this.props.thread));
 
     return (
       <div style={styles.threadContainer}>
@@ -106,7 +106,7 @@ class Thread extends React.Component {
         {this.props.allowEdit &&
           <div style={styles.buttonHolder}>
             <i className="fas fa-edit article-button"
-              onClick={() => this.props.toggleThreadForm(this.props.thread)}></i>
+              onClick={() => this.props.handleEdit(thread)}></i>
 
             <i className="fas fa-trash-alt article-button"
               onClick={this.toggleDeleteWarning}></i>
@@ -116,6 +116,11 @@ class Thread extends React.Component {
         <p className="thread-title" style={styles.text}>{thread.name}</p>
         <p className="thread-text">
           <i className=" far fa-user"></i>{`  ${thread.user}`}
+        </p>
+
+        <p className="thread-text">
+          {`articles mentioned: `}
+          <Button color="link" className="article-button">{`${thread.article}`}</Button>
         </p>
 
         {thread.paragraph && <p className="thread-text" >{thread.paragraph.slice(0, 50) + ` ...`}</p>}

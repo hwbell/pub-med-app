@@ -64,7 +64,7 @@ class ProfileForm extends React.Component {
 
 
 
-    console.log(this.state.profileInfo)
+    // console.log(this.state.profileInfo)
 
     return (
       <Modal centered={true}

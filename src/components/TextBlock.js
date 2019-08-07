@@ -24,14 +24,16 @@ class TextBlock extends React.Component {
       <div className={this.props.class || "glass"} style={styles.content}>
         <p className="profile-title">{this.props.text.title}</p>
 
-        {this.props.text.paragraph.map((el, i) =>
-          <p key={i} className="paragraph" style={{ alignSelf: 'flex-start' }}>{el}</p>
-        )}
+        <div>
+          {this.props.text.paragraph.map((el, i) =>
+            <p key={i} className="paragraph" style={{ alignSelf: 'flex-start' }}>{el}</p>
+          )}
+        </div>
 
-          <Button color='primary' size="sm" className="block-button"
-            onClick={this.props.navigateToResource}>
-            <Link to={this.props.linkTo || '/about'} style={{color: 'white'}}>{this.props.text.button}</Link>
-          </Button>
+        <Button color='primary' size="sm" className="block-button"
+          onClick={this.props.navigateToResource}>
+          <Link to={this.props.linkTo || '/about'} style={{ color: 'white' }}>{this.props.text.button}</Link>
+        </Button>
 
       </div>
 
@@ -42,6 +44,10 @@ class TextBlock extends React.Component {
 const styles = {
   content: {
     height: '100%',
+    display: 'flex', 
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start'
   },
 }
 

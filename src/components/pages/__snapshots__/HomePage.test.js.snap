@@ -28,7 +28,11 @@ exports[`renders correctly 1`] = `
         className="glass"
         style={
           Object {
+            "alignItems": "flex-start",
+            "display": "flex",
+            "flexDirection": "column",
             "height": "100%",
+            "justifyContent": "space-between",
           }
         }
       >
@@ -37,15 +41,16 @@ exports[`renders correctly 1`] = `
         >
           About PMC
         </p>
-        <p
-          className="paragraph"
-          style={
-            Object {
-              "alignSelf": "flex-start",
+        <div>
+          <p
+            className="paragraph"
+            style={
+              Object {
+                "alignSelf": "flex-start",
+              }
             }
-          }
-        >
-          PubMed Central (PMC) is a free digital repository that archives 
+          >
+            PubMed Central (PMC) is a free digital repository that archives 
   publicly accessible full-text scholarly articles that have been published within the 
   biomedical and life sciences journal literature. As one of the major research 
   databases within the suite of resources that have been developed by the National 
@@ -55,7 +60,8 @@ exports[`renders correctly 1`] = `
   National Institutes of Health (NIH) freely accessible to anyone, and, in addition, 
   many publishers are working cooperatively with the NIH to provide free access to 
   their works.
-        </p>
+          </p>
+        </div>
         <button
           aria-label={null}
           className="block-button btn btn-primary btn-sm"
@@ -82,7 +88,11 @@ exports[`renders correctly 1`] = `
         className="glass"
         style={
           Object {
+            "alignItems": "flex-start",
+            "display": "flex",
+            "flexDirection": "column",
             "height": "100%",
+            "justifyContent": "space-between",
           }
         }
       >
@@ -91,66 +101,68 @@ exports[`renders correctly 1`] = `
         >
           Resources
         </p>
-        <p
-          className="paragraph"
-          style={
-            Object {
-              "alignSelf": "flex-start",
+        <div>
+          <p
+            className="paragraph"
+            style={
+              Object {
+                "alignSelf": "flex-start",
+              }
             }
-          }
-        >
-          abstracts &gt; 34 million
-        </p>
-        <p
-          className="paragraph"
-          style={
-            Object {
-              "alignSelf": "flex-start",
+          >
+            abstracts &gt; 34 million
+          </p>
+          <p
+            className="paragraph"
+            style={
+              Object {
+                "alignSelf": "flex-start",
+              }
             }
-          }
-        >
-          full text articles &gt; 5 million
-        </p>
-        <p
-          className="paragraph"
-          style={
-            Object {
-              "alignSelf": "flex-start",
+          >
+            full text articles &gt; 5 million
+          </p>
+          <p
+            className="paragraph"
+            style={
+              Object {
+                "alignSelf": "flex-start",
+              }
             }
-          }
-        >
-          patents &gt; 4 million
-        </p>
-        <p
-          className="paragraph"
-          style={
-            Object {
-              "alignSelf": "flex-start",
+          >
+            patents &gt; 4 million
+          </p>
+          <p
+            className="paragraph"
+            style={
+              Object {
+                "alignSelf": "flex-start",
+              }
             }
-          }
-        >
-          preprints &gt; 74,000
-        </p>
-        <p
-          className="paragraph"
-          style={
-            Object {
-              "alignSelf": "flex-start",
+          >
+            preprints &gt; 74,000
+          </p>
+          <p
+            className="paragraph"
+            style={
+              Object {
+                "alignSelf": "flex-start",
+              }
             }
-          }
-        >
-          agricola records &gt; 700,000
-        </p>
-        <p
-          className="paragraph"
-          style={
-            Object {
-              "alignSelf": "flex-start",
+          >
+            agricola records &gt; 700,000
+          </p>
+          <p
+            className="paragraph"
+            style={
+              Object {
+                "alignSelf": "flex-start",
+              }
             }
-          }
-        >
-          NIH clinical guidelines &gt; 800
-        </p>
+          >
+            NIH clinical guidelines &gt; 800
+          </p>
+        </div>
         <button
           aria-label={null}
           className="block-button btn btn-primary btn-sm"
@@ -181,7 +193,11 @@ exports[`renders correctly 1`] = `
         className="glass"
         style={
           Object {
+            "alignItems": "flex-start",
+            "display": "flex",
+            "flexDirection": "column",
             "height": "100%",
+            "justifyContent": "space-between",
           }
         }
       >
@@ -190,76 +206,78 @@ exports[`renders correctly 1`] = `
         >
           Journals
         </p>
-        <p
-          className="paragraph"
-          style={
-            Object {
-              "alignSelf": "flex-start",
+        <div>
+          <p
+            className="paragraph"
+            style={
+              Object {
+                "alignSelf": "flex-start",
+              }
             }
-          }
-        >
-          Nature
-        </p>
-        <p
-          className="paragraph"
-          style={
-            Object {
-              "alignSelf": "flex-start",
+          >
+            Nature
+          </p>
+          <p
+            className="paragraph"
+            style={
+              Object {
+                "alignSelf": "flex-start",
+              }
             }
-          }
-        >
-          Science
-        </p>
-        <p
-          className="paragraph"
-          style={
-            Object {
-              "alignSelf": "flex-start",
+          >
+            Science
+          </p>
+          <p
+            className="paragraph"
+            style={
+              Object {
+                "alignSelf": "flex-start",
+              }
             }
-          }
-        >
-          Cardiology and Therapy
-        </p>
-        <p
-          className="paragraph"
-          style={
-            Object {
-              "alignSelf": "flex-start",
+          >
+            Cardiology and Therapy
+          </p>
+          <p
+            className="paragraph"
+            style={
+              Object {
+                "alignSelf": "flex-start",
+              }
             }
-          }
-        >
-          Anatomy and Cell Biology
-        </p>
-        <p
-          className="paragraph"
-          style={
-            Object {
-              "alignSelf": "flex-start",
+          >
+            Anatomy and Cell Biology
+          </p>
+          <p
+            className="paragraph"
+            style={
+              Object {
+                "alignSelf": "flex-start",
+              }
             }
-          }
-        >
-          Journal of Applied Physics
-        </p>
-        <p
-          className="paragraph"
-          style={
-            Object {
-              "alignSelf": "flex-start",
+          >
+            Journal of Applied Physics
+          </p>
+          <p
+            className="paragraph"
+            style={
+              Object {
+                "alignSelf": "flex-start",
+              }
             }
-          }
-        >
-          PLoS Genetics
-        </p>
-        <p
-          className="paragraph"
-          style={
-            Object {
-              "alignSelf": "flex-start",
+          >
+            PLoS Genetics
+          </p>
+          <p
+            className="paragraph"
+            style={
+              Object {
+                "alignSelf": "flex-start",
+              }
             }
-          }
-        >
-          Frontiers in Chemistry
-        </p>
+          >
+            Frontiers in Chemistry
+          </p>
+        </div>
         <button
           aria-label={null}
           className="block-button btn btn-primary btn-sm"
@@ -286,7 +304,11 @@ exports[`renders correctly 1`] = `
         className="glass"
         style={
           Object {
+            "alignItems": "flex-start",
+            "display": "flex",
+            "flexDirection": "column",
             "height": "100%",
+            "justifyContent": "space-between",
           }
         }
       >
@@ -295,6 +317,7 @@ exports[`renders correctly 1`] = `
         >
           New Publications
         </p>
+        <div />
         <button
           aria-label={null}
           className="block-button btn btn-primary btn-sm"

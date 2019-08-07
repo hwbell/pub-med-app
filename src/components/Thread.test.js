@@ -5,7 +5,7 @@ import { shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 
 // stubs
-const toggleThreadFormStub = jest.fn();
+const handleEditStub = jest.fn();
 
 describe('Thread', () => {
 
@@ -37,7 +37,7 @@ describe('Thread', () => {
         _id: '9898y23e23ee20389u'
       },
       thread,
-      toggleThreadForm: toggleThreadFormStub
+      handleEdit: handleEditStub
     };
 
     wrapper = shallow(<Thread {...someProps}/>);
@@ -58,7 +58,7 @@ describe('Thread', () => {
     expect(wrapper.find('.outline').length).toBe(1)
 
     expect(wrapper.find('.thread-title').length).toBe(1)
-    expect(wrapper.find('.thread-text').length).toBe(3)
+    expect(wrapper.find('.thread-text').length).toBe(4)
     expect(wrapper.find('.view').length).toBe(1)
     expect(wrapper.find('Fade').length).toBe(1)
     expect(wrapper.find('AlertModal').length).toBe(1);
@@ -68,9 +68,11 @@ describe('Thread', () => {
 
     expect(wrapper.find('.thread-text').at(0).text()).toBe(`  ${thread.user}`);
 
+    expect(wrapper.find('.thread-text').at(1).text()).toBe(`articles mentioned: <Button />`);
+
     // this one we may or may not have
     let paragraph = thread.paragraph.slice(0,50);
-    expect(wrapper.find('.thread-text').at(1).text()).toBe(paragraph + ` ...`);
+    expect(wrapper.find('.thread-text').at(2).text()).toBe(paragraph + ` ...`);
 
   })
 
@@ -148,10 +150,10 @@ describe('Thread', () => {
   it('should show how many comments a thread has', () => {
     expect(wrapper.find('Comment').length).toBe(2);
 
-    expect(wrapper.find('.thread-text').at(2).text()).toBe(`${thread.commentsCount} comments`)
+    expect(wrapper.find('.thread-text').at(3).text()).toBe(`${thread.commentsCount} comments`)
   })
 
-  it('should toggle the ThreadForm when the edit button is clicked', () => {
+  it('should fire this.props.handleEdit() when the edit button is clicked', () => {
     jest.clearAllMocks();
 
     // get the buttons in there
@@ -162,7 +164,7 @@ describe('Thread', () => {
     
     wrapper.find('.fa-edit').simulate('click');
 
-    expect(toggleThreadFormStub.mock.calls.length).toBe(1)
+    expect(handleEditStub.mock.calls.length).toBe(1)
   
   })
 

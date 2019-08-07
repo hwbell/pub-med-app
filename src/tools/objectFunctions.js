@@ -1,25 +1,34 @@
 
 // this comibines two objects for the keys specified, giving priority to obj1
-const combineObjects = (obj1, obj2, keys) => {
+const combineObjects = (obj1, obj2, props) => {
+
+  console.log(obj1)
+  console.log(obj2)
 
   if(!obj1 || !obj2) {
     return console.log('object argument missing')
   }
-  if(!keys || !keys.length) {
+  if(!props || !props.length) {
     return console.log('keys argument missing')
   }
 
   let combined = {};
 
-  keys.forEach((key) => {
-    if (obj1[key]) {
-      combined[key] = obj1[key];
-    } else if (obj2[key]){
-      combined[key] = obj2[key];
+  props.forEach((prop) => {
+    if (obj1[prop]) {
+      combined[prop] = obj1[prop];
+      
+
+    } else if (obj2[prop]){
+      combined[prop] = obj2[prop];
+   
     } else {
-      combined[key] = '';
+      combined[prop] = '';
     }
+    // console.log(combined[prop])
   })
+
+  // console.log(combined)
 
   return combined;
 }

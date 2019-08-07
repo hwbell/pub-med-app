@@ -26,6 +26,7 @@ class ThreadPage extends React.Component {
     super(props);
 
     this.state = {
+      selected: null,
       sorter: '',
       showThreadForm: false,
       showUniqueWarning: false,
@@ -39,6 +40,9 @@ class ThreadPage extends React.Component {
     this.toggleThreadForm = this.toggleThreadForm.bind(this);
     this.handleSubmitThread = this.handleSubmitThread.bind(this);
     this.toggleUniqueWarning = this.toggleUniqueWarning.bind(this);
+
+    // this is passed to the individual threads. the form is rendered here
+    this.handleEdit = this.handleEdit.bind(this);
   }
 
   componentDidMount() {
@@ -102,6 +106,7 @@ class ThreadPage extends React.Component {
           return <Thread key={i}
             user={this.props.user}
             allowEdit={isUsers}
+            handleEdit={this.handleEdit}
             thread={thread}
             handleSubmitThread={this.handleSubmitThread}
             refreshServerThreads={this.props.refreshServerThreads}
@@ -129,14 +134,27 @@ class ThreadPage extends React.Component {
     })
   }
 
-  toggleThreadForm(thread) {
-
-    let selected = thread ? thread : null;
+  // this function will set the thread that was clicked on as the selected thread 
+  // in state, then toggle the form
+  handleEdit(thread) {
+    let selected = thread ? thread: null;
     this.setState({
-      selected,
+      selected
+    }, () => {
+      this.toggleThreadForm();
+    })
+  }
+
+  toggleThreadForm() {
+
+    this.setState({
       showThreadForm: !this.state.showThreadForm
     }, () => {
-      // console.log(this.state.showThreadForm)
+      if (!this.state.showThreadForm) {
+        this.setState({
+          selected: null
+        })
+      }
     })
   }
 
@@ -225,6 +243,11 @@ class ThreadPage extends React.Component {
           this.toggleUniqueWarning()
         }
 
+        // once we submit, clear the selected thread
+        this.setState({
+          selected: null
+        })
+
         // Fail => show the fail message / reason
 
       }).catch((e) => {
@@ -269,7 +292,7 @@ class ThreadPage extends React.Component {
             {/* the button for new threads - only present when logged in */}
             <Fade in={!!this.props.user} style={styles.buttonHolder}>
               <Button className="add article-button" size="sm"
-                onClick={this.toggleThreadForm}>+ new</Button>
+                onClick={() => this.handleEdit()}>+ new</Button>
             </Fade>
 
             {haveUserThreads && this.renderThreads(user.threads, true)}

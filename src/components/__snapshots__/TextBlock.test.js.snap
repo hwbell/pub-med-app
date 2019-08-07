@@ -5,7 +5,11 @@ exports[`TextBlock renders correctly 1`] = `
   className="glass"
   style={
     Object {
+      "alignItems": "flex-start",
+      "display": "flex",
+      "flexDirection": "column",
       "height": "100%",
+      "justifyContent": "space-between",
     }
   }
 >
@@ -14,15 +18,16 @@ exports[`TextBlock renders correctly 1`] = `
   >
     About PMC
   </p>
-  <p
-    className="paragraph"
-    style={
-      Object {
-        "alignSelf": "flex-start",
+  <div>
+    <p
+      className="paragraph"
+      style={
+        Object {
+          "alignSelf": "flex-start",
+        }
       }
-    }
-  >
-    PubMed Central (PMC) is a free digital repository that archives 
+    >
+      PubMed Central (PMC) is a free digital repository that archives 
   publicly accessible full-text scholarly articles that have been published within the 
   biomedical and life sciences journal literature. As one of the major research 
   databases within the suite of resources that have been developed by the National 
@@ -32,7 +37,8 @@ exports[`TextBlock renders correctly 1`] = `
   National Institutes of Health (NIH) freely accessible to anyone, and, in addition, 
   many publishers are working cooperatively with the NIH to provide free access to 
   their works.
-  </p>
+    </p>
+  </div>
   <button
     aria-label={null}
     className="block-button btn btn-primary btn-sm"

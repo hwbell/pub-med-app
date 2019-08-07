@@ -15,7 +15,7 @@ class ThreadForm extends React.Component {
 
     this.state = {
       threadInfo: {},
-      isNewThread: !this.props.thread
+      isNewThread: this.props.thread ? false : true
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -38,18 +38,30 @@ class ThreadForm extends React.Component {
 
   handleSubmit() {
 
-    // this means the user changed something - it now makes sense to submit
-    if (this.state.threadInfo) {
+    // just check if there are any keys in this.state.threadInfo to see if 
+    // anything has actually been typed
+    let isUpdated = !!Object.keys(this.state.threadInfo).length
 
-      let thread = this.props.thread;
+    // this means the user changed something - it now makes sense to submit
+    if (isUpdated) {
+
+      // if there isn't a thread in props, this thread is new. just send it off!
+      if (!this.props.thread) {
+        return this.props.handleSubmitThread(this.state.threadInfo)
+      }
+
+      let thread = this.props.thread || {};
+      console.log(thread)
       let threadUpdates = this.state.threadInfo;
-      console.log(threadUpdates)
 
       // combine the two for the properties available, giving priprity to updates
-      let combined = combineObjects(threadUpdates, thread, Object.keys(thread));
+      let props = Object.keys(thread);
+      // console.log(props)
+      // console.log(threadUpdates)
+
+      let combined = combineObjects(threadUpdates, thread, props);
       combined.owner = this.props.user._id;
 
-      console.log(combined)
       this.props.handleSubmitThread(combined);
     }
   }

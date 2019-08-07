@@ -107,6 +107,18 @@ exports[`ThreadPage renders correctly 1`] = `
               />
                 undefined
             </p>
+            <p
+              className="thread-text"
+            >
+              articles mentioned: 
+              <button
+                aria-label={null}
+                className="article-button btn btn-link"
+                onClick={[Function]}
+              >
+                013091283
+              </button>
+            </p>
             <hr
               style={
                 Object {
@@ -268,6 +280,18 @@ exports[`ThreadPage renders correctly 1`] = `
               />
                 undefined
             </p>
+            <p
+              className="thread-text"
+            >
+              articles mentioned: 
+              <button
+                aria-label={null}
+                className="article-button btn btn-link"
+                onClick={[Function]}
+              >
+                013091283
+              </button>
+            </p>
             <hr
               style={
                 Object {
@@ -428,6 +452,18 @@ exports[`ThreadPage renders correctly 1`] = `
                 className=" far fa-user"
               />
                 undefined
+            </p>
+            <p
+              className="thread-text"
+            >
+              articles mentioned: 
+              <button
+                aria-label={null}
+                className="article-button btn btn-link"
+                onClick={[Function]}
+              >
+                013091283
+              </button>
             </p>
             <hr
               style={
