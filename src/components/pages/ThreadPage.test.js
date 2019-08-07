@@ -104,6 +104,7 @@ describe('ThreadPage', () => {
   it('contains the correct elements', () => {
     expect(wrapper.find('.page-content').length).toBe(1)
     expect(wrapper.find('.glass').length).toBe(1)
+    expect(wrapper.find('.outline').length).toBe(1)
     expect(wrapper.find('.add').length).toBe(1);
 
     expect(wrapper.find('Fade').length).toBe(1)

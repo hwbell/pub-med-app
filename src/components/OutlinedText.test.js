@@ -28,13 +28,13 @@ describe('OutlinedText', () => {
   })
 
   it('should not show a title unless provided', () => {
-    // without title prop there wont be a profile-title
-    expect(wrapper.find('.profile-title').length).toBe(0);
+    // without title prop there wont be a thread-title
+    expect(wrapper.find('.thread-title').length).toBe(0);
 
     // once a title is provided it should show up
     wrapper.setProps({title: 'About'});
     wrapper.update();
-    expect(wrapper.find('.profile-title').length).toBe(1);
+    expect(wrapper.find('.thread-title').length).toBe(1);
 
   })
 
@@ -42,7 +42,7 @@ describe('OutlinedText', () => {
     // set a title so we can check this as well as the paragraph
     wrapper.setProps({title: 'About'});
 
-    expect(wrapper.find('.profile-title').props().style.alignSelf).toBe('');
+    expect(wrapper.find('.thread-title').props().style.alignSelf).toBe('');
     expect(wrapper.find('.paragraph').props().style.alignSelf).toBe('');
 
     // set the prop
@@ -50,7 +50,7 @@ describe('OutlinedText', () => {
       alignLeft: true
     });
 
-    expect(wrapper.find('.profile-title').props().style.alignSelf).toBe('flex-start');
+    expect(wrapper.find('.thread-title').props().style.alignSelf).toBe('flex-start');
     expect(wrapper.find('.paragraph').props().style.alignSelf).toBe('flex-start');
   })
 })

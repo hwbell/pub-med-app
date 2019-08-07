@@ -7,6 +7,7 @@ import { CSSTransitionGroup } from 'react-transition-group' // ES6
 import Header from '../Header';
 import ProfileForm from '../ProfileForm';
 import OutlinedText from '../OutlinedText';
+import AlertModal from '../AlertModal';
 
 import { Button, Form, FormGroup, Label, Input, Fade } from 'reactstrap';
 
@@ -21,7 +22,8 @@ class ProfilePage extends React.Component {
     this.state = {
       checked: false,
       editText: false,
-      showProfileForm: false
+      showProfileForm: false,
+      showSignoutWarning: false
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -30,8 +32,9 @@ class ProfilePage extends React.Component {
     this.handleSubmitUser = this.handleSubmitUser.bind(this);
     this.attemptSignIn = this.attemptSignIn.bind(this);
     this.renderProfile = this.renderProfile.bind(this);
-    this.toggleEditText = this.toggleEditText.bind(this);
+    this.toggleAlertModal = this.toggleAlertModal.bind(this);
     this.toggleProfileForm = this.toggleProfileForm.bind(this);
+    this.handleSignout = this.handleSignout.bind(this);
   }
 
   componentDidMount() {
@@ -116,17 +119,21 @@ class ProfilePage extends React.Component {
       <div className="outline profile" style={styles.profileInfo}>
 
         <div style={styles.buttonHolder}>
-          <Button className="view article-button" size="sm"
-            onMouseOver={this.toggleEditText}
-            onMouseLeave={this.toggleEditText}
-            onClick={this.toggleProfileForm}>edit profile</Button>
+          <Button color="link" size="sm"
+            style={styles.button}
+            onClick={this.toggleProfileForm}>
+            <i className="fas fa-user-edit"></i>
+          </Button>
 
-          <Button className="warn article-button" size="sm"
-            onClick={this.props.registerSignOut}>logout</Button>
+          <Button color="link" size="sm"
+            style={styles.button}
+            onClick={this.toggleAlertModal}>
+            <i className="warn-icon fas fa-sign-out-alt"></i>
+          </Button>
 
         </div>
 
-        <p className="section-title">
+        <p className="profile-title">
           <strong>{`${this.props.user.name || this.props.user.email}`}</strong>
         </p>
 
@@ -144,11 +151,11 @@ class ProfilePage extends React.Component {
         <div style={styles.nameAndIcon}>
 
           <div>
-            <p className="profile-title">
+            <p className="thread-text">
               {user.email}
             </p>
 
-            <p className="profile-title">
+            <p className="thread-text">
               {user.collections &&
                 `${user.collections.length} collections`}
             </p>
@@ -249,18 +256,6 @@ class ProfilePage extends React.Component {
       })
   }
 
-  toggleEditText() {
-    this.setState({
-      editText: !this.state.editText
-    })
-  }
-
-  toggleProfileForm() {
-    this.setState({
-      showProfileForm: !this.state.showProfileForm
-    })
-  }
-
   // this one is for the Profile Form
   handleSubmitUser(profileInfo) {
 
@@ -304,12 +299,41 @@ class ProfilePage extends React.Component {
       })
   }
 
+  handleSignout() {
+    this.setState({
+      showSignoutWarning: false
+    }, () => {
+      this.props.registerSignOut();
+    })
+  }
+
+  toggleAlertModal() {
+    this.setState({
+      showSignoutWarning: !this.state.showSignoutWarning
+    })
+  }
+
+  toggleProfileForm() {
+    this.setState({
+      showProfileForm: !this.state.showProfileForm
+    })
+  }
+
 
   render() {
 
     // console.log(this.props)
     return (
       <div className="page">
+
+        {/* the warning for signing out */}
+        <AlertModal
+          message={`Are you sure you want to sign out? Make sure all your changes are saved!`}
+          isVisible={this.state.showSignoutWarning}
+          confirm={this.handleSignout}
+          confirming={true}
+          toggle={this.toggleAlertModal}
+        />
 
         {/* the edit modal, for user that is logged in */}
         <ProfileForm
@@ -324,7 +348,7 @@ class ProfilePage extends React.Component {
           <Header
             class="heading"
             title={"Your Profile"}
-            subtitle={""}
+            subtitle={"say something about you"}
           />
 
           {!this.props.user ?
@@ -356,6 +380,9 @@ const styles = {
     right: '10px',
     display: 'flex',
     flexDirection: 'row'
+  },
+  button: {
+    fontSize: '16px'
   },
   iconRow: {
     paddingLeft: '24px'

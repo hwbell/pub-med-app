@@ -119,11 +119,11 @@ class Thread extends React.Component {
         </p>
 
         <p className="thread-text">
-          {`articles mentioned: `}
-          <Button color="link" className="article-button">{`${thread.article}`}</Button>
+          {`@ article(s): `}
+          <strong>{`${thread.article}`}</strong>
         </p>
 
-        {thread.paragraph && <p className="thread-text" >{thread.paragraph.slice(0, 50) + ` ...`}</p>}
+        {thread.paragraph && <p className="thread-text" >{thread.paragraph}</p>}
 
         <hr style={styles.hr}></hr>
 
@@ -196,10 +196,9 @@ const styles = {
   },
   button: {
     alignSelf: 'flex-end',
-    // margin: '10px'
   },
   transitionGroup: {
-    padding: '20px',
+    paddingTop: '20px',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
@@ -214,7 +213,7 @@ const styles = {
   },
   hr: {
     backgroundColor: 'rgba(245,245,245,0.1)',
-    margin: 0,
+    margin: '4px',
     padding: 0
   }
 }

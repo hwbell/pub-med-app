@@ -137,6 +137,7 @@ class ThreadPage extends React.Component {
   // this function will set the thread that was clicked on as the selected thread 
   // in state, then toggle the form
   handleEdit(thread) {
+    console.log(thread)
     let selected = thread ? thread: null;
     this.setState({
       selected
@@ -265,10 +266,12 @@ class ThreadPage extends React.Component {
     const haveServerThreads = serverThreads && serverThreads.length > 0;
 
     const headerSubtitle = this.props.user ? "post a thread to start a discussion" : "login and post a thread to start a discussion";
+    const threadHeaderText = this.state.selected ? "": "Start a discussion with other researchers";
     return (
       <div className="page">
 
         <ThreadForm
+          headerText={threadHeaderText}
           user={this.props.user}
           thread={this.state.selected}
           toggle={this.toggleThreadForm}
@@ -288,11 +291,11 @@ class ThreadPage extends React.Component {
             subtitle={headerSubtitle}
           />
 
-          <div style={styles.threadsHolder}>
+          <div className="outline" style={styles.threadsHolder}>
             {/* the button for new threads - only present when logged in */}
             <Fade in={!!this.props.user} style={styles.buttonHolder}>
               <Button className="add article-button" size="sm"
-                onClick={() => this.handleEdit()}>+ new</Button>
+                onClick={() => this.handleEdit()}>+new thread</Button>
             </Fade>
 
             {haveUserThreads && this.renderThreads(user.threads, true)}
@@ -320,7 +323,7 @@ const styles = {
   },
   threadsHolder: {
     position: 'relative',
-    width: '100%'
+    // width: '100%'
   }
 }
 

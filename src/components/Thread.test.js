@@ -68,11 +68,10 @@ describe('Thread', () => {
 
     expect(wrapper.find('.thread-text').at(0).text()).toBe(`  ${thread.user}`);
 
-    expect(wrapper.find('.thread-text').at(1).text()).toBe(`articles mentioned: <Button />`);
+    expect(wrapper.find('.thread-text').at(1).text()).toBe(`@ article(s): ${thread.article}`);
 
     // this one we may or may not have
-    let paragraph = thread.paragraph.slice(0,50);
-    expect(wrapper.find('.thread-text').at(2).text()).toBe(paragraph + ` ...`);
+    expect(wrapper.find('.thread-text').at(2).text()).toBe(thread.paragraph);
 
   })
 

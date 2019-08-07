@@ -95,7 +95,9 @@ describe('ProfilePage', () => {
 
     ['.page', '.page-content', '.glass', '.heading', '.outline', 'Button'].forEach((selector) => {
       expect(wrapper.find(selector).length).toEqual(1);
-    })
+    });
+
+    expect(wrapper.find('AlertModal').length).toBe(1);
 
   });
 
@@ -104,11 +106,12 @@ describe('ProfilePage', () => {
     wrapper.update();
     expect(wrapper.find('.profile').length).toEqual(1);
     expect(wrapper.find('.signin').length).toEqual(0);
-    expect(wrapper.find('.profile-title').length).toEqual(2);
-    expect(wrapper.find('.section-title').length).toEqual(1);
+    expect(wrapper.find('.profile-title').length).toEqual(1);
+    expect(wrapper.find('.thread-text').length).toEqual(2);
+
     expect(wrapper.find('Button').length).toEqual(2);    
-    expect(wrapper.find('Button').at(0).render().text()).toEqual('edit profile');
-    expect(wrapper.find('Button').at(1).render().text()).toEqual('logout');
+    expect(wrapper.find('.fa-user-edit').length).toEqual(1);    
+    expect(wrapper.find('.fa-sign-out-alt').length).toEqual(1);    
 
     // change the signedIn prop and wipe the user
     wrapper.setProps({ user: null });
@@ -160,15 +163,24 @@ describe('ProfilePage', () => {
 
   })
 
-  it('toggleEditText() should toggle the edit text', () => {
-    // let wrapper = shallow(<ProfilePage {...someProps}/>);
+  it('toggleAlertModal() should toggle the AlertModal', () => {
+    let wrapper = mount(<ProfilePage />);
 
-    expect(wrapper.state().editText).toBe(false);
+    expect(wrapper.state().showSignoutWarning).toBe(false);
+    expect(wrapper.find('AlertModal').props().isVisible).toBe(false);
 
-    wrapper.instance().toggleEditText();
+    wrapper.instance().toggleAlertModal();
     wrapper.update();
 
-    expect(wrapper.state().editText).toBe(true);    
+    expect(wrapper.state().showSignoutWarning).toBe(true);   
+    expect(wrapper.find('AlertModal').props().isVisible).toBe(true);
+
+    wrapper.instance().toggleAlertModal();
+    wrapper.update();
+
+    expect(wrapper.state().showSignoutWarning).toBe(false);   
+    expect(wrapper.find('AlertModal').props().isVisible).toBe(false);
+
     
   })
 

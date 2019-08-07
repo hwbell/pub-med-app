@@ -14,14 +14,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 class OutlinedText extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      // 
-    };
-  }
-
-  componentDidMount() {
-    // 
   }
 
   render() {
@@ -45,7 +37,7 @@ class OutlinedText extends React.Component {
       <div className="outline" style={styles.content}>
 
         {this.props.title &&
-          <p className="profile-title" style={styles.title}>{this.props.title}</p>
+          <p className="thread-title" style={styles.title}>{this.props.title}</p>
         }
 
         <p className="paragraph" style={styles.text}>{this.props.text}</p>

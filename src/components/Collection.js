@@ -360,49 +360,51 @@ class Collection extends React.Component {
         {this.renderAlertModals()}
 
         {/* User can toggle here to edit the title of a collection */}
-        <CSSTransitionGroup
-          style={styles.titleHolder}
-          transitionName="replace"
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={300}>
+        <div style={styles.titleRow}>
+          <CSSTransitionGroup
+            style={styles.titleHolder}
+            transitionName="replace"
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={300}>
 
 
-          {!this.state.editing &&
-            this.renderTitle()}
-          {this.state.editing &&
-            this.renderInput()}
+            {!this.state.editing &&
+              this.renderTitle()}
+            {this.state.editing &&
+              this.renderInput()}
+            {/* preview / download options for the article */}
 
-        </CSSTransitionGroup>
-        <div className="" style={styles.titleRow}>
-
-
-
-          {/* preview / download options for the article */}
-          <div style={styles.buttonHolder}>
-            <Button
-              className="add article-button" size="sm"
-              onClick={this.togglePreview}>
-              {!this.state.showPreview ? 'make pdf' : 'hide pdf'}
-            </Button>
-            {!this.props.isSaved &&
-              <Button
-                className="add article-button" size="sm"
-                onClick={this.postCollection}>
-                save to my collections
-            </Button>}
-            <Button
-              className="warn article-button" size="sm"
-              onClick={this.handleDelete}>
-              delete
-            </Button>
-
-          </div>
+          </CSSTransitionGroup>
         </div>
 
         <CSSTransitionGroup
           transitionName="fade"
           transitionEnterTimeout={500}
           transitionLeaveTimeout={300}>
+
+
+          <div style={styles.buttonHolder}>
+            <Button
+              style={styles.button}
+              color="link" size="md"
+              onClick={this.togglePreview}>
+              <i className={!this.state.showPreview ? 'far fa-file-pdf' : 'far fa-window-close'}></i>
+            </Button>
+            {!this.props.isSaved &&
+              <Button
+                style={styles.button}
+                color="link" size="md"
+                onClick={this.postCollection}>
+                <i className="far fa-save"></i>
+              </Button>}
+            <Button
+              style={styles.button}
+              color="link" size="md"
+              onClick={this.handleDelete}>
+              <i className="warn-icon fas fa-trash"></i>
+            </Button>
+
+          </div>
 
           {/* the pdf, when the preview button is clicked */}
           {this.state.showPreview &&
@@ -429,6 +431,7 @@ class Collection extends React.Component {
 const styles = {
   titleRow: {
     width: '100%',
+    height: '40px',
     position: 'relative',
     display: 'flex',
     flexDirection: 'row',
@@ -436,7 +439,7 @@ const styles = {
     alignItems: 'center'
   },
   titleHolder: {
-    padding: '20px',
+    // padding: '20px',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
@@ -446,26 +449,30 @@ const styles = {
     padding: '10px',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center'
   },
   title: {
     position: 'absolute',
-    padding: '10px',
+    top: '0px',
+    width: '100%',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center'
   },
   iconHolder: {
     position: 'absolute',
     right: '20px',
+    zIndex: 10,
     padding: '10px',
   },
   icon: {
-    fontSize: '20px',
+    fontSize: '16px',
     padding: '10px',
-
+  },
+  button: {
+    fontSize: '16px'
   }
 }
 

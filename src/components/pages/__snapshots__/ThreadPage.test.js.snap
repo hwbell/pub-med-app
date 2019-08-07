@@ -22,10 +22,10 @@ exports[`ThreadPage renders correctly 1`] = `
       </h4>
     </div>
     <div
+      className="outline"
       style={
         Object {
           "position": "relative",
-          "width": "100%",
         }
       }
     >
@@ -47,7 +47,7 @@ exports[`ThreadPage renders correctly 1`] = `
           onClick={[Function]}
           type="button"
         >
-          + new
+          +new thread
         </button>
       </div>
       <div
@@ -110,20 +110,16 @@ exports[`ThreadPage renders correctly 1`] = `
             <p
               className="thread-text"
             >
-              articles mentioned: 
-              <button
-                aria-label={null}
-                className="article-button btn btn-link"
-                onClick={[Function]}
-              >
+              @ article(s): 
+              <strong>
                 013091283
-              </button>
+              </strong>
             </p>
             <hr
               style={
                 Object {
                   "backgroundColor": "rgba(245,245,245,0.1)",
-                  "margin": 0,
+                  "margin": "4px",
                   "padding": 0,
                 }
               }
@@ -135,7 +131,7 @@ exports[`ThreadPage renders correctly 1`] = `
                   "display": "flex",
                   "flexDirection": "column",
                   "justifyContent": "flex-start",
-                  "padding": "20px",
+                  "paddingTop": "20px",
                 }
               }
             >
@@ -283,20 +279,16 @@ exports[`ThreadPage renders correctly 1`] = `
             <p
               className="thread-text"
             >
-              articles mentioned: 
-              <button
-                aria-label={null}
-                className="article-button btn btn-link"
-                onClick={[Function]}
-              >
+              @ article(s): 
+              <strong>
                 013091283
-              </button>
+              </strong>
             </p>
             <hr
               style={
                 Object {
                   "backgroundColor": "rgba(245,245,245,0.1)",
-                  "margin": 0,
+                  "margin": "4px",
                   "padding": 0,
                 }
               }
@@ -308,7 +300,7 @@ exports[`ThreadPage renders correctly 1`] = `
                   "display": "flex",
                   "flexDirection": "column",
                   "justifyContent": "flex-start",
-                  "padding": "20px",
+                  "paddingTop": "20px",
                 }
               }
             >
@@ -456,20 +448,16 @@ exports[`ThreadPage renders correctly 1`] = `
             <p
               className="thread-text"
             >
-              articles mentioned: 
-              <button
-                aria-label={null}
-                className="article-button btn btn-link"
-                onClick={[Function]}
-              >
+              @ article(s): 
+              <strong>
                 013091283
-              </button>
+              </strong>
             </p>
             <hr
               style={
                 Object {
                   "backgroundColor": "rgba(245,245,245,0.1)",
-                  "margin": 0,
+                  "margin": "4px",
                   "padding": 0,
                 }
               }
@@ -481,7 +469,7 @@ exports[`ThreadPage renders correctly 1`] = `
                   "display": "flex",
                   "flexDirection": "column",
                   "justifyContent": "flex-start",
-                  "padding": "20px",
+                  "paddingTop": "20px",
                 }
               }
             >

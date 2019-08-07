@@ -131,7 +131,7 @@ class ThreadForm extends React.Component {
         isOpen={this.props.isVisible}
         toggle={this.props.toggle}>
 
-        <ModalHeader>Start a discussion with other researchers</ModalHeader>
+        {this.props.headerText && <ModalHeader>{this.props.headerText}</ModalHeader>}
         <ModalBody>
 
           <Form style={styles.form} onSubmit={this.handleSubmit}>

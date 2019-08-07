@@ -31,15 +31,23 @@ class AboutPage extends React.Component {
 
           <div className="outline" style={styles.content}>
 
+          {/* 'far fa-file-alt', 'fas fa-project-diagram', 'fas fa-users' */}
+
+            <div className="row" style={{margin: '20px', marginBottom: '0px'}}>
+              <i style={styles.icon} className="far fa-file-alt"></i>
+              <i style={styles.icon} className="fas fa-project-diagram"></i>
+              <i style={styles.icon} className="fas fa-users"></i>
+            </div>
+
             {aboutPageText.full.top.map((section) => {
               return (
                 <div>
                   <div style={styles.titleHolder}>
-                    <p className="profile-title">{section.title}</p>
+                    {section.title && <p className="profile-title">{section.title}</p>}
 
                     <div className="row">
-                      {section.icons.map((icon) => {
-                        return <i className={icon}></i>
+                      {section.icons.map((icon, i) => {
+                        return <i key={i} className={icon}></i>
                       })}
                     </div>
                   </div>
@@ -63,7 +71,9 @@ class AboutPage extends React.Component {
 
           <div className="outline" style={styles.content}>
 
-            <p className="paragraph">{aboutPageText.full.bottom}</p>
+            {aboutPageText.full.bottom.map((section) => {
+              return <p className="paragraph">{section}</p>
+            })}
 
           </div>
 
@@ -82,7 +92,7 @@ const styles = {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center'
-  }
+  },
 }
 
 export default AboutPage;

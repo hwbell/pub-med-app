@@ -4,94 +4,115 @@ exports[`Collection renders correctly 1`] = `
 <div
   className="outline collection"
 >
-  <span
-    style={
-      Object {
-        "alignItems": "center",
-        "display": "flex",
-        "flexDirection": "row",
-        "justifyContent": "center",
-        "padding": "20px",
-      }
-    }
-  >
-    <div
-      style={
-        Object {
-          "alignItems": "center",
-          "display": "flex",
-          "flexDirection": "row",
-          "justifyContent": "center",
-          "padding": "10px",
-          "position": "absolute",
-        }
-      }
-    >
-      <p
-        className="collection-title"
-      >
-        <strong>
-          sample collection 
-        </strong>
-         (3)
-      </p>
-      <i
-        className="far fa-edit"
-        onClick={[Function]}
-      />
-    </div>
-  </span>
   <div
-    className=""
     style={
       Object {
         "alignItems": "center",
         "display": "flex",
         "flexDirection": "row",
+        "height": "40px",
         "justifyContent": "center",
         "position": "relative",
         "width": "100%",
       }
     }
   >
-    <div
+    <span
       style={
         Object {
           "alignItems": "center",
           "display": "flex",
           "flexDirection": "row",
           "justifyContent": "center",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "alignItems": "center",
+            "display": "flex",
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "position": "absolute",
+            "top": "0px",
+            "width": "100%",
+          }
+        }
+      >
+        <p
+          className="collection-title"
+        >
+          <strong>
+            sample collection 
+          </strong>
+           (3)
+        </p>
+        <i
+          className="far fa-edit"
+          onClick={[Function]}
+        />
+      </div>
+    </span>
+  </div>
+  <span>
+    <div
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "row",
+          "justifyContent": "flex-start",
           "padding": "10px",
         }
       }
     >
       <button
         aria-label={null}
-        className="add article-button btn btn-secondary btn-sm"
+        className="btn btn-link btn-md"
         onClick={[Function]}
+        style={
+          Object {
+            "fontSize": "16px",
+          }
+        }
         type="button"
       >
-        make pdf
+        <i
+          className="far fa-file-pdf"
+        />
       </button>
       <button
         aria-label={null}
-        className="add article-button btn btn-secondary btn-sm"
+        className="btn btn-link btn-md"
         onClick={[Function]}
+        style={
+          Object {
+            "fontSize": "16px",
+          }
+        }
         type="button"
       >
-        save to my collections
+        <i
+          className="far fa-save"
+        />
       </button>
       <button
         aria-label={null}
-        className="warn article-button btn btn-secondary btn-sm"
+        className="btn btn-link btn-md"
         onClick={[Function]}
+        style={
+          Object {
+            "fontSize": "16px",
+          }
+        }
         type="button"
       >
-        delete
+        <i
+          className="warn-icon fas fa-trash"
+        />
       </button>
     </div>
-  </div>
-  <span>
     <div
       className="results-holder"
     >

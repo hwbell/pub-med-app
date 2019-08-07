@@ -31,6 +31,7 @@ describe('ThreadForm', () => {
         _id: userId
       },
       thread,
+      headerText: 'A text Header',
       isVisible: false,
       toggle: toggleStub,
       handleSubmitThread: handleSubmitThreadStub,
@@ -55,16 +56,27 @@ describe('ThreadForm', () => {
 
   it('contains the correct elements', () => {
 
-    ['Modal', 'ModalBody', 'ModalFooter', 'Form', '.add', '.back'].forEach((selector) => {
+    ['Modal', 'ModalBody', 'ModalHeader', 'ModalFooter', 'Form', '.add', '.back'].forEach((selector) => {
       expect(wrapper.find(selector).length).toEqual(1);
     });
 
+    expect(wrapper.find('ModalHeader').render().text()).toBe(someProps.headerText)
     expect(wrapper.find('Fade').length).toBe(1);
 
     // one input for each property of the thread
     expect(wrapper.find('Input').length).toBe(3);
 
   });
+
+  it('should not show the ModalHeader if this.props.headerText is falsy', () => {
+    
+    wrapper.setProps({
+      headerText: ''
+    });
+    wrapper.update();
+
+    expect(wrapper.find('ModalHeader').length).toBe(0);
+  })
 
   it('should have the correct placeholder values without this.props.thread', () => {
     wrapper.setProps({

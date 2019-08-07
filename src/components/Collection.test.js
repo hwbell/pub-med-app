@@ -71,10 +71,9 @@ describe('Collection', () => {
 
     // if unspecified, we will have 3 buttons
     expect(wrapper.find('Button').length).toEqual(3);
-    expect(wrapper.find('Button').at(0).render().text()).toEqual('make pdf');
-    expect(wrapper.find('Button').at(1).render().text()).toEqual('save to my collections');
-    expect(wrapper.find('Button').at(2).render().text()).toEqual('delete');
-
+    expect(wrapper.find('.fa-file-pdf').length).toEqual(1);
+    expect(wrapper.find('.fa-save').length).toEqual(1);
+    expect(wrapper.find('.fa-trash').length).toEqual(1);
 
     // if we set the isSaved boolean=true, we should't see the save button
     wrapper.setProps({
@@ -187,14 +186,15 @@ describe('Collection', () => {
 
   it('should show the save option if a collection is modified', () => {
 
-    expect(wrapper.find('.fa-save').length).toEqual(0);
-    expect(wrapper.find('.fa-undo').length).toEqual(0);
-
     instance.handleChange('collection title');
     wrapper.setProps({
       isSaved: true
     })
     wrapper.update();
+
+    expect(wrapper.find('.fa-save').length).toEqual(0);
+    expect(wrapper.find('.fa-undo').length).toEqual(0);
+
     instance.handleSubmit(e);
     wrapper.update();
 

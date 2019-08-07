@@ -33,25 +33,21 @@ exports[`Thread renders correctly 1`] = `
     <p
       className="thread-text"
     >
-      articles mentioned: 
-      <button
-        aria-label={null}
-        className="article-button btn btn-link"
-        onClick={[Function]}
-      >
+      @ article(s): 
+      <strong>
         013091283
-      </button>
+      </strong>
     </p>
     <p
       className="thread-text"
     >
-      I found the source material for the basis of this  ...
+      I found the source material for the basis of this study to be lacking. Does anyone else agree?
     </p>
     <hr
       style={
         Object {
           "backgroundColor": "rgba(245,245,245,0.1)",
-          "margin": 0,
+          "margin": "4px",
           "padding": 0,
         }
       }
@@ -63,7 +59,7 @@ exports[`Thread renders correctly 1`] = `
           "display": "flex",
           "flexDirection": "column",
           "justifyContent": "flex-start",
-          "padding": "20px",
+          "paddingTop": "20px",
         }
       }
     >
