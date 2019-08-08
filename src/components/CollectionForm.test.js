@@ -95,7 +95,7 @@ it('contains the correct elements', () => {
   expect(wrapper.find('Modal').length).toEqual(1)
 
   // title 
-  expect(wrapper.find('.article-title').length).toEqual(1);
+  expect(wrapper.find('.thread-text').length).toBe(1);
 
   // should have two .nav-link buttons with the names of the provided collections
   expect(wrapper.find('.nav-link').length).toEqual(2);
@@ -117,14 +117,14 @@ it('should change the title based on whether there are collections or not', asyn
   const wrapper = shallow(<CollectionForm {...someProps} />);
 
   // with collections
-  expect(wrapper.find('.article-title').text()).toEqual(
+  expect(wrapper.find('.thread-text').at(0).text()).toEqual(
     "Select a collection to add the article to, or make a new collection."
   );
   // without collections
   wrapper.setProps({ collections: [] });
   wrapper.update();
-  expect(wrapper.find('.article-title').text()).toEqual(
-    `You don't currently have any collections ... would you like to make one?
+  expect(wrapper.find('.thread-text').at(0).text()).toEqual(
+    `You don't currently have any new collections ... would you like to make one?
       You can enter a name below.`
   );
 })

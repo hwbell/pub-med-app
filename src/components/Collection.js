@@ -3,7 +3,7 @@ import '../App.scss';
 import 'bootstrap/dist/css/bootstrap.css';
 
 // components
-import { Button, Collapse, Input, Form } from 'reactstrap';
+import { Button, Collapse, Input, Form, Fade } from 'reactstrap';
 import ArticleResult from './ArticleResult';
 import { PDFViewer } from '@react-pdf/renderer';
 import GeneratedPdf from './GeneratedPdf';
@@ -27,9 +27,14 @@ class Collection extends React.Component {
       uniqueWarning: false,
       deleteWarning: false,
       confirming: false,
-    }
+      showPopup: false,
+      renderPopup: false,
+      popupMessage: 'make a pdf!'
 
+    }
+    this.toggleContent = this.toggleContent.bind(this);
     this.togglePreview = this.togglePreview.bind(this);
+    this.togglePopup = this.togglePopup.bind(this);
     this.postCollection = this.postCollection.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
     this.clearEdits = this.clearEdits.bind(this);
@@ -40,6 +45,19 @@ class Collection extends React.Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.deleteFromServer = this.deleteFromServer.bind(this);
     this.editSavedCollection = this.editSavedCollection.bind(this);
+    this.renderButtons = this.renderButtons.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({
+      renderPopup: true
+    })
+  }
+
+  toggleContent() {
+    this.setState({
+      showContent: !this.state.showContent
+    });
   }
 
   toggleEdit() {
@@ -250,7 +268,7 @@ class Collection extends React.Component {
     let title = collection.name;
     return (
       <div style={styles.title}>
-        <p className="collection-title">
+        <p className="thread-title">
           <strong>{`${title} `}</strong>{` (${collection.articles.length})`}
         </p>
         <i className="far fa-edit"
@@ -270,13 +288,79 @@ class Collection extends React.Component {
           <div style={styles.titleHolder}>
             <Input type="text" name="text" id="exampleEmail" className="collection-edit"
               placeholder={placeholder}
+              value={this.state.inputText || this.props.collection.name}
               onChange={(e) => this.handleChange(e.target.value)}
               ref={(input) => { this.nameInput = input }} >
             </Input>
-            <i className="fas fa-times"
+            <i className="far fa-times-circle"
               onClick={this.toggleEdit}></i>
+            <i className="far fa-check-circle"
+              onClick={this.handleSubmit}></i>
           </div>
         </Form>
+      </div>
+    )
+  }
+
+  // this is for the buttons below, to explain the icons
+  togglePopup(str) {
+    if (str) {
+      this.setState({
+        popupMessage: str,
+        showPopup: true
+      })
+    } else {
+      this.setState({
+        showPopup: false
+      })
+    }
+  }
+
+  // the buttons for export, save, delete
+  renderButtons() {
+    return (
+      <div className="left-all-col">
+
+        {/* the content expander button */}
+        <Button
+          style={styles.expandButton}
+          color="link" size="md"
+          onClick={this.toggleContent}>
+          <i className="fas fa-angle-double-down"></i>
+        </Button>
+
+        <Fade in={this.state.showPopup} style={styles.popupText}>
+          {this.state.popupMessage}
+        </Fade>
+
+        <div style={styles.buttonHolder}>
+          <Button
+            style={styles.button}
+            color="link" size="md"
+            onClick={this.togglePreview}
+            onMouseOver={() => this.togglePopup('make a pdf!')}
+            onMouseLeave={() => this.togglePopup('')}>
+            <i className={!this.state.showPreview ? 'far fa-file-pdf' : 'far fa-window-close'}></i>
+          </Button>
+          {!this.props.isSaved &&
+            <Button
+              style={styles.button}
+              color="link" size="md"
+              onClick={this.postCollection}
+              onMouseOver={() => this.togglePopup('save to server')}
+              onMouseLeave={() => this.togglePopup('')}>
+              <i className="far fa-save"></i>
+            </Button>}
+          <Button
+            style={styles.button}
+            color="link" size="md"
+            onClick={this.handleDelete}
+            onMouseOver={() => this.togglePopup('delete collection')}
+            onMouseLeave={() => this.togglePopup('')}>
+            <i className="warn-icon fas fa-trash"></i>
+          </Button>
+
+        </div>
       </div>
     )
   }
@@ -349,7 +433,7 @@ class Collection extends React.Component {
     return (
       <div className="outline collection" style={styles.content}>
 
-        <Collapse isOpen={this.state.showContent}></Collapse>
+
         {/* the save icon that appears once we have any edits */}
         {this.state.collection && this.props.isSaved &&
           this.renderSaveOption()
@@ -376,50 +460,35 @@ class Collection extends React.Component {
           </CSSTransitionGroup>
         </div>
 
-        <CSSTransitionGroup
-          transitionName="fade"
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={300}>
+        {/* the buttons for save, delete, pdf */}
+        {this.renderButtons()}
 
 
-          <div style={styles.buttonHolder}>
-            <Button
-              style={styles.button}
-              color="link" size="md"
-              onClick={this.togglePreview}>
-              <i className={!this.state.showPreview ? 'far fa-file-pdf' : 'far fa-window-close'}></i>
-            </Button>
-            {!this.props.isSaved &&
-              <Button
-                style={styles.button}
-                color="link" size="md"
-                onClick={this.postCollection}>
-                <i className="far fa-save"></i>
-              </Button>}
-            <Button
-              style={styles.button}
-              color="link" size="md"
-              onClick={this.handleDelete}>
-              <i className="warn-icon fas fa-trash"></i>
-            </Button>
+        <Collapse style={{width: '100%'}} isOpen={this.state.showContent}>
 
-          </div>
+          <CSSTransitionGroup
+            transitionName="fade"
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={300}>
 
-          {/* the pdf, when the preview button is clicked */}
-          {this.state.showPreview &&
-            <div ref={this.props.ref} key="pdf" className="pdf-holder">
-              <PDFViewer className="pdf-viewer">
-                <GeneratedPdf collection={collection} />
-              </PDFViewer>
-            </div>}
 
-          {/* the articles in the collection, in ArticleResult format */}
-          {!this.state.showPreview &&
-            <div ref={this.props.ref} key="results" className="results-holder">
-              {this.renderResults(collection)}
-            </div>}
+            {/* the pdf, when the preview button is clicked */}
+            {this.state.showPreview &&
+              <div ref={this.props.ref} key="pdf" className="pdf-holder">
+                <PDFViewer className="pdf-viewer">
+                  <GeneratedPdf collection={collection} />
+                </PDFViewer>
+              </div>}
 
-        </CSSTransitionGroup>
+            {/* the articles in the collection, in ArticleResult format */}
+            {!this.state.showPreview &&
+              <div ref={this.props.ref} key="results" className="results-holder">
+                {this.renderResults(collection)}
+              </div>}
+
+          </CSSTransitionGroup>
+
+        </Collapse>
 
       </div>
 
@@ -445,7 +514,7 @@ const styles = {
     alignItems: 'center'
   },
   buttonHolder: {
-    padding: '10px',
+    marginLeft: '10px',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
@@ -471,7 +540,20 @@ const styles = {
     padding: '10px',
   },
   button: {
-    fontSize: '16px'
+    fontSize: '16px',
+    paddingTop: '0px'
+  },
+  expandButton: {
+    fontSize: '16px',
+    position: 'absolute',
+    right: '45%',
+    bottom: '0px'
+  },
+  popupText: {
+    color: 'white',
+    fontSize: '12px',
+    padding: '0px',
+    margin: '0px 30px'
   }
 }
 

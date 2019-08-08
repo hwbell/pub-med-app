@@ -113,10 +113,11 @@ describe('ArticleResult', () => {
     expect(wrapper.find('.article-result').length).toBe(1);
 
     // contains three .article-title elements - the title, authors, and journal 
-    expect(wrapper.find('.article-title').length).toBe(3);
-    expect(wrapper.find('.article-title').at(0).text()).toEqual(article.title)
-    expect(wrapper.find('.article-title').at(1).text()).toEqual(article.authorString)
-    expect(wrapper.find('.article-title').at(2).text()).toContain(article.journalInfo.journal.title)
+    expect(wrapper.find('.article-title').length).toBe(1);
+    expect(wrapper.find('.article-text').length).toBe(2);
+    expect(wrapper.find('.article-title').text()).toEqual(article.title)
+    expect(wrapper.find('.article-text').at(0).text()).toEqual(article.authorString)
+    expect(wrapper.find('.article-text').at(1).text()).toContain(article.journalInfo.journal.title)
 
     // contains 2 correct buttons
     expect(wrapper.find('.article-button').length).toBe(2);

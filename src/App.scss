@@ -24,8 +24,11 @@ body {
 }
 * > i {
   transition: all 0.3s ease;
+  font-size: 16px;
 }
-
+* > .btn {
+  font-size: 12px;
+}
 hr {
   /* border: 0; */
   width: 100%;
@@ -46,6 +49,15 @@ hr {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.left-all-col {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 // common uses
@@ -144,15 +156,12 @@ hr {
 }
 .paragraph {
   font-size: 14px;
-  padding: 4px 20px;
+  padding: 0px 20px;
+  // margin: 0px;
   align-self: flex-start;
 }
 .text {
   padding: 0px 25px;
-}
-.article-title {
-  padding: 0px 20px;
-  font-size: 16px;
 }
 
 /* buttons */
@@ -206,7 +215,7 @@ hr {
 
 /* the nav component */
 .navigator {
-  background-color: white;
+  background-color: rgb(240, 239, 239);
   /* position: absolute; */
   top: 0px;
   left: 0px;
@@ -282,38 +291,17 @@ input {
   width: 100%;
   height: 100%;
 }
+.collection {
+  &:hover {
+    background-color: rgba(49, 60, 98, 0.527);
+  }
+}
 .collection-title {
   margin: 20px;
   font-size: 18px;
   &:hover {
     cursor: pointer;
   }
-}
-.collection-edit {
-  margin: 8px 4px 0 0;
-  padding: 4px;
-  background-color: inherit;
-  border-radius: 10px;
-  font-size: 18px;
-  background-color: whitesmoke;
-}
-
-.fa-edit,
-.fa-trash-alt,
-.fa-times,
-.fa-save,
-.fa-undo {
-  color: whitesmoke;
-  transition: all 0.3s ease;
-  &:hover {
-    transform: translateX(-2px);
-    -webkit-transform: translateX(-2px);
-    -ms-transform: translateX(-2px);
-    -moz-transform: translateX(-2px);
-    cursor: pointer;
-    color: rgb(167, 167, 167);
-  }
-  font-size: 24px;
 }
 .section-title {
   font-weight: bolder;
@@ -324,6 +312,35 @@ input {
 .collection-block {
   width: 100%;
 }
+.collection-edit {
+  // margin: 8px 4px 0 0;
+  padding: 4px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+.fa-edit,
+.fa-save,
+.fa-undo {
+  color: whitesmoke;
+  &:hover {
+    transform: translateX(-2px);
+    -webkit-transform: translateX(-2px);
+    -ms-transform: translateX(-2px);
+    -moz-transform: translateX(-2px);
+    cursor: pointer;
+    color: rgb(167, 167, 167);
+  }
+  font-size: 24px;
+}
+.fa-times-circle, .fa-check-circle {
+  color: whitesmoke;
+  font-size: 14px;
+  &:hover {
+    cursor: pointer;
+    color: $main-blue;
+  }
+}
+//
 
 // the profile page
 .profile-title {
@@ -337,7 +354,6 @@ input {
 .fa-atom,
 .fa-dna {
   transition: all 1s ease;
-  font-size: 24px;
   margin: 10px;
   color: $main-blue;
 }
@@ -420,6 +436,20 @@ body.modal-open {
   max-width: 750px;
 }
 
+// The ArticleResult component
+.article-title, .article-text {
+  padding: 0px 20px;
+  margin: 2px;
+  font-size: 14px;
+  color: rgb(255, 255, 255)
+} 
+.article-text {
+  font-size: 12px;
+  color: rgb(194, 194, 194)
+} 
+// 
+
+// The ArticleViewer Component
 /* the article links */
 .article-link {
   transition: all 0.3s ease;
@@ -432,6 +462,7 @@ body.modal-open {
     color: rgb(13, 104, 30);
   }
 }
+// 
 
 // CSSTransitionGroup animations
 
@@ -442,7 +473,6 @@ body.modal-open {
   -webkit-transform: scaleY(0.8);
   -ms-transform: scaleY(0.8);
   -moz-transform: scaleY(0.8);
-  
 }
 
 .fade-enter.fade-enter-active {

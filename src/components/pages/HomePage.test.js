@@ -26,7 +26,7 @@ it('renders correctly', async () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('contains the .page div', () => {
+it('contains the correct elements', () => {
   let wrapper = mount(
     <MemoryRouter>
       <HomePage />
@@ -38,7 +38,7 @@ it('contains the .page div', () => {
 
   // these are direct children
   expect(wrapper.find('.page').length).toBe(1);
-  expect(wrapper.find('.profile-title').length).toBe(4);
+  expect(wrapper.find('.thread-title').length).toBe(4);
   expect(wrapper.find('.glass').length).toEqual(5);
 })
 

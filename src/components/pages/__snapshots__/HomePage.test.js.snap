@@ -22,7 +22,7 @@ exports[`renders correctly 1`] = `
     className="row no-gutters row-eq-height"
   >
     <div
-      className="col col-12 col-md-8"
+      className="col col-12 col-sm-8"
     >
       <div
         className="glass"
@@ -37,9 +37,9 @@ exports[`renders correctly 1`] = `
         }
       >
         <p
-          className="profile-title"
+          className="thread-title"
         >
-          About PMC
+          Welcome!
         </p>
         <div>
           <p
@@ -52,14 +52,9 @@ exports[`renders correctly 1`] = `
           >
             PubMed Central (PMC) is a free digital repository that archives 
   publicly accessible full-text scholarly articles that have been published within the 
-  biomedical and life sciences journal literature. As one of the major research 
-  databases within the suite of resources that have been developed by the National 
-  Center for Biotechnology Information (NCBI), PubMed Central is much more than just 
-  a document repository. Launched in February 2000, the repository has grown rapidly 
-  as the NIH Public Access Policy is designed to make all research funded by the 
-  National Institutes of Health (NIH) freely accessible to anyone, and, in addition, 
-  many publishers are working cooperatively with the NIH to provide free access to 
-  their works.
+  biomedical and life sciences journal literature. This website is a portal to the resources
+  provided to the public by PMC. Hopefully, this site will enable researchers to more efficiently
+  organize, share and discuss scientific and medical literature. 
           </p>
         </div>
         <button
@@ -82,7 +77,7 @@ exports[`renders correctly 1`] = `
       </div>
     </div>
     <div
-      className="col col-12 col-md-4"
+      className="col col-12 col-sm-4"
     >
       <div
         className="glass"
@@ -97,7 +92,7 @@ exports[`renders correctly 1`] = `
         }
       >
         <p
-          className="profile-title"
+          className="thread-title"
         >
           Resources
         </p>
@@ -130,36 +125,6 @@ exports[`renders correctly 1`] = `
               }
             }
           >
-            patents &gt; 4 million
-          </p>
-          <p
-            className="paragraph"
-            style={
-              Object {
-                "alignSelf": "flex-start",
-              }
-            }
-          >
-            preprints &gt; 74,000
-          </p>
-          <p
-            className="paragraph"
-            style={
-              Object {
-                "alignSelf": "flex-start",
-              }
-            }
-          >
-            agricola records &gt; 700,000
-          </p>
-          <p
-            className="paragraph"
-            style={
-              Object {
-                "alignSelf": "flex-start",
-              }
-            }
-          >
             NIH clinical guidelines &gt; 800
           </p>
         </div>
@@ -177,7 +142,7 @@ exports[`renders correctly 1`] = `
               }
             }
           >
-            find a resource
+            resources
           </a>
         </button>
       </div>
@@ -202,7 +167,7 @@ exports[`renders correctly 1`] = `
         }
       >
         <p
-          className="profile-title"
+          className="thread-title"
         >
           Journals
         </p>
@@ -235,27 +200,7 @@ exports[`renders correctly 1`] = `
               }
             }
           >
-            Cardiology and Therapy
-          </p>
-          <p
-            className="paragraph"
-            style={
-              Object {
-                "alignSelf": "flex-start",
-              }
-            }
-          >
             Anatomy and Cell Biology
-          </p>
-          <p
-            className="paragraph"
-            style={
-              Object {
-                "alignSelf": "flex-start",
-              }
-            }
-          >
-            Journal of Applied Physics
           </p>
           <p
             className="paragraph"
@@ -292,7 +237,7 @@ exports[`renders correctly 1`] = `
               }
             }
           >
-            search literature
+            literature
           </a>
         </button>
       </div>
@@ -313,7 +258,7 @@ exports[`renders correctly 1`] = `
         }
       >
         <p
-          className="profile-title"
+          className="thread-title"
         >
           New Publications
         </p>

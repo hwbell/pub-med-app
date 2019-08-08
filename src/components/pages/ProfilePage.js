@@ -146,6 +146,9 @@ class ProfilePage extends React.Component {
         <p className="profile-title">
           <strong>{`${this.props.user.name || this.props.user.email}`}</strong>
         </p>
+        <p className="thread-text">
+          {user.email}
+        </p>
 
 
         {user.collections &&
@@ -162,12 +165,13 @@ class ProfilePage extends React.Component {
 
           <div>
             <p className="thread-text">
-              {user.email}
+              {user.collections &&
+                `${user.collections.length} collections`}
             </p>
 
             <p className="thread-text">
-              {user.collections &&
-                `${user.collections.length} collections`}
+              {user.threads &&
+                `${user.threads.length} threads`}
             </p>
           </div>
 
@@ -296,9 +300,17 @@ class ProfilePage extends React.Component {
 
       }).catch((e) => {
         console.log(e)
+        let { modalProps } = this.state;
+        modalProps.confirm = this.toggleAlertModal;
+        modalProps.message = `It looks like there was a problem signing you in ... please check your information and try again.`
+        modalProps.confirming = false;
+
         this.setState({
-          error: e
+          modalProps
+        }, () => {
+          this.toggleAlertModal();
         })
+
       })
   }
 
@@ -397,14 +409,6 @@ class ProfilePage extends React.Component {
 
         {/* the warning for signing out */}
         <AlertModal {...this.state.modalProps} />
-
-        {/* the warning bad entries into the login */}
-        {/* <AlertModal
-          message={this.state.loginErrorMessage}
-          isVisible={this.state.showLoginError}
-          confirming={false}
-          toggle={this.toggleAlertModal}
-        /> */}
 
         {/* the edit modal, for user that is logged in */}
         <ProfileForm

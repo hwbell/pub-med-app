@@ -29,14 +29,14 @@ class ArticleResult extends React.Component {
 
         <p className="article-title">{title}</p>
 
-        <p className="article-title">{authorString}</p>
+        <p className="article-text">{authorString}</p>
 
         { journalInfo && journalInfo.journal ?
-          <p className="article-title">
+          <p className="article-text">
             {`${this.props.article.journalInfo.journal.title}  `}
             <strong>{`  ${pubYear}`}</strong>
           </p> :
-          <p className="article-title">
+          <p className="article-text">
             <strong>{`  ${pubYear}`}</strong>
           </p>}
 

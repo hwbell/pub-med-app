@@ -79,7 +79,7 @@ describe('TextBlock', () => {
   it('contains the correct elements for different data', () => {
 
     expect(wrapper.find('.glass').length).toEqual(1);
-    expect(wrapper.find('.profile-title').length).toEqual(1);
+    expect(wrapper.find('.thread-title').length).toEqual(1);
     expect(wrapper.find('Button').length).toEqual(1);
     expect(wrapper.find('Link').length).toEqual(1);
     expect(wrapper.find('.paragraph').length).toEqual(1);
@@ -92,7 +92,7 @@ describe('TextBlock', () => {
     );
 
     expect(newWrapper.find('.glass').length).toEqual(1);
-    expect(newWrapper.find('.profile-title').length).toEqual(1);
+    expect(newWrapper.find('.thread-title').length).toEqual(1);
     expect(newWrapper.find('Button').length).toEqual(1);
     expect(newWrapper.find('Link').length).toEqual(1);
 

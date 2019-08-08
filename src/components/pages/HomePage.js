@@ -16,18 +16,13 @@ import { getArticles, parseSearchToTitlesArray } from '../../tools/apiFunctions.
 
 // vars etc
 const aboutIntro = {
-  title: 'About PMC',
+  title: 'Welcome!',
   paragraph: [
     `PubMed Central (PMC) is a free digital repository that archives 
   publicly accessible full-text scholarly articles that have been published within the 
-  biomedical and life sciences journal literature. As one of the major research 
-  databases within the suite of resources that have been developed by the National 
-  Center for Biotechnology Information (NCBI), PubMed Central is much more than just 
-  a document repository. Launched in February 2000, the repository has grown rapidly 
-  as the NIH Public Access Policy is designed to make all research funded by the 
-  National Institutes of Health (NIH) freely accessible to anyone, and, in addition, 
-  many publishers are working cooperatively with the NIH to provide free access to 
-  their works.`,
+  biomedical and life sciences journal literature. This website is a portal to the resources
+  provided to the public by PMC. Hopefully, this site will enable researchers to more efficiently
+  organize, share and discuss scientific and medical literature. `,
   ],
   button: 'read more'
 }
@@ -37,12 +32,9 @@ const resourcesIntro = {
   paragraph: [
     'abstracts > 34 million',
     'full text articles > 5 million',
-    'patents > 4 million',
-    'preprints > 74,000',
-    'agricola records > 700,000',
     'NIH clinical guidelines > 800'
   ],
-  button: 'find a resource'
+  button: 'resources'
 }
 
 const journalsIntro = {
@@ -50,13 +42,11 @@ const journalsIntro = {
   paragraph: [
     'Nature',
     'Science',
-    'Cardiology and Therapy',
     'Anatomy and Cell Biology',
-    'Journal of Applied Physics',
     'PLoS Genetics',
     'Frontiers in Chemistry'
   ],
-  button: 'search literature'
+  button: 'literature'
 }
 
 class HomePage extends React.Component {
@@ -106,14 +96,14 @@ class HomePage extends React.Component {
 
         <div className="row no-gutters row-eq-height">
 
-          <div className="col col-12 col-md-8">
+          <div className="col col-12 col-sm-8">
             <TextBlock
               linkTo={'/about/'}
               text={aboutIntro}
             />
           </div>
 
-          <div className="col col-12 col-md-4">
+          <div className="col col-12 col-sm-4">
             <TextBlock
               linkTo={'/search/'}
               text={resourcesIntro}

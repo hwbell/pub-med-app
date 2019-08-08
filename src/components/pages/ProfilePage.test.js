@@ -107,7 +107,7 @@ describe('ProfilePage', () => {
     expect(wrapper.find('.profile').length).toEqual(1);
     expect(wrapper.find('.signin').length).toEqual(0);
     expect(wrapper.find('.profile-title').length).toEqual(1);
-    expect(wrapper.find('.thread-text').length).toEqual(2);
+    expect(wrapper.find('.thread-text').length).toEqual(3);
 
     expect(wrapper.find('Button').length).toEqual(2);    
     expect(wrapper.find('.fa-user-edit').length).toEqual(1);    

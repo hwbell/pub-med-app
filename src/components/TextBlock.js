@@ -22,7 +22,7 @@ class TextBlock extends React.Component {
 
     return (
       <div className={this.props.class || "glass"} style={styles.content}>
-        <p className="profile-title">{this.props.text.title}</p>
+        <p className="thread-title">{this.props.text.title}</p>
 
         <div>
           {this.props.text.paragraph.map((el, i) =>

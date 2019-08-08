@@ -5,10 +5,6 @@ exports[`Collection renders correctly 1`] = `
   className="outline collection"
 >
   <div
-    className="collapse"
-    style={Object {}}
-  />
-  <div
     style={
       Object {
         "alignItems": "center",
@@ -45,7 +41,7 @@ exports[`Collection renders correctly 1`] = `
         }
       >
         <p
-          className="collection-title"
+          className="thread-title"
         >
           <strong>
             sample collection 
@@ -59,7 +55,40 @@ exports[`Collection renders correctly 1`] = `
       </div>
     </span>
   </div>
-  <span>
+  <div
+    className="left-all-col"
+  >
+    <button
+      aria-label={null}
+      className="btn btn-link btn-md"
+      onClick={[Function]}
+      style={
+        Object {
+          "bottom": "0px",
+          "fontSize": "16px",
+          "position": "absolute",
+          "right": "45%",
+        }
+      }
+      type="button"
+    >
+      <i
+        className="fas fa-angle-double-down"
+      />
+    </button>
+    <div
+      className="fade"
+      style={
+        Object {
+          "color": "white",
+          "fontSize": "12px",
+          "margin": "0px 30px",
+          "padding": "0px",
+        }
+      }
+    >
+      make a pdf!
+    </div>
     <div
       style={
         Object {
@@ -67,7 +96,7 @@ exports[`Collection renders correctly 1`] = `
           "display": "flex",
           "flexDirection": "row",
           "justifyContent": "flex-start",
-          "padding": "10px",
+          "marginLeft": "10px",
         }
       }
     >
@@ -75,9 +104,12 @@ exports[`Collection renders correctly 1`] = `
         aria-label={null}
         className="btn btn-link btn-md"
         onClick={[Function]}
+        onMouseLeave={[Function]}
+        onMouseOver={[Function]}
         style={
           Object {
             "fontSize": "16px",
+            "paddingTop": "0px",
           }
         }
         type="button"
@@ -90,9 +122,12 @@ exports[`Collection renders correctly 1`] = `
         aria-label={null}
         className="btn btn-link btn-md"
         onClick={[Function]}
+        onMouseLeave={[Function]}
+        onMouseOver={[Function]}
         style={
           Object {
             "fontSize": "16px",
+            "paddingTop": "0px",
           }
         }
         type="button"
@@ -105,9 +140,12 @@ exports[`Collection renders correctly 1`] = `
         aria-label={null}
         className="btn btn-link btn-md"
         onClick={[Function]}
+        onMouseLeave={[Function]}
+        onMouseOver={[Function]}
         style={
           Object {
             "fontSize": "16px",
+            "paddingTop": "0px",
           }
         }
         type="button"
@@ -117,172 +155,183 @@ exports[`Collection renders correctly 1`] = `
         />
       </button>
     </div>
-    <div
-      className="results-holder"
-    >
+  </div>
+  <div
+    className="collapse"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <span>
       <div
-        className="article-result"
+        className="results-holder"
       >
         <div
-          style={
-            Object {
-              "alignItems": "flex-start",
-              "display": "flex",
-              "flexDirection": "column",
-              "justifyContent": "space-around",
-              "width": "100%",
-            }
-          }
+          className="article-result"
         >
-          <p
-            className="article-title"
-          />
-          <p
-            className="article-title"
-          />
-          <p
-            className="article-title"
+          <div
+            style={
+              Object {
+                "alignItems": "flex-start",
+                "display": "flex",
+                "flexDirection": "column",
+                "justifyContent": "space-around",
+                "width": "100%",
+              }
+            }
           >
-            <strong>
-                undefined
-            </strong>
-          </p>
+            <p
+              className="article-title"
+            />
+            <p
+              className="article-text"
+            />
+            <p
+              className="article-text"
+            >
+              <strong>
+                  undefined
+              </strong>
+            </p>
+          </div>
+          <div
+            style={
+              Object {
+                "alignSelf": "flex-start",
+                "marginLeft": "15px",
+              }
+            }
+          >
+            <button
+              aria-label={null}
+              className="article-button view btn btn-secondary btn-sm"
+              onClick={[Function]}
+              type="button"
+            >
+              view article
+            </button>
+            <button
+              aria-label={null}
+              className="article-button warn btn btn-secondary btn-sm"
+              onClick={[Function]}
+              type="button"
+            >
+              remove
+            </button>
+          </div>
         </div>
         <div
-          style={
-            Object {
-              "alignSelf": "flex-start",
-              "marginLeft": "15px",
-            }
-          }
+          className="article-result"
         >
-          <button
-            aria-label={null}
-            className="article-button view btn btn-secondary btn-sm"
-            onClick={[Function]}
-            type="button"
+          <div
+            style={
+              Object {
+                "alignItems": "flex-start",
+                "display": "flex",
+                "flexDirection": "column",
+                "justifyContent": "space-around",
+                "width": "100%",
+              }
+            }
           >
-            view article
-          </button>
-          <button
-            aria-label={null}
-            className="article-button warn btn btn-secondary btn-sm"
-            onClick={[Function]}
-            type="button"
+            <p
+              className="article-title"
+            />
+            <p
+              className="article-text"
+            />
+            <p
+              className="article-text"
+            >
+              <strong>
+                  undefined
+              </strong>
+            </p>
+          </div>
+          <div
+            style={
+              Object {
+                "alignSelf": "flex-start",
+                "marginLeft": "15px",
+              }
+            }
           >
-            remove
-          </button>
+            <button
+              aria-label={null}
+              className="article-button view btn btn-secondary btn-sm"
+              onClick={[Function]}
+              type="button"
+            >
+              view article
+            </button>
+            <button
+              aria-label={null}
+              className="article-button warn btn btn-secondary btn-sm"
+              onClick={[Function]}
+              type="button"
+            >
+              remove
+            </button>
+          </div>
+        </div>
+        <div
+          className="article-result"
+        >
+          <div
+            style={
+              Object {
+                "alignItems": "flex-start",
+                "display": "flex",
+                "flexDirection": "column",
+                "justifyContent": "space-around",
+                "width": "100%",
+              }
+            }
+          >
+            <p
+              className="article-title"
+            />
+            <p
+              className="article-text"
+            />
+            <p
+              className="article-text"
+            >
+              <strong>
+                  undefined
+              </strong>
+            </p>
+          </div>
+          <div
+            style={
+              Object {
+                "alignSelf": "flex-start",
+                "marginLeft": "15px",
+              }
+            }
+          >
+            <button
+              aria-label={null}
+              className="article-button view btn btn-secondary btn-sm"
+              onClick={[Function]}
+              type="button"
+            >
+              view article
+            </button>
+            <button
+              aria-label={null}
+              className="article-button warn btn btn-secondary btn-sm"
+              onClick={[Function]}
+              type="button"
+            >
+              remove
+            </button>
+          </div>
         </div>
       </div>
-      <div
-        className="article-result"
-      >
-        <div
-          style={
-            Object {
-              "alignItems": "flex-start",
-              "display": "flex",
-              "flexDirection": "column",
-              "justifyContent": "space-around",
-              "width": "100%",
-            }
-          }
-        >
-          <p
-            className="article-title"
-          />
-          <p
-            className="article-title"
-          />
-          <p
-            className="article-title"
-          >
-            <strong>
-                undefined
-            </strong>
-          </p>
-        </div>
-        <div
-          style={
-            Object {
-              "alignSelf": "flex-start",
-              "marginLeft": "15px",
-            }
-          }
-        >
-          <button
-            aria-label={null}
-            className="article-button view btn btn-secondary btn-sm"
-            onClick={[Function]}
-            type="button"
-          >
-            view article
-          </button>
-          <button
-            aria-label={null}
-            className="article-button warn btn btn-secondary btn-sm"
-            onClick={[Function]}
-            type="button"
-          >
-            remove
-          </button>
-        </div>
-      </div>
-      <div
-        className="article-result"
-      >
-        <div
-          style={
-            Object {
-              "alignItems": "flex-start",
-              "display": "flex",
-              "flexDirection": "column",
-              "justifyContent": "space-around",
-              "width": "100%",
-            }
-          }
-        >
-          <p
-            className="article-title"
-          />
-          <p
-            className="article-title"
-          />
-          <p
-            className="article-title"
-          >
-            <strong>
-                undefined
-            </strong>
-          </p>
-        </div>
-        <div
-          style={
-            Object {
-              "alignSelf": "flex-start",
-              "marginLeft": "15px",
-            }
-          }
-        >
-          <button
-            aria-label={null}
-            className="article-button view btn btn-secondary btn-sm"
-            onClick={[Function]}
-            type="button"
-          >
-            view article
-          </button>
-          <button
-            aria-label={null}
-            className="article-button warn btn btn-secondary btn-sm"
-            onClick={[Function]}
-            type="button"
-          >
-            remove
-          </button>
-        </div>
-      </div>
-    </div>
-  </span>
+    </span>
+  </div>
 </div>
 `;

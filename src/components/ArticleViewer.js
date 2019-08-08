@@ -3,8 +3,7 @@ import '../App.scss';
 import 'bootstrap/dist/css/bootstrap.css';
 
 // components
-import { Button, ButtonGroup, Input, Form, InputGroup, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import { Document } from 'react-pdf'
+import { Button, Modal, ModalBody, ModalFooter } from 'reactstrap';
 
 // this form is toggled visible by the 'add to collection' button on the search page
 class ArticleViewer extends React.Component {
@@ -12,11 +11,6 @@ class ArticleViewer extends React.Component {
     super(props);
 
     this.closeModal = this.closeModal.bind(this);
-    this.toggleCollectionForm = this.toggleCollectionForm.bind(this);
-  }
-
-  componentDidMount() {
-    // 
   }
 
   renderArticlePreview() {
@@ -106,7 +100,6 @@ class ArticleViewer extends React.Component {
               // demand code and link
               if (!!link.availabilityCode && !!link.url) {
                 // set fa class
-                console.log(link)
                 let iconClass = link.availabilityCode === 'OA' ? 'fas fa-book-open' : 'fas fa-dollar-sign';
 
                 return (
@@ -141,18 +134,12 @@ class ArticleViewer extends React.Component {
     )
   }
 
-  toggleCollectionForm() {
-    console.log('toggling AddForm')
-    this.setState(prevState => ({
-      collectionModal: !prevState.collectionModal
-    }));
-  }
-
   closeModal() {
     this.props.toggle();
   }
 
   render() {
+    console.log(this.props.article)
 
     return (
       <Modal size="xl" centered={true} isOpen={this.props.isVisible} toggle={this.props.toggle}>
@@ -166,8 +153,6 @@ class ArticleViewer extends React.Component {
         </ModalBody>
         <ModalFooter>
           <Button color="secondary" size="sm" onClick={() => this.closeModal()}>close</Button>
-          <Button color="secondary" size="sm" onClick={() => this.closeModal()}>closer</Button>
-
         </ModalFooter>
 
       </Modal>

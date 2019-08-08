@@ -30,18 +30,18 @@ const Route = require("react-router-dom").Route;
 const RoutesContainer = posed.div({
   enter: {
     transition: {
-      ease: 'easeIn', duration: 300
+      ease: 'easeIn', duration: 200
     },
     opacity: 1,
-    x: 0
+    // x: 0
   },
   exit: {
     // delay: 300,
     transition: {
-      ease: 'easeOut', duration: 200
+      ease: 'easeOut', duration: 100
     },
     opacity: 0,
-    x: 10
+    // x: 10
   }
 });
 
@@ -101,7 +101,7 @@ class App extends Component {
   componentDidMount() {
     // sign in on startup if there is a token in localStorage
     if (localStorage.getItem('user') && localStorage.getItem('user') !== "undefined") {
-      console.log(localStorage.getItem('user'))
+      // console.log(localStorage.getItem('user'))
       let user = JSON.parse(localStorage.getItem('user'));
       return this.registerSignIn(user);
     }
@@ -113,6 +113,7 @@ class App extends Component {
     let collections = this.state.collections;
     collections.push(collection);
 
+    localStorage.setItem('collections', JSON.stringify(collections));
     this.setState({
       collections
     }, () => callback());

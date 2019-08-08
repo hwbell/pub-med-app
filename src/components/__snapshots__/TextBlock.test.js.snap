@@ -14,7 +14,7 @@ exports[`TextBlock renders correctly 1`] = `
   }
 >
   <p
-    className="profile-title"
+    className="thread-title"
   >
     About PMC
   </p>

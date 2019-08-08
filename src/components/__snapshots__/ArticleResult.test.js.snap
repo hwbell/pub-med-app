@@ -21,12 +21,12 @@ exports[`ArticleResult renders correctly 1`] = `
       Agreement between self-reported and central cancer registry-recorded prevalence of cancer in the Alaska EARTH study.
     </p>
     <p
-      className="article-title"
+      className="article-text"
     >
       Nash SH, Day G, Hiratsuka VY, Zimpelman GL, Koller KR.
     </p>
     <p
-      className="article-title"
+      className="article-text"
     >
       International journal of circumpolar health  
       <strong>

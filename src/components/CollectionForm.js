@@ -42,14 +42,14 @@ class CollectionForm extends React.Component {
     console.log(this.props.collections)
     let message;
     if (this.props.collections.length === 0) {
-      message = `You don't currently have any collections ... would you like to make one?
+      message = `You don't currently have any new collections ... would you like to make one?
       You can enter a name below.`;
     } else {
       message = "Select a collection to add the article to, or make a new collection."
     }
 
     return (
-      <p className="article-title" style={{ color: 'black' }}>
+      <p className="thread-text" style={{ color: 'black' }}>
         {message}
       </p>
     )
@@ -64,7 +64,7 @@ class CollectionForm extends React.Component {
           {this.props.collections.map((collection, i) =>
             <Button key={i}
               color="link" className="nav-link"
-              style={{ backgroundColor: i === this.state.highlightInd ? 'whitesmoke' : 'white' }}
+              style={{ fontSize: '14px', backgroundColor: i === this.state.highlightInd ? '#CADEE8' : 'white' }}
               onClick={() => this.highlight(i)}>{`${collection.name} ( ${collection.articles.length} )`}</Button>)}
         </div>
       )
@@ -128,7 +128,7 @@ class CollectionForm extends React.Component {
     if (this.state.highlightInd !== null) {
       let collectionName = this.props.collections[this.state.highlightInd].name;
       return this.props.modifyCollection(this.props.article, collectionName, 1, () => {
-        console.log('article added to collection')
+        // console.log('article added to collection')
         this.setState({ name: '' });
       })
     }
@@ -207,13 +207,15 @@ const styles = {
   },
   text: {
     color: 'black',
-    margin: '18px 20px'
+    margin: '10px 20px',
+    fontSize: '14px'
+
   },
   articleText: {
     color: 'blue',
     margin: '10px 20px',
     fontWeight: 'bold',
-    fontSize: '18px'
+    fontSize: '14px'
   }
 
 }

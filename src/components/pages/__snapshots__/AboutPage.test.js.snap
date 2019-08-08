@@ -102,6 +102,10 @@ exports[`AboutPage renders correctly 1`] = `
           The first thing you should do is make a user profile! It only takes a few seconds, and 
     you just need to provide an email address and password. Once you are logged in, you can 
     use all the features of the site.
+        </p>
+        <p
+          className="paragraph"
+        >
           Use this site as you would PubMed to find abstracts, articles, and more! If you are
     compiling a list of papers / publications, you will find the collection page very useful! 
     If you are looking to connect with other researchers to discuss publications or other topics,

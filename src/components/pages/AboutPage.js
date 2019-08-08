@@ -52,7 +52,9 @@ class AboutPage extends React.Component {
                     </div>
                   </div>
 
-                  <p className="paragraph">{section.text}</p>
+                  {section.text.map((text, i) => {
+                    return <p key={i} className="paragraph">{text}</p>
+                  })}
                 </div>
               )
             })}
