@@ -1,6 +1,5 @@
-
-@import './variables.scss';
-@import url('https://fonts.googleapis.com/css?family=Quicksand');
+@import "./variables.scss";
+@import url("https://fonts.googleapis.com/css?family=Quicksand");
 
 * {
   font-family: Quicksand;
@@ -8,7 +7,7 @@
 }
 body {
   background-attachment: fixed;
-  background:url(./assets/background-image2.jpg) fixed center;
+  background: url(./assets/background-image2.jpg) fixed center;
   background-size: 1600px auto;
   min-height: 100vh;
   overflow-x: hidden;
@@ -29,7 +28,7 @@ body {
 
 hr {
   /* border: 0; */
-  width: 100%;               
+  width: 100%;
   background-color: grey;
   height: 0.3px;
   margin-bottom: 10px;
@@ -37,8 +36,8 @@ hr {
 
 /* to remove spacing between bootstrap cols - https://stackoverflow.com/questions/40267056/remove-spacing-between-cols */
 .padding-0 {
-  padding-right:0;
-  padding-left:0;
+  padding-right: 0;
+  padding-left: 0;
 }
 
 .center-all-col {
@@ -50,19 +49,25 @@ hr {
 }
 
 // common uses
-.heading, .glass, .outline, .article-result, .collection-block {
+.heading,
+.glass,
+.outline,
+.article-result,
+.collection-block {
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
 }
-.glass, .outline, .article-result {
-  box-shadow: -2px 2px 3px 1px rgba(24,24,24,0.2);
+.glass,
+.outline,
+.article-result {
+  box-shadow: -2px 2px 3px 1px rgba(24, 24, 24, 0.2);
 }
 
 .article-result {
-  width: 100%; 
+  width: 100%;
   margin-top: 2px;
   border-radius: 4px;
   background-color: rgba(4, 14, 49, 0.377);
@@ -76,45 +81,46 @@ hr {
 }
 
 .page-content {
-  min-height: 100vh;  
+  min-height: 100vh;
 }
 
 /* for any glass background container, add this to the parent div */
 .glass {
-  position:relative;
+  position: relative;
   justify-content: flex-start;
   background-color: rgba(0, 18, 68, 0.438);
   margin: 0px 2px 0px 2px;
 }
-.glass:before{
-  content:'';
-  position:absolute;
-  z-index:-1;
-  top:0;
-  left:0;
-  bottom:0;
-  right:0;
-  background:url(./assets/background-image2.jpg) fixed center;
-  filter:blur(10px);
-  background-size:100vw auto;
+.glass:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: url(./assets/background-image2.jpg) fixed center;
+  filter: blur(10px);
+  background-size: 100vw auto;
   /* box-shadow:inset 0 0 0 50vw rgba(255,255,255,0.2) */
 }
 
 /* for any outlined container, add this to the parent div */
 .outline {
   border: 1px solid rgba(255, 255, 255, 0.226);
-  background-color: rgba(4, 14, 49, 0.241);  
+  background-color: rgba(4, 14, 49, 0.241);
   width: 92%;
   margin: 15px;
 }
 
 /* this will be the universal border-radius */
-.glass, .outline {
+.glass,
+.outline {
   border-radius: 6px;
 }
 
 /* to make bootstrap columns equal height */
-.row-eq-height{
+.row-eq-height {
   // margin-top: 4px;
   display: flex;
   flex-wrap: wrap;
@@ -125,7 +131,8 @@ hr {
 }
 
 /* some common text / button classes */
-.title, .subtitle {
+.title,
+.subtitle {
   color: whitesmoke;
   padding: 10px 25px;
 }
@@ -149,7 +156,11 @@ hr {
 }
 
 /* buttons */
-.block-button, .article-button, .add, .warn, .view {
+.block-button,
+.article-button,
+.add,
+.warn,
+.view {
   border: none;
 }
 .block-button {
@@ -166,13 +177,13 @@ hr {
   background-color: rgb(180, 67, 86);
 }
 .warn:hover {
-  background-color: rgb(146, 54, 69);  
+  background-color: rgb(146, 54, 69);
 }
 .warn-icon {
   color: rgb(180, 67, 86);
 }
 .warn-icon:hover {
-  color: rgb(146, 54, 69);  
+  color: rgb(146, 54, 69);
 }
 .add {
   background-color: rgb(26, 98, 214);
@@ -191,9 +202,7 @@ hr {
 }
 .view:hover {
   background-color: rgb(16, 104, 126);
-
 }
-
 
 /* the nav component */
 .navigator {
@@ -210,22 +219,25 @@ hr {
   /* color: rgb(253, 233, 255); */
   transition: all 0.3s ease;
 }
-.nav-link:hover, .nav-link:active, .nav-link:focus {
+.nav-link:hover,
+.nav-link:active,
+.nav-link:focus {
   color: rgb(161, 161, 161);
 }
 .nav-link:focus {
   text-decoration: underline;
 }
-// 
+//
 
 /* the about page */
 .about-img {
   width: 90%;
   margin: 10px;
   border-radius: 2px;
-  box-shadow: -2px 2px 6px 1px rgba(24,24,24,0.4);
+  box-shadow: -2px 2px 6px 1px rgba(24, 24, 24, 0.4);
 }
-.fa-file-alt, .fa-users {
+.fa-file-alt,
+.fa-users {
   color: whitesmoke;
   transition: all 0.3s ease;
   font-size: 24px;
@@ -236,6 +248,9 @@ hr {
   transition: all 1s ease;
   &:hover {
     transform: translateX(30px) translateY(-5px) rotate(35deg);
+    -webkit-transform: translateX(30px) translateY(-5px) rotate(35deg);
+    -ms-transform: translateX(30px) translateY(-5px) rotate(35deg);
+    -moz-transform: translateX(30px) translateY(-5px) rotate(35deg);
     cursor: pointer;
     color: $main-blue;
   }
@@ -252,7 +267,6 @@ input {
   // margin: 15px;
   text-align: center;
 }
-
 
 /* the collection page */
 
@@ -284,11 +298,18 @@ input {
   background-color: whitesmoke;
 }
 
-.fa-edit, .fa-trash-alt, .fa-times, .fa-save, .fa-undo {
+.fa-edit,
+.fa-trash-alt,
+.fa-times,
+.fa-save,
+.fa-undo {
   color: whitesmoke;
   transition: all 0.3s ease;
   &:hover {
     transform: translateX(-2px);
+    -webkit-transform: translateX(-2px);
+    -ms-transform: translateX(-2px);
+    -moz-transform: translateX(-2px);
     cursor: pointer;
     color: rgb(167, 167, 167);
   }
@@ -313,7 +334,8 @@ input {
   font-weight: 600;
 }
 
-.fa-atom, .fa-dna {
+.fa-atom,
+.fa-dna {
   transition: all 1s ease;
   font-size: 24px;
   margin: 10px;
@@ -322,6 +344,9 @@ input {
 .fa-atom {
   &:hover {
     transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
     cursor: pointer;
     color: whitesmoke;
   }
@@ -329,13 +354,19 @@ input {
 .fa-dna {
   &:hover {
     transform: rotateY(360deg) scaleY(1.3);
+    -webkit-transform: rotateY(360deg) scaleY(1.3);
+    -ms-transform: rotateY(360deg) scaleY(1.3);
+    -moz-transform: rotateY(360deg) scaleY(1.3);
     cursor: pointer;
     color: whitesmoke;
   }
 }
 
 // the ThreadPage
-.thread-title, .thread-text, .comment-title, .comment-text {
+.thread-title,
+.thread-text,
+.comment-title,
+.comment-text {
   margin: 6px 20px;
 }
 
@@ -349,13 +380,14 @@ input {
   font-size: 14px;
 }
 
-.fa-edit, .fa-trash-alt {
-  font-size: 14px;  
+.fa-edit,
+.fa-trash-alt {
+  font-size: 14px;
 }
 .fa-trash-alt {
   color: rgb(180, 67, 86);
   &:hover {
-    color: rgb(146, 54, 69);  
+    color: rgb(146, 54, 69);
   }
 }
 
@@ -365,7 +397,8 @@ input {
   justify-content: flex-start;
   align-items: flex-start;
 }
-.comment-title, .comment-text {
+.comment-title,
+.comment-text {
   font-size: 14px;
 }
 .comment-title {
@@ -375,8 +408,6 @@ input {
 
 // }
 
-
-
 /* reactstrap modals */
 /* this setting prevents the jumpy shift when the scrollbar disappears on modal popup */
 body.modal-open {
@@ -384,11 +415,10 @@ body.modal-open {
   padding-right: 0 !important;
 }
 .modal-xl {
- /* margin: 0px; */
- padding: 1vw;
- max-width: 750px;
+  /* margin: 0px; */
+  padding: 1vw;
+  max-width: 750px;
 }
-
 
 /* the article links */
 .article-link {
@@ -399,7 +429,7 @@ body.modal-open {
 .fa-dollar-sign {
   color: rgb(23, 177, 49);
   &:hover {
-  color: rgb(13, 104, 30);
+    color: rgb(13, 104, 30);
   }
 }
 
@@ -409,21 +439,31 @@ body.modal-open {
 .fade-enter {
   opacity: 0.01;
   transform: scaleY(0.8);
+  -webkit-transform: scaleY(0.8);
+  -ms-transform: scaleY(0.8);
+  -moz-transform: scaleY(0.8);
+  
 }
 
 .fade-enter.fade-enter-active {
   transition: all 200ms ease-in;
   transform: scaleY(1);
+  -webkit-transform: scaleY(1);
+  -ms-transform: scaleY(1);
+  -moz-transform: scaleY(1);
   opacity: 1;
 }
 
 // .fade-leave {
-  // opacity: 1;
+// opacity: 1;
 // }
 
 .fade-leave.fade-leave-active {
   transition: all 300ms ease-out;
   transform: translateX(1500px) translateY(-300px);
+  -webkit-transform: translateX(1500px) translateY(-300px);
+  -ms-transform: translateX(1500px) translateY(-300px);
+  -moz-transform: translateX(1500px) translateY(-300px);
   opacity: 0.01;
 }
 
@@ -438,7 +478,7 @@ body.modal-open {
 }
 
 // .replace-leave {
-  // opacity: 1;
+// opacity: 1;
 // }
 
 .replace-leave.replace-leave-active {
@@ -459,7 +499,7 @@ body.modal-open {
 }
 
 // .drop-leave {
-  // opacity: 1;
+// opacity: 1;
 // }
 
 .drop-leave.drop-leave-active {

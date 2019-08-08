@@ -163,22 +163,22 @@ describe('ProfilePage', () => {
 
   })
 
-  it('toggleAlertModal() should toggle the AlertModal', () => {
-    let wrapper = mount(<ProfilePage />);
+  it('toggleAlertModal() should toggle the AlertModal', async () => {
+    let wrapper = await mount(<ProfilePage />);
 
-    expect(wrapper.state().showSignoutWarning).toBe(false);
+    expect(wrapper.state().modalProps.isVisible).toBe(false);
     expect(wrapper.find('AlertModal').props().isVisible).toBe(false);
 
     wrapper.instance().toggleAlertModal();
     wrapper.update();
 
-    expect(wrapper.state().showSignoutWarning).toBe(true);   
+    expect(wrapper.state().modalProps.isVisible).toBe(true);   
     expect(wrapper.find('AlertModal').props().isVisible).toBe(true);
 
     wrapper.instance().toggleAlertModal();
     wrapper.update();
 
-    expect(wrapper.state().showSignoutWarning).toBe(false);   
+    expect(wrapper.state().modalProps.isVisible).toBe(false);   
     expect(wrapper.find('AlertModal').props().isVisible).toBe(false);
 
     

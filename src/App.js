@@ -33,15 +33,15 @@ const RoutesContainer = posed.div({
       ease: 'easeIn', duration: 300
     },
     opacity: 1,
-    scale: 1
+    x: 0
   },
   exit: {
-    delay: 300,
+    // delay: 300,
     transition: {
-      ease: 'easeOut', duration: 300
+      ease: 'easeOut', duration: 200
     },
     opacity: 0,
-    scale: 0.01
+    x: 10
   }
 });
 
@@ -100,7 +100,8 @@ class App extends Component {
 
   componentDidMount() {
     // sign in on startup if there is a token in localStorage
-    if (localStorage.getItem('user')) {
+    if (localStorage.getItem('user') && localStorage.getItem('user') !== "undefined") {
+      console.log(localStorage.getItem('user'))
       let user = JSON.parse(localStorage.getItem('user'));
       return this.registerSignIn(user);
     }

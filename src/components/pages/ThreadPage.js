@@ -11,15 +11,6 @@ import { Button, Fade } from 'reactstrap';
 // functions
 import { getPublicThreads, saveThread } from '../../tools/serverFunctions';
 
-// for server requests
-const user = JSON.parse(localStorage.getItem('user'));
-const token = JSON.parse(localStorage.getItem('token'));
-const headers = {
-  Authorization: `Bearer ${token}`,
-  Accept: 'application/json',
-  'Content-Type': 'application/json',
-}
-
 // ******************************************************************************
 class ThreadPage extends React.Component {
   constructor(props) {
@@ -49,7 +40,7 @@ class ThreadPage extends React.Component {
 
     // console.log(!this.props.serverThreads)
 
-    if (!this.props.serverThreads) {
+    if (!this.props.serverThreads ) {
       console.log('there are no serverThreads in props')
       this.setState({
         loading: true
@@ -64,6 +55,15 @@ class ThreadPage extends React.Component {
     console.log('fetching server threads');
 
     let { threadSorter, threadPage } = this.state;
+
+    // for server requests
+    // const user = JSON.parse(localStorage.getItem('user'));
+    // const token = JSON.parse(localStorage.getItem('token'));
+    const headers = {
+      // Authorization: `Bearer ${token}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    }
 
     return getPublicThreads(headers, threadSorter, threadPage)
       .then((response) => {
@@ -138,7 +138,7 @@ class ThreadPage extends React.Component {
   // in state, then toggle the form
   handleEdit(thread) {
     console.log(thread)
-    let selected = thread ? thread: null;
+    let selected = thread ? thread : null;
     this.setState({
       selected
     }, () => {
@@ -266,7 +266,7 @@ class ThreadPage extends React.Component {
     const haveServerThreads = serverThreads && serverThreads.length > 0;
 
     const headerSubtitle = this.props.user ? "post a thread to start a discussion" : "login and post a thread to start a discussion";
-    const threadHeaderText = this.state.selected ? "": "Start a discussion with other researchers";
+    const threadHeaderText = this.state.selected ? "" : "Start a discussion with other researchers";
     return (
       <div className="page">
 

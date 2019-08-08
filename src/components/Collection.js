@@ -3,7 +3,7 @@ import '../App.scss';
 import 'bootstrap/dist/css/bootstrap.css';
 
 // components
-import { Button, Input, InputGroup, Form } from 'reactstrap';
+import { Button, Collapse, Input, Form } from 'reactstrap';
 import ArticleResult from './ArticleResult';
 import { PDFViewer } from '@react-pdf/renderer';
 import GeneratedPdf from './GeneratedPdf';
@@ -19,13 +19,14 @@ class Collection extends React.Component {
     super(props);
 
     this.state = {
+      showContent: false,
       collection: null,
       inputText: '',
       editing: false,
       showPreview: false,
       uniqueWarning: false,
       deleteWarning: false,
-      confirming: false
+      confirming: false,
     }
 
     this.togglePreview = this.togglePreview.bind(this);
@@ -341,9 +342,6 @@ class Collection extends React.Component {
 
   render() {
 
-    console.log(this.props.collection)
-    console.log(this.state.collection)
-
     // if there is a collection in state, this means changes have been made and the props
     // one copied to state to be edited
     let collection = this.state.collection || this.props.collection;
@@ -351,6 +349,7 @@ class Collection extends React.Component {
     return (
       <div className="outline collection" style={styles.content}>
 
+        <Collapse isOpen={this.state.showContent}></Collapse>
         {/* the save icon that appears once we have any edits */}
         {this.state.collection && this.props.isSaved &&
           this.renderSaveOption()

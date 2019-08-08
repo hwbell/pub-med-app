@@ -79,7 +79,7 @@ class ProfileForm extends React.Component {
             <p style={{ color: 'black' }}>About</p>
             <Input style={styles.inputLarge} type="textarea" name="about"
               maxLength={500}
-              value={userInfo.about || null}
+              value={userInfo.about}
               placeholder="Say something about yourself!"
               onChange={(e) => this.handleChange(e)}
             />

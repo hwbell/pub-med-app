@@ -5,6 +5,10 @@ exports[`Collection renders correctly 1`] = `
   className="outline collection"
 >
   <div
+    className="collapse"
+    style={Object {}}
+  />
+  <div
     style={
       Object {
         "alignItems": "center",

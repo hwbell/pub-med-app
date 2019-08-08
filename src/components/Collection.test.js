@@ -64,6 +64,7 @@ describe('Collection', () => {
       expect(wrapper.find(selector).length).toEqual(1);
     })
 
+    expect(wrapper.find('Collapse').length).toEqual(1);
     expect(wrapper.find('.collection-title').length).toEqual(1);
     expect(wrapper.find('.fa-edit').length).toEqual(1);
 

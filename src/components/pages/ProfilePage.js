@@ -23,7 +23,9 @@ class ProfilePage extends React.Component {
       checked: false,
       editText: false,
       showProfileForm: false,
-      showSignoutWarning: false
+      showAlertModal: false,
+      loginErrorMessage: 'There was a problem logging :( ... Please try a different name and/or email.',
+      showLoginError: false
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -34,11 +36,19 @@ class ProfilePage extends React.Component {
     this.renderProfile = this.renderProfile.bind(this);
     this.toggleAlertModal = this.toggleAlertModal.bind(this);
     this.toggleProfileForm = this.toggleProfileForm.bind(this);
+    this.attemptSignOut = this.attemptSignOut.bind(this);
     this.handleSignout = this.handleSignout.bind(this);
   }
 
   componentDidMount() {
-    // console.log(localStorage)
+    this.setState({
+      modalProps: {
+        message: `Are you sure you want to sign out? Make sure all your changes are saved!`,
+        isVisible: false,
+        confirming: false,
+        toggle: this.toggleAlertModal
+      }
+    })
   }
 
   renderSignIn() {
@@ -127,7 +137,7 @@ class ProfilePage extends React.Component {
 
           <Button color="link" size="sm"
             style={styles.button}
-            onClick={this.toggleAlertModal}>
+            onClick={this.attemptSignOut}>
             <i className="warn-icon fas fa-sign-out-alt"></i>
           </Button>
 
@@ -216,13 +226,34 @@ class ProfilePage extends React.Component {
     // check for all fields, with username being optional
     let user = this.state.user;
     if (!user.email || !user.password) {
-      return console.log('Email and password are required!');
+      console.log('missing email or password')
+
+      let { modalProps } = this.state;
+      modalProps.confirming = false;
+      modalProps.confirm = this.toggleAlertModal;
+      modalProps.message = 'Email and password are required!'
+
+      this.setState({
+        modalProps
+      });
+
+      return this.toggleAlertModal();
     }
 
     // check for confirmed password if new user
     if (this.state.checked) {
       if (user.password !== user['confirm-password']) {
-        return console.log('passwords dont match, you new user you!')
+        console.log('passwords dont match, you new user you!')
+        let { modalProps } = this.state;
+        modalProps.confirming = false;
+        modalProps.confirm = this.toggleAlertModal;
+        modalProps.message = "Your passwords don't match!"
+
+        this.setState({
+          modalProps
+        });
+
+        return this.toggleAlertModal();
       }
     }
 
@@ -238,6 +269,21 @@ class ProfilePage extends React.Component {
     return signInUser(user, this.state.checked)
       .then((response) => {
         console.log(response)
+
+        if (response.code === 11000) {
+          let { modalProps } = this.state;
+
+          modalProps.message = `Sorry, it looks like that email or name is registered already! Please try another entry`
+          modalProps.confirming = false;
+          modalProps.confirm = this.toggleAlertModal;
+
+          this.setState({
+            modalProps
+          }, () => {
+            return this.toggleAlertModal();
+          })
+        }
+
 
         let { user, token } = response;
 
@@ -290,6 +336,7 @@ class ProfilePage extends React.Component {
         // 1. Refresh the user - this will send the new collection list sent back
         // from the server to the root App component to update all concerned components
         this.props.refreshUser(response);
+        this.toggleProfileForm();
 
       }).catch((e) => {
         console.log(e)
@@ -299,17 +346,39 @@ class ProfilePage extends React.Component {
       })
   }
 
-  handleSignout() {
+  // when the user first clicks sign out icon, popping up the AlertModal
+  attemptSignOut() {
+
+    let { modalProps } = this.state;
+    modalProps.confirm = this.handleSignout;
+    modalProps.message = `Are you sure you want to sign out? Make sure you saved any changes!`
+    modalProps.confirming = true;
+
     this.setState({
-      showSignoutWarning: false
+      modalProps
+    }, () => {
+      this.toggleAlertModal();
+    })
+  }
+
+  // when the signout is confirmed
+  handleSignout() {
+    let { modalProps } = this.state;
+    modalProps.isVisible = !modalProps.isVisible;
+
+    this.setState({
+      modalProps
     }, () => {
       this.props.registerSignOut();
     })
   }
 
   toggleAlertModal() {
+    let { modalProps } = this.state;
+    modalProps.isVisible = !modalProps.isVisible;
+
     this.setState({
-      showSignoutWarning: !this.state.showSignoutWarning
+      modalProps
     })
   }
 
@@ -327,13 +396,15 @@ class ProfilePage extends React.Component {
       <div className="page">
 
         {/* the warning for signing out */}
-        <AlertModal
-          message={`Are you sure you want to sign out? Make sure all your changes are saved!`}
-          isVisible={this.state.showSignoutWarning}
-          confirm={this.handleSignout}
-          confirming={true}
+        <AlertModal {...this.state.modalProps} />
+
+        {/* the warning bad entries into the login */}
+        {/* <AlertModal
+          message={this.state.loginErrorMessage}
+          isVisible={this.state.showLoginError}
+          confirming={false}
           toggle={this.toggleAlertModal}
-        />
+        /> */}
 
         {/* the edit modal, for user that is logged in */}
         <ProfileForm

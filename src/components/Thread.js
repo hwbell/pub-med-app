@@ -14,13 +14,7 @@ import { CSSTransitionGroup } from 'react-transition-group' // ES6
 // functions
 import { deleteThread } from '../tools/serverFunctions';
 
-// for server requests
-const token = JSON.parse(localStorage.getItem('token'));
-const headers = {
-  Authorization: `Bearer ${token}`,
-  Accept: 'application/json',
-  'Content-Type': 'application/json',
-}
+
 
 // ******************************************************************************
 class Thread extends React.Component {
@@ -56,6 +50,15 @@ class Thread extends React.Component {
   }
 
   handleDeleteThread() {
+
+    // for server requests
+    const token = localStorage.getItem('token') !== "undefined" ? JSON.parse(localStorage.getItem('token')) : null;
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    }
+
     return deleteThread(headers, this.props.thread)
       .then((response) => {
         console.log(response)
