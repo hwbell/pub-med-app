@@ -24,6 +24,7 @@ export async function getArticles (query, sortParam) {
 
   let searchUrl = `https://www.ebi.ac.uk/europepmc/webservices/rest/searchPOST?query=${query}${sorter}&resultType=core&pageSize=10&format=json`;
   
+  console.log(searchUrl)
   let headers = {}
   headers['Content-Type'] = 'application/x-www-form-urlencoded';
 

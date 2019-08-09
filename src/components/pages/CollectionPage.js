@@ -74,7 +74,7 @@ class CollectionPage extends React.Component {
   // deletes the entire collection, registers the removal in App
   handleDelete(collection) {
     this.props.deleteCollection(collection, () => {
-      console.log(`${collection.name} deleted from collecetions`)
+      console.log(`${collection.name} deleted from collections`)
     });
   }
 
@@ -128,9 +128,16 @@ class CollectionPage extends React.Component {
 
   render() {
 
+    // get the user's saved collections
     const user = this.props.user;
-    // console.log(user)
-    const userCollections = user && user.collections && user.collections.length > 0;
+    const haveUserCollections = user && user.collections && user.collections.length > 0;
+
+    // get the new collections
+    const newCollections = this.props.collections.length > 0 ? 
+      this.props.collections :
+      JSON.parse(localStorage.getItem('collections'));
+    const haveNewCollections = newCollections && newCollections.length > 0;
+    console.log(`have new collections? ${haveNewCollections}`)
 
     return (
       <div className="collection-page page">
@@ -158,9 +165,9 @@ class CollectionPage extends React.Component {
             <p className="profile-title">New Collections</p>
 
             {/* the new collections when they are present */}
-            {this.props.collections.length > 0 ?
+            {haveNewCollections ?
 
-              this.renderCollections(this.props.collections)
+              this.renderCollections(newCollections)
 
               // or if there aren't any collections yet
               :
@@ -174,7 +181,7 @@ class CollectionPage extends React.Component {
             <p className="profile-title">Saved Collections</p>
 
             {/* the user's collections when they are present */}
-            {userCollections ?
+            {haveUserCollections ?
 
               this.renderCollections(user.collections, true)
 

@@ -38,9 +38,48 @@ exports[`SearchPage renders correctly 1`] = `
             }
           }
           type="text"
+          value="medicine"
         />
       </div>
     </form>
+    <div
+      className="left-all-row"
+      style={
+        Object {
+          "padding": "0px 24px",
+        }
+      }
+    >
+      <p
+        className="thread-text"
+      >
+        sort by:
+      </p>
+      <button
+        aria-label={null}
+        className="sort-link btn btn-link btn-sm"
+        onClick={[Function]}
+        type="button"
+      >
+        date
+      </button>
+      <button
+        aria-label={null}
+        className="sort-link btn btn-link btn-sm"
+        onClick={[Function]}
+        type="button"
+      >
+        cited
+      </button>
+      <button
+        aria-label={null}
+        className="sort-link btn btn-link btn-sm"
+        onClick={[Function]}
+        type="button"
+      >
+        relevance
+      </button>
+    </div>
     <div
       className="outline"
     >

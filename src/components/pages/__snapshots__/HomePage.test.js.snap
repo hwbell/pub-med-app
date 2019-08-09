@@ -43,7 +43,7 @@ exports[`renders correctly 1`] = `
         </p>
         <div>
           <p
-            className="paragraph"
+            className="thread-text"
             style={
               Object {
                 "alignSelf": "flex-start",
@@ -98,17 +98,17 @@ exports[`renders correctly 1`] = `
         </p>
         <div>
           <p
-            className="paragraph"
+            className="thread-text"
             style={
               Object {
                 "alignSelf": "flex-start",
               }
             }
           >
-            abstracts &gt; 34 million
+            abstracts &gt; 35 million
           </p>
           <p
-            className="paragraph"
+            className="thread-text"
             style={
               Object {
                 "alignSelf": "flex-start",
@@ -118,7 +118,27 @@ exports[`renders correctly 1`] = `
             full text articles &gt; 5 million
           </p>
           <p
-            className="paragraph"
+            className="thread-text"
+            style={
+              Object {
+                "alignSelf": "flex-start",
+              }
+            }
+          >
+            patents &gt; 4 million
+          </p>
+          <p
+            className="thread-text"
+            style={
+              Object {
+                "alignSelf": "flex-start",
+              }
+            }
+          >
+            preprints &gt; 80,000
+          </p>
+          <p
+            className="thread-text"
             style={
               Object {
                 "alignSelf": "flex-start",
@@ -142,7 +162,7 @@ exports[`renders correctly 1`] = `
               }
             }
           >
-            resources
+            find resources!
           </a>
         </button>
       </div>
@@ -173,7 +193,7 @@ exports[`renders correctly 1`] = `
         </p>
         <div>
           <p
-            className="paragraph"
+            className="thread-text"
             style={
               Object {
                 "alignSelf": "flex-start",
@@ -183,7 +203,7 @@ exports[`renders correctly 1`] = `
             Nature
           </p>
           <p
-            className="paragraph"
+            className="thread-text"
             style={
               Object {
                 "alignSelf": "flex-start",
@@ -193,7 +213,7 @@ exports[`renders correctly 1`] = `
             Science
           </p>
           <p
-            className="paragraph"
+            className="thread-text"
             style={
               Object {
                 "alignSelf": "flex-start",
@@ -203,7 +223,7 @@ exports[`renders correctly 1`] = `
             Anatomy and Cell Biology
           </p>
           <p
-            className="paragraph"
+            className="thread-text"
             style={
               Object {
                 "alignSelf": "flex-start",
@@ -213,7 +233,7 @@ exports[`renders correctly 1`] = `
             PLoS Genetics
           </p>
           <p
-            className="paragraph"
+            className="thread-text"
             style={
               Object {
                 "alignSelf": "flex-start",
@@ -221,6 +241,16 @@ exports[`renders correctly 1`] = `
             }
           >
             Frontiers in Chemistry
+          </p>
+          <p
+            className="thread-text"
+            style={
+              Object {
+                "alignSelf": "flex-start",
+              }
+            }
+          >
+            PNAS
           </p>
         </div>
         <button
@@ -237,7 +267,7 @@ exports[`renders correctly 1`] = `
               }
             }
           >
-            literature
+            search the literature!
           </a>
         </button>
       </div>
@@ -260,9 +290,51 @@ exports[`renders correctly 1`] = `
         <p
           className="thread-title"
         >
-          New Publications
+          Research
         </p>
-        <div />
+        <div>
+          <p
+            className="thread-text"
+            style={
+              Object {
+                "alignSelf": "flex-start",
+              }
+            }
+          >
+            Use this site to mine literature, organize resources, and connect with other reseachers! Using the tools
+    found here, you can:
+          </p>
+          <p
+            className="thread-text"
+            style={
+              Object {
+                "alignSelf": "flex-start",
+              }
+            }
+          >
+               - Quickly compile lists of important publications and research.
+          </p>
+          <p
+            className="thread-text"
+            style={
+              Object {
+                "alignSelf": "flex-start",
+              }
+            }
+          >
+               - Connect with other researchers in a public forum to share thoughts and dscuss the latest scientific findings.
+          </p>
+          <p
+            className="thread-text"
+            style={
+              Object {
+                "alignSelf": "flex-start",
+              }
+            }
+          >
+               - Hopefully enjoy the process of literature mining a little more than you used to!
+          </p>
+        </div>
         <button
           aria-label={null}
           className="block-button btn btn-primary btn-sm"
@@ -277,7 +349,7 @@ exports[`renders correctly 1`] = `
               }
             }
           >
-            more articles
+            start mining!
           </a>
         </button>
       </div>

@@ -30,11 +30,13 @@ const aboutIntro = {
 const resourcesIntro = {
   title: 'Resources',
   paragraph: [
-    'abstracts > 34 million',
+    'abstracts > 35 million',
     'full text articles > 5 million',
+    'patents > 4 million',
+    'preprints > 80,000',
     'NIH clinical guidelines > 800'
   ],
-  button: 'resources'
+  button: 'find resources!'
 }
 
 const journalsIntro = {
@@ -44,16 +46,29 @@ const journalsIntro = {
     'Science',
     'Anatomy and Cell Biology',
     'PLoS Genetics',
-    'Frontiers in Chemistry'
+    'Frontiers in Chemistry',
+    'PNAS'
   ],
-  button: 'literature'
+  button: 'search the literature!'
+}
+
+const toolsIntro = {
+  title: 'Research',
+  paragraph: [
+    `Use this site to mine literature, organize resources, and connect with other reseachers! Using the tools
+    found here, you can:`, 
+    `   - Quickly compile lists of important publications and research.`,
+    `   - Connect with other researchers in a public forum to share thoughts and dscuss the latest scientific findings.`,
+    `   - Hopefully enjoy the process of literature mining a little more than you used to!`
+  ],
+  button: 'start mining!'
 }
 
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
 
-    this.fetchArticles = this.fetchArticles.bind(this);
+    // this.fetchArticles = this.fetchArticles.bind(this);
 
     this.state = {
       newPublicationsInfo: {
@@ -64,25 +79,25 @@ class HomePage extends React.Component {
     };
   }
 
-  fetchArticles() {
-    return getArticles('medicine', 'date')
-      .then((results) => {
-        // console.log(results)
-        let articleTitles = parseSearchToTitlesArray(results).slice(0, 4);
-        this.setState({
-          newPublicationsInfo: {
-            title: 'New Publications',
-            paragraph: articleTitles,
-            button: 'more articles'
-          }
-        })
-      }).catch((e) => {
-        console.log(e)
-      })
-  }
+  // fetchArticles() {
+  //   return getArticles('medicine', 'date')
+  //     .then((results) => {
+  //       // console.log(results)
+  //       let articleTitles = parseSearchToTitlesArray(results).slice(0, 4);
+  //       this.setState({
+  //         newPublicationsInfo: {
+  //           title: 'New Publications',
+  //           paragraph: articleTitles,
+  //           button: 'more articles'
+  //         }
+  //       })
+  //     }).catch((e) => {
+  //       console.log(e)
+  //     })
+  // }
 
   componentDidMount() {
-    return this.fetchArticles();
+    // return this.fetchArticles();
   }
 
   render() {
@@ -124,7 +139,7 @@ class HomePage extends React.Component {
             {this.state.newPublicationsInfo &&
               <TextBlock
                 linkTo={'/search/'}
-                text={this.state.newPublicationsInfo}
+                text={toolsIntro}
               />}
           </div>
         </div>

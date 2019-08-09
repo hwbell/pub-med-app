@@ -42,21 +42,4 @@ it('contains the correct elements', () => {
   expect(wrapper.find('.glass').length).toEqual(5);
 })
 
-it('contains search results after fetch', async () => {
-  let wrapper = await shallow(<HomePage />)
-
-  // should be empty to start
-  expect(wrapper.state().newPublicationsInfo.paragraph.length).toBe(0)
-
-  // then trigger the fetch
-  await wrapper.instance().componentDidMount();
-
-  // unfortunately it seems this is necessary? tried to find alternative, will
-  // try again
-  // await sleep(DELAY_MS)
-
-  // should have results
-  await wrapper.update();
-  expect(wrapper.state().newPublicationsInfo.paragraph.length).not.toBe(0)
-});
 

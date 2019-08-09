@@ -11,6 +11,9 @@ import { Button, Fade } from 'reactstrap';
 // functions
 import { getPublicThreads, saveThread } from '../../tools/serverFunctions';
 
+import Loader from 'react-loader-spinner';
+
+
 // ******************************************************************************
 class ThreadPage extends React.Component {
   constructor(props) {
@@ -23,10 +26,11 @@ class ThreadPage extends React.Component {
       showUniqueWarning: false,
       threadPage: 1,
       threadSorter: 'date',
-      loading: 'false'
     }
 
     this.fetchServerThreads = this.fetchServerThreads.bind(this);
+    // this.renderLoader = this.renderLoader.bind(this);
+
     this.renderThreads = this.renderThreads.bind(this);
     this.toggleThreadForm = this.toggleThreadForm.bind(this);
     this.handleSubmitThread = this.handleSubmitThread.bind(this);
@@ -40,14 +44,9 @@ class ThreadPage extends React.Component {
 
     // console.log(!this.props.serverThreads)
 
-    if (!this.props.serverThreads ) {
+    if (!this.props.serverThreads) {
       console.log('there are no serverThreads in props')
-      this.setState({
-        loading: true
-      }, () => {
-        this.fetchServerThreads();
-      })
-
+      this.fetchServerThreads();
     }
   }
 
@@ -73,11 +72,6 @@ class ThreadPage extends React.Component {
         // This is handled separately from patches / posts, because when we fetch the entire list,
         // we can just register that as the serverThreads in App
         this.props.registerServerThreads(response);
-        this.setState({
-          loading: false
-        })
-
-        // Fail => show the fail message / reason
 
       }).catch((e) => {
         console.log(e)
@@ -85,6 +79,21 @@ class ThreadPage extends React.Component {
           error: e
         })
       })
+  }
+
+  // for when the threads are being fetched
+  renderLoader() {
+    return (
+      <div style={styles.loaderHolder} id="loader" key="loader">
+        <p className="thread-text">getting threads ... </p>
+        <Loader
+          height={100}
+          width={100}
+          type="ThreeDots"
+          color="whitesmoke"
+        />
+      </div>
+    )
   }
 
   // we use the isUsers flag to determine if this is the user's thread or not
@@ -297,6 +306,11 @@ class ThreadPage extends React.Component {
               <Button className="add article-button" size="sm"
                 onClick={() => this.handleEdit()}>+new thread</Button>
             </Fade>
+
+            {/* the loader icon */}
+            {!haveServerThreads &&
+              this.renderLoader()
+            }
 
             {haveUserThreads && this.renderThreads(user.threads, true)}
 

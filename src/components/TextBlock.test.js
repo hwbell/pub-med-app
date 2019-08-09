@@ -82,7 +82,7 @@ describe('TextBlock', () => {
     expect(wrapper.find('.thread-title').length).toEqual(1);
     expect(wrapper.find('Button').length).toEqual(1);
     expect(wrapper.find('Link').length).toEqual(1);
-    expect(wrapper.find('.paragraph').length).toEqual(1);
+    expect(wrapper.find('.thread-text').length).toEqual(1);
 
     someProps.text = resourcesIntro;
     let newWrapper = mount(
@@ -96,8 +96,7 @@ describe('TextBlock', () => {
     expect(newWrapper.find('Button').length).toEqual(1);
     expect(newWrapper.find('Link').length).toEqual(1);
 
-    console.log(newWrapper.props().paragraph)
-    expect(newWrapper.find('.paragraph').length).toEqual(6);
+    expect(newWrapper.find('.thread-text').length).toEqual(6);
 
   })
 

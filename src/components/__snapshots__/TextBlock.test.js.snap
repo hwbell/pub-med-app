@@ -20,7 +20,7 @@ exports[`TextBlock renders correctly 1`] = `
   </p>
   <div>
     <p
-      className="paragraph"
+      className="thread-text"
       style={
         Object {
           "alignSelf": "flex-start",

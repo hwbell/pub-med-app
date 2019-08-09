@@ -48,6 +48,8 @@ describe('CollectionPage', () => {
       },
       modifyCollection: modifyStub
     }
+
+    localStorage.removeItem('collections');
   });
 
   // tests
@@ -80,6 +82,7 @@ describe('CollectionPage', () => {
     // the explanations should not appear with collections present 
     expect(wrapper.find('.outline').length).toEqual(1);
     expect(wrapper.find('.profile-title').length).toEqual(2);
+    expect(wrapper.find('.collection-block').length).toEqual(2);
 
     // set the user's collections to empty 
     wrapper.setProps({
@@ -93,6 +96,7 @@ describe('CollectionPage', () => {
 
     // now the 1st segment appears
     expect(wrapper.find('.paragraph').length).toEqual(1);
+    expect(wrapper.find('.collection-block').length).toEqual(1);
 
     //  set the new collections to empty 
     wrapper.setProps({
@@ -101,8 +105,44 @@ describe('CollectionPage', () => {
 
     // now the second segment appears
     expect(wrapper.find('.paragraph').length).toEqual(2);
+    expect(wrapper.find('.collection-block').length).toEqual(0);
 
   })
+
+  // it('should use localStorage collections as new Collections if there are none in props', async () => {
+  //   let wrapper = shallow(<CollectionPage  {...someProps} />);
+
+  //   // the explanations should not appear with collections present 
+  //   expect(wrapper.find('.collection-block').length).toEqual(2);
+
+  //   // set the props collections to empty 
+  //   wrapper.setProps({
+  //     collections: []
+  //   });
+
+  //   // now the 1st segment appears
+  //   expect(wrapper.find('.collection-block').length).toEqual(1);
+
+  //   //  set the new collections in localStorage 
+  //   let localCollections = [
+  //     {
+  //       name: 'first collection',
+  //       articles: articles
+  //     },
+  //     {
+  //       name: 'second collection',
+  //       articles: articles
+  //     }
+  //   ]
+
+  //   localStorage.setItem('collections', JSON.stringify(localCollections));
+    
+  //   await wrapper.update();
+
+  //   // now the second segment appears
+  //   expect(wrapper.find('.collection-block').length).toEqual(2);
+    
+  // })
 
   it('should toggle the ArticleViewer', () => {
     let wrapper = shallow(<CollectionPage  {...someProps} />);

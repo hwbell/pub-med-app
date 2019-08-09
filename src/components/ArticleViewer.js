@@ -54,7 +54,7 @@ class ArticleViewer extends React.Component {
 
     // get urls for the article availablitity
     let urlList = fullTextUrlList.fullTextUrl.map((articleObj) => {
-      console.log(articleObj)
+      // console.log(articleObj)
       let { availabilityCode, url } = articleObj;
       return {
         availabilityCode,
@@ -139,7 +139,7 @@ class ArticleViewer extends React.Component {
   }
 
   render() {
-    console.log(this.props.article)
+    // console.log(this.props.article)
 
     return (
       <Modal size="xl" centered={true} isOpen={this.props.isVisible} toggle={this.props.toggle}>

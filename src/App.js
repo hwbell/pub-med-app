@@ -113,16 +113,20 @@ class App extends Component {
     let collections = this.state.collections;
     collections.push(collection);
 
-    localStorage.setItem('collections', JSON.stringify(collections));
     this.setState({
       collections
-    }, () => callback());
+    }, () => {
+      callback()
+      localStorage.setItem('collections', JSON.stringify(collections))
+    });
   }
 
   deleteCollection(collectionToDelete, callback) {
     let name = collectionToDelete.name;
     console.log(name)
     let collections = this.state.collections.filter(collection => collection.name !== name);
+
+    localStorage.setItem('collections', JSON.stringify(collections));
 
     this.setState({
       collections
@@ -165,7 +169,11 @@ class App extends Component {
         collections
       }, () => callback());
     } else {
-      this.setState({ collections });
+      this.setState({
+        collections
+      }, () => {
+        localStorage.setItem('collections', JSON.stringify(collections))
+      });
     }
   }
 

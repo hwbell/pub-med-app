@@ -26,7 +26,7 @@ class TextBlock extends React.Component {
 
         <div>
           {this.props.text.paragraph.map((el, i) =>
-            <p key={i} className="paragraph" style={{ alignSelf: 'flex-start' }}>{el}</p>
+            <p key={i} className="thread-text" style={{ alignSelf: 'flex-start' }}>{el}</p>
           )}
         </div>
 

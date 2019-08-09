@@ -12,7 +12,7 @@ import { Input, Form, InputGroup, Button } from 'reactstrap';
 import Loader from 'react-loader-spinner';
 
 // tools
-import { getArticles, parseSearchToTitlesArray } from '../../tools/apiFunctions.js';
+import { getArticles } from '../../tools/apiFunctions.js';
 
 // animation
 import posed, { PoseGroup } from 'react-pose';
@@ -24,6 +24,8 @@ const Div = posed.div({
 });
 
 const initialState = {
+  query: 'medicine',
+  sorter: '',
   collectionModal: false,
   articleModal: false,
   results: null,
@@ -41,9 +43,13 @@ class SearchPage extends React.Component {
     this.fetchSearch = this.fetchSearch.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleSortButton = this.handleSortButton.bind(this);
+
+    this.renderLoader = this.renderLoader.bind(this);
+    this.renderSorters = this.renderSorters.bind(this);
+
     this.viewArticle = this.viewArticle.bind(this);
     this.addArticle = this.addArticle.bind(this);
-    this.renderLoader = this.renderLoader.bind(this);
     this.toggleCollectionForm = this.toggleCollectionForm.bind(this);
     this.toggleViewArticle = this.toggleViewArticle.bind(this);
 
@@ -51,13 +57,27 @@ class SearchPage extends React.Component {
 
   }
 
+  // on mounting, check for localStorage results from previous searches. 
+  // we should fetch articles with our default sorters if the user has not
+  // performed any searches yet. 
   componentDidMount() {
-   return this.fetchSearch('medicine', 'date');
+    let localResults = JSON.parse(localStorage.getItem('searchResults'))
+
+    if (!localResults || !localResults.length) {
+      let { query, sorter } = this.state;
+      return this.fetchSearch(query, sorter);
+    } else {
+      // if we have the localStorage results, set them as the results and cancel the loader icon
+      this.setState({
+        showLoading: false,
+        results: JSON.parse(localStorage.getItem('searchResults'))
+      })
+    }
   }
 
   // get the results from the api
-  fetchSearch(query) {
-    return getArticles(query)
+  fetchSearch(query, sorter) {
+    return getArticles(query, sorter)
       .then((response) => {
         // console.log(response.resultList.result)
         // let articleTitles = parseSearchToTitlesArray(results);
@@ -65,7 +85,12 @@ class SearchPage extends React.Component {
           results: response.resultList.result,
           showLoading: false
           // articleTitles
+        }, () => {
+          // save the search to local storage
+          localStorage.setItem('searchResults', JSON.stringify(response.resultList.result));
+          localStorage.setItem('searchQuery', JSON.stringify(query));          
         })
+
       }).catch((e) => {
         // console.log(e)
         this.setState({
@@ -84,11 +109,25 @@ class SearchPage extends React.Component {
 
   // handleSubmit fires the search for the current query
   handleSubmit(e) {
-    console.log(`search fired => ${this.state.query}`)
+    console.log(`search fired => ${this.state.query}, ${this.state.sorter}`)
     e.preventDefault();
 
+    // set to loading state, and fetch the search
     this.setState(loadingState, () => {
-      this.fetchSearch(this.state.query);
+      let { query, sorter } = this.state
+      this.fetchSearch(query, sorter);
+    })
+  }
+
+  // date, cited, relevance buttons will re-fetch the search, since we will get 
+  // totally different results based on these. 
+  handleSortButton(sorter) {
+    loadingState.sorter = sorter;
+    this.setState(loadingState, () => {
+      let { query } = this.state;
+      this.fetchSearch(query, sorter)
+    console.log(query, sorter)
+      
     })
 
   }
@@ -125,6 +164,36 @@ class SearchPage extends React.Component {
       )
     })
 
+  }
+
+  // the buttons to sort by date, citations, etc
+  renderSorters() {
+    let sortButtons = [
+      {
+        text: 'date',
+        sorter: 'date'
+      },
+      {
+        text: 'cited',
+        sorter: 'cited'
+      },
+      {
+        text: 'relevance',
+        sorter: ''
+      }
+    ];
+
+    return (
+
+      <div className="left-all-row" style={{ padding: '0px 24px' }}>
+        <p className="thread-text">sort by:</p>
+
+        {sortButtons.map((button, i) => {
+          return <Button key={i} className="sort-link" color="link" size="sm"
+            onClick={() => this.handleSortButton(button.sorter)}>{button.text}</Button>
+        })}
+      </div>
+    )
   }
 
   addArticle(article) {
@@ -185,7 +254,7 @@ class SearchPage extends React.Component {
             article={this.state.selected}
             isVisible={this.state.articleModal}
             toggle={this.toggleViewArticle} />}
-        
+
         {/* ************************************************** */}
 
 
@@ -204,12 +273,17 @@ class SearchPage extends React.Component {
 
             <InputGroup>
               <Input style={{ borderRadius: '25px' }}
+                // value is set to one of these values, state or local or ''
+                value={this.state.query || JSON.parse(localStorage.getItem('searchQuery')) || ''}
                 placeholder={"articles, patents, clinical guidelines ..."}
                 onChange={(e) => this.handleChange(e.target.value)}
               />
             </InputGroup>
 
           </Form>
+
+          {/* the sorting options */}
+          {this.renderSorters()}
 
           {/* the results */}
           <div className="outline" style={styles.content}>
