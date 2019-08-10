@@ -165,6 +165,7 @@ class App extends Component {
     console.log(collections)
 
     if (callback) {
+      localStorage.setItem('collections', JSON.stringify(collections))
       this.setState({
         collections
       }, () => callback());

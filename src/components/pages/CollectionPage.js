@@ -128,6 +128,8 @@ class CollectionPage extends React.Component {
 
   render() {
 
+    console.log(JSON.parse(localStorage.getItem('collections')))
+
     // get the user's saved collections
     const user = this.props.user;
     const haveUserCollections = user && user.collections && user.collections.length > 0;
@@ -137,7 +139,8 @@ class CollectionPage extends React.Component {
       this.props.collections :
       JSON.parse(localStorage.getItem('collections'));
     const haveNewCollections = newCollections && newCollections.length > 0;
-    console.log(`have new collections? ${haveNewCollections}`)
+
+    // console.log(haveUserCollections, haveNewCollections)
 
     return (
       <div className="collection-page page">

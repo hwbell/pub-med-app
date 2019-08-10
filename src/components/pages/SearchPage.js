@@ -61,6 +61,10 @@ class SearchPage extends React.Component {
   // we should fetch articles with our default sorters if the user has not
   // performed any searches yet. 
   componentDidMount() {
+
+    // assign the sorter to local storage
+    localStorage.setItem('sorter', JSON.stringify(this.state.sorter))
+
     let localResults = JSON.parse(localStorage.getItem('searchResults'))
 
     if (!localResults || !localResults.length) {
@@ -126,7 +130,8 @@ class SearchPage extends React.Component {
     this.setState(loadingState, () => {
       let { query } = this.state;
       this.fetchSearch(query, sorter)
-    console.log(query, sorter)
+      
+      localStorage.setItem('sorter', JSON.stringify(sorter))
       
     })
 
@@ -189,7 +194,17 @@ class SearchPage extends React.Component {
         <p className="thread-text">sort by:</p>
 
         {sortButtons.map((button, i) => {
-          return <Button key={i} className="sort-link" color="link" size="sm"
+
+          let isLocalSorter = JSON.parse(localStorage.getItem('sorter')) === button.sorter;
+          {/* let isStateSorter = this.state.sorter === button.sorter; */}
+
+          let color;
+          if (isLocalSorter) {
+            color = 'blue';
+          } else {
+            color = 'white';
+          }
+          return <Button key={i} style={{color}} className="sort-link" color="link" size="sm"
             onClick={() => this.handleSortButton(button.sorter)}>{button.text}</Button>
         })}
       </div>

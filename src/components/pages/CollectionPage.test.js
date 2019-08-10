@@ -4,26 +4,37 @@ import { shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 import { getArticles } from '../../tools/apiFunctions.js';
 
+const articles = [
+  {
+    id: '013091283'
+  },
+  {
+    id: '446264632'
+  },
+  {
+    id: '651753334'
+  }
+]
+
+const modifyStub = jest.fn();
+
 describe('CollectionPage', () => {
 
   // stubs
-  const modifyStub = jest.fn();
-  let articles;
-  let someProps;
-  // get some props
-  beforeAll(async () => {
-    articles = [
-      {
-        id: '013091283'
-      },
-      {
-        id: '446264632'
-      },
-      {
-        id: '651753334'
-      }
-    ]
+  let articles, user, someProps, wrapper;
 
+  beforeEach(async () => {
+    user = {
+      name: 'Mark',
+      email: 'mark@mail.com',
+      age: 33,
+      collections: [
+        {
+          name: 'first collection',
+          articles: articles
+        }
+      ],
+    };
     someProps = {
       collections: [
         {
@@ -35,26 +46,19 @@ describe('CollectionPage', () => {
           articles: articles
         }
       ],
-      user: {
-        name: 'Mark',
-        email: 'mark@mail.com',
-        age: 33,
-        collections: [
-          {
-            name: 'first collection',
-            articles: articles
-          }
-        ],
-      },
+      user,
       modifyCollection: modifyStub
     }
 
     localStorage.removeItem('collections');
+    
+    wrapper = shallow(<CollectionPage {...someProps} />);
+
   });
 
   // tests
   it('renders without crashing', async () => {
-    let wrapper = shallow(<CollectionPage {...someProps} />);
+    wrapper.update();
   });
 
   it('renders correctly', async () => {
@@ -73,76 +77,46 @@ describe('CollectionPage', () => {
       expect(wrapper.find(selector).length).toEqual(2);
     });
 
-
   });
 
-  it('should change content when collections are empty', () => {
+  it('should render content based on props.collections and props.user.collections', async () => {
     let wrapper = shallow(<CollectionPage  {...someProps} />);
 
-    // the explanations should not appear with collections present 
-    expect(wrapper.find('.outline').length).toEqual(1);
-    expect(wrapper.find('.profile-title').length).toEqual(2);
+    // there's two to start, one for props.collections and one for user.collections
     expect(wrapper.find('.collection-block').length).toEqual(2);
+    expect(wrapper.find('.paragraph').length).toEqual(0);
 
-    // set the user's collections to empty 
-    wrapper.setProps({
-      user: {
-        name: 'Mark',
-        email: 'mark@mail.com',
-        age: 33,
-        collections: []
-      }
-    });
-
-    // now the 1st segment appears
-    expect(wrapper.find('.paragraph').length).toEqual(1);
-    expect(wrapper.find('.collection-block').length).toEqual(1);
-
-    //  set the new collections to empty 
+    // set the props collections to empty 
     wrapper.setProps({
       collections: []
     });
+    wrapper.update();
 
-    // now the second segment appears
-    expect(wrapper.find('.paragraph').length).toEqual(2);
+    // now the 1st segment disappears
+    expect(wrapper.find('.collection-block').length).toEqual(1);
+    expect(wrapper.find('.paragraph').length).toEqual(1);
+
+    user.collections = [];
+    wrapper.setProps({
+      user
+    });
+
+    // // now the 2nd segment disappears
     expect(wrapper.find('.collection-block').length).toEqual(0);
-
+    expect(wrapper.find('.paragraph').length).toEqual(2);
+    
   })
 
-  // it('should use localStorage collections as new Collections if there are none in props', async () => {
-  //   let wrapper = shallow(<CollectionPage  {...someProps} />);
-
-  //   // the explanations should not appear with collections present 
-  //   expect(wrapper.find('.collection-block').length).toEqual(2);
-
-  //   // set the props collections to empty 
-  //   wrapper.setProps({
-  //     collections: []
-  //   });
-
-  //   // now the 1st segment appears
-  //   expect(wrapper.find('.collection-block').length).toEqual(1);
-
-  //   //  set the new collections in localStorage 
-  //   let localCollections = [
-  //     {
-  //       name: 'first collection',
-  //       articles: articles
-  //     },
-  //     {
-  //       name: 'second collection',
-  //       articles: articles
-  //     }
-  //   ]
-
-  //   localStorage.setItem('collections', JSON.stringify(localCollections));
+  it('should use localStorage collections', () => {
+    localStorage.setItem('collections', JSON.stringify(someProps.collections))
     
-  //   await wrapper.update();
+    someProps.collections = [];
+    let wrapper = shallow(<CollectionPage  {...someProps} />);
 
-  //   // now the second segment appears
-  //   expect(wrapper.find('.collection-block').length).toEqual(2);
-    
-  // })
+    // 2 are still rendered, even with no props.collections
+    expect(wrapper.find('.collection-block').length).toEqual(2);
+
+  })
 
   it('should toggle the ArticleViewer', () => {
     let wrapper = shallow(<CollectionPage  {...someProps} />);

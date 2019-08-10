@@ -59,6 +59,11 @@ exports[`SearchPage renders correctly 1`] = `
         aria-label={null}
         className="sort-link btn btn-link btn-sm"
         onClick={[Function]}
+        style={
+          Object {
+            "color": "white",
+          }
+        }
         type="button"
       >
         date
@@ -67,6 +72,11 @@ exports[`SearchPage renders correctly 1`] = `
         aria-label={null}
         className="sort-link btn btn-link btn-sm"
         onClick={[Function]}
+        style={
+          Object {
+            "color": "white",
+          }
+        }
         type="button"
       >
         cited
@@ -75,6 +85,11 @@ exports[`SearchPage renders correctly 1`] = `
         aria-label={null}
         className="sort-link btn btn-link btn-sm"
         onClick={[Function]}
+        style={
+          Object {
+            "color": "blue",
+          }
+        }
         type="button"
       >
         relevance

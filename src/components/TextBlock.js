@@ -18,7 +18,7 @@ class TextBlock extends React.Component {
   }
 
   render() {
-    console.log(this.props.linkTo)
+    // console.log(this.props.linkTo)
 
     return (
       <div className={this.props.class || "glass"} style={styles.content}>
