@@ -57,23 +57,25 @@ exports[`renders correctly 1`] = `
   organize, share and discuss scientific and medical literature. 
           </p>
         </div>
-        <button
-          aria-label={null}
-          className="block-button btn btn-primary btn-sm"
-          onClick={[Function]}
-        >
-          <a
-            href="/about/"
+        <div>
+          <button
+            aria-label={null}
+            className="block-button btn btn-primary btn-sm"
             onClick={[Function]}
-            style={
-              Object {
-                "color": "white",
-              }
-            }
           >
-            read more
-          </a>
-        </button>
+            <a
+              href="/about"
+              onClick={[Function]}
+              style={
+                Object {
+                  "color": "white",
+                }
+              }
+            >
+              read more
+            </a>
+          </button>
+        </div>
       </div>
     </div>
     <div
@@ -148,23 +150,25 @@ exports[`renders correctly 1`] = `
             NIH clinical guidelines &gt; 800
           </p>
         </div>
-        <button
-          aria-label={null}
-          className="block-button btn btn-primary btn-sm"
-          onClick={[Function]}
-        >
-          <a
-            href="/search/"
+        <div>
+          <button
+            aria-label={null}
+            className="block-button btn btn-primary btn-sm"
             onClick={[Function]}
-            style={
-              Object {
-                "color": "white",
-              }
-            }
           >
-            find resources!
-          </a>
-        </button>
+            <a
+              href="/search"
+              onClick={[Function]}
+              style={
+                Object {
+                  "color": "white",
+                }
+              }
+            >
+              find resources
+            </a>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -172,7 +176,7 @@ exports[`renders correctly 1`] = `
     className="row no-gutters row-eq-height"
   >
     <div
-      className="col-12 col-md-4"
+      className="col col-12 col-sm-4"
     >
       <div
         className="glass"
@@ -253,27 +257,29 @@ exports[`renders correctly 1`] = `
             PNAS
           </p>
         </div>
-        <button
-          aria-label={null}
-          className="block-button btn btn-primary btn-sm"
-          onClick={[Function]}
-        >
-          <a
-            href="/search/"
+        <div>
+          <button
+            aria-label={null}
+            className="block-button btn btn-primary btn-sm"
             onClick={[Function]}
-            style={
-              Object {
-                "color": "white",
-              }
-            }
           >
-            search the literature!
-          </a>
-        </button>
+            <a
+              href="/about"
+              onClick={[Function]}
+              style={
+                Object {
+                  "color": "white",
+                }
+              }
+            >
+              search the literature
+            </a>
+          </button>
+        </div>
       </div>
     </div>
     <div
-      className="col-12 col-md-8"
+      className="col col-12 col-sm-8"
     >
       <div
         className="glass"
@@ -335,23 +341,59 @@ exports[`renders correctly 1`] = `
                - Hopefully enjoy the process of literature mining a little more than you used to!
           </p>
         </div>
-        <button
-          aria-label={null}
-          className="block-button btn btn-primary btn-sm"
-          onClick={[Function]}
-        >
-          <a
-            href="/search/"
+        <div>
+          <button
+            aria-label={null}
+            className="block-button btn btn-primary btn-sm"
             onClick={[Function]}
-            style={
-              Object {
-                "color": "white",
-              }
-            }
           >
-            start mining!
-          </a>
-        </button>
+            <a
+              href="/search"
+              onClick={[Function]}
+              style={
+                Object {
+                  "color": "white",
+                }
+              }
+            >
+              start mining
+            </a>
+          </button>
+          <button
+            aria-label={null}
+            className="block-button btn btn-primary btn-sm"
+            onClick={[Function]}
+          >
+            <a
+              href="/profile"
+              onClick={[Function]}
+              style={
+                Object {
+                  "color": "white",
+                }
+              }
+            >
+              make a profile
+            </a>
+          </button>
+          <button
+            aria-label={null}
+            className="block-button btn btn-primary btn-sm"
+            onClick={[Function]}
+          >
+            <a
+              href="/about"
+              onClick={[Function]}
+              style={
+                Object {
+                  "color": "white",
+                }
+              }
+            >
+              learn more first
+            </a>
+          </button>
+        </div>
       </div>
     </div>
   </div>

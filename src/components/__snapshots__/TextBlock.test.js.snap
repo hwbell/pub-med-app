@@ -16,7 +16,7 @@ exports[`TextBlock renders correctly 1`] = `
   <p
     className="thread-title"
   >
-    About PMC
+    Resources
   </p>
   <div>
     <p
@@ -27,35 +27,111 @@ exports[`TextBlock renders correctly 1`] = `
         }
       }
     >
-      PubMed Central (PMC) is a free digital repository that archives 
-  publicly accessible full-text scholarly articles that have been published within the 
-  biomedical and life sciences journal literature. As one of the major research 
-  databases within the suite of resources that have been developed by the National 
-  Center for Biotechnology Information (NCBI), PubMed Central is much more than just 
-  a document repository. Launched in February 2000, the repository has grown rapidly 
-  as the NIH Public Access Policy is designed to make all research funded by the 
-  National Institutes of Health (NIH) freely accessible to anyone, and, in addition, 
-  many publishers are working cooperatively with the NIH to provide free access to 
-  their works.
+      abstracts &gt; 34 million
     </p>
-  </div>
-  <button
-    aria-label={null}
-    className="block-button btn btn-primary btn-sm"
-    onClick={[Function]}
-    type="button"
-  >
-    <a
-      href="/threads/"
-      onClick={[Function]}
+    <p
+      className="thread-text"
       style={
         Object {
-          "color": "white",
+          "alignSelf": "flex-start",
         }
       }
     >
-      read more
-    </a>
-  </button>
+      full text articles &gt; 5 million
+    </p>
+    <p
+      className="thread-text"
+      style={
+        Object {
+          "alignSelf": "flex-start",
+        }
+      }
+    >
+      patents &gt; 4 million
+    </p>
+    <p
+      className="thread-text"
+      style={
+        Object {
+          "alignSelf": "flex-start",
+        }
+      }
+    >
+      preprints &gt; 74,000
+    </p>
+    <p
+      className="thread-text"
+      style={
+        Object {
+          "alignSelf": "flex-start",
+        }
+      }
+    >
+      agricola records &gt; 700,000
+    </p>
+    <p
+      className="thread-text"
+      style={
+        Object {
+          "alignSelf": "flex-start",
+        }
+      }
+    >
+      NIH clinical guidelines &gt; 800
+    </p>
+  </div>
+  <div>
+    <button
+      aria-label={null}
+      className="block-button btn btn-primary btn-sm"
+      onClick={[Function]}
+    >
+      <a
+        href="/search"
+        onClick={[Function]}
+        style={
+          Object {
+            "color": "white",
+          }
+        }
+      >
+        start mining
+      </a>
+    </button>
+    <button
+      aria-label={null}
+      className="block-button btn btn-primary btn-sm"
+      onClick={[Function]}
+    >
+      <a
+        href="/profile"
+        onClick={[Function]}
+        style={
+          Object {
+            "color": "white",
+          }
+        }
+      >
+        make a profile
+      </a>
+    </button>
+    <button
+      aria-label={null}
+      className="block-button btn btn-primary btn-sm"
+      onClick={[Function]}
+    >
+      <a
+        href="/about"
+        onClick={[Function]}
+        style={
+          Object {
+            "color": "white",
+          }
+        }
+      >
+        learn more first
+      </a>
+    </button>
+  </div>
 </div>
 `;

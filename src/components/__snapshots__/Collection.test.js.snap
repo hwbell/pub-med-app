@@ -184,7 +184,9 @@ exports[`Collection renders correctly 1`] = `
           >
             <p
               className="article-title"
-            />
+            >
+              1.    undefined
+            </p>
             <p
               className="article-text"
             />
@@ -238,7 +240,9 @@ exports[`Collection renders correctly 1`] = `
           >
             <p
               className="article-title"
-            />
+            >
+              2.    undefined
+            </p>
             <p
               className="article-text"
             />
@@ -292,7 +296,9 @@ exports[`Collection renders correctly 1`] = `
           >
             <p
               className="article-title"
-            />
+            >
+              3.    undefined
+            </p>
             <p
               className="article-text"
             />

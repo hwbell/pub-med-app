@@ -22,6 +22,8 @@ class ProfilePage extends React.Component {
     this.state = {
       checked: false,
       editText: false,
+      showPopup: false,
+      popupMessage: '',
       showProfileForm: false,
       showAlertModal: false,
       loginErrorMessage: 'There was a problem logging :( ... Please try a different name and/or email.',
@@ -36,6 +38,7 @@ class ProfilePage extends React.Component {
     this.renderProfile = this.renderProfile.bind(this);
     this.toggleAlertModal = this.toggleAlertModal.bind(this);
     this.toggleProfileForm = this.toggleProfileForm.bind(this);
+    this.togglePopup = this.togglePopup.bind(this);
     this.attemptSignOut = this.attemptSignOut.bind(this);
     this.handleSignout = this.handleSignout.bind(this);
   }
@@ -129,17 +132,27 @@ class ProfilePage extends React.Component {
       <div className="outline profile" style={styles.profileInfo}>
 
         <div style={styles.buttonHolder}>
-          <Button color="link" size="sm"
-            style={styles.button}
-            onClick={this.toggleProfileForm}>
-            <i className="fas fa-user-edit"></i>
-          </Button>
+          <div className="left-all-row">
+            <Button color="link" size="sm"
+              style={styles.button}
+              onMouseOver={() => this.togglePopup('edit profile')}
+              onMouseLeave={() => this.togglePopup('')}
+              onClick={this.toggleProfileForm}>
+              <i className="fas fa-user-edit"></i>
+            </Button>
 
-          <Button color="link" size="sm"
-            style={styles.button}
-            onClick={this.attemptSignOut}>
-            <i className="warn-icon fas fa-sign-out-alt"></i>
-          </Button>
+            <Button color="link" size="sm"
+              style={styles.button}
+              onMouseOver={() => this.togglePopup('log out')}
+              onMouseLeave={() => this.togglePopup('')}
+              onClick={this.attemptSignOut}>
+              <i className="warn-icon fas fa-sign-out-alt"></i>
+            </Button>
+          </div>
+
+          <Fade in={this.state.showPopup} style={{ color: 'white', fontSize: '12px', alignSelf: 'flex-end' }}>
+            {this.state.popupMessage}
+          </Fade>
 
         </div>
 
@@ -358,6 +371,21 @@ class ProfilePage extends React.Component {
       })
   }
 
+  // this is for the buttons for signout and edit profile, to explain the icons
+  togglePopup(str) {
+    if (str) {
+      this.setState({
+        popupMessage: str,
+        showPopup: true
+      })
+    } else {
+      this.setState({
+        showPopup: false
+      })
+    }
+  }
+
+
   // when the user first clicks sign out icon, popping up the AlertModal
   attemptSignOut() {
 
@@ -454,7 +482,7 @@ const styles = {
     top: '10px',
     right: '10px',
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'column'
   },
   button: {
     fontSize: '16px'

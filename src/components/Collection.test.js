@@ -243,35 +243,60 @@ describe('Collection', () => {
 
 
 
-  // it('should fire the clearEdits() method when the undo icon is clicked', () => {
-  //   const wrapper = shallow(<Collection {...someProps} />);    
-  //   const instance = wrapper.instance();
+  it('should fire the clearEdits() method when the undo icon is clicked', () => {
+    const clearEditsSpy = jest.spyOn(Collection.prototype, 'clearEdits');
+    const wrapper = shallow(<Collection {...someProps} />);    
+    const instance = wrapper.instance();
 
-  //   // get some changes registered
-  //   instance.handleChange('collection title');
-  //   wrapper.setProps({
-  //     isSaved: true
-  //   })
-  //   wrapper.update();    
-  //   instance.handleSubmit(e);
-  //   wrapper.update();
+    // get some changes registered
+    instance.handleChange('collection title');
+    wrapper.setProps({
+      isSaved: true
+    })
+    wrapper.update();    
+    instance.handleSubmit(e);
+    wrapper.update();
 
-  //   instance.clearEdits = jest.fn()
+    // click to clear
+    wrapper.find('.fa-undo').simulate('click');
+    wrapper.update();
 
-  //   // click to save
-  //   wrapper.find('.fa-undo').simulate('click');
-  //   wrapper.update();
+    expect(wrapper.state().collection).toBeNull();
+    expect(clearEditsSpy).toHaveBeenCalled();
 
-  // })
+  })
 
-  // it('should toggle the alert modal', () => {
-  //   const wrapper = shallow(<Collection {...someProps} />);
-  //   const instance = wrapper.instance();
+  it('should toggle the alert modal', () => {
+    const wrapper = shallow(<Collection {...someProps} />);
+    const instance = wrapper.instance();
 
-  //   instance.toggleUniqueWarning();
-  //   wrapper.update;
-  //   expect(wrapper.state().uniqueWarning).toEqual(true);
-  // })
+    expect(wrapper.state().uniqueWarning).toEqual(false);
+
+    instance.toggleUniqueWarning();
+    wrapper.update();
+    expect(wrapper.state().uniqueWarning).toEqual(true);
+  
+    instance.toggleUniqueWarning();
+    wrapper.update();
+    expect(wrapper.state().uniqueWarning).toEqual(false);
+
+  })
+
+  it('should toggle expand / collapse icon', () => {
+    const wrapper = shallow(<Collection {...someProps} />);
+
+    // angling up when not expanded
+    expect(wrapper.find('.fa-angle-double-down').length).toBe(1);
+    expect(wrapper.find('.fa-angle-double-up').length).toBe(0);
+
+    // click the button to switch
+    wrapper.find('Button').at(0).simulate('click');
+    wrapper.update();
+
+    // angling down when expanded
+    expect(wrapper.find('.fa-angle-double-down').length).toBe(0);
+    expect(wrapper.find('.fa-angle-double-up').length).toBe(1);
+  })
 
 })
 

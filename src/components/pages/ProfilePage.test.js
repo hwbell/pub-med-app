@@ -113,6 +113,8 @@ describe('ProfilePage', () => {
     expect(wrapper.find('.fa-user-edit').length).toEqual(1);    
     expect(wrapper.find('.fa-sign-out-alt').length).toEqual(1);    
 
+    expect(wrapper.find('Fade').length).toBe(1);
+
     // change the signedIn prop and wipe the user
     wrapper.setProps({ user: null });
     wrapper.update();
@@ -121,8 +123,7 @@ describe('ProfilePage', () => {
     expect(wrapper.find('.signin').length).toEqual(1);
     expect(wrapper.find('.profile-title').length).toEqual(0);
     expect(wrapper.find('Button').at(0).render().text()).toEqual('sign up!');
-
-
+    expect(wrapper.find('Fade').length).toBe(0);
   })
 
   it('should show the users profile once signed in', async () => {
@@ -182,6 +183,46 @@ describe('ProfilePage', () => {
     expect(wrapper.find('AlertModal').props().isVisible).toBe(false);
 
     
+  })
+
+  it('togglePopup should assign this.state.popupText and toggle the boolean for the Fade', () => {
+    expect(wrapper.state().showPopup).toBe(false);
+    expect(wrapper.find('Fade').props().in).toBe(false);
+    expect(wrapper.find('Fade').render().text()).toBe('');
+
+    wrapper.instance().togglePopup('fade text');
+    wrapper.update();
+
+    expect(wrapper.find('Fade').props().in).toBe(true);
+    expect(wrapper.find('Fade').render().text()).toBe('fade text');
+    expect(wrapper.state().showPopup).toBe(true);
+    
+  })
+
+  it('should show the Fade text when the edit / logout buttons are hovered', async () => {
+    // mount to check inner props of the Fade
+    let wrapper = await mount(<ProfilePage {...someProps}/>);
+    
+    // start not showing the fade
+    expect(wrapper.state().showPopup).toBe(false);    
+    expect(wrapper.find('Fade').props().in).toBe(false);
+
+    // toggles when the user hovers on the edit button
+    wrapper.find('.fa-user-edit').simulate('mouseover');
+    wrapper.update();
+    
+    expect(wrapper.state().showPopup).toBe(true);
+    expect(wrapper.find('Fade').props().in).toBe(true);
+    expect(wrapper.find('Fade').render().text()).toBe('edit profile');
+
+     // toggles when the user hovers on the logout button
+     wrapper.find('.fa-sign-out-alt').simulate('mouseover');
+     wrapper.update();
+     
+     expect(wrapper.state().showPopup).toBe(true);
+     expect(wrapper.find('Fade').props().in).toBe(true);
+     expect(wrapper.find('Fade').render().text()).toBe('log out');
+
   })
 
   it('toggles the ProfileForm modal when the edit icon is clicked', () => {

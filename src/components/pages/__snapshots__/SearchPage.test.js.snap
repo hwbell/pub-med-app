@@ -38,7 +38,7 @@ exports[`SearchPage renders correctly 1`] = `
             }
           }
           type="text"
-          value="medicine"
+          value="neuron"
         />
       </div>
     </form>
@@ -55,6 +55,19 @@ exports[`SearchPage renders correctly 1`] = `
       >
         sort by:
       </p>
+      <button
+        aria-label={null}
+        className="sort-link btn btn-link btn-sm"
+        onClick={[Function]}
+        style={
+          Object {
+            "color": "white",
+          }
+        }
+        type="button"
+      >
+        1st author
+      </button>
       <button
         aria-label={null}
         className="sort-link btn btn-link btn-sm"

@@ -1,7 +1,7 @@
 const fetch = require('node-fetch')
 
 // query and return based on date / citations
-export async function getArticles (query, sortParam) {
+export async function getArticles(query, sortParam) {
 
   // must have a query
   if (!query) return {};
@@ -23,23 +23,21 @@ export async function getArticles (query, sortParam) {
   }
 
   // let searchUrl = `https://www.ebi.ac.uk/europepmc/webservices/rest/searchPOST?query=${query}${sorter}&resultType=core&pageSize=10&format=json`;
-  
+
   // let headers = {}
   // headers['Content-Type'] = 'application/x-www-form-urlencoded';
 
+  let list = [];
+  for (let i = 0; i < 50; i++) {
+    list.push({
+      title: `Article ${i + 1}`,
+      pmid: `PMID10000${i + 1}`
+    })
+  }
+
   let articles = await Promise.resolve({
     resultList: {
-      result: [
-        {
-          title: 'Article 1'
-        },        
-        {
-          title: 'Article 2'
-        },
-        {
-          title: 'Article 3'
-        },
-      ]
+      result: list
     }
   })
 
@@ -47,7 +45,7 @@ export async function getArticles (query, sortParam) {
 }
 
 // parses the result of a search query to a simple array of the article titles
-export function parseSearchToTitlesArray (searchResults) {
+export function parseSearchToTitlesArray(searchResults) {
   let titlesArray = searchResults.resultList.result.map((result) => {
     return result.title;
   })

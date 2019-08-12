@@ -128,7 +128,7 @@ class CollectionPage extends React.Component {
 
   render() {
 
-    console.log(JSON.parse(localStorage.getItem('collections')))
+    // console.log(JSON.parse(localStorage.getItem('collections')))
 
     // get the user's saved collections
     const user = this.props.user;

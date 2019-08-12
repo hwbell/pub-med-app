@@ -41,12 +41,14 @@ describe('SearchPage', () => {
     ['.page', '.page-content', '.glass', '.outline', '#loader', 'Form', '.left-all-row'].forEach((selector) => {
       expect(newWrapper.find(selector).length).toEqual(1);
     })
+    expect(wrapper.find('.article-button').length).toBe(1);
 
     // sorters
-    expect(newWrapper.find('.sort-link').length).toBe(3);
-    expect(newWrapper.find('.sort-link').at(0).render().text()).toBe('date');
-    expect(newWrapper.find('.sort-link').at(1).render().text()).toBe('cited');
-    expect(newWrapper.find('.sort-link').at(2).render().text()).toBe('relevance');
+    expect(newWrapper.find('.sort-link').length).toBe(4);
+    expect(newWrapper.find('.sort-link').at(0).render().text()).toBe('1st author');
+    expect(newWrapper.find('.sort-link').at(1).render().text()).toBe('date');
+    expect(newWrapper.find('.sort-link').at(2).render().text()).toBe('cited');
+    expect(newWrapper.find('.sort-link').at(3).render().text()).toBe('relevance');
 
   });
 
@@ -63,17 +65,35 @@ describe('SearchPage', () => {
     // fetchSearch was called
     expect(fetchSpy).toHaveBeenCalled();
 
-    expect(newWrapper.state().results).toMatchObject([
+    expect(newWrapper.state().results[0]).toMatchObject(
       {
-        title: 'Article 1'
+        title: 'Article 1',
+        pmid: 'PMID100001'
       },
+    );
+    expect(newWrapper.state().results[35]).toMatchObject(
       {
-        title: 'Article 2'
+        title: 'Article 36',
+        pmid: 'PMID1000036'
       },
-      {
-        title: 'Article 3'
-      },
-    ]);
+    );
+  })
+
+  it('should show more results when the "show more" button is clicked', async () => {
+    
+    await wrapper.instance().componentDidMount();
+
+    // there's up to 50 results
+    expect(wrapper.find('ArticleResult').length).toBe(50);
+
+    // the collapse shows the first 10 until expanded
+    expect(wrapper.find('Collapse').length).toBe(1);
+    expect(wrapper.state().showMoreResults).toBe(false);
+    expect(wrapper.find('Collapse').props().isOpen).toBe(false);
+
+    wrapper.find('.article-button').simulate('click');
+    wrapper.update();
+    expect(wrapper.find('Collapse').props().isOpen).toBe(true);
 
   })
 
@@ -92,7 +112,7 @@ describe('SearchPage', () => {
 
   it('should change this.state.query when the user types something into the input', () => {
 
-    expect(wrapper.state().query).toBe('medicine');
+    expect(wrapper.state().query).toBe('neuron');
     wrapper.instance().handleChange('science');
     wrapper.update();
 
@@ -108,21 +128,26 @@ describe('SearchPage', () => {
 
     // click the cited button
     newWrapper.find('.sort-link').at(0).simulate('click');
-    expect(newWrapper.state().sorter).toBe('date');
+    expect(newWrapper.state().sorter).toBe('AUTH_FIRST');
     // should call the fetch again
-    expect(fetchSpy).toHaveBeenCalledWith('medicine', 'date');
+    expect(fetchSpy).toHaveBeenCalledWith('neuron', 'AUTH_FIRST');
 
     // click the date button
     newWrapper.find('.sort-link').at(1).simulate('click');
-    expect(newWrapper.state().sorter).toBe('cited');
+    expect(newWrapper.state().sorter).toBe('P_PDATE_D');
     // should call the fetch again
-    expect(fetchSpy).toHaveBeenCalledWith('medicine', 'cited');
+    expect(fetchSpy).toHaveBeenCalledWith('neuron', 'P_PDATE_D');
 
     // click the relevance button
     newWrapper.find('.sort-link').at(2).simulate('click');
+    expect(newWrapper.state().sorter).toBe('CITED');
+    // should call the fetch again
+    expect(fetchSpy).toHaveBeenCalledWith('neuron', 'CITED');
+
+    newWrapper.find('.sort-link').at(3).simulate('click');
     expect(newWrapper.state().sorter).toBe('');
     // should call the fetch again
-    expect(fetchSpy).toHaveBeenCalledWith('medicine', '');
+    expect(fetchSpy).toHaveBeenCalledWith('neuron', '');
 
 
   })

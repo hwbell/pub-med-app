@@ -18,7 +18,7 @@ exports[`ArticleResult renders correctly 1`] = `
     <p
       className="article-title"
     >
-      Agreement between self-reported and central cancer registry-recorded prevalence of cancer in the Alaska EARTH study.
+      3.    Agreement between self-reported and central cancer registry-recorded prevalence of cancer in the Alaska EARTH study.
     </p>
     <p
       className="article-text"

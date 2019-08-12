@@ -83,7 +83,6 @@ describe('ArticleViewer', () => {
       article
     }
     wrapper = shallow(<ArticleViewer {...someProps} />);
-    wrapper.instance().renderArticlePreview = jest.fn();
 
   });
 
@@ -99,5 +98,11 @@ describe('ArticleViewer', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it('contains the correct elements', () => {
+    expect(wrapper.find('.nav-link').length).toBe(1);
+    expect(wrapper.find('.fa-times').length).toBe(1);
+    expect(wrapper.find('p').at(0).text()).toBe(article.title);
+
+  })
 })
 

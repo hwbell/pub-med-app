@@ -251,6 +251,7 @@ class Collection extends React.Component {
     return collection.articles.map((article, i) => {
       return (
         <ArticleResult key={i}
+          index={i+1}
           collection={collection}
           article={article}
           buttons={collectionButtons} />
@@ -260,7 +261,7 @@ class Collection extends React.Component {
   }
 
   renderTitle() {
-    console.log('rendering title')
+    // console.log('rendering title')
     // console.log(this.state.collection)
     // console.log(this.props.collection)
 
@@ -326,7 +327,7 @@ class Collection extends React.Component {
           style={styles.expandButton}
           color="link" size="md"
           onClick={this.toggleContent}>
-          <i className="fas fa-angle-double-down"></i>
+          <i className={this.state.showContent ? "fas fa-angle-double-up": "fas fa-angle-double-down"}></i>
         </Button>
 
         <Fade in={this.state.showPopup} style={styles.popupText}>

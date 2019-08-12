@@ -52,15 +52,20 @@ class ArticleViewer extends React.Component {
       }
     ];
 
-    // get urls for the article availablitity
-    let urlList = fullTextUrlList.fullTextUrl.map((articleObj) => {
-      // console.log(articleObj)
-      let { availabilityCode, url } = articleObj;
-      return {
-        availabilityCode,
-        url
-      }
-    })
+    // get urls for the article availablitity if we have them
+    let urlList;
+    if (fullTextUrlList && fullTextUrlList.fullTextUrl.length > 0) {
+      urlList = fullTextUrlList.fullTextUrl.map((articleObj) => {
+        // console.log(articleObj)
+        let { availabilityCode, url } = articleObj;
+        return {
+          availabilityCode,
+          url
+        }
+      })
+    } else {
+      urlList = [];
+    }
 
     return (
       <div className="">
@@ -90,31 +95,32 @@ class ArticleViewer extends React.Component {
         })}
 
         {/* render the links to the article. They'll link externally to the pdf / access information */}
-        <div>
-
-          <p style={styles.subtitle}>Full Text:</p>
-
+        {urlList.length > 0 &&
           <div>
-            {urlList.map((link, i) => {
 
-              // demand code and link
-              if (!!link.availabilityCode && !!link.url) {
-                // set fa class
-                let iconClass = link.availabilityCode === 'OA' ? 'fas fa-book-open' : 'fas fa-dollar-sign';
+            <p style={styles.subtitle}>Full Text:</p>
 
-                return (
-                  <a key={i} target="_blank" href={link.url}>
-                    <i style={styles.icon} className={`${iconClass} article-link`}></i>
-                  </a>
-                )
+            <div>
+              {urlList.map((link, i) => {
 
-              } else {
-                return null;
-              }
-            })}
-          </div>
+                // demand code and link
+                if (!!link.availabilityCode && !!link.url) {
+                  // set fa class
+                  let iconClass = link.availabilityCode === 'OA' ? 'fas fa-book-open' : 'fas fa-dollar-sign';
 
-        </div>
+                  return (
+                    <a key={i} target="_blank" href={link.url}>
+                      <i style={styles.icon} className={`${iconClass} article-link`}></i>
+                    </a>
+                  )
+
+                } else {
+                  return null;
+                }
+              })}
+            </div>
+
+          </div>}
 
 
         {/* render the identifiers we have values for */}

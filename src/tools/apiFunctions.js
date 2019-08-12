@@ -7,8 +7,10 @@ export async function getArticles (query, sortParam) {
   if (!query) return {};
 
   let allowedSorters = [
-    '%20sort_cited:y',
-    '%20sort_date:y',
+    '&sort=P_PDATE_D%20asc',
+    '&sort=AUTH_FIRST%20asc',
+    '&sort=CITED%20asc',
+    '&sort=RELEVANCE%20asc',
   ];
 
   // check for bad strings and default to no sorter, which will sort by relevance
@@ -16,13 +18,13 @@ export async function getArticles (query, sortParam) {
   if (!sortParam) {
     sorter = '';
   } else {
-    sorter = `%20sort_${sortParam}:y`;
+    sorter = `&sort=${sortParam}%20asc`;
     if (!allowedSorters.indexOf(sorter)) {
       sorter = '';
     }
   }
 
-  let searchUrl = `https://www.ebi.ac.uk/europepmc/webservices/rest/searchPOST?query=${query}${sorter}&resultType=core&pageSize=10&format=json`;
+  let searchUrl = `https://www.ebi.ac.uk/europepmc/webservices/rest/searchPOST?query=${query}${sorter}&resultType=core&pageSize=50&format=json`;
   
   console.log(searchUrl)
   let headers = {}

@@ -48,9 +48,23 @@ describe('TextBlock', () => {
   let someProps;
   beforeEach(() => {
     someProps = {
-      text: aboutIntro,
+      buttons: [
+        {
+          text: 'start mining',
+          link: '/search'
+        },
+        {
+          text: 'make a profile',
+          link: '/profile'
+        },
+        {
+          text: 'learn more first',
+          link: '/about'
+        },
+
+      ],
       navigateToResource: navigateToResourceStub,
-      linkTo: '/threads/'
+      text: resourcesIntro
     }
 
     wrapper = mount(
@@ -80,11 +94,12 @@ describe('TextBlock', () => {
 
     expect(wrapper.find('.glass').length).toEqual(1);
     expect(wrapper.find('.thread-title').length).toEqual(1);
-    expect(wrapper.find('Button').length).toEqual(1);
-    expect(wrapper.find('Link').length).toEqual(1);
-    expect(wrapper.find('.thread-text').length).toEqual(1);
+    expect(wrapper.find('Button').length).toEqual(3);
+    expect(wrapper.find('Link').length).toEqual(3);
+    expect(wrapper.find('.thread-text').length).toEqual(6);
 
-    someProps.text = resourcesIntro;
+    // change props
+    someProps.text = aboutIntro;
     let newWrapper = mount(
       <MemoryRouter>
         <TextBlock {...someProps} />
@@ -93,18 +108,16 @@ describe('TextBlock', () => {
 
     expect(newWrapper.find('.glass').length).toEqual(1);
     expect(newWrapper.find('.thread-title').length).toEqual(1);
-    expect(newWrapper.find('Button').length).toEqual(1);
-    expect(newWrapper.find('Link').length).toEqual(1);
-
-    expect(newWrapper.find('.thread-text').length).toEqual(6);
+    expect(newWrapper.find('Button').length).toEqual(3);
+    expect(newWrapper.find('Link').length).toEqual(3);
+    expect(newWrapper.find('.thread-text').length).toEqual(1);
 
   })
 
-  // it('fires this.props.navigateToResource() when the button is clicked', () => {
+  it('should render all buttons with provided info provided', () => {
+    expect(wrapper.find('Link').at(0).props().to).toBe(someProps.buttons[0].link)
+    expect(wrapper.find('Link').at(1).props().to).toBe(someProps.buttons[1].link)
+    expect(wrapper.find('Link').at(2).props().to).toBe(someProps.buttons[2].link)
 
-  //   wrapper.find('Button').simulate('click');
-  //   wrapper.update();
-
-  //   expect(navigateToResourceStub).toHaveBeenCalled();
-  // })
+  })
 })

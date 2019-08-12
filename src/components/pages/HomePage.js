@@ -56,7 +56,7 @@ const toolsIntro = {
   title: 'Research',
   paragraph: [
     `Use this site to mine literature, organize resources, and connect with other reseachers! Using the tools
-    found here, you can:`, 
+    found here, you can:`,
     `   - Quickly compile lists of important publications and research.`,
     `   - Connect with other researchers in a public forum to share thoughts and dscuss the latest scientific findings.`,
     `   - Hopefully enjoy the process of literature mining a little more than you used to!`
@@ -113,14 +113,14 @@ class HomePage extends React.Component {
 
           <div className="col col-12 col-sm-8">
             <TextBlock
-              linkTo={'/about/'}
+              buttons={[{ link: '/about', text: 'read more' }]}
               text={aboutIntro}
             />
           </div>
 
           <div className="col col-12 col-sm-4">
             <TextBlock
-              linkTo={'/search/'}
+              buttons={[{ link: '/search', text: 'find resources' }]}
               text={resourcesIntro}
             />
           </div>
@@ -128,17 +128,17 @@ class HomePage extends React.Component {
 
         <div className="row no-gutters row-eq-height">
 
-          <div className="col-12 col-md-4">
+          <div className="col col-12 col-sm-4">
             <TextBlock
-              linkTo={'/search/'}
+              buttons={[{ link: '/about', text: 'search the literature' }]}
               text={journalsIntro}
             />
           </div>
 
-          <div className="col-12 col-md-8">
+          <div className="col col-12 col-sm-8">
             {this.state.newPublicationsInfo &&
               <TextBlock
-                linkTo={'/search/'}
+                buttons={[{ link: '/search', text: 'start mining' }, { link: '/profile', text: 'make a profile' }, { link: '/about', text: 'learn more first' }]}
                 text={toolsIntro}
               />}
           </div>

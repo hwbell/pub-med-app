@@ -23,15 +23,15 @@ class ArticleResult extends React.Component {
   renderText() {
 
     let { title, authorString, journalInfo, pubYear } = this.props.article;
-
+    let { index } = this.props;
     return (
       <div style={styles.top}>
 
-        <p className="article-title">{title}</p>
+        <p className="article-title">{`${index}.    ${title}`}</p>
 
         <p className="article-text">{authorString}</p>
 
-        { journalInfo && journalInfo.journal ?
+        {journalInfo && journalInfo.journal ?
           <p className="article-text">
             {`${this.props.article.journalInfo.journal.title}  `}
             <strong>{`  ${pubYear}`}</strong>

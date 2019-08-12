@@ -30,10 +30,13 @@ class TextBlock extends React.Component {
           )}
         </div>
 
-        <Button color='primary' size="sm" className="block-button"
-          onClick={this.props.navigateToResource}>
-          <Link to={this.props.linkTo || '/about'} style={{ color: 'white' }}>{this.props.text.button}</Link>
-        </Button>
+        <div style={{margin: '0px 10px'}}>
+          {this.props.buttons.map((button, i) =>
+            <Button key={i} color='primary' size="sm" className="article-button">
+              <Link to={button.link || '/about'} style={{ color: 'white' }}>{button.text}</Link>
+            </Button>
+          )}
+        </div>
 
       </div>
 
@@ -44,7 +47,7 @@ class TextBlock extends React.Component {
 const styles = {
   content: {
     height: '100%',
-    display: 'flex', 
+    display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'flex-start'

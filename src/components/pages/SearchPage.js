@@ -8,7 +8,7 @@ import ArticleResult from '../ArticleResult';
 import CollectionForm from "../CollectionForm";
 import ArticleViewer from '../ArticleViewer';
 
-import { Input, Form, InputGroup, Button } from 'reactstrap';
+import { Input, Form, InputGroup, Button, Collapse } from 'reactstrap';
 import Loader from 'react-loader-spinner';
 
 // tools
@@ -24,16 +24,18 @@ const Div = posed.div({
 });
 
 const initialState = {
-  query: 'medicine',
+  query: 'neuron',
   sorter: '',
   collectionModal: false,
   articleModal: false,
   results: null,
-  showLoading: true
+  showLoading: true,
+  showMoreResults: false
 }
 const loadingState = {
   results: null,
-  showLoading: true
+  showLoading: true,
+  showMoreResults: false
 }
 
 class SearchPage extends React.Component {
@@ -52,6 +54,8 @@ class SearchPage extends React.Component {
     this.addArticle = this.addArticle.bind(this);
     this.toggleCollectionForm = this.toggleCollectionForm.bind(this);
     this.toggleViewArticle = this.toggleViewArticle.bind(this);
+    this.toggleShowMoreResults = this.toggleShowMoreResults.bind(this);
+
 
     this.state = initialState;
 
@@ -69,6 +73,7 @@ class SearchPage extends React.Component {
 
     if (!localResults || !localResults.length) {
       let { query, sorter } = this.state;
+
       return this.fetchSearch(query, sorter);
     } else {
       // if we have the localStorage results, set them as the results and cancel the loader icon
@@ -92,7 +97,7 @@ class SearchPage extends React.Component {
         }, () => {
           // save the search to local storage
           localStorage.setItem('searchResults', JSON.stringify(response.resultList.result));
-          localStorage.setItem('searchQuery', JSON.stringify(query));          
+          localStorage.setItem('searchQuery', JSON.stringify(query));
         })
 
       }).catch((e) => {
@@ -130,9 +135,9 @@ class SearchPage extends React.Component {
     this.setState(loadingState, () => {
       let { query } = this.state;
       this.fetchSearch(query, sorter)
-      
+
       localStorage.setItem('sorter', JSON.stringify(sorter))
-      
+
     })
 
   }
@@ -150,6 +155,12 @@ class SearchPage extends React.Component {
     )
   }
 
+  toggleShowMoreResults() {
+    this.setState({
+      showMoreResults: !this.state.showMoreResults
+    })
+  }
+
   renderResults() {
 
     const searchButtons = [
@@ -163,11 +174,34 @@ class SearchPage extends React.Component {
       }
     ];
 
-    return this.state.results.map((article, i) => {
-      return (
-        <ArticleResult key={i} article={article} buttons={searchButtons} />
-      )
-    })
+    // split the results and put moreResults into the Collapse element, controlled
+    // by the show more button
+    let topResults = this.state.results.slice(0,10);
+    let moreResults = this.state.results.slice(10);
+    return (
+      <div className="center-all-col">
+        {topResults.map((article, i) => {
+          return (
+            <ArticleResult key={i} index={i+1} article={article} buttons={searchButtons} />
+          )
+        })}
+
+        <Collapse isOpen={this.state.showMoreResults}>
+          {moreResults.map((article, i) => {
+            return (
+              <ArticleResult key={i} index={i+11} article={article} buttons={searchButtons} />
+            )
+          })}
+        </Collapse>
+
+        <Button size="sm" color="link" className="article-button"
+          style={{fontSize: '20px'}}
+          onClick={this.toggleShowMoreResults}>
+          <i className={this.state.showMoreResults ? 'fas fa-angle-double-up': 'fas fa-angle-double-down'}></i>
+        </Button>
+
+      </div>
+    )
 
   }
 
@@ -175,12 +209,16 @@ class SearchPage extends React.Component {
   renderSorters() {
     let sortButtons = [
       {
+        text: '1st author',
+        sorter: 'AUTH_FIRST'
+      },
+      {
         text: 'date',
-        sorter: 'date'
+        sorter: 'P_PDATE_D'
       },
       {
         text: 'cited',
-        sorter: 'cited'
+        sorter: 'CITED'
       },
       {
         text: 'relevance',
@@ -196,7 +234,7 @@ class SearchPage extends React.Component {
         {sortButtons.map((button, i) => {
 
           let isLocalSorter = JSON.parse(localStorage.getItem('sorter')) === button.sorter;
-          {/* let isStateSorter = this.state.sorter === button.sorter; */}
+          {/* let isStateSorter = this.state.sorter === button.sorter; */ }
 
           let color;
           if (isLocalSorter) {
@@ -204,7 +242,7 @@ class SearchPage extends React.Component {
           } else {
             color = 'white';
           }
-          return <Button key={i} style={{color}} className="sort-link" color="link" size="sm"
+          return <Button key={i} style={{ color }} className="sort-link" color="link" size="sm"
             onClick={() => this.handleSortButton(button.sorter)}>{button.text}</Button>
         })}
       </div>

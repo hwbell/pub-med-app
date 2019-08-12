@@ -93,16 +93,16 @@ const searchButtons = [
 describe('ArticleResult', () => {
   let wrapper
   beforeEach( () => {
-    wrapper = shallow(<ArticleResult article={article} buttons={searchButtons} />);
+    wrapper = shallow(<ArticleResult index={3} article={article} buttons={searchButtons} />);
   })
 
   it('renders without crashing', async () => {
-    let deepwrapper = mount(<ArticleResult article={article} buttons={searchButtons} />);
+    let deepwrapper = mount(<ArticleResult index={3} article={article} buttons={searchButtons} />);
   });
 
   it('renders correctly', async () => {
     const tree = await renderer
-      .create(<ArticleResult article={article} buttons={searchButtons} />)
+      .create(<ArticleResult index={3} article={article} buttons={searchButtons} />)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -115,7 +115,7 @@ describe('ArticleResult', () => {
     // contains three .article-title elements - the title, authors, and journal 
     expect(wrapper.find('.article-title').length).toBe(1);
     expect(wrapper.find('.article-text').length).toBe(2);
-    expect(wrapper.find('.article-title').text()).toEqual(article.title)
+    expect(wrapper.find('.article-title').text()).toEqual(`${3}.    ${article.title}`)
     expect(wrapper.find('.article-text').at(0).text()).toEqual(article.authorString)
     expect(wrapper.find('.article-text').at(1).text()).toContain(article.journalInfo.journal.title)
 
@@ -132,5 +132,6 @@ describe('ArticleResult', () => {
     wrapper.find('.article-button').at(1).simulate('click');
     expect(dummyFunction2.mock.calls.length).toEqual(1);
   })
+
 
 })
