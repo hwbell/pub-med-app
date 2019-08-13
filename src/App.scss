@@ -17,7 +17,9 @@ body {
   font-size: 16px;
 }
 * > a {
-  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
 }
 * > span {
   width: 100%;
@@ -106,6 +108,7 @@ hr {
 }
 
 .page {
+  position: relative;
   max-width: 800px;
   margin: 0px auto 80px auto;
   padding-top: 120px;
@@ -285,6 +288,16 @@ hr {
   }
   font-size: 14px;
 }
+.anchor-link {
+  font-size: 14px;
+  font-weight: bold;
+  color: rgb(71, 156, 253);
+  &:hover {
+    color: rgb(57, 125, 202);
+  }
+  margin: 4px;
+}
+
 //
 
 /* the search page */
@@ -299,12 +312,14 @@ input {
   font-size: 14px;
   color: white;
   font-weight: bold;
-  &:hover, &:active, &:focus {
+  &:hover,
+  &:active,
+  &:focus {
     text-decoration: none;
     color: $main-blue;
   }
 }
-// 
+//
 
 /* the collection page */
 
@@ -361,7 +376,8 @@ input {
   }
   font-size: 24px;
 }
-.fa-times-circle, .fa-check-circle {
+.fa-times-circle,
+.fa-check-circle {
   color: whitesmoke;
   font-size: 14px;
   &:hover {
@@ -383,7 +399,7 @@ input {
 .fa-atom,
 .fa-dna {
   transition: all 1s ease;
-  margin: 10px;
+  margin: 4px;
   color: $main-blue;
 }
 .fa-atom {
@@ -466,23 +482,26 @@ body.modal-open {
 }
 
 // The ArticleResult component
-.article-title, .article-text {
+.article-title,
+.article-text {
   padding: 0px 20px;
   margin: 2px;
   font-size: 14px;
-  color: rgb(255, 255, 255)
-} 
+  color: rgb(255, 255, 255);
+}
 .article-text {
   font-size: 12px;
-  color: rgb(194, 194, 194)
-} 
-// 
+  color: rgb(194, 194, 194);
+}
+//
 
 // The ArticleViewer Component //
 .preview {
   background-color: rgb(245, 245, 245);
 }
-.preview-title, .preview-subtitle, .preview-text {
+.preview-title,
+.preview-subtitle,
+.preview-text {
   color: black;
 }
 .preview-title {
@@ -510,7 +529,7 @@ body.modal-open {
     color: rgb(13, 104, 30);
   }
 }
-// 
+//
 
 // CSSTransitionGroup animations
 

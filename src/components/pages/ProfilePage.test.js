@@ -121,7 +121,7 @@ describe('ProfilePage', () => {
     // check for the change
     expect(wrapper.find('.profile').length).toEqual(0);
     expect(wrapper.find('.signin').length).toEqual(1);
-    expect(wrapper.find('.profile-title').length).toEqual(3);
+    expect(wrapper.find('.thread-title').length).toEqual(3);
     expect(wrapper.find('Button').at(0).render().text()).toEqual('login');
     expect(wrapper.find('Fade').length).toBe(0);
   })

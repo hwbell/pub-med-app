@@ -29,12 +29,13 @@ class Collection extends React.Component {
       confirming: false,
       showPopup: false,
       renderPopup: false,
-      popupMessage: 'make a pdf!'
-
+      popupMessage: 'make a pdf!',
+      modalProps: {}
     }
     this.toggleContent = this.toggleContent.bind(this);
     this.togglePreview = this.togglePreview.bind(this);
     this.togglePopup = this.togglePopup.bind(this);
+    this.toggleAlertModal = this.toggleAlertModal.bind(this);
     this.postCollection = this.postCollection.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
     this.clearEdits = this.clearEdits.bind(this);
@@ -42,7 +43,7 @@ class Collection extends React.Component {
     this.focusInput = this.focusInput.bind(this);
     this.toggleUniqueWarning = this.toggleUniqueWarning.bind(this);
     this.toggleDeleteWarning = this.toggleDeleteWarning.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
+    this.deleteNewCollection = this.deleteNewCollection.bind(this);
     this.deleteFromServer = this.deleteFromServer.bind(this);
     this.editSavedCollection = this.editSavedCollection.bind(this);
     this.renderButtons = this.renderButtons.bind(this);
@@ -50,7 +51,12 @@ class Collection extends React.Component {
 
   componentDidMount() {
     this.setState({
-      renderPopup: true
+      renderPopup: true,
+      modalProps: {
+        isVisible: false,
+        confirming: false,
+        toggle: this.toggleAlertModal
+      }
     })
   }
 
@@ -88,7 +94,10 @@ class Collection extends React.Component {
 
   // to store the value of the input
   handleChange(value) {
-    // console.log(value)
+
+    if (value === '') {
+      value = ` `
+    }
     this.setState({
       inputText: value
     });
@@ -108,25 +117,9 @@ class Collection extends React.Component {
 
   }
 
-  // if it is a new collection, handle delete in state, back in App.
-  // if it is a saved collection, delete it from the server 
-  handleDelete() {
-    let collection = this.props.collection;
-
-    if (!this.props.isSaved) {
-      this.props.handleDelete(collection)
-    } else {
-      console.log('show warning')
-      this.toggleDeleteWarning();
-    }
-
-  }
-
-  toggleDeleteWarning() {
-    this.setState({
-      confirming: !this.state.confirming,
-      deleteWarning: !this.state.deleteWarning
-    })
+  // if it is a new collection, handle delete in state and register back in App.
+  deleteNewCollection() {
+    this.props.handleDelete(this.props.collection);
   }
 
   // this will delete a collection from the server and send the response
@@ -153,8 +146,9 @@ class Collection extends React.Component {
         // from the server to the root App component to update all concerned components
         this.props.refreshUserCollections(response);
 
-        // toggle the modal - it should always be up at this point
-        this.state.deleteWarning && this.toggleDeleteWarning();
+        let { modalProps } = this.state;
+        modalProps.isVisible = !modalProps.isVisible;
+        this.setState({modalProps});
 
       }).catch((e) => {
         console.log(e)
@@ -251,7 +245,7 @@ class Collection extends React.Component {
     return collection.articles.map((article, i) => {
       return (
         <ArticleResult key={i}
-          index={i+1}
+          index={i + 1}
           collection={collection}
           article={article}
           buttons={collectionButtons} />
@@ -319,6 +313,10 @@ class Collection extends React.Component {
 
   // the buttons for export, save, delete
   renderButtons() {
+    // the user can only post the collection with this save button below
+    // if they are logged in and it is a new collection
+    let userCanSave = !this.props.isSaved && !!JSON.parse(localStorage.getItem('user'));
+    // console.log(userCanSave)    
     return (
       <div className="left-all-col">
 
@@ -327,7 +325,7 @@ class Collection extends React.Component {
           style={styles.expandButton}
           color="link" size="md"
           onClick={this.toggleContent}>
-          <i className={this.state.showContent ? "fas fa-angle-double-up": "fas fa-angle-double-down"}></i>
+          <i className={this.state.showContent ? "fas fa-angle-double-up" : "fas fa-angle-double-down"}></i>
         </Button>
 
         <Fade in={this.state.showPopup} style={styles.popupText}>
@@ -343,7 +341,7 @@ class Collection extends React.Component {
             onMouseLeave={() => this.togglePopup('')}>
             <i className={!this.state.showPreview ? 'far fa-file-pdf' : 'far fa-window-close'}></i>
           </Button>
-          {!this.props.isSaved &&
+          {userCanSave &&
             <Button
               style={styles.button}
               color="link" size="md"
@@ -355,7 +353,7 @@ class Collection extends React.Component {
           <Button
             style={styles.button}
             color="link" size="md"
-            onClick={this.handleDelete}
+            onClick={this.toggleDeleteWarning}
             onMouseOver={() => this.togglePopup('delete collection')}
             onMouseLeave={() => this.togglePopup('')}>
             <i className="warn-icon fas fa-trash"></i>
@@ -387,41 +385,45 @@ class Collection extends React.Component {
     })
   }
 
-
+  // this will set the modal props to warn for a unique name, and toggle the modal
   toggleUniqueWarning() {
+    let { modalProps } = this.state;
+    modalProps.confirming = false;
+    modalProps.confirm = this.toggleAlertModal;
+    modalProps.message = 'Each collection must have a unique name! Try adjusting the name.'
+
     this.setState({
-      uniqueWarning: !this.state.uniqueWarning
-    })
+      modalProps
+    }, () => {
+      this.toggleAlertModal();
+    });
   }
 
-  // use the AlertModal for each of the alerts, just use different props
-  renderAlertModals() {
-    let uniqueWarningProps = {
-      message: 'Each collection must have a unique name! Try adjusting the name.',
-      isVisible: this.state.uniqueWarning,
-      confirming: this.state.confirming,
-      confirm: this.toggleUniqueWarning,
-      toggle: this.toggleUniqueWarning
-    }
-    let deleteCollectionWarningProps = {
-      message: `Are you sure you want to delete this collection?`,
-      isVisible: this.state.deleteWarning,
-      confirming: this.state.confirming,
-      confirm: this.deleteFromServer,
-      toggle: this.toggleDeleteWarning
-    }
-    // let deleteArticleWarningProps = {
-    //   message: `Are you sure you want to remove this article?`,
-    //   isVisible: this.state.deleteWarning,
-    //   confirming: this.state.confirming,
-    //   confirm: this.props.handleDelete,
-    //   toggle: this.toggleDeleteWarning
-    // }
+  // this will set the modal props to warn for a deleting a collection, and toggle the modal
+  toggleDeleteWarning() {
+    let { modalProps } = this.state;
+    let { isSaved, collection } = this.props;
 
-    let propSets = [uniqueWarningProps, deleteCollectionWarningProps];
+    modalProps.confirming = true;
+    modalProps.confirm = isSaved ? this.deleteFromServer : this.deleteNewCollection;
+    modalProps.message = isSaved ? 'Are you sure you want to delete this saved collection?': 'Are you sure you want to delete this new collection?'
 
-    return propSets.map((props, i) => {
-      return <AlertModal key={i} {...props} />
+    this.setState({
+      modalProps
+    }, () => {
+      this.toggleAlertModal();
+    });
+  }
+
+  // this will toggle the AlertModal used for each warning / confirmation 
+  // modal, using the modal props from state. These are changed by the 
+  // different situations that demand a warning / confirmation 
+  toggleAlertModal() {
+    let { modalProps } = this.state;
+    modalProps.isVisible = !modalProps.isVisible;
+
+    this.setState({
+      modalProps
     })
   }
 
@@ -434,14 +436,14 @@ class Collection extends React.Component {
     return (
       <div className="outline collection" style={styles.content}>
 
+        {/* the warning for signing out / improper signin. the props in state are 
+        changed in different scenarios */}
+        <AlertModal {...this.state.modalProps} />
 
         {/* the save icon that appears once we have any edits */}
         {this.state.collection && this.props.isSaved &&
           this.renderSaveOption()
         }
-
-        {/* the modals to alert for non-unique properties / deletions */}
-        {this.renderAlertModals()}
 
         {/* User can toggle here to edit the title of a collection */}
         <div style={styles.titleRow}>
@@ -450,7 +452,6 @@ class Collection extends React.Component {
             transitionName="replace"
             transitionEnterTimeout={500}
             transitionLeaveTimeout={300}>
-
 
             {!this.state.editing &&
               this.renderTitle()}
@@ -464,14 +465,12 @@ class Collection extends React.Component {
         {/* the buttons for save, delete, pdf */}
         {this.renderButtons()}
 
-
-        <Collapse style={{width: '100%'}} isOpen={this.state.showContent}>
+        <Collapse style={{ width: '100%' }} isOpen={this.state.showContent}>
 
           <CSSTransitionGroup
             transitionName="fade"
             transitionEnterTimeout={500}
             transitionLeaveTimeout={300}>
-
 
             {/* the pdf, when the preview button is clicked */}
             {this.state.showPreview &&
@@ -488,9 +487,7 @@ class Collection extends React.Component {
               </div>}
 
           </CSSTransitionGroup>
-
         </Collapse>
-
       </div>
 
     );

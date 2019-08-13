@@ -78,7 +78,7 @@ class ArticleViewer extends React.Component {
           {title}
         </p>
 
-        {/* render the headings we have values for */}
+        {/* render the headings / text we have values for */}
         {headings.map((heading, i) => {
 
           if (!!heading.name && !!heading.text) {
@@ -105,7 +105,7 @@ class ArticleViewer extends React.Component {
 
                 // demand code and link
                 if (!!link.availabilityCode && !!link.url) {
-                  // set fa class
+                  // set fa class to book or dollar sign
                   let iconClass = link.availabilityCode === 'OA' ? 'fas fa-book-open' : 'fas fa-dollar-sign';
 
                   return (
@@ -145,7 +145,7 @@ class ArticleViewer extends React.Component {
   }
 
   render() {
-    console.log(this.props.article)
+    // console.log(this.props.article)
 
     return (
       <Modal contentClassName="outline preview" size="xl" centered={true}
@@ -158,11 +158,7 @@ class ArticleViewer extends React.Component {
 
           {this.renderArticlePreview()}
 
-
         </ModalBody>
-        <ModalFooter>
-          <Button color="secondary" size="sm" onClick={() => this.closeModal()}>close</Button>
-        </ModalFooter>
 
       </Modal>
 

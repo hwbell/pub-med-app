@@ -7,6 +7,12 @@ import { getArticles } from '../tools/apiFunctions';
 // stubs
 let handleDeleteStub = jest.fn();
 
+// fake user to check local storage functionality
+let user = {
+  name: 'mark',
+  id: '09309jdij3d3d'
+}
+
 describe('Collection', () => {
 
   let e, articles, someProps;
@@ -29,6 +35,7 @@ describe('Collection', () => {
     }
 
     someProps = {
+      isSaved: false,
       collection: {
         name: 'sample collection',
         articles
@@ -40,6 +47,7 @@ describe('Collection', () => {
   let wrapper, instance;
 
   beforeEach(() => {
+    localStorage.setItem('user', JSON.stringify(user));
     wrapper = shallow(<Collection {...someProps} />);
     instance = wrapper.instance()
   })
@@ -66,34 +74,46 @@ describe('Collection', () => {
 
     expect(wrapper.find('Collapse').length).toEqual(1);
     expect(wrapper.find('Fade').length).toEqual(1);
+    expect(wrapper.find('AlertModal').length).toEqual(1);
 
     expect(wrapper.find('.thread-title').length).toEqual(1);
     expect(wrapper.find('.fa-edit').length).toEqual(1);
 
     expect(wrapper.find('.pdf-holder').length).toEqual(0);
 
-    // if unspecified, we will have 3 buttons
+    // if isSaved is false && we have a localStorage user, we will have 4 buttons , i.e. showing save button
     expect(wrapper.find('Button').length).toEqual(4);
     expect(wrapper.find('.fa-angle-double-down').length).toEqual(1);
     expect(wrapper.find('.fa-file-pdf').length).toEqual(1);
     expect(wrapper.find('.fa-save').length).toEqual(1);
     expect(wrapper.find('.fa-trash').length).toEqual(1);
 
-    // if we set the isSaved boolean=true, we should't see the save button
+  });
+
+  it('should hide the save button if isSaved=true', () => {
+    // change the prop
     wrapper.setProps({
       isSaved: true
     });
+    wrapper.update();
     expect(wrapper.find('Button').length).toEqual(3);
     expect(wrapper.find('.fa-save').length).toEqual(0);
+  })
 
+  it('should hide the save button if the user is not logged in', () => {
+    // change the localStorage
+    localStorage.removeItem('user');
+    let newWrapper = shallow(<Collection {...someProps} />);
+    
+    expect(newWrapper.find('Button').length).toEqual(3);
+    expect(newWrapper.find('.fa-save').length).toEqual(0);
+  })
 
-
-  });
 
   it('should fire the button functions correctly', async () => {
 
     wrapper.instance().postCollection = jest.fn();
-    wrapper.instance().handleDelete = jest.fn();
+    wrapper.instance().toggleAlertModal = jest.fn();
 
     // the preview button
     expect(wrapper.state().showPreview).toEqual(false);
@@ -106,10 +126,37 @@ describe('Collection', () => {
     wrapper.update();
     expect(wrapper.instance().postCollection.mock.calls.length).toEqual(1);
 
+    wrapper.find('Button').at(3).simulate('click');
+    wrapper.update();
+    expect(wrapper.instance().toggleAlertModal.mock.calls.length).toEqual(1);
+
+  })
+
+  it('should assign values to modalProps depending on isSaved boolean', () => {
+    // simulate an new collection
+    wrapper.setProps({
+      isSaved: false
+    });
+
     // the delete button
     wrapper.find('Button').at(3).simulate('click');
     wrapper.update();
-    expect(wrapper.instance().handleDelete.mock.calls.length).toEqual(1);
+
+    expect(wrapper.state().modalProps.confirming).toBe(true);
+    expect(wrapper.state().modalProps.message).toBe('Are you sure you want to delete this new collection?');
+
+    // simulate a saved collection
+    wrapper.setProps({
+      isSaved: true
+    });
+    wrapper.update();
+
+    // the delete button is moved now, since the save button is gone
+    wrapper.find('Button').at(2).simulate('click');
+    wrapper.update();
+
+    expect(wrapper.state().modalProps.confirming).toBe(true);
+    expect(wrapper.state().modalProps.message).toBe('Are you sure you want to delete this saved collection?');
 
   })
 
@@ -220,7 +267,7 @@ describe('Collection', () => {
     expect(wrapper.state().collection).not.toBeNull();
   })
 
-  it('should show the save option if a collection is modified', () => {
+  it('should show the save option if a saved collection is modified', () => {
 
     instance.handleChange('collection title');
     wrapper.setProps({
@@ -270,15 +317,15 @@ describe('Collection', () => {
     const wrapper = shallow(<Collection {...someProps} />);
     const instance = wrapper.instance();
 
-    expect(wrapper.state().uniqueWarning).toEqual(false);
+    expect(wrapper.state().modalProps.isVisible).toEqual(false);
 
-    instance.toggleUniqueWarning();
+    instance.toggleAlertModal();
     wrapper.update();
-    expect(wrapper.state().uniqueWarning).toEqual(true);
+    expect(wrapper.state().modalProps.isVisible).toEqual(true);
   
-    instance.toggleUniqueWarning();
+    instance.toggleAlertModal();
     wrapper.update();
-    expect(wrapper.state().uniqueWarning).toEqual(false);
+    expect(wrapper.state().modalProps.isVisible).toEqual(false);
 
   })
 

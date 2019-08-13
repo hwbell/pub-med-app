@@ -11,7 +11,7 @@ exports[`CommentForm renders correctly 1`] = `
   <p
     style={
       Object {
-        "color": "black",
+        "color": "silver",
         "margin": "5px 20px",
       }
     }

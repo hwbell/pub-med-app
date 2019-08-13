@@ -44,6 +44,7 @@ class ProfilePage extends React.Component {
   }
 
   componentDidMount() {
+
     this.setState({
       modalProps: {
         message: `Are you sure you want to sign out? Make sure all your changes are saved!`,
@@ -58,18 +59,18 @@ class ProfilePage extends React.Component {
     return (
       <div className="outline signin" style={{ padding: '40px' }}>
 
-        <p className="profile-title">Welcome Back</p>
+        <p className="thread-title" style={{alignSelf: 'flex-start'}}>Welcome Back</p>
         <p className="paragraph">
           {`Login to your account to connect with other researchers!`}
         </p>
 
-        <p className="profile-title">Don't have an account?</p>
+        <p className="thread-title" style={{alignSelf: 'flex-start'}}>Don't have an account?</p>
         <p className="paragraph">
           {`If you don't already have an account, you can sign up by checking the new user box below
           and confirming your password.`}
         </p>
 
-        <p className="profile-title">Why should I make account?</p>
+        <p className="thread-title" style={{alignSelf: 'flex-start'}}>Why should I make account?</p>
         <p className="paragraph">
           {`You are welcome to use the site however you like, and we invite you to do so! However, certain
           tools on the site are limited to logged in users, such as saving information to our servers, as well as

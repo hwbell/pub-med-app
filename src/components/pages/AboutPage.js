@@ -2,8 +2,11 @@ import React from 'react';
 import '../../App.scss';
 import 'bootstrap/dist/css/bootstrap.css';
 import { aboutPageText } from "../../assets/text";
+
 // components
 import Header from '../Header';
+import AnchorLink from 'react-anchor-link-smooth-scroll'
+import { Link } from 'react-router-dom';
 
 class AboutPage extends React.Component {
   constructor(props) {
@@ -15,7 +18,9 @@ class AboutPage extends React.Component {
   }
 
   componentDidMount() {
-    // 
+    // setTimeout(() => {
+    // window.scrollTo(0,0);
+    // }, 1000)
   }
 
   render() {
@@ -25,48 +30,51 @@ class AboutPage extends React.Component {
 
           <Header
             class="heading"
-            title={"About this Site"}
+            title={"A Portal to PMC"}
             subtitle={"medical & life sciences literature for everyone"}
           />
 
-          <div className="outline" style={styles.content}>
+          <div id="aboutportal" className="outline" style={styles.content}>
 
-          {/* 'far fa-file-alt', 'fas fa-project-diagram', 'fas fa-users' */}
-
-            <div className="row" style={{margin: '20px', marginBottom: '0px'}}>
-              <i style={styles.icon} className="far fa-file-alt"></i>
-              <i style={styles.icon} className="fas fa-project-diagram"></i>
-              <i style={styles.icon} className="fas fa-users"></i>
+            <div style={styles.linkHolder}>
+              <AnchorLink className="anchor-link" offset='100' href='#aboutpmc'>about PMC</AnchorLink>
             </div>
 
-            {aboutPageText.full.top.map((section, i) => {
-              return (
-                <div key={i}>
-                  <div style={styles.titleHolder}>
-                    {section.title && <p className="profile-title">{section.title}</p>}
+            <div style={{ marginTop: '20px' }}>
 
-                    <div className="row">
-                      {section.icons.map((icon, i) => {
-                        return <i key={i} className={icon}></i>
-                      })}
+              <p className="profile-title" >About this Site</p>
+              {aboutPageText.full.top.map((section, i) => {
+                return (
+                  <div key={i}>
+                    <div style={styles.titleHolder}>
+                      {section.title && <p className="paragraph" style={{ marginBottom: '0px' }}>{section.title}</p>}
+
+                      <Link to={section.icon.route || '/about'}>
+                        <i key={i} className={section.icon.className}></i>
+                      </Link>
                     </div>
-                  </div>
 
-                  {section.text.map((text, i) => {
-                    return <p key={i} className="paragraph">{text}</p>
-                  })}
-                </div>
-              )
-            })}
+                    {section.text.map((text, i) => {
+                      return <p key={i} className="paragraph">{text}</p>
+                    })}
+                  </div>
+                )
+              })}
+            </div>
 
           </div>
 
-          <div className="outline" style={styles.content}>
+          <div id="aboutpmc" className="outline" style={styles.content}>
 
-            <p className="profile-title">About PMC</p>
-            <p className="paragraph">{aboutPageText.full.middle[0]}</p>
-            <p className="paragraph">{aboutPageText.full.middle[1]}</p>
+            <div style={styles.linkHolder}>
+              <AnchorLink className="anchor-link" offset='100' href='#aboutportal'>about the site</AnchorLink>
+            </div>
 
+            <div style={{ marginTop: '20px' }}>
+              <p className="profile-title">About PubMed Central</p>
+              <p className="paragraph">{aboutPageText.full.middle[0]}</p>
+              <p className="paragraph">{aboutPageText.full.middle[1]}</p>
+            </div>
           </div>
 
           <img className="about-img" src={require('../../assets/about-page.png')}></img>
@@ -76,6 +84,8 @@ class AboutPage extends React.Component {
             {aboutPageText.full.bottom.map((section, i) => {
               return <p key={i} className="paragraph">{section}</p>
             })}
+
+
 
           </div>
 
@@ -95,6 +105,15 @@ const styles = {
     justifyContent: 'flex-start',
     alignItems: 'center'
   },
+  linkHolder: {
+    position: 'absolute',
+    right: '20px',
+    top: '2px',
+    zIndex: 10,
+    display: 'flex',
+    fontSize: '14px'
+  }
+
 }
 
 export default AboutPage;

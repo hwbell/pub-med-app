@@ -101,7 +101,6 @@ class CollectionPage extends React.Component {
   }
 
   renderCollections(collections, isSaved) {
-    const ref = React.createRef();
     return (
 
       <div className="collection-block">
@@ -170,7 +169,7 @@ class CollectionPage extends React.Component {
             {/* the new collections when they are present */}
             {haveNewCollections ?
 
-              this.renderCollections(newCollections)
+              this.renderCollections(newCollections, false)
 
               // or if there aren't any collections yet
               :

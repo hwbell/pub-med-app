@@ -3,7 +3,7 @@ import '../App.scss';
 import 'bootstrap/dist/css/bootstrap.css';
 
 // components
-import { Button, Input, Form, InputGroup, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Input} from 'reactstrap';
 
 // this form is toggled visible by the 'add to collection' button on the search page
 class CommentForm extends React.Component {
@@ -86,7 +86,8 @@ const styles = {
     height: '100%',
   },
   text: {
-    color: 'black',
+    color: 'silver',
+    // fontSize: '14px',
     margin: '5px 20px'
   },
   input: {
