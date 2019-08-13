@@ -114,7 +114,7 @@ describe('TextBlock', () => {
 
   })
 
-  it('should render all buttons with provided info provided', () => {
+  it('should render all buttons with info from provided props.buttons', () => {
     expect(wrapper.find('Link').at(0).props().to).toBe(someProps.buttons[0].link)
     expect(wrapper.find('Link').at(1).props().to).toBe(someProps.buttons[1].link)
     expect(wrapper.find('Link').at(2).props().to).toBe(someProps.buttons[2].link)

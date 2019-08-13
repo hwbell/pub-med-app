@@ -30,15 +30,38 @@ exports[`ProfilePage renders correctly 1`] = `
       }
     >
       <p
+        className="profile-title"
+      >
+        Welcome Back
+      </p>
+      <p
         className="paragraph"
       >
-        Sign in or create an account to start sharing resources with other researchers!
+        Login to your account to connect with other researchers!
+      </p>
+      <p
+        className="profile-title"
+      >
+        Don't have an account?
       </p>
       <p
         className="paragraph"
       >
         If you don't already have an account, you can sign up by checking the new user box below
           and confirming your password.
+      </p>
+      <p
+        className="profile-title"
+      >
+        Why should I make account?
+      </p>
+      <p
+        className="paragraph"
+      >
+        You are welcome to use the site however you like, and we invite you to do so! However, certain
+          tools on the site are limited to logged in users, such as saving information to our servers, as well as
+          posting and participating in thread discussions. With just an email address and confirmed password, you 
+          can access everything the site has to offer! It only takes 10-15 seconds.
       </p>
       <form
         className=""
@@ -52,6 +75,9 @@ exports[`ProfilePage renders correctly 1`] = `
           }
         }
       >
+        <p>
+          Enter your information below
+        </p>
         <input
           className="form-control"
           name="email"
@@ -107,7 +133,7 @@ exports[`ProfilePage renders correctly 1`] = `
           onClick={[Function]}
           type="submit"
         >
-          sign up!
+          login
         </button>
       </form>
     </div>

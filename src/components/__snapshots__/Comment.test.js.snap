@@ -7,7 +7,7 @@ exports[`Comment renders correctly 1`] = `
   <p
     className="comment-title"
   >
-    Jeff - 
+    Jeff- 
   </p>
   <p
     className="comment-text"

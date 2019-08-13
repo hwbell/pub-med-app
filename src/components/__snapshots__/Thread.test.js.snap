@@ -75,7 +75,7 @@ exports[`Thread renders correctly 1`] = `
           <p
             className="comment-title"
           >
-            Jeff - 
+            Jeff- 
           </p>
           <p
             className="comment-text"
@@ -89,7 +89,7 @@ exports[`Thread renders correctly 1`] = `
           <p
             className="comment-title"
           >
-            mark - 
+            mark- 
           </p>
           <p
             className="comment-text"

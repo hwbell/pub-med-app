@@ -39,9 +39,9 @@ class AboutPage extends React.Component {
               <i style={styles.icon} className="fas fa-users"></i>
             </div>
 
-            {aboutPageText.full.top.map((section) => {
+            {aboutPageText.full.top.map((section, i) => {
               return (
-                <div>
+                <div key={i}>
                   <div style={styles.titleHolder}>
                     {section.title && <p className="profile-title">{section.title}</p>}
 
@@ -73,8 +73,8 @@ class AboutPage extends React.Component {
 
           <div className="outline" style={styles.content}>
 
-            {aboutPageText.full.bottom.map((section) => {
-              return <p className="paragraph">{section}</p>
+            {aboutPageText.full.bottom.map((section, i) => {
+              return <p key={i} className="paragraph">{section}</p>
             })}
 
           </div>

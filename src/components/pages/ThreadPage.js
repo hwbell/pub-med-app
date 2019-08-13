@@ -45,13 +45,13 @@ class ThreadPage extends React.Component {
     // console.log(!this.props.serverThreads)
 
     if (!this.props.serverThreads) {
-      console.log('there are no serverThreads in props')
+      // console.log('there are no serverThreads in props')
       this.fetchServerThreads();
     }
   }
 
   fetchServerThreads() {
-    console.log('fetching server threads');
+    // console.log('fetching server threads');
 
     let { threadSorter, threadPage } = this.state;
 
@@ -66,7 +66,7 @@ class ThreadPage extends React.Component {
 
     return getPublicThreads(headers, threadSorter, threadPage)
       .then((response) => {
-        console.log(response)
+        // console.log(response)
 
         // once we have posted, we will register in App. 
         // This is handled separately from patches / posts, because when we fetch the entire list,
@@ -146,7 +146,7 @@ class ThreadPage extends React.Component {
   // this function will set the thread that was clicked on as the selected thread 
   // in state, then toggle the form
   handleEdit(thread) {
-    console.log(thread)
+    // console.log(thread)
     let selected = thread ? thread : null;
     this.setState({
       selected
@@ -170,7 +170,7 @@ class ThreadPage extends React.Component {
 
   // this will post our thread and relay the response back to App
   handleSubmitThread(threadInfo) {
-    console.log(threadInfo)
+    // console.log(threadInfo)
 
     // get local storage info
     const user = JSON.parse(localStorage.getItem('user'));
@@ -199,7 +199,7 @@ class ThreadPage extends React.Component {
     if (!threadInfo || Object.keys(threadInfo).length === 0) {
       return;
     }
-    console.log('posting thread')
+    // console.log('posting thread')
 
     // set up post obj with user
     let post = {
@@ -221,10 +221,10 @@ class ThreadPage extends React.Component {
 
     // Post the thread to the server. Using the currently stored token
     // will assign the user as the owner of the thread in mongodb on the backend.
-    console.log(isUsers)
+    // console.log(isUsers)
     return saveThread(post, headers, isComment, isUsers)
       .then((response) => {
-        console.log(response)
+        // console.log(response)
 
         // once we have posted, we will: 
 
@@ -232,7 +232,7 @@ class ThreadPage extends React.Component {
         // from the server to the root App component to update all concerned components
         if (response.code !== 11000) {
 
-          console.log(isUsers, isNewThread)
+          // console.log(isUsers, isNewThread)
 
           // refresh for the user if this was a user thread, or a new thread
           if (isUsers || isNewThread) {

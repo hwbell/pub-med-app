@@ -121,8 +121,8 @@ describe('ProfilePage', () => {
     // check for the change
     expect(wrapper.find('.profile').length).toEqual(0);
     expect(wrapper.find('.signin').length).toEqual(1);
-    expect(wrapper.find('.profile-title').length).toEqual(0);
-    expect(wrapper.find('Button').at(0).render().text()).toEqual('sign up!');
+    expect(wrapper.find('.profile-title').length).toEqual(3);
+    expect(wrapper.find('Button').at(0).render().text()).toEqual('login');
     expect(wrapper.find('Fade').length).toBe(0);
   })
 
@@ -161,6 +161,19 @@ describe('ProfilePage', () => {
     setTimeout(() => {
       expect(wrapper.find('Input').length).toEqual(3);
     }, 500)
+
+  })
+
+  it('handleCheck() should change the text of the login / sign up button', () => {
+    wrapper.setProps({ user: null });
+    wrapper.update();
+    
+    expect(wrapper.find('Button').at(0).render().text()).toEqual('login');
+
+    wrapper.instance().handleCheck();
+    wrapper.update();
+
+    expect(wrapper.find('Button').at(0).render().text()).toEqual('sign up!');
 
   })
 

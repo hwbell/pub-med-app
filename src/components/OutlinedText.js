@@ -22,7 +22,7 @@ class OutlinedText extends React.Component {
     const styles = {
       content: {
         width: '100%',
-        margin: '10px auto'
+        margin: '4px'
       },
       text: {
         paddingTop: '10px',

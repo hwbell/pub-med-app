@@ -57,14 +57,26 @@ class ProfilePage extends React.Component {
   renderSignIn() {
     return (
       <div className="outline signin" style={{ padding: '40px' }}>
+
+        <p className="profile-title">Welcome Back</p>
         <p className="paragraph">
-          {`Sign in or create an account to start sharing resources with other researchers!`}
+          {`Login to your account to connect with other researchers!`}
         </p>
 
+        <p className="profile-title">Don't have an account?</p>
         <p className="paragraph">
           {`If you don't already have an account, you can sign up by checking the new user box below
           and confirming your password.`}
         </p>
+
+        <p className="profile-title">Why should I make account?</p>
+        <p className="paragraph">
+          {`You are welcome to use the site however you like, and we invite you to do so! However, certain
+          tools on the site are limited to logged in users, such as saving information to our servers, as well as
+          posting and participating in thread discussions. With just an email address and confirmed password, you 
+          can access everything the site has to offer! It only takes 10-15 seconds.`}
+        </p>
+
 
         {this.renderInputs()}
       </div>
@@ -74,6 +86,8 @@ class ProfilePage extends React.Component {
   renderInputs() {
     return (
       <Form style={styles.form} onSubmit={this.handleSubmit}>
+
+        <p>Enter your information below</p>
 
         <Input style={styles.input} type="email" name="email" placeholder="email"
           onChange={(e) => this.handleChange(e)}
@@ -108,7 +122,7 @@ class ProfilePage extends React.Component {
           </Label>
         </FormGroup>
 
-        <Button color="primary" type="submit">sign up!</Button>
+        <Button color="primary" type="submit">{this.state.checked ? 'sign up!' : 'login'}</Button>
       </Form>
     )
   }

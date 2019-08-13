@@ -80,10 +80,16 @@ exports[`TextBlock renders correctly 1`] = `
       NIH clinical guidelines &gt; 800
     </p>
   </div>
-  <div>
+  <div
+    style={
+      Object {
+        "margin": "0px 10px",
+      }
+    }
+  >
     <button
       aria-label={null}
-      className="block-button btn btn-primary btn-sm"
+      className="article-button btn btn-primary btn-sm"
       onClick={[Function]}
     >
       <a
@@ -100,7 +106,7 @@ exports[`TextBlock renders correctly 1`] = `
     </button>
     <button
       aria-label={null}
-      className="block-button btn btn-primary btn-sm"
+      className="article-button btn btn-primary btn-sm"
       onClick={[Function]}
     >
       <a
@@ -117,7 +123,7 @@ exports[`TextBlock renders correctly 1`] = `
     </button>
     <button
       aria-label={null}
-      className="block-button btn btn-primary btn-sm"
+      className="article-button btn btn-primary btn-sm"
       onClick={[Function]}
     >
       <a

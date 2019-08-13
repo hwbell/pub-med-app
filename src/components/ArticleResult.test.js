@@ -119,10 +119,14 @@ describe('ArticleResult', () => {
     expect(wrapper.find('.article-text').at(0).text()).toEqual(article.authorString)
     expect(wrapper.find('.article-text').at(1).text()).toContain(article.journalInfo.journal.title)
 
-    // contains 2 correct buttons
+    // contains 2 buttons
     expect(wrapper.find('.article-button').length).toBe(2);
     expect(wrapper.find('.article-button').at(0).html()).toContain(searchButtons[0].text)
     expect(wrapper.find('.article-button').at(1).html()).toContain(searchButtons[1].text)
+
+    // contains the button holder for the icons indicating full-text, etc
+    expect(wrapper.find('.indicators').length).toBe(1);
+
   })
 
   it('receives and fires the right functions as props', () => {

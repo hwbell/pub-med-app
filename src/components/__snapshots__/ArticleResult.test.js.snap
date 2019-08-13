@@ -5,6 +5,49 @@ exports[`ArticleResult renders correctly 1`] = `
   className="article-result"
 >
   <div
+    className="indicators"
+    style={
+      Object {
+        "bottom": "10px",
+        "padding": "10px",
+        "position": "absolute",
+        "right": "20px",
+        "zIndex": 10,
+      }
+    }
+  >
+    <i
+      className="fas fa-dollar-sign"
+      style={
+        Object {
+          "color": "white",
+          "fontSize": "12px",
+          "margin": "4px",
+        }
+      }
+    />
+    <i
+      className="fas fa-dollar-sign"
+      style={
+        Object {
+          "color": "white",
+          "fontSize": "12px",
+          "margin": "4px",
+        }
+      }
+    />
+    <i
+      className="fas fa-dollar-sign"
+      style={
+        Object {
+          "color": "white",
+          "fontSize": "12px",
+          "margin": "4px",
+        }
+      }
+    />
+  </div>
+  <div
     style={
       Object {
         "alignItems": "flex-start",

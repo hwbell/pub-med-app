@@ -67,9 +67,9 @@ class SearchPage extends React.Component {
   componentDidMount() {
 
     // assign the sorter to local storage
-    localStorage.setItem('sorter', JSON.stringify(this.state.sorter))
+    localStorage.setItem('sorter', JSON.stringify(this.state.sorter));
 
-    let localResults = JSON.parse(localStorage.getItem('searchResults'))
+    let localResults = JSON.parse(localStorage.getItem('searchResults'));
 
     if (!localResults || !localResults.length) {
       let { query, sorter } = this.state;
@@ -79,6 +79,7 @@ class SearchPage extends React.Component {
       // if we have the localStorage results, set them as the results and cancel the loader icon
       this.setState({
         showLoading: false,
+        query: JSON.parse(localStorage.getItem('searchQuery')),
         results: JSON.parse(localStorage.getItem('searchResults'))
       })
     }

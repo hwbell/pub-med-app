@@ -141,7 +141,7 @@ hr {
   border: 1px solid rgba(255, 255, 255, 0.226);
   background-color: rgba(4, 14, 49, 0.241);
   width: 92%;
-  margin: 15px;
+  margin: 4px;
 }
 
 /* this will be the universal border-radius */
@@ -478,9 +478,28 @@ body.modal-open {
 } 
 // 
 
-// The ArticleViewer Component
+// The ArticleViewer Component //
+.preview {
+  background-color: rgb(245, 245, 245);
+}
+.preview-title, .preview-subtitle, .preview-text {
+  color: black;
+}
+.preview-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+.preview-subtitle {
+  font-size: 14px;
+  font-weight: bold;
+  color: rgb(13, 74, 172);
+  margin-bottom: 0px;
+}
+.preview-text {
+  font-size: 14px;
+}
 /* the article links */
-.article-link {
+.preview-link {
   transition: all 0.3s ease;
   margin: 10px;
   font-size: 22px;

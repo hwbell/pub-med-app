@@ -74,7 +74,7 @@ class ArticleViewer extends React.Component {
           <i className="fas fa-times"></i>
         </Button>
 
-        <p style={styles.title}>
+        <p className="preview-title">
           {title}
         </p>
 
@@ -84,8 +84,8 @@ class ArticleViewer extends React.Component {
           if (!!heading.name && !!heading.text) {
             return (
               <div key={i}>
-                <p style={styles.subtitle}>{heading.name}</p>
-                <p style={styles.text}>{heading.text}</p>
+                <p className="preview-subtitle">{heading.name}</p>
+                <p className="preview-text">{heading.text}</p>
               </div>
             )
           } else {
@@ -98,7 +98,7 @@ class ArticleViewer extends React.Component {
         {urlList.length > 0 &&
           <div>
 
-            <p style={styles.subtitle}>Full Text:</p>
+            <p className="preview-subtitle">Full Text:</p>
 
             <div>
               {urlList.map((link, i) => {
@@ -110,7 +110,7 @@ class ArticleViewer extends React.Component {
 
                   return (
                     <a key={i} target="_blank" href={link.url}>
-                      <i style={styles.icon} className={`${iconClass} article-link`}></i>
+                      <i className={`${iconClass} preview-link`}></i>
                     </a>
                   )
 
@@ -129,7 +129,7 @@ class ArticleViewer extends React.Component {
 
             if (!!id.name && !!id.text) {
               return (
-                <p key={i} style={styles.subtitle}>{`${id.name}: ${id.text}`}</p>
+                <p key={i} className="preview-subtitle">{`${id.name}: ${id.text}`}</p>
               )
             } else {
               return null;
@@ -145,13 +145,16 @@ class ArticleViewer extends React.Component {
   }
 
   render() {
-    // console.log(this.props.article)
+    console.log(this.props.article)
 
     return (
-      <Modal size="xl" centered={true} isOpen={this.props.isVisible} toggle={this.props.toggle}>
+      <Modal contentClassName="outline preview" size="xl" centered={true}
+        style={styles.modal}
+        isOpen={this.props.isVisible}
+        toggle={this.props.toggle}>
 
         {/* <ModalHeader toggle={this.props.toggle}>Your Collections</ModalHeader> */}
-        <ModalBody style={{ margin: '10px' }}>
+        <ModalBody style={{ margin: '10px', marginBottom: '0px' }}>
 
           {this.renderArticlePreview()}
 
@@ -171,21 +174,11 @@ const styles = {
   content: {
     height: '100%',
   },
-  title: {
-    color: 'black',
-    fontSize: '22px',
-    marginTop: '10px'
-  },
-  subtitle: {
-    margin: '0px',
-    color: 'rgb(50,50,100)',
-    fontSize: '18px',
-    fontWeight: 'bold'
-  },
-  text: {
-    color: 'black',
-    fontSize: '14px',
-  },
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
 }
 
 export default ArticleViewer;

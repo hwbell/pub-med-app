@@ -14,10 +14,35 @@ class ArticleResult extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      results: null
+    this.renderIndicators = this.renderIndicators.bind(this);
+  }
 
-    };
+  renderIndicators() {
+    let { article } = this.props;
+    let { fullTextUrlList } = article;
+
+    if ( !fullTextUrlList || !fullTextUrlList.fullTextUrl ||  !fullTextUrlList.fullTextUrl.length > 0 ) {
+      return null;
+    }
+
+    let urlList;
+    urlList = fullTextUrlList.fullTextUrl.map((articleObj) => {
+      let { availabilityCode, url } = articleObj;
+      return {
+        availabilityCode,
+        url
+      }
+    })
+
+    return (
+
+      <div style={styles.indicatorsHolder} className="indicators">
+        {fullTextUrlList.fullTextUrl.map((item, i) => {
+            let iconClass = item.availabilityCode === 'OA' ? 'fas fa-book-open' : 'fas fa-dollar-sign';
+            return <i key={i} className={iconClass} style={styles.icon}></i>
+          })}
+      </div>
+    )
   }
 
   renderText() {
@@ -76,8 +101,13 @@ class ArticleResult extends React.Component {
     return (
       <div className="article-result">
 
+        {/* icons telling the user if full text/ etc is available */}
+        {this.renderIndicators()}
+
+        {/* the title / author / journal info */}
         {this.renderText()}
 
+        {/* the action buttons */}
         {this.renderButtons()}
 
 
@@ -97,8 +127,19 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'space-around',
     alignItems: 'flex-start'
+  },
+  indicatorsHolder: {
+    position: 'absolute',
+    right: '20px',
+    bottom: '10px',
+    zIndex: 10,
+    padding: '10px',
+  },
+  icon: {
+    fontSize: '12px', 
+    color: 'white',
+    margin: '4px'
   }
-
 }
 
 export default ArticleResult;
