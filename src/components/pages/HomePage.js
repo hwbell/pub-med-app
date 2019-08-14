@@ -79,27 +79,6 @@ class HomePage extends React.Component {
     };
   }
 
-  // fetchArticles() {
-  //   return getArticles('medicine', 'date')
-  //     .then((results) => {
-  //       // console.log(results)
-  //       let articleTitles = parseSearchToTitlesArray(results).slice(0, 4);
-  //       this.setState({
-  //         newPublicationsInfo: {
-  //           title: 'New Publications',
-  //           paragraph: articleTitles,
-  //           button: 'more articles'
-  //         }
-  //       })
-  //     }).catch((e) => {
-  //       console.log(e)
-  //     })
-  // }
-
-  componentDidMount() {
-    // return this.fetchArticles();
-  }
-
   render() {
     return (
       <div className="page">
@@ -138,7 +117,7 @@ class HomePage extends React.Component {
           <div className="col col-12 col-sm-8">
             {this.state.newPublicationsInfo &&
               <TextBlock
-                buttons={[{ link: '/search', text: 'start mining' }, { link: '/profile', text: 'make a profile' }, { link: '/about', text: 'learn more first' }]}
+                buttons={[{ link: '/search', text: 'start mining' }, { link: '/profile', text: 'register' }, { link: '/about', text: 'learn more' }]}
                 text={toolsIntro}
               />}
           </div>

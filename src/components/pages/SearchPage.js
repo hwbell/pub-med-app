@@ -111,7 +111,10 @@ class SearchPage extends React.Component {
 
   // handleChange changes the value of the current query, in the input
   handleChange(value) {
-    // console.log(value)
+
+    if (!value) {
+      value = ` `;
+    } 
     this.setState({
       query: value
     });
@@ -295,12 +298,15 @@ class SearchPage extends React.Component {
           collections to the form so it can decide what to render */}
         {this.state.selected &&
           <CollectionForm
+            user={this.props.user}
             article={this.state.selected}
             isVisible={this.state.collectionModal}
             toggle={this.toggleCollectionForm}
             collections={this.props.collections}
             createNewCollection={this.props.createNewCollection}
-            modifyCollection={this.props.modifyCollection} />}
+            modifyCollection={this.props.modifyCollection} 
+            refreshUserCollections={this.props.refreshUserCollections}
+            />}
 
         {/* modal for viewing any article */}
         {this.state.selected &&

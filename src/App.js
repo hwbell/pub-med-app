@@ -241,17 +241,34 @@ class App extends Component {
   // on the server. The updated user collections are sent from the server upon update and sent 
   // back to App to keep App as the root source of the current user data
   refreshUserCollections(response) {
-    // all we have to do is set the response as the user's collections
-
+    console.log('refreshing users collections')
     let { user } = this.state;
-    user.collections = response;
+
+    // for deletions we get a list back. check for this
+    if( !response._id && !!response.length ) {
+      user.collections = response;
+      return this.setState({
+        user
+      }, () => {
+        // save to local storage
+        localStorage.setItem(`user`, JSON.stringify(user));
+      })
+    }
+
+    // if we get an object, replace the matching collection with the response
+    // the updateObjInArray function will handle whether the response is a new collection or an update
+    user.collections = updateObjInArray(user.collections, response);
+
     this.setState({
       user
+    }, () => {
+      // save to local storage
+      localStorage.setItem(`user`, JSON.stringify(user));
     })
   }
 
   refreshUserThreads(response) {
-    // all we have to do is set the response as the user's threads
+    // all we have to do is replace the matching thread with the response
 
     console.log('refreshing users threads')
     let { user } = this.state;
@@ -417,6 +434,7 @@ class App extends Component {
                       collections={this.state.collections}
                       createNewCollection={this.createNewCollection}
                       modifyCollection={this.modifyCollection}
+                      refreshUserCollections={this.refreshUserCollections}
                       user={this.state.user} />
                   } />
                   <Route path="/collections/" render={() =>

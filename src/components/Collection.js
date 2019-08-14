@@ -261,6 +261,7 @@ class Collection extends React.Component {
 
     let collection = this.state.collection || this.props.collection;
     let title = collection.name;
+    // console.log(collection)
     return (
       <div style={styles.title}>
         <p className="thread-title">

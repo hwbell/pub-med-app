@@ -50,7 +50,9 @@ export async function patchUser(patch, headers) {
 // saves a collection to the server, or patches an exisiting collection on the server
 export async function saveCollection(collection, headers, isExisting) {
 
-  // console.log(collection)
+  console.log(collection)
+  console.log(headers)
+  console.log(isExisting)
   // assign the request params accoring to either PATCH for existing collections or 
   // POST for new collections
 
@@ -71,6 +73,8 @@ export async function saveCollection(collection, headers, isExisting) {
     body = collection;
     method = 'POST';
   }
+  console.log(method)
+  console.log(body)
 
   let serverResponse = await fetch(url, {
     method,

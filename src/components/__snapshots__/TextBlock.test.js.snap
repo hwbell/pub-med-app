@@ -83,7 +83,7 @@ exports[`TextBlock renders correctly 1`] = `
   <div
     style={
       Object {
-        "margin": "0px 10px",
+        "margin": "0px 14px",
       }
     }
   >

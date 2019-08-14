@@ -22,3 +22,33 @@ export async function getUserCollections(headers) {
 
   return serverResponse;
 }
+
+// saves a collection to the server, or patches an exisiting collection on the server
+export async function saveCollection(collection, headers, isExisting) {
+
+  // console.log(collection)
+  // assign the request params accoring to either PATCH for existing collections or 
+  // POST for new collections
+
+  // base url
+  let url = `${collectionServerUrl}collections`;
+  let method, body;
+
+  if (isExisting) {
+    // if its a patch, we only want to send allowed properties.
+    let { name, articles } = collection;
+    body = {
+      name,
+      articles
+    }
+    method = 'PATCH';
+    url += `/${collection._id}`;
+  } else {
+    body = collection;
+    method = 'POST';
+  }
+
+  let serverResponse = await Promise.resolve(collection);
+
+  return serverResponse;
+}

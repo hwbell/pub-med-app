@@ -30,7 +30,7 @@ class TextBlock extends React.Component {
           )}
         </div>
 
-        <div style={{margin: '0px 10px'}}>
+        <div style={{margin: '0px 14px'}}>
           {this.props.buttons.map((button, i) =>
             <Button key={i} color='primary' size="sm" className="article-button">
               <Link to={button.link || '/about'} style={{ color: 'white' }}>{button.text}</Link>

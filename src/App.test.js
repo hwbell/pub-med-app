@@ -4,6 +4,9 @@ import App from './App';
 import { shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 
+// tools
+import { getSampleCollections } from './tools/sampleData';
+
 // mock the server functions
 jest.mock('./tools/serverFunctions.js');
 
@@ -19,8 +22,15 @@ const resizeWindow = (x, y) => {
 
 describe('App', () => {
 
-  let wrapper;
+  let user, wrapper;
   beforeEach(() => {
+
+    user = {
+      name: 'Mark',
+      email: 'mark@example.com',
+      password: 'password'
+    }
+
     wrapper = shallow(<App />);
     wrapper.instance().registerSignIn = jest.fn();
   })
@@ -54,13 +64,6 @@ describe('App', () => {
     await wrapper.instance().componentDidMount();
     wrapper.update();
     expect(wrapper.instance().registerSignIn).not.toHaveBeenCalled();
-
-    // with fake user it should attempt
-    let user = {
-      name: 'Mark',
-      email: 'mark@example.com',
-      password: 'password'
-    }
 
     // set a user
     localStorage.setItem('user', JSON.stringify(user));
@@ -105,18 +108,16 @@ describe('App', () => {
   // })
 
 
-  //   it('should render the dang thing', () => {
-  //     const component = mount(
-  //         <div>
-  //             <Media query="(max-width: 721px)">
-  //                 { matches => matches ? (
-  //                     <div>This matches</div>
-  //                 ) : <div>This doesn't match</div> }
-  //             </Media>
-  //         </div>
-  //     );
-  //     expect(component).toMatchSnapshot();
-  // });
+  it('should set state correctly when refreshUserCollections() is fired', () => {
+    expect(wrapper.state().user).toMatchObject(user);
+
+    let newCollections = getSampleCollections();
+    wrapper.instance().refreshUserCollections(newCollections);
+    wrapper.update();
+
+    expect(wrapper.state().user.collections).toMatchObject(newCollections);
+
+  })
 
 })
 

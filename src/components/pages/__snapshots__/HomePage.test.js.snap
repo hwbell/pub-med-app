@@ -57,10 +57,16 @@ exports[`renders correctly 1`] = `
   organize, share and discuss scientific and medical literature. 
           </p>
         </div>
-        <div>
+        <div
+          style={
+            Object {
+              "margin": "0px 14px",
+            }
+          }
+        >
           <button
             aria-label={null}
-            className="block-button btn btn-primary btn-sm"
+            className="article-button btn btn-primary btn-sm"
             onClick={[Function]}
           >
             <a
@@ -150,10 +156,16 @@ exports[`renders correctly 1`] = `
             NIH clinical guidelines &gt; 800
           </p>
         </div>
-        <div>
+        <div
+          style={
+            Object {
+              "margin": "0px 14px",
+            }
+          }
+        >
           <button
             aria-label={null}
-            className="block-button btn btn-primary btn-sm"
+            className="article-button btn btn-primary btn-sm"
             onClick={[Function]}
           >
             <a
@@ -257,10 +269,16 @@ exports[`renders correctly 1`] = `
             PNAS
           </p>
         </div>
-        <div>
+        <div
+          style={
+            Object {
+              "margin": "0px 14px",
+            }
+          }
+        >
           <button
             aria-label={null}
-            className="block-button btn btn-primary btn-sm"
+            className="article-button btn btn-primary btn-sm"
             onClick={[Function]}
           >
             <a
@@ -341,10 +359,16 @@ exports[`renders correctly 1`] = `
                - Hopefully enjoy the process of literature mining a little more than you used to!
           </p>
         </div>
-        <div>
+        <div
+          style={
+            Object {
+              "margin": "0px 14px",
+            }
+          }
+        >
           <button
             aria-label={null}
-            className="block-button btn btn-primary btn-sm"
+            className="article-button btn btn-primary btn-sm"
             onClick={[Function]}
           >
             <a
@@ -361,7 +385,7 @@ exports[`renders correctly 1`] = `
           </button>
           <button
             aria-label={null}
-            className="block-button btn btn-primary btn-sm"
+            className="article-button btn btn-primary btn-sm"
             onClick={[Function]}
           >
             <a
@@ -373,12 +397,12 @@ exports[`renders correctly 1`] = `
                 }
               }
             >
-              make a profile
+              register
             </a>
           </button>
           <button
             aria-label={null}
-            className="block-button btn btn-primary btn-sm"
+            className="article-button btn btn-primary btn-sm"
             onClick={[Function]}
           >
             <a
@@ -390,7 +414,7 @@ exports[`renders correctly 1`] = `
                 }
               }
             >
-              learn more first
+              learn more
             </a>
           </button>
         </div>

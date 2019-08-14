@@ -428,6 +428,9 @@ class ProfilePage extends React.Component {
     })
   }
 
+  // this will toggle the AlertModal used for each warning / confirmation 
+  // modal, using the modal props from state. These are changed by the 
+  // different situations that demand a warning / confirmation 
   toggleAlertModal() {
     let { modalProps } = this.state;
     modalProps.isVisible = !modalProps.isVisible;
@@ -450,7 +453,8 @@ class ProfilePage extends React.Component {
     return (
       <div className="page">
 
-        {/* the warning for signing out */}
+        {/* the warning for signing out / improper signin. the props in state are 
+        changed in different scenarios */}
         <AlertModal {...this.state.modalProps} />
 
         {/* the edit modal, for user that is logged in */}
