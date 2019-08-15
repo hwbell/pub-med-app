@@ -233,7 +233,7 @@ class SearchPage extends React.Component {
     return (
 
       <div className="left-all-row" style={{ padding: '0px 24px' }}>
-        <p className="thread-text">sort by:</p>
+        <p style={{margin: '5px', fontSize: '12px'}}>sort by:</p>
 
         {sortButtons.map((button, i) => {
 

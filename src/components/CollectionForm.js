@@ -147,6 +147,7 @@ class CollectionForm extends React.Component {
   handleChange(value) {
     // console.log(value)
     this.setState({
+      highlightInd: null,
       name: value
     });
   }
@@ -209,6 +210,7 @@ class CollectionForm extends React.Component {
   // this will get fired upon submission, if the user selected a previously saved 
   // collection to add the article to
   patchCollection(collection) {
+    console.log(collection)
     collection.articles.push(this.props.article);
 
     let token = JSON.parse(localStorage.getItem('token'));

@@ -40,6 +40,7 @@ it('contains the correct elements', () => {
   expect(wrapper.find('.page').length).toBe(1);
   expect(wrapper.find('.thread-title').length).toBe(4);
   expect(wrapper.find('.glass').length).toEqual(5);
+  expect(wrapper.find('.header').length).toEqual(1);
 })
 
 

@@ -11,6 +11,7 @@ import AlertModal from './AlertModal'
 
 // tools
 import { saveCollection, deleteCollection } from '../tools/serverFunctions';
+import { extractStringDate } from '../tools/objectFunctions';
 import { CSSTransitionGroup } from 'react-transition-group' // ES6
 
 // ******************************************************************************
@@ -148,7 +149,7 @@ class Collection extends React.Component {
 
         let { modalProps } = this.state;
         modalProps.isVisible = !modalProps.isVisible;
-        this.setState({modalProps});
+        this.setState({ modalProps });
 
       }).catch((e) => {
         console.log(e)
@@ -261,14 +262,20 @@ class Collection extends React.Component {
 
     let collection = this.state.collection || this.props.collection;
     let title = collection.name;
-    // console.log(collection)
+    
+    let createdAt = new Date(collection.createdAt)
+    let time = extractStringDate(createdAt);
     return (
       <div style={styles.title}>
-        <p className="thread-title">
-          <strong>{`${title} `}</strong>{` (${collection.articles.length})`}
-        </p>
-        <i className="far fa-edit"
-          onClick={this.toggleEdit}></i>
+        <div className="left-all-row">
+          <p className="thread-title" style={{margin: '10px'}}>
+            <strong>{`${title} `}</strong>{` (${collection.articles.length})`}
+          </p>
+          <i className="far fa-edit" style={{marginTop: '10px'}}
+            onClick={this.toggleEdit}></i>
+        </div>
+
+        <p className="time">{time}</p>
       </div>
     )
   }
@@ -407,7 +414,7 @@ class Collection extends React.Component {
 
     modalProps.confirming = true;
     modalProps.confirm = isSaved ? this.deleteFromServer : this.deleteNewCollection;
-    modalProps.message = isSaved ? 'Are you sure you want to delete this saved collection?': 'Are you sure you want to delete this new collection?'
+    modalProps.message = isSaved ? 'Are you sure you want to delete this saved collection?' : 'Are you sure you want to delete this new collection?'
 
     this.setState({
       modalProps
@@ -525,14 +532,15 @@ const styles = {
     width: '100%',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     alignItems: 'center'
   },
   iconHolder: {
     position: 'absolute',
-    right: '20px',
+    right: '24px',
+    top: '40px',
     zIndex: 10,
-    padding: '10px',
+    padding: '4px',
   },
   icon: {
     fontSize: '16px',

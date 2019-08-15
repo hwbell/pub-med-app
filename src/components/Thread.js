@@ -13,8 +13,7 @@ import { CSSTransitionGroup } from 'react-transition-group' // ES6
 
 // functions
 import { deleteThread } from '../tools/serverFunctions';
-
-
+import { extractStringDate } from '../tools/objectFunctions';
 
 // ******************************************************************************
 class Thread extends React.Component {
@@ -22,18 +21,27 @@ class Thread extends React.Component {
     super(props);
 
     this.state = {
-      expanded: false,
       showCommentForm: false,
-      showDeleteWarning: false
+      showDeleteWarning: false,
+      showContent: false
     }
 
     this.renderThread = this.renderThread.bind(this);
+    this.toggleContent = this.toggleContent.bind(this);
     this.renderComments = this.renderComments.bind(this);
     this.toggleCommentForm = this.toggleCommentForm.bind(this);
     this.renderCommentForm = this.renderCommentForm.bind(this);
     this.submitComment = this.submitComment.bind(this);
     this.toggleDeleteWarning = this.toggleDeleteWarning.bind(this);
     this.handleDeleteThread = this.handleDeleteThread.bind(this);
+  }
+
+  toggleContent() {
+    this.setState({
+      showContent: !this.state.showContent
+    }, () => {
+      console.log(this.state.showContent)
+    })
   }
 
   toggleCommentForm() {
@@ -102,6 +110,9 @@ class Thread extends React.Component {
 
     let thread = JSON.parse(JSON.stringify(this.props.thread));
 
+    let createdAt = new Date(thread.createdAt)
+    let time = extractStringDate(createdAt);
+
     return (
       <div style={styles.threadContainer}>
 
@@ -117,6 +128,9 @@ class Thread extends React.Component {
           </div>}
 
         <p className="thread-title" style={styles.text}>{thread.name}</p>
+          
+        <p className="time" style={{paddingLeft: '24px'}}>{time}</p>        
+        
         <p className="thread-text">
           <i className=" far fa-user"></i>{`  ${thread.user}`}
         </p>
@@ -128,31 +142,41 @@ class Thread extends React.Component {
 
         {thread.paragraph && <p className="thread-text" >{thread.paragraph}</p>}
 
-        <hr style={styles.hr}></hr>
+        {/* the content expander button */}
+        <div className="left-all-row">
+          <p className="thread-text">{`${thread.commentsCount} comments`}</p>
 
-        <CSSTransitionGroup
-          style={styles.transitionGroup}
-          transitionName="drop"
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={300}>
+          <Button
+            style={styles.expandButton}
+            color="link" size="md"
+            onClick={this.toggleContent}>
+            <i className={this.state.showContent ? "fas fa-angle-double-up" : "fas fa-angle-double-down"}></i>
+          </Button>
+        </div>
 
-          <div>
-            <p className="thread-text">{`${thread.commentsCount} comments`}</p>
+        <Collapse style={{ width: '100%' }} isOpen={this.state.showContent}>
+
+          <CSSTransitionGroup
+            style={styles.transitionGroup}
+            transitionName="drop"
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={300}>
+
             {thread.comments &&
               this.renderComments(thread)}
-          </div>
 
-          {/* the boolean for this is inside the function, since we are using a Collapse element */}
-          {this.renderCommentForm()}
+            {/* the boolean for this is inside the function, since we are using a Collapse element */}
+            {this.renderCommentForm()}
 
-          {/* this uses the same boolean, flipped */}
-          {this.props.user &&
-            <Fade style={styles.button} in={!this.state.showCommentForm}>
-              <Button disabled={this.state.showCommentForm} className="view article-button" size="sm"
-                onClick={this.toggleCommentForm}>comment</Button>
-            </Fade>}
+            {/* this uses the same boolean, flipped */}
+            {this.props.user &&
+              <Fade style={styles.button} in={!this.state.showCommentForm}>
+                <Button disabled={this.state.showCommentForm} className="view article-button" size="sm"
+                  onClick={this.toggleCommentForm}>comment</Button>
+              </Fade>}
 
-        </CSSTransitionGroup>
+          </CSSTransitionGroup>
+        </Collapse>
       </div>
     )
   }
@@ -199,6 +223,9 @@ const styles = {
   },
   button: {
     alignSelf: 'flex-end',
+  },
+  expandButton: {
+    margin: '4px'
   },
   transitionGroup: {
     paddingTop: '20px',

@@ -33,25 +33,44 @@ exports[`Collection renders correctly 1`] = `
             "alignItems": "center",
             "display": "flex",
             "flexDirection": "row",
-            "justifyContent": "flex-start",
+            "justifyContent": "space-between",
             "position": "absolute",
             "top": "0px",
             "width": "100%",
           }
         }
       >
-        <p
-          className="thread-title"
+        <div
+          className="left-all-row"
         >
-          <strong>
-            sample collection 
-          </strong>
-           (3)
+          <p
+            className="thread-title"
+            style={
+              Object {
+                "margin": "10px",
+              }
+            }
+          >
+            <strong>
+              sample collection 
+            </strong>
+             (3)
+          </p>
+          <i
+            className="far fa-edit"
+            onClick={[Function]}
+            style={
+              Object {
+                "marginTop": "10px",
+              }
+            }
+          />
+        </div>
+        <p
+          className="time"
+        >
+          NaN-NaN-N @ NaN:NaNam
         </p>
-        <i
-          className="far fa-edit"
-          onClick={[Function]}
-        />
       </div>
     </span>
   </div>

@@ -83,10 +83,13 @@ class HomePage extends React.Component {
     return (
       <div className="page">
 
+        {/* the header */}
+        <div className="glass">
         <Header
           title={"PubMed Central"}
           subtitle={"making research accessible"}
         />
+        </div>
 
         <div className="row no-gutters row-eq-height">
 

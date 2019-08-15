@@ -18,10 +18,10 @@ class Header extends React.Component {
 
   render() {
     return (
-      <div className={this.props.class || "glass"}>
+      <div className={this.props.className || "header left-all-col"} >
         
           <h2 className="title">{this.props.title}</h2>
-          <h4 className="subtitle">{this.props.subtitle}</h4>
+          <h4 className="subtitle" style={{alignSelf: 'center'}}>{this.props.subtitle}</h4>
 
       </div>
     );
@@ -34,6 +34,9 @@ const styles = {
   },
   text: {
     color: 'white'
+  },
+  container: {
+    width: '60%'
   }
 
 }

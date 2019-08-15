@@ -20,6 +20,7 @@ class ThreadPage extends React.Component {
     super(props);
 
     this.state = {
+      warningMessage: 'Sorry, there was a problem. Please try again.',
       selected: null,
       sorter: '',
       showThreadForm: false,
@@ -38,6 +39,11 @@ class ThreadPage extends React.Component {
 
     // this is passed to the individual threads. the form is rendered here
     this.handleEdit = this.handleEdit.bind(this);
+
+    // the sorting functionality
+    this.renderSorters = this.renderSorters.bind(this);
+    this.handleSortButton = this.handleSortButton.bind(this);
+    this.sortThreads = this.sortThreads.bind(this);
   }
 
   componentDidMount() {
@@ -48,6 +54,73 @@ class ThreadPage extends React.Component {
       // console.log('there are no serverThreads in props')
       this.fetchServerThreads();
     }
+  }
+
+  // the buttons to sort by date, citations, etc
+  renderSorters() {
+    let sortButtons = [
+      {
+        text: 'newest',
+        sorter: '_id'
+      },
+      {
+        text: '#of comments',
+        sorter: 'commentsCount'
+      },
+    ];
+
+    return (
+
+      <div className="left-all-row" style={{ padding: '0px 24px' }}>
+        <p style={{ fontSize: '12px', padding: '5px' }}>sort by:</p>
+
+        {sortButtons.map((button, i) => {
+
+          let isLocalSorter = JSON.parse(localStorage.getItem('threadSorter')) === button.sorter;
+
+          let color;
+          if (isLocalSorter) {
+            color = 'blue';
+          } else {
+            color = 'white';
+          }
+          return <Button key={i} style={{ color }} className="sort-link" color="link" size="sm"
+            onClick={() => this.handleSortButton(button.sorter)}>{button.text}</Button>
+        })}
+      </div>
+    )
+  }
+
+  // the sorter is already set to a property of any thread, so we can use
+  // it directly below 
+  sortThreads() {
+    let threads = JSON.parse(JSON.stringify(this.props.serverThreads));
+    let { sorter } = this.state;
+
+    threads = threads.sort((a, b) => {
+      console.log(a[sorter], b[sorter])
+      if (sorter === 'name') {
+        return a[sorter] > b[sorter] ? 1 : -1;
+      } else {
+        return a[sorter] < b[sorter] ? 1 : -1;
+      }
+    });
+
+    this.props.refreshServerThreads(threads);
+  }
+
+  handleSortButton(sorter) {
+    // update local storage
+    localStorage.setItem('threadSorter', JSON.stringify(sorter))
+
+    // update the state    
+    this.setState({
+      sorter
+    }, () => {
+      // sort 'em
+      this.sortThreads();
+
+    })
   }
 
   fetchServerThreads() {
@@ -109,8 +182,12 @@ class ThreadPage extends React.Component {
       threads = threads.filter(thread => thread.owner !== this.props.user._id)
     }
     return (
-      <div className="center-all-col">
+      <div className="center-all-col" style={{paddingBottom: '20px'}}>
+
         <p className="section-title">{title}</p>
+
+        {!isUsers && this.renderSorters()}
+
         {threads.map((thread, i) => {
           return <Thread key={i}
             user={this.props.user}
@@ -127,8 +204,9 @@ class ThreadPage extends React.Component {
     )
   }
 
-  toggleUniqueWarning() {
+  toggleUniqueWarning(str) {
     this.setState({
+      warningMessage: str,
       showUniqueWarning: !this.state.showUniqueWarning
     }, () => {
 
@@ -226,31 +304,31 @@ class ThreadPage extends React.Component {
       .then((response) => {
         // console.log(response)
 
-        // once we have posted, we will: 
+        if (response.code === 11000) {
+          return this.toggleUniqueWarning('Names must be unique!');
+        }
 
+        if (response.errors) {
+          return this.toggleUniqueWarning('There was a problem submitting your thread. Make sure to fill out all fields!');
+        }
+
+        // once we have posted, we will: 
         // Success => refresh the threads. This will relay the new thread sent back
         // from the server to the root App component to update all concerned components
-        if (response.code !== 11000) {
 
-          // console.log(isUsers, isNewThread)
+        // refresh for the user if this was a user thread, or a new thread
+        if (isUsers || isNewThread) {
+          this.props.refreshUserThreads(response);
+        }
 
-          // refresh for the user if this was a user thread, or a new thread
-          if (isUsers || isNewThread) {
-            this.props.refreshUserThreads(response);
-          }
-
-          // and always refresh the server threads
-          this.props.refreshServerThreads(response);
+        // and always refresh the server threads
+        this.props.refreshServerThreads(response);
 
 
-          // take down the form if it is up - this is only for new threads, or patching 
-          // thread info (not comments)
-          if (this.state.showThreadForm) {
-            this.toggleThreadForm();
-          }
-        } else {
-          // this means the thread name is not unique
-          this.toggleUniqueWarning()
+        // take down the form if it is up - this is only for new threads, or patching 
+        // thread info (not comments)
+        if (this.state.showThreadForm) {
+          this.toggleThreadForm();
         }
 
         // once we submit, clear the selected thread
@@ -286,8 +364,9 @@ class ThreadPage extends React.Component {
           toggle={this.toggleThreadForm}
           isVisible={this.state.showThreadForm}
           handleSubmitThread={this.handleSubmitThread}
-          showUniqueWarning={this.state.showUniqueWarning}
           toggleUniqueWarning={this.toggleUniqueWarning}
+          showUniqueWarning={this.state.showUniqueWarning}
+          warningMessage={this.state.warningMessage}
         />
 
         <div className="glass page-content" >

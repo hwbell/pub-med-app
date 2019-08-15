@@ -32,18 +32,20 @@ class ThreadForm extends React.Component {
     obj[`${name}`] = value;
 
     this.setState({ threadInfo: obj }, () => {
-      // console.log(this.state.user)
-    })
+      console.log(this.state.threadInfo)
+    });
   }
 
   handleSubmit() {
+    let { threadInfo } = this.state;
+    let fields = Object.keys(this.state.threadInfo);
 
-    // just check if there are any keys in this.state.threadInfo to see if 
-    // anything has actually been typed
-    let isUpdated = !!Object.keys(this.state.threadInfo).length
+    // check that all fields have been filled out with something
+    let hasTyped = fields.length === 3;
+    let noneEmpty = fields.every(field => !!threadInfo[field]);
 
-    // this means the user changed something - it now makes sense to submit
-    if (isUpdated) {
+    // this means the user entered all fields - it now makes sense to submit
+    if (hasTyped && noneEmpty) {
 
       // if there isn't a thread in props, this thread is new. just send it off!
       if (!this.props.thread) {
@@ -63,6 +65,9 @@ class ThreadForm extends React.Component {
       combined.owner = this.props.user._id;
 
       this.props.handleSubmitThread(combined);
+    } else {
+      console.log('bad input!')
+      this.props.toggleUniqueWarning('Please fill out each field!');
     }
   }
 
@@ -97,10 +102,7 @@ class ThreadForm extends React.Component {
 
     return Object.keys(threadInfo).map((name, i) => {
 
-      let title = name[0].toUpperCase() + name.slice(1);
-      if (title === 'Name' || title === 'Paragraph') {
-        title += ` *`
-      }
+      let title = name[0].toUpperCase() + name.slice(1) + '*';
 
       let type = 'text';
       let style = styles.input;
@@ -145,7 +147,7 @@ class ThreadForm extends React.Component {
 
           <div >
             <Fade style={{ color: 'red' }} in={this.props.showUniqueWarning}>
-              Names must be unique!
+              {this.props.warningMessage}
             </Fade>
           </div>
           <div>

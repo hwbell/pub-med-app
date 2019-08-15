@@ -241,11 +241,13 @@ class App extends Component {
   // on the server. The updated user collections are sent from the server upon update and sent 
   // back to App to keep App as the root source of the current user data
   refreshUserCollections(response) {
+
     console.log('refreshing users collections')
     let { user } = this.state;
 
-    // for deletions we get a list back. check for this
-    if( !response._id && !!response.length ) {
+    // for sorting / deletions we get a list back. check for this
+    // if there are none left, it will be empty, but this is ok
+    if (!response._id) {
       user.collections = response;
       return this.setState({
         user
@@ -273,6 +275,18 @@ class App extends Component {
     console.log('refreshing users threads')
     let { user } = this.state;
 
+    // for sorting / deletions we get a list back. check for this
+    // if there are none left, it will be empty, but this is ok
+    if (!response._id) {
+      user.threads = response;
+      return this.setState({
+        user
+      }, () => {
+        // save to local storage
+        localStorage.setItem(`threads`, JSON.stringify(user));
+      })
+    }
+
     // the updateObjInArray function will handle whether the response is a new thread or an update
     user.threads = updateObjInArray(user.threads, response);
 
@@ -283,6 +297,33 @@ class App extends Component {
       localStorage.setItem(`user`, JSON.stringify(user));
     })
 
+  }
+
+  // this function is triggered when a thread is saved / modified from the ThreadPage
+  refreshServerThreads(response) {
+
+    // for sorting / deletions we get a list back. check for this
+    // if there are none left, it will be empty, but this is ok
+    if (!response._id) {
+      return this.setState({
+        serverThreads: response
+      }, () => {
+        // save to local storage
+        localStorage.setItem(`serverThreads`, JSON.stringify(response));
+      })
+    }
+
+    // otherwise update the thread accordingly
+    let { serverThreads } = this.state;
+
+    // the updateObjInArray function will handle whether the response is a new thread or an update
+    let updatedThreads = updateObjInArray(serverThreads, response);
+
+    this.setState({
+      serverThreads: updatedThreads
+    }, () => {
+      console.log(this.state.serverThreads)
+    })
   }
 
   // this function is triggered from the ProfileForm in ProfilePage when a user changes their info
@@ -308,21 +349,6 @@ class App extends Component {
   registerServerThreads(response) {
     this.setState({
       serverThreads: response
-    })
-  }
-
-  // this function is triggered when a thread is saved / modified from the ThreadPage
-  refreshServerThreads(response) {
-
-    let { serverThreads } = this.state;
-
-    // the updateObjInArray function will handle whether the response is a new thread or an update
-    let updatedThreads = updateObjInArray(serverThreads, response);
-
-    this.setState({
-      serverThreads: updatedThreads
-    }, () => {
-      console.log(this.state.serverThreads)
     })
   }
 

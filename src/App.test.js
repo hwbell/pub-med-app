@@ -111,12 +111,36 @@ describe('App', () => {
   it('should set state correctly when refreshUserCollections() is fired', () => {
     expect(wrapper.state().user).toMatchObject(user);
 
+    // can pass an array or object to this function, to account for different responses
     let newCollections = getSampleCollections();
+    // pass an array, which will replace the user collections
     wrapper.instance().refreshUserCollections(newCollections);
     wrapper.update();
-
     expect(wrapper.state().user.collections).toMatchObject(newCollections);
 
+    // pass an new colection, which will be added to the user collections
+    let newObj = JSON.parse(JSON.stringify(newCollections[0]));
+    newObj._id = '3242';
+    newObj.owner = 'user3242';
+
+    wrapper.instance().refreshUserCollections(newObj);
+    wrapper.update();
+    // length increased by one, and the new collection is the first in the list
+    expect(wrapper.state().user.collections.length).toBe(11);
+    expect(wrapper.state().user.collections[0]).toMatchObject(newObj);
+
+    // pass an updated object, which will replace the old object
+    newObj.name = 'new name';
+    newObj.articles.push({
+      name: 'article 3242', 
+    });
+    console.log(newObj)
+
+    wrapper.instance().refreshUserCollections(newObj);
+    wrapper.update();
+    // length stays the same, and the new collection is the first in the list
+    expect(wrapper.state().user.collections.length).toBe(11);
+    expect(wrapper.state().user.collections[0]).toMatchObject(newObj);
   })
 
 })

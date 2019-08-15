@@ -2,13 +2,18 @@
 
 exports[`renders correctly 1`] = `
 <div
-  className="glass"
+  className="header left-all-col"
 >
   <h2
     className="title"
   />
   <h4
     className="subtitle"
+    style={
+      Object {
+        "alignSelf": "center",
+      }
+    }
   />
 </div>
 `;

@@ -1,4 +1,4 @@
-import { combineObjects } from './objectFunctions';
+import { combineObjects, extractStringDate } from './objectFunctions';
 
 describe('objectFunctions', () => {
 
@@ -36,6 +36,29 @@ describe('objectFunctions', () => {
     expect(combined.music).toBe(userTwo.music);
     expect(combined.interests).toBe('');
     
+  })
+
+  it('should extract a date string from a date object', () => {
+    let date = new Date('December 17, 1995 03:24:00'); 
+    let dateStr = extractStringDate(date);
+
+    expect(dateStr).toBe('12-17-95 @ 3:24am');
+
+    let date2 = new Date('November 20, 2017 13:43:00'); 
+    let dateStr2 = extractStringDate(date2);
+
+    expect(dateStr2).toBe('11-20-17 @ 1:43pm');
+
+    let date3 = new Date('May 21, 2003 15:28:00'); 
+    let dateStr3 = extractStringDate(date3);
+
+    expect(dateStr3).toBe('5-21-03 @ 3:28pm');
+
+    let date4 = new Date('January 09, 2019 10:05:00'); 
+    let dateStr4 = extractStringDate(date4);
+
+    expect(dateStr4).toBe('1-9-19 @ 10:05am');
+
   })
 
 })

@@ -8,7 +8,7 @@ exports[`SearchPage renders correctly 1`] = `
     className="glass page-content"
   >
     <div
-      className="heading"
+      className="header left-all-col"
     >
       <h2
         className="title"
@@ -17,6 +17,11 @@ exports[`SearchPage renders correctly 1`] = `
       </h2>
       <h4
         className="subtitle"
+        style={
+          Object {
+            "alignSelf": "center",
+          }
+        }
       >
         abstracts, full text & more
       </h4>
@@ -51,7 +56,12 @@ exports[`SearchPage renders correctly 1`] = `
       }
     >
       <p
-        className="thread-text"
+        style={
+          Object {
+            "fontSize": "12px",
+            "margin": "5px",
+          }
+        }
       >
         sort by:
       </p>

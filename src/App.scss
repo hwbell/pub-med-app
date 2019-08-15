@@ -168,10 +168,10 @@ hr {
 .title,
 .subtitle {
   color: whitesmoke;
-  padding: 10px 25px;
+  padding: 5px 25px;
 }
 .title {
-  font-size: 28px;
+  font-size: 40px;
 }
 .subtitle {
   font-size: 18px;
@@ -234,6 +234,13 @@ hr {
 }
 .view:hover {
   background-color: rgb(16, 104, 126);
+}
+
+
+// the Header component 
+.header {
+  width: 95%;
+  // background-color: whitesmoke;
 }
 
 /* the nav component */
@@ -309,7 +316,7 @@ input {
   text-align: center;
 }
 .sort-link {
-  font-size: 14px;
+  font-size: 12px;
   color: white;
   font-weight: bold;
   &:hover,
@@ -360,7 +367,7 @@ input {
   // margin: 8px 4px 0 0;
   padding: 4px;
   border-radius: 10px;
-  font-size: 14px;
+  font-size: 16px;
 }
 .fa-edit,
 .fa-save,
@@ -385,6 +392,19 @@ input {
     color: $main-blue;
   }
 }
+.time {
+  font-size: 12px;
+  color: silver;
+  margin: 0px;
+  padding: 4px;
+}
+.collection > div > span > div > div > .fa-edit {
+  font-size: 10px;
+  margin: 0px;
+  padding: 6px;
+}
+
+
 //
 
 // the profile page
@@ -435,7 +455,7 @@ input {
   align-self: flex-start;
 }
 .thread-title {
-  font-weight: 600;
+  font-weight: lighter;
 }
 .thread-text {
   font-size: 14px;

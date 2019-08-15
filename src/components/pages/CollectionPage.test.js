@@ -17,6 +17,7 @@ const articles = [
 ]
 
 const modifyStub = jest.fn();
+const refreshStub = jest.fn();
 
 describe('CollectionPage', () => {
 
@@ -47,7 +48,8 @@ describe('CollectionPage', () => {
         }
       ],
       user,
-      modifyCollection: modifyStub
+      modifyCollection: modifyStub,
+      refreshUserCollections: refreshStub
     }
 
     localStorage.removeItem('collections');
@@ -76,6 +78,8 @@ describe('CollectionPage', () => {
     ['.collection-block', '.profile-title'].forEach((selector) => {
       expect(wrapper.find(selector).length).toEqual(2);
     });
+
+    expect(wrapper.find('.sort-link').length).toBe(3);
 
   });
 
@@ -133,6 +137,18 @@ describe('CollectionPage', () => {
 
   })
 
+  it('should sort a users collections', () => {
+
+    const sortCollectionsSpy = jest.spyOn(CollectionPage.prototype, 'sortCollections');
+    let wrapper = shallow(<CollectionPage  {...someProps} />);
+   
+    wrapper.find('.sort-link').at(0).simulate('click');
+    wrapper.update();
+    expect(wrapper.state().sorter).toBe('_id');
+    expect(sortCollectionsSpy).toHaveBeenCalled();
+    expect(refreshStub.mock.calls.length).toBe(1);
+
+  })
 
 });
 

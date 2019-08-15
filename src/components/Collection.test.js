@@ -88,6 +88,9 @@ describe('Collection', () => {
     expect(wrapper.find('.fa-save').length).toEqual(1);
     expect(wrapper.find('.fa-trash').length).toEqual(1);
 
+    // the creation date
+    expect(wrapper.find('.time').length).toBe(1);    
+
   });
 
   it('should hide the save button if isSaved=true', () => {

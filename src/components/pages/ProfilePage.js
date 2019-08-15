@@ -468,7 +468,6 @@ class ProfilePage extends React.Component {
         <div className="glass page-content">
 
           <Header
-            class="heading"
             title={"Your Profile"}
             subtitle={"say something about you"}
           />

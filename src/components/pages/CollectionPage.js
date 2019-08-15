@@ -20,7 +20,7 @@ const Div = posed.div({
 });
 
 const initialState = {
-  pdfReady: false,
+  sorter: 'createdAt',
   showPreview: false,
   emailModal: false,
   articleModal: false,
@@ -33,6 +33,10 @@ class CollectionPage extends React.Component {
     super(props);
 
     this.renderLoader = this.renderLoader.bind(this);
+    this.renderSorters = this.renderSorters.bind(this);
+    this.handleSortButton = this.handleSortButton.bind(this);
+    this.sortCollections = this.sortCollections.bind(this);
+
     this.toggleEmailForm = this.toggleEmailForm.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
@@ -43,10 +47,75 @@ class CollectionPage extends React.Component {
 
   }
 
-  componentDidMount() {
+  // the sorter is already set to a property of any collection, so we can use
+  // it directly below 
+  sortCollections() {
+    let collections = JSON.parse(JSON.stringify(this.props.user.collections));
+    let { sorter } = this.state;
+
+    collections = collections.sort((a, b) => {
+      console.log(a[sorter], b[sorter])
+      if (sorter === 'name') {
+        return a[sorter] > b[sorter] ? 1 : -1;
+      } else {
+        return a[sorter] < b[sorter] ? 1 : -1;
+      }
+    });
+
+    this.props.refreshUserCollections(collections);
+  }
+
+  handleSortButton(sorter) {
+    // update local storage
+    localStorage.setItem('collectionSorter', JSON.stringify(sorter))
+
+    // update the state    
     this.setState({
-      pdfReady: true
+      sorter
+    }, () => {
+      // sort 'em
+      this.sortCollections();
+
     })
+  }
+
+  // the buttons to sort by date, citations, etc
+  renderSorters() {
+    let sortButtons = [
+      {
+        text: 'newest',
+        sorter: '_id'
+      },
+      {
+        text: '#of articles',
+        sorter: 'articlesCount'
+      },
+      {
+        text: 'name',
+        sorter: 'name'
+      },
+    ];
+
+    return (
+
+      <div className="left-all-row" style={{ padding: '0px 24px' }}>
+        <p style={{fontSize: '12px', padding: '5px'}}>sort by:</p>
+
+        {sortButtons.map((button, i) => {
+
+          let isLocalSorter = JSON.parse(localStorage.getItem('collectionSorter')) === button.sorter;
+
+          let color;
+          if (isLocalSorter) {
+            color = 'blue';
+          } else {
+            color = 'white';
+          }
+          return <Button key={i} style={{ color }} className="sort-link" color="link" size="sm"
+            onClick={() => this.handleSortButton(button.sorter)}>{button.text}</Button>
+        })}
+      </div>
+    )
   }
 
   renderLoader() {
@@ -104,6 +173,7 @@ class CollectionPage extends React.Component {
     return (
 
       <div className="collection-block">
+        {isSaved && this.renderSorters()}
 
         {collections.map((collection, i) => {
 
@@ -134,7 +204,7 @@ class CollectionPage extends React.Component {
     const haveUserCollections = user && user.collections && user.collections.length > 0;
 
     // get the new collections
-    const newCollections = this.props.collections.length > 0 ? 
+    const newCollections = this.props.collections.length > 0 ?
       this.props.collections :
       JSON.parse(localStorage.getItem('collections'));
     const haveNewCollections = newCollections && newCollections.length > 0;
@@ -157,7 +227,7 @@ class CollectionPage extends React.Component {
           <Header
             class="heading"
             title={"PMC Collections"}
-            subtitle={"create & share lists of resources"}
+            subtitle={"create & save a record of your research"}
           />
 
           {/* results */}

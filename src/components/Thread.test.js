@@ -62,17 +62,34 @@ describe('Thread', () => {
     expect(wrapper.find('.view').length).toBe(1)
     expect(wrapper.find('Fade').length).toBe(1)
     expect(wrapper.find('AlertModal').length).toBe(1);
+    expect(wrapper.find('Collapse').length).toBe(2);  
+    expect(wrapper.find('.time').length).toBe(1);
 
-    // these three cover information that we would always have - the name, article, and user
+    // these three cover information that we would always have - the name, article, user
     expect(wrapper.find('.thread-title').text()).toBe(thread.name);
-
     expect(wrapper.find('.thread-text').at(0).text()).toBe(`  ${thread.user}`);
-
     expect(wrapper.find('.thread-text').at(1).text()).toBe(`@ article(s): ${thread.article}`);
 
     // this one we may or may not have
     expect(wrapper.find('.thread-text').at(2).text()).toBe(thread.paragraph);
 
+  })
+
+  it('should toggle Collapse holding comments when the expander button it is clicked', () => {
+
+    expect(wrapper.find('Collapse').at(0).props().isOpen).toBe(false);
+
+    // click the expander button which toggle the comments, and also its own class
+    expect(wrapper.find('.fa-angle-double-up').length).toBe(0); // it will switch to this
+    wrapper.find({size: 'md'}).simulate('click');
+    wrapper.update();
+
+    // button class is switched and the collapse is open
+    expect(wrapper.find('.fa-angle-double-down').length).toBe(0);
+    expect(wrapper.find('.fa-angle-double-up').length).toBe(1);
+
+    expect(wrapper.state().showContent).toBe(true);
+    expect(wrapper.find('Collapse').at(0).props().isOpen).toBe(true);
   })
 
   it('should not display the comment button if there is no user in props', () => {
@@ -108,13 +125,14 @@ describe('Thread', () => {
 
   it('should change / hide the Collapse holding CommentForm when the comment button it is clicked', () => {
 
-    expect(wrapper.find('Collapse').props().isOpen).toBe(false);
+    expect(wrapper.find('Collapse').at(1).props().isOpen).toBe(false);
 
+    // click the comment button
     wrapper.find('.view').simulate('click');
     wrapper.update();
 
     expect(wrapper.state().showCommentForm).toBe(true);
-    expect(wrapper.find('Collapse').props().isOpen).toBe(true);
+    expect(wrapper.find('Collapse').at(1).props().isOpen).toBe(true);
   })
 
   it('should render delete + edit buttons if its a user-owned thread', () => {

@@ -102,30 +102,50 @@ describe('ThreadForm', () => {
     let e = {
       target: {
         name: 'about',
-        paragraph: 'This article seemed unreliable, but upon futher reading ... '
+        value: 'This article seemed unreliable, but upon futher reading ... '
       }
     }
     wrapper.instance().handleChange(e)
     wrapper.update();
 
     expect(wrapper.state().threadInfo).toMatchObject({
-      about: e.paragraph
+      about: 'This article seemed unreliable, but upon futher reading ... '
     })
   })
 
   it('should fire the provided handleSubmitThread() function when OK is clicked', () => {
     wrapper.setProps({
-      thread
+      thread,
+      toggleUniqueWarning: jest.fn()
     });
     wrapper.update();
 
-    let e = {
+    // update all the fields
+    let name = {
       target: {
-        name: 'about',
-        paragraph: 'This article seemed unreliable, but upon futher reading ... '
+        name: 'name',
+        value: 'New Post'
       }
     }
-    wrapper.instance().handleChange(e)
+    wrapper.instance().handleChange(name)
+    wrapper.update();
+
+    let article = {
+      target: {
+        name: 'article',
+        value: 'pmid8991736'
+      }
+    }
+    wrapper.instance().handleChange(article)
+    wrapper.update();
+
+    let about = {
+      target: {
+        name: 'about',
+        value: 'This article seemed unreliable, but upon futher reading ... '
+      }
+    }
+    wrapper.instance().handleChange(about)
     wrapper.update();
 
     wrapper.find('.add').simulate('click');

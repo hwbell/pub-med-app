@@ -7,16 +7,25 @@ exports[`renders correctly 1`] = `
   <div
     className="glass"
   >
-    <h2
-      className="title"
+    <div
+      className="header left-all-col"
     >
-      PubMed Central
-    </h2>
-    <h4
-      className="subtitle"
-    >
-      making research accessible
-    </h4>
+      <h2
+        className="title"
+      >
+        PubMed Central
+      </h2>
+      <h4
+        className="subtitle"
+        style={
+          Object {
+            "alignSelf": "center",
+          }
+        }
+      >
+        making research accessible
+      </h4>
+    </div>
   </div>
   <div
     className="row no-gutters row-eq-height"

@@ -4,6 +4,9 @@ import { shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 import CollectionForm from './CollectionForm';
 
+// use the mocks for calls to the server
+jest.mock('../tools/serverFunctions.js')
+
 {/* <CollectionForm
   article={this.state.selected}
   isVisible={this.state.collectionModal}
@@ -61,9 +64,14 @@ const collections = [0,1,2,3,4,5].map((num) => {
   }
 })
 
+let userCollections = collections.slice(3);
+userCollections.forEach((collection, i) => {
+  collection.owner = `user${i+1}`;
+});
+
 const user = {
   name: 'dude',
-  collections: collections.slice(3)
+  collections: userCollections
 }
 
 describe('CollectionForm', () => {
@@ -172,23 +180,7 @@ describe('CollectionForm', () => {
     expect(deepWrapper.find('Modal').props().isOpen).toEqual(false);
   
   })
-  
-  it('should set the highlightInd for selector buttons', () => {
-    const wrapper = shallow(<CollectionForm {...someProps} />);
-  
-    // the highlightInd should initially be null
-    expect(wrapper.state().highlightInd).toEqual(null);
-    expect(wrapper.find('.nav-link').length).toEqual(9);
-  
-    // click the collections and check the highlightInd matches
-    wrapper.find('.nav-link').forEach((link, i) => {
-      link.simulate('click');
-      wrapper.update();
-      expect(wrapper.state().highlightInd).toEqual(i);
-    })
-  
-  })
-  
+
   it('should close when "close" button is clicked', () => {
     const deepWrapper = shallow(<CollectionForm {...someProps} />);
   
@@ -209,6 +201,36 @@ describe('CollectionForm', () => {
     }, 1100) // the timer in the component is 1000
   })
   
+  it('should set the highlightInd for selector buttons', () => {
+    const wrapper = shallow(<CollectionForm {...someProps} />);
+  
+    // the highlightInd should initially be null
+    expect(wrapper.state().highlightInd).toEqual(null);
+    expect(wrapper.find('.nav-link').length).toEqual(9);
+  
+    // click the collections and check the highlightInd matches
+    wrapper.find('.nav-link').forEach((link, i) => {
+      link.simulate('click');
+      wrapper.update();
+      expect(wrapper.state().highlightInd).toEqual(i);
+    })
+  
+  })
+
+  it('should change the state when handleChange is fired', () => {
+    expect(wrapper.state().highlightInd).toBeNull();
+    expect(wrapper.state().name).toBe('');
+
+    // the highlightInd should go back to null after handleChange
+    wrapper.setState({highlightInd: 3});
+    // and name should be set to the input
+    wrapper.instance().handleChange('new collection');
+    wrapper.update();
+
+    expect(wrapper.state().highlightInd).toBeNull();
+    expect(wrapper.state().name).toBe('new collection');
+  })  
+  
   it('should fire the submit function when "add to collection" button is clicked', () => {
     const deepWrapper = shallow(<CollectionForm {...someProps} />);
   
@@ -226,6 +248,27 @@ describe('CollectionForm', () => {
     // have been called
     expect(deepWrapper.state().highlightInd).toEqual(null);
   
+  })
+
+  it('should fire patchCollection() if handleSubmit is called with a saved collection selected', () => {
+
+    const patchCollectionSpy = jest.spyOn(CollectionForm.prototype, 'patchCollection');
+    const newWrapper = shallow(<CollectionForm {...someProps} />);
+
+    // set the index to a user collection
+    newWrapper.setState({highlightInd: 7});
+
+    // simulate the click
+    newWrapper.find({size: 'sm'}).at(0).simulate('click', {
+      preventDefault: () => {}
+    });
+    newWrapper.update();
+
+    // simulate the addition of the article
+    someProps.user.collections[1].articles.push(someProps.article);
+
+    expect(patchCollectionSpy).toHaveBeenCalledWith(someProps.user.collections[1]);
+
   })
 
 })

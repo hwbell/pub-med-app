@@ -17,7 +17,7 @@ it('renders correctly', async () => {
 
 it('contains the correct elements', () => {
   let wrapper = shallow( <Header/>);
-  expect(wrapper.find('.glass').length).toEqual(1);
+  expect(wrapper.find('.header').length).toEqual(1);
   expect(wrapper.find('.title').length).toEqual(1);
   expect(wrapper.find('.subtitle').length).toEqual(1);
 

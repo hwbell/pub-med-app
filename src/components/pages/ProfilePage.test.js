@@ -93,7 +93,7 @@ describe('ProfilePage', () => {
   it('contains the correct elements', () => {
     let wrapper = mount(<ProfilePage />);
 
-    ['.page', '.page-content', '.glass', '.heading', '.outline', 'Button'].forEach((selector) => {
+    ['.page', '.page-content', '.glass', '.header', '.outline', 'Button'].forEach((selector) => {
       expect(wrapper.find(selector).length).toEqual(1);
     });
 

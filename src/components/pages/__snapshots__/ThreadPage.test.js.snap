@@ -8,7 +8,7 @@ exports[`ThreadPage renders correctly 1`] = `
     className="glass page-content"
   >
     <div
-      className="heading"
+      className="header left-all-col"
     >
       <h2
         className="title"
@@ -17,6 +17,11 @@ exports[`ThreadPage renders correctly 1`] = `
       </h2>
       <h4
         className="subtitle"
+        style={
+          Object {
+            "alignSelf": "center",
+          }
+        }
       >
         post a thread to start a discussion
       </h4>
@@ -152,6 +157,11 @@ exports[`ThreadPage renders correctly 1`] = `
       </div>
       <div
         className="center-all-col"
+        style={
+          Object {
+            "paddingBottom": "20px",
+          }
+        }
       >
         <p
           className="section-title"
@@ -200,6 +210,16 @@ exports[`ThreadPage renders correctly 1`] = `
               Sourcing of PMID: 013091283
             </p>
             <p
+              className="time"
+              style={
+                Object {
+                  "paddingLeft": "24px",
+                }
+              }
+            >
+              NaN-NaN-N @ NaN:NaNam
+            </p>
+            <p
               className="thread-text"
             >
               <i
@@ -215,116 +235,133 @@ exports[`ThreadPage renders correctly 1`] = `
                 013091283
               </strong>
             </p>
-            <hr
-              style={
-                Object {
-                  "backgroundColor": "rgba(245,245,245,0.1)",
-                  "margin": "4px",
-                  "padding": 0,
+            <div
+              className="left-all-row"
+            >
+              <p
+                className="thread-text"
+              >
+                undefined comments
+              </p>
+              <button
+                aria-label={null}
+                className="btn btn-link btn-md"
+                onClick={[Function]}
+                style={
+                  Object {
+                    "margin": "4px",
+                  }
                 }
-              }
-            />
-            <span
+                type="button"
+              >
+                <i
+                  className="fas fa-angle-double-down"
+                />
+              </button>
+            </div>
+            <div
+              className="collapse"
               style={
                 Object {
-                  "alignItems": "flex-start",
-                  "display": "flex",
-                  "flexDirection": "column",
-                  "justifyContent": "flex-start",
-                  "paddingTop": "20px",
+                  "width": "100%",
                 }
               }
             >
-              <div>
-                <p
-                  className="thread-text"
-                >
-                  undefined comments
-                </p>
-              </div>
-              <div
-                className="collapse"
-                style={Object {}}
-              >
-                <div
-                  style={
-                    Object {
-                      "marginTop": "25px",
-                    }
-                  }
-                >
-                  <p
-                    style={
-                      Object {
-                        "color": "silver",
-                        "margin": "5px 20px",
-                      }
-                    }
-                  >
-                    Have something to say about this thread? Add a comment to join the discussion.
-                  </p>
-                  <textarea
-                    className="form-control"
-                    onChange={[Function]}
-                    placeholder="Your comment here"
-                    style={
-                      Object {
-                        "borderRadius": "6px",
-                        "margin": "15px auto",
-                        "padding": "8px",
-                        "width": "95%",
-                      }
-                    }
-                  />
-                  <div
-                    style={
-                      Object {
-                        "alignItems": "center",
-                        "alignSelf": "flex-end",
-                        "display": "flex",
-                        "flexDirection": "row",
-                        "justifyContent": "center",
-                      }
-                    }
-                  >
-                    <button
-                      aria-label={null}
-                      className="add article-button btn btn-secondary btn-sm"
-                      onClick={[Function]}
-                      type="button"
-                    >
-                      post comment
-                    </button>
-                    <button
-                      aria-label={null}
-                      className="back article-button btn btn-secondary btn-sm"
-                      onClick={[Function]}
-                      type="button"
-                    >
-                      cancel
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <div
-                className="fade"
+              <span
                 style={
                   Object {
-                    "alignSelf": "flex-end",
+                    "alignItems": "flex-start",
+                    "display": "flex",
+                    "flexDirection": "column",
+                    "justifyContent": "flex-start",
+                    "paddingTop": "20px",
                   }
                 }
               >
-                <button
-                  aria-label={null}
-                  className="view article-button btn btn-secondary btn-sm"
-                  disabled={false}
-                  onClick={[Function]}
-                  type="button"
+                <div
+                  className="collapse"
+                  style={Object {}}
                 >
-                  comment
-                </button>
-              </div>
-            </span>
+                  <div
+                    style={
+                      Object {
+                        "marginTop": "25px",
+                      }
+                    }
+                  >
+                    <p
+                      style={
+                        Object {
+                          "color": "silver",
+                          "margin": "5px 20px",
+                        }
+                      }
+                    >
+                      Have something to say about this thread? Add a comment to join the discussion.
+                    </p>
+                    <textarea
+                      className="form-control"
+                      onChange={[Function]}
+                      placeholder="Your comment here"
+                      style={
+                        Object {
+                          "borderRadius": "6px",
+                          "margin": "15px auto",
+                          "padding": "8px",
+                          "width": "95%",
+                        }
+                      }
+                    />
+                    <div
+                      style={
+                        Object {
+                          "alignItems": "center",
+                          "alignSelf": "flex-end",
+                          "display": "flex",
+                          "flexDirection": "row",
+                          "justifyContent": "center",
+                        }
+                      }
+                    >
+                      <button
+                        aria-label={null}
+                        className="add article-button btn btn-secondary btn-sm"
+                        onClick={[Function]}
+                        type="button"
+                      >
+                        post comment
+                      </button>
+                      <button
+                        aria-label={null}
+                        className="back article-button btn btn-secondary btn-sm"
+                        onClick={[Function]}
+                        type="button"
+                      >
+                        cancel
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="fade"
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                    }
+                  }
+                >
+                  <button
+                    aria-label={null}
+                    className="view article-button btn btn-secondary btn-sm"
+                    disabled={false}
+                    onClick={[Function]}
+                    type="button"
+                  >
+                    comment
+                  </button>
+                </div>
+              </span>
+            </div>
           </div>
         </div>
         <div
@@ -369,6 +406,16 @@ exports[`ThreadPage renders correctly 1`] = `
               Data in figure 1 of PMID: 013091283
             </p>
             <p
+              className="time"
+              style={
+                Object {
+                  "paddingLeft": "24px",
+                }
+              }
+            >
+              NaN-NaN-N @ NaN:NaNam
+            </p>
+            <p
               className="thread-text"
             >
               <i
@@ -384,116 +431,133 @@ exports[`ThreadPage renders correctly 1`] = `
                 013091283
               </strong>
             </p>
-            <hr
-              style={
-                Object {
-                  "backgroundColor": "rgba(245,245,245,0.1)",
-                  "margin": "4px",
-                  "padding": 0,
+            <div
+              className="left-all-row"
+            >
+              <p
+                className="thread-text"
+              >
+                undefined comments
+              </p>
+              <button
+                aria-label={null}
+                className="btn btn-link btn-md"
+                onClick={[Function]}
+                style={
+                  Object {
+                    "margin": "4px",
+                  }
                 }
-              }
-            />
-            <span
+                type="button"
+              >
+                <i
+                  className="fas fa-angle-double-down"
+                />
+              </button>
+            </div>
+            <div
+              className="collapse"
               style={
                 Object {
-                  "alignItems": "flex-start",
-                  "display": "flex",
-                  "flexDirection": "column",
-                  "justifyContent": "flex-start",
-                  "paddingTop": "20px",
+                  "width": "100%",
                 }
               }
             >
-              <div>
-                <p
-                  className="thread-text"
-                >
-                  undefined comments
-                </p>
-              </div>
-              <div
-                className="collapse"
-                style={Object {}}
-              >
-                <div
-                  style={
-                    Object {
-                      "marginTop": "25px",
-                    }
-                  }
-                >
-                  <p
-                    style={
-                      Object {
-                        "color": "silver",
-                        "margin": "5px 20px",
-                      }
-                    }
-                  >
-                    Have something to say about this thread? Add a comment to join the discussion.
-                  </p>
-                  <textarea
-                    className="form-control"
-                    onChange={[Function]}
-                    placeholder="Your comment here"
-                    style={
-                      Object {
-                        "borderRadius": "6px",
-                        "margin": "15px auto",
-                        "padding": "8px",
-                        "width": "95%",
-                      }
-                    }
-                  />
-                  <div
-                    style={
-                      Object {
-                        "alignItems": "center",
-                        "alignSelf": "flex-end",
-                        "display": "flex",
-                        "flexDirection": "row",
-                        "justifyContent": "center",
-                      }
-                    }
-                  >
-                    <button
-                      aria-label={null}
-                      className="add article-button btn btn-secondary btn-sm"
-                      onClick={[Function]}
-                      type="button"
-                    >
-                      post comment
-                    </button>
-                    <button
-                      aria-label={null}
-                      className="back article-button btn btn-secondary btn-sm"
-                      onClick={[Function]}
-                      type="button"
-                    >
-                      cancel
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <div
-                className="fade"
+              <span
                 style={
                   Object {
-                    "alignSelf": "flex-end",
+                    "alignItems": "flex-start",
+                    "display": "flex",
+                    "flexDirection": "column",
+                    "justifyContent": "flex-start",
+                    "paddingTop": "20px",
                   }
                 }
               >
-                <button
-                  aria-label={null}
-                  className="view article-button btn btn-secondary btn-sm"
-                  disabled={false}
-                  onClick={[Function]}
-                  type="button"
+                <div
+                  className="collapse"
+                  style={Object {}}
                 >
-                  comment
-                </button>
-              </div>
-            </span>
+                  <div
+                    style={
+                      Object {
+                        "marginTop": "25px",
+                      }
+                    }
+                  >
+                    <p
+                      style={
+                        Object {
+                          "color": "silver",
+                          "margin": "5px 20px",
+                        }
+                      }
+                    >
+                      Have something to say about this thread? Add a comment to join the discussion.
+                    </p>
+                    <textarea
+                      className="form-control"
+                      onChange={[Function]}
+                      placeholder="Your comment here"
+                      style={
+                        Object {
+                          "borderRadius": "6px",
+                          "margin": "15px auto",
+                          "padding": "8px",
+                          "width": "95%",
+                        }
+                      }
+                    />
+                    <div
+                      style={
+                        Object {
+                          "alignItems": "center",
+                          "alignSelf": "flex-end",
+                          "display": "flex",
+                          "flexDirection": "row",
+                          "justifyContent": "center",
+                        }
+                      }
+                    >
+                      <button
+                        aria-label={null}
+                        className="add article-button btn btn-secondary btn-sm"
+                        onClick={[Function]}
+                        type="button"
+                      >
+                        post comment
+                      </button>
+                      <button
+                        aria-label={null}
+                        className="back article-button btn btn-secondary btn-sm"
+                        onClick={[Function]}
+                        type="button"
+                      >
+                        cancel
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="fade"
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                    }
+                  }
+                >
+                  <button
+                    aria-label={null}
+                    className="view article-button btn btn-secondary btn-sm"
+                    disabled={false}
+                    onClick={[Function]}
+                    type="button"
+                  >
+                    comment
+                  </button>
+                </div>
+              </span>
+            </div>
           </div>
         </div>
         <div
@@ -538,6 +602,16 @@ exports[`ThreadPage renders correctly 1`] = `
               Figure 3 in PMID: 013091283
             </p>
             <p
+              className="time"
+              style={
+                Object {
+                  "paddingLeft": "24px",
+                }
+              }
+            >
+              NaN-NaN-N @ NaN:NaNam
+            </p>
+            <p
               className="thread-text"
             >
               <i
@@ -553,116 +627,133 @@ exports[`ThreadPage renders correctly 1`] = `
                 013091283
               </strong>
             </p>
-            <hr
-              style={
-                Object {
-                  "backgroundColor": "rgba(245,245,245,0.1)",
-                  "margin": "4px",
-                  "padding": 0,
+            <div
+              className="left-all-row"
+            >
+              <p
+                className="thread-text"
+              >
+                undefined comments
+              </p>
+              <button
+                aria-label={null}
+                className="btn btn-link btn-md"
+                onClick={[Function]}
+                style={
+                  Object {
+                    "margin": "4px",
+                  }
                 }
-              }
-            />
-            <span
+                type="button"
+              >
+                <i
+                  className="fas fa-angle-double-down"
+                />
+              </button>
+            </div>
+            <div
+              className="collapse"
               style={
                 Object {
-                  "alignItems": "flex-start",
-                  "display": "flex",
-                  "flexDirection": "column",
-                  "justifyContent": "flex-start",
-                  "paddingTop": "20px",
+                  "width": "100%",
                 }
               }
             >
-              <div>
-                <p
-                  className="thread-text"
-                >
-                  undefined comments
-                </p>
-              </div>
-              <div
-                className="collapse"
-                style={Object {}}
-              >
-                <div
-                  style={
-                    Object {
-                      "marginTop": "25px",
-                    }
-                  }
-                >
-                  <p
-                    style={
-                      Object {
-                        "color": "silver",
-                        "margin": "5px 20px",
-                      }
-                    }
-                  >
-                    Have something to say about this thread? Add a comment to join the discussion.
-                  </p>
-                  <textarea
-                    className="form-control"
-                    onChange={[Function]}
-                    placeholder="Your comment here"
-                    style={
-                      Object {
-                        "borderRadius": "6px",
-                        "margin": "15px auto",
-                        "padding": "8px",
-                        "width": "95%",
-                      }
-                    }
-                  />
-                  <div
-                    style={
-                      Object {
-                        "alignItems": "center",
-                        "alignSelf": "flex-end",
-                        "display": "flex",
-                        "flexDirection": "row",
-                        "justifyContent": "center",
-                      }
-                    }
-                  >
-                    <button
-                      aria-label={null}
-                      className="add article-button btn btn-secondary btn-sm"
-                      onClick={[Function]}
-                      type="button"
-                    >
-                      post comment
-                    </button>
-                    <button
-                      aria-label={null}
-                      className="back article-button btn btn-secondary btn-sm"
-                      onClick={[Function]}
-                      type="button"
-                    >
-                      cancel
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <div
-                className="fade"
+              <span
                 style={
                   Object {
-                    "alignSelf": "flex-end",
+                    "alignItems": "flex-start",
+                    "display": "flex",
+                    "flexDirection": "column",
+                    "justifyContent": "flex-start",
+                    "paddingTop": "20px",
                   }
                 }
               >
-                <button
-                  aria-label={null}
-                  className="view article-button btn btn-secondary btn-sm"
-                  disabled={false}
-                  onClick={[Function]}
-                  type="button"
+                <div
+                  className="collapse"
+                  style={Object {}}
                 >
-                  comment
-                </button>
-              </div>
-            </span>
+                  <div
+                    style={
+                      Object {
+                        "marginTop": "25px",
+                      }
+                    }
+                  >
+                    <p
+                      style={
+                        Object {
+                          "color": "silver",
+                          "margin": "5px 20px",
+                        }
+                      }
+                    >
+                      Have something to say about this thread? Add a comment to join the discussion.
+                    </p>
+                    <textarea
+                      className="form-control"
+                      onChange={[Function]}
+                      placeholder="Your comment here"
+                      style={
+                        Object {
+                          "borderRadius": "6px",
+                          "margin": "15px auto",
+                          "padding": "8px",
+                          "width": "95%",
+                        }
+                      }
+                    />
+                    <div
+                      style={
+                        Object {
+                          "alignItems": "center",
+                          "alignSelf": "flex-end",
+                          "display": "flex",
+                          "flexDirection": "row",
+                          "justifyContent": "center",
+                        }
+                      }
+                    >
+                      <button
+                        aria-label={null}
+                        className="add article-button btn btn-secondary btn-sm"
+                        onClick={[Function]}
+                        type="button"
+                      >
+                        post comment
+                      </button>
+                      <button
+                        aria-label={null}
+                        className="back article-button btn btn-secondary btn-sm"
+                        onClick={[Function]}
+                        type="button"
+                      >
+                        cancel
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="fade"
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                    }
+                  }
+                >
+                  <button
+                    aria-label={null}
+                    className="view article-button btn btn-secondary btn-sm"
+                    disabled={false}
+                    onClick={[Function]}
+                    type="button"
+                  >
+                    comment
+                  </button>
+                </div>
+              </span>
+            </div>
           </div>
         </div>
       </div>
