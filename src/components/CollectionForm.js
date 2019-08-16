@@ -76,8 +76,8 @@ class CollectionForm extends React.Component {
   renderMessage() {
     // console.log(this.props.collections)
     let message;
-    if (this.props.collections.length === 0) {
-      message = `You don't currently have any new collections ... would you like to make one? You can enter a name below.`;
+    if (this.combineAllCollections().length === 0) {
+      message = `You don't currently have any collections ... would you like to make one? You can enter a name below.`;
     } else {
       message = "Select a collection to add the article to, or make a new collection."
     }
@@ -100,8 +100,8 @@ class CollectionForm extends React.Component {
         <div className="center-all-col">
           {allCollections.map((collection, i) =>
             <Button key={i}
-              color="link" className="nav-link"
-              style={{ fontSize: '14px', backgroundColor: i === this.state.highlightInd ? '#CADEE8' : 'white' }}
+              color="link"
+              style={{ fontSize: '16px', backgroundColor: i === this.state.highlightInd ? 'rgb(230,230,230)' : 'white' }}
               onClick={() => this.highlight(i)}>{`${collection.name} ( ${collection.articles.length} )`}</Button>)}
         </div>
       )
@@ -120,7 +120,7 @@ class CollectionForm extends React.Component {
           <p style={styles.text}>
             new collection:
             </p>
-          <Input style={{ margin: '10px', borderRadius: '25px' }}
+          <Input style={styles.input}
             placeholder={" Ex - Cancer Biology "}
             value={this.state.name}
             onChange={(e) => this.handleChange(e.target.value)}
@@ -268,10 +268,11 @@ class CollectionForm extends React.Component {
           {/* select an exisiting collection */}
           {this.renderSelectors()}
 
-          {this.renderArticlePreview()}
-
           {/* name a new one */}
           {this.renderInput()}
+
+          {this.renderArticlePreview()}
+
 
         </ModalBody>
         <ModalFooter>
@@ -291,9 +292,14 @@ const styles = {
   },
   text: {
     color: 'black',
-    margin: '10px 20px',
+    margin: '16px 4px 16px 20px',
     fontSize: '14px'
-
+  },
+  input: {
+    margin: '10px', 
+    borderRadius: '6px',
+    width: '60%',
+    fontSize: '14px'
   },
   articleText: {
     color: 'blue',

@@ -4,6 +4,9 @@ import Thread from './Thread';
 import { shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 
+// tools
+import { extractStringDate } from '../tools/objectFunctions';
+
 // stubs
 const handleEditStub = jest.fn();
 
@@ -40,11 +43,11 @@ describe('Thread', () => {
       handleEdit: handleEditStub
     };
 
-    wrapper = shallow(<Thread {...someProps}/>);
+    wrapper = shallow(<Thread {...someProps} />);
   })
 
   it('renders without crashing', async () => {
-    wrapper = shallow(<Thread {...someProps}/>);
+    wrapper = shallow(<Thread {...someProps} />);
   });
 
   it('renders correctly', async () => {
@@ -58,21 +61,30 @@ describe('Thread', () => {
     expect(wrapper.find('.outline').length).toBe(1)
 
     expect(wrapper.find('.thread-title').length).toBe(1)
-    expect(wrapper.find('.thread-text').length).toBe(4)
+    expect(wrapper.find('.thread-text').length).toBe(3)
     expect(wrapper.find('.view').length).toBe(1)
     expect(wrapper.find('Fade').length).toBe(1)
     expect(wrapper.find('AlertModal').length).toBe(1);
-    expect(wrapper.find('Collapse').length).toBe(2);  
-    expect(wrapper.find('.time').length).toBe(1);
+    expect(wrapper.find('Collapse').length).toBe(2);
+    expect(wrapper.find('.time').length).toBe(2);
 
     // these three cover information that we would always have - the name, article, user
     expect(wrapper.find('.thread-title').text()).toBe(thread.name);
     expect(wrapper.find('.thread-text').at(0).text()).toBe(`  ${thread.user}`);
-    expect(wrapper.find('.thread-text').at(1).text()).toBe(`@ article(s): ${thread.article}`);
+    expect(wrapper.find('.thread-text').at(1).text()).toBe(thread.paragraph);
 
-    // this one we may or may not have
-    expect(wrapper.find('.thread-text').at(2).text()).toBe(thread.paragraph);
+    let createdAt = new Date(thread.createdAt)
+    let time = extractStringDate(createdAt);
 
+    expect(wrapper.find('.time').at(0).text()).toBe(`${time}`);
+    expect(wrapper.find('.time').at(1).text()).toBe(`@ article(s): ${thread.article}`);
+
+  })
+
+  it('should show how many comments a thread has', () => {
+    expect(wrapper.find('Comment').length).toBe(2);
+
+    expect(wrapper.find('.thread-text').at(2).text()).toBe(`${thread.commentsCount} comments`)
   })
 
   it('should toggle Collapse holding comments when the expander button it is clicked', () => {
@@ -81,7 +93,7 @@ describe('Thread', () => {
 
     // click the expander button which toggle the comments, and also its own class
     expect(wrapper.find('.fa-angle-double-up').length).toBe(0); // it will switch to this
-    wrapper.find({size: 'md'}).simulate('click');
+    wrapper.find({ size: 'md' }).simulate('click');
     wrapper.update();
 
     // button class is switched and the collapse is open
@@ -108,7 +120,7 @@ describe('Thread', () => {
     wrapper.update();
 
     expect(wrapper.state().showCommentForm).toBe(true);
-    
+
     wrapper.instance().toggleCommentForm();
     wrapper.update();
 
@@ -164,12 +176,6 @@ describe('Thread', () => {
     expect(wrapper.state().showDeleteWarning).toBe(true);
   })
 
-  it('should show how many comments a thread has', () => {
-    expect(wrapper.find('Comment').length).toBe(2);
-
-    expect(wrapper.find('.thread-text').at(3).text()).toBe(`${thread.commentsCount} comments`)
-  })
-
   it('should fire this.props.handleEdit() when the edit button is clicked', () => {
     jest.clearAllMocks();
 
@@ -178,11 +184,11 @@ describe('Thread', () => {
       allowEdit: true
     });
     wrapper.update();
-    
+
     wrapper.find('.fa-edit').simulate('click');
 
     expect(handleEditStub.mock.calls.length).toBe(1)
-  
+
   })
 
 

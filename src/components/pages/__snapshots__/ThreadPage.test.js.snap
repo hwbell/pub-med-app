@@ -41,8 +41,8 @@ exports[`ThreadPage renders correctly 1`] = `
             "display": "flex",
             "flexDirection": "row",
             "position": "absolute",
-            "right": "30px",
-            "top": "18px",
+            "right": "4%",
+            "top": "4px",
           }
         }
       >
@@ -54,106 +54,6 @@ exports[`ThreadPage renders correctly 1`] = `
         >
           +new thread
         </button>
-      </div>
-      <div
-        id="loader"
-      >
-        <p
-          className="thread-text"
-        >
-          getting threads ... 
-        </p>
-        <div>
-          <svg
-            fill="whitesmoke"
-            height={100}
-            viewBox="0 0 120 30"
-            width={100}
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle
-              cx="15"
-              cy="15"
-              r="15"
-            >
-              <animate
-                attributeName="r"
-                begin="0s"
-                calcMode="linear"
-                dur="0.8s"
-                from="15"
-                repeatCount="indefinite"
-                to="15"
-                values="15;9;15"
-              />
-              <animate
-                attributeName="fillOpacity"
-                begin="0s"
-                calcMode="linear"
-                dur="0.8s"
-                from="1"
-                repeatCount="indefinite"
-                to="1"
-                values="1;.5;1"
-              />
-            </circle>
-            <circle
-              attributeName="fillOpacity"
-              cx="60"
-              cy="15"
-              from="1"
-              r="9"
-              to="0.3"
-            >
-              <animate
-                attributeName="r"
-                begin="0s"
-                calcMode="linear"
-                dur="0.8s"
-                from="9"
-                repeatCount="indefinite"
-                to="9"
-                values="9;15;9"
-              />
-              <animate
-                attributeName="fillOpacity"
-                begin="0s"
-                calcMode="linear"
-                dur="0.8s"
-                from="0.5"
-                repeatCount="indefinite"
-                to="0.5"
-                values=".5;1;.5"
-              />
-            </circle>
-            <circle
-              cx="105"
-              cy="15"
-              r="15"
-            >
-              <animate
-                attributeName="r"
-                begin="0s"
-                calcMode="linear"
-                dur="0.8s"
-                from="15"
-                repeatCount="indefinite"
-                to="15"
-                values="15;9;15"
-              />
-              <animate
-                attributeName="fillOpacity"
-                begin="0s"
-                calcMode="linear"
-                dur="0.8s"
-                from="1"
-                repeatCount="indefinite"
-                to="1"
-                values="1;.5;1"
-              />
-            </circle>
-          </svg>
-        </div>
       </div>
       <div
         className="center-all-col"
@@ -210,16 +110,6 @@ exports[`ThreadPage renders correctly 1`] = `
               Sourcing of PMID: 013091283
             </p>
             <p
-              className="time"
-              style={
-                Object {
-                  "paddingLeft": "24px",
-                }
-              }
-            >
-              NaN-NaN-N @ NaN:NaNam
-            </p>
-            <p
               className="thread-text"
             >
               <i
@@ -228,12 +118,14 @@ exports[`ThreadPage renders correctly 1`] = `
                 undefined
             </p>
             <p
-              className="thread-text"
+              className="time"
             >
-              @ article(s): 
-              <strong>
-                013091283
-              </strong>
+              NaN-NaN-N @ NaN:NaNam
+            </p>
+            <p
+              className="time"
+            >
+              @ article(s): 013091283
             </p>
             <div
               className="left-all-row"
@@ -406,16 +298,6 @@ exports[`ThreadPage renders correctly 1`] = `
               Data in figure 1 of PMID: 013091283
             </p>
             <p
-              className="time"
-              style={
-                Object {
-                  "paddingLeft": "24px",
-                }
-              }
-            >
-              NaN-NaN-N @ NaN:NaNam
-            </p>
-            <p
               className="thread-text"
             >
               <i
@@ -424,12 +306,14 @@ exports[`ThreadPage renders correctly 1`] = `
                 undefined
             </p>
             <p
-              className="thread-text"
+              className="time"
             >
-              @ article(s): 
-              <strong>
-                013091283
-              </strong>
+              NaN-NaN-N @ NaN:NaNam
+            </p>
+            <p
+              className="time"
+            >
+              @ article(s): 013091283
             </p>
             <div
               className="left-all-row"
@@ -602,14 +486,231 @@ exports[`ThreadPage renders correctly 1`] = `
               Figure 3 in PMID: 013091283
             </p>
             <p
+              className="thread-text"
+            >
+              <i
+                className=" far fa-user"
+              />
+                undefined
+            </p>
+            <p
               className="time"
+            >
+              NaN-NaN-N @ NaN:NaNam
+            </p>
+            <p
+              className="time"
+            >
+              @ article(s): 013091283
+            </p>
+            <div
+              className="left-all-row"
+            >
+              <p
+                className="thread-text"
+              >
+                undefined comments
+              </p>
+              <button
+                aria-label={null}
+                className="btn btn-link btn-md"
+                onClick={[Function]}
+                style={
+                  Object {
+                    "margin": "4px",
+                  }
+                }
+                type="button"
+              >
+                <i
+                  className="fas fa-angle-double-down"
+                />
+              </button>
+            </div>
+            <div
+              className="collapse"
               style={
                 Object {
-                  "paddingLeft": "24px",
+                  "width": "100%",
                 }
               }
             >
-              NaN-NaN-N @ NaN:NaNam
+              <span
+                style={
+                  Object {
+                    "alignItems": "flex-start",
+                    "display": "flex",
+                    "flexDirection": "column",
+                    "justifyContent": "flex-start",
+                    "paddingTop": "20px",
+                  }
+                }
+              >
+                <div
+                  className="collapse"
+                  style={Object {}}
+                >
+                  <div
+                    style={
+                      Object {
+                        "marginTop": "25px",
+                      }
+                    }
+                  >
+                    <p
+                      style={
+                        Object {
+                          "color": "silver",
+                          "margin": "5px 20px",
+                        }
+                      }
+                    >
+                      Have something to say about this thread? Add a comment to join the discussion.
+                    </p>
+                    <textarea
+                      className="form-control"
+                      onChange={[Function]}
+                      placeholder="Your comment here"
+                      style={
+                        Object {
+                          "borderRadius": "6px",
+                          "margin": "15px auto",
+                          "padding": "8px",
+                          "width": "95%",
+                        }
+                      }
+                    />
+                    <div
+                      style={
+                        Object {
+                          "alignItems": "center",
+                          "alignSelf": "flex-end",
+                          "display": "flex",
+                          "flexDirection": "row",
+                          "justifyContent": "center",
+                        }
+                      }
+                    >
+                      <button
+                        aria-label={null}
+                        className="add article-button btn btn-secondary btn-sm"
+                        onClick={[Function]}
+                        type="button"
+                      >
+                        post comment
+                      </button>
+                      <button
+                        aria-label={null}
+                        className="back article-button btn btn-secondary btn-sm"
+                        onClick={[Function]}
+                        type="button"
+                      >
+                        cancel
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="fade"
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                    }
+                  }
+                >
+                  <button
+                    aria-label={null}
+                    className="view article-button btn btn-secondary btn-sm"
+                    disabled={false}
+                    onClick={[Function]}
+                    type="button"
+                  >
+                    comment
+                  </button>
+                </div>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="center-all-col"
+        style={
+          Object {
+            "paddingBottom": "20px",
+          }
+        }
+      >
+        <p
+          className="section-title"
+        >
+          recent threads
+        </p>
+        <div
+          className="left-all-row"
+          style={
+            Object {
+              "padding": "0px 24px",
+            }
+          }
+        >
+          <p
+            style={
+              Object {
+                "fontSize": "12px",
+                "padding": "5px",
+              }
+            }
+          >
+            sort by:
+          </p>
+          <button
+            aria-label={null}
+            className="sort-link btn btn-link btn-sm"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "rgb(29, 120, 223)",
+              }
+            }
+            type="button"
+          >
+            newest
+          </button>
+          <button
+            aria-label={null}
+            className="sort-link btn btn-link btn-sm"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "white",
+              }
+            }
+            type="button"
+          >
+            #of comments
+          </button>
+        </div>
+        <div
+          className="outline"
+        >
+          <div
+            style={
+              Object {
+                "alignItems": "flex-start",
+                "alignSelf": "flex-start",
+                "display": "flex",
+                "flexDirection": "column",
+                "justifyContent": "flex-start",
+                "padding": "10px",
+                "width": "100%",
+              }
+            }
+          >
+            <p
+              className="thread-title"
+            >
+              Sourcing of PMID: 013091283
             </p>
             <p
               className="thread-text"
@@ -620,12 +721,182 @@ exports[`ThreadPage renders correctly 1`] = `
                 undefined
             </p>
             <p
+              className="time"
+            >
+              NaN-NaN-N @ NaN:NaNam
+            </p>
+            <p
+              className="time"
+            >
+              @ article(s): 013091283
+            </p>
+            <div
+              className="left-all-row"
+            >
+              <p
+                className="thread-text"
+              >
+                undefined comments
+              </p>
+              <button
+                aria-label={null}
+                className="btn btn-link btn-md"
+                onClick={[Function]}
+                style={
+                  Object {
+                    "margin": "4px",
+                  }
+                }
+                type="button"
+              >
+                <i
+                  className="fas fa-angle-double-down"
+                />
+              </button>
+            </div>
+            <div
+              className="collapse"
+              style={
+                Object {
+                  "width": "100%",
+                }
+              }
+            >
+              <span
+                style={
+                  Object {
+                    "alignItems": "flex-start",
+                    "display": "flex",
+                    "flexDirection": "column",
+                    "justifyContent": "flex-start",
+                    "paddingTop": "20px",
+                  }
+                }
+              >
+                <div
+                  className="collapse"
+                  style={Object {}}
+                >
+                  <div
+                    style={
+                      Object {
+                        "marginTop": "25px",
+                      }
+                    }
+                  >
+                    <p
+                      style={
+                        Object {
+                          "color": "silver",
+                          "margin": "5px 20px",
+                        }
+                      }
+                    >
+                      Have something to say about this thread? Add a comment to join the discussion.
+                    </p>
+                    <textarea
+                      className="form-control"
+                      onChange={[Function]}
+                      placeholder="Your comment here"
+                      style={
+                        Object {
+                          "borderRadius": "6px",
+                          "margin": "15px auto",
+                          "padding": "8px",
+                          "width": "95%",
+                        }
+                      }
+                    />
+                    <div
+                      style={
+                        Object {
+                          "alignItems": "center",
+                          "alignSelf": "flex-end",
+                          "display": "flex",
+                          "flexDirection": "row",
+                          "justifyContent": "center",
+                        }
+                      }
+                    >
+                      <button
+                        aria-label={null}
+                        className="add article-button btn btn-secondary btn-sm"
+                        onClick={[Function]}
+                        type="button"
+                      >
+                        post comment
+                      </button>
+                      <button
+                        aria-label={null}
+                        className="back article-button btn btn-secondary btn-sm"
+                        onClick={[Function]}
+                        type="button"
+                      >
+                        cancel
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="fade"
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                    }
+                  }
+                >
+                  <button
+                    aria-label={null}
+                    className="view article-button btn btn-secondary btn-sm"
+                    disabled={false}
+                    onClick={[Function]}
+                    type="button"
+                  >
+                    comment
+                  </button>
+                </div>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          className="outline"
+        >
+          <div
+            style={
+              Object {
+                "alignItems": "flex-start",
+                "alignSelf": "flex-start",
+                "display": "flex",
+                "flexDirection": "column",
+                "justifyContent": "flex-start",
+                "padding": "10px",
+                "width": "100%",
+              }
+            }
+          >
+            <p
+              className="thread-title"
+            >
+              Figure 3 in PMID: 013091283
+            </p>
+            <p
               className="thread-text"
             >
-              @ article(s): 
-              <strong>
-                013091283
-              </strong>
+              <i
+                className=" far fa-user"
+              />
+                undefined
+            </p>
+            <p
+              className="time"
+            >
+              NaN-NaN-N @ NaN:NaNam
+            </p>
+            <p
+              className="time"
+            >
+              @ article(s): 013091283
             </p>
             <div
               className="left-all-row"

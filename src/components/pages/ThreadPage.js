@@ -22,7 +22,7 @@ class ThreadPage extends React.Component {
     this.state = {
       warningMessage: 'Sorry, there was a problem. Please try again.',
       selected: null,
-      sorter: '',
+      sorter: '_id',
       showThreadForm: false,
       showUniqueWarning: false,
       threadPage: 1,
@@ -47,13 +47,36 @@ class ThreadPage extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props.serverThreads);
 
-    // console.log(!this.props.serverThreads)
+    let localSorter = JSON.parse(localStorage.getItem('threadSorter'));
+    console.log(localSorter);
 
+    // fetch the threads if we don't have them
     if (!this.props.serverThreads) {
-      // console.log('there are no serverThreads in props')
-      this.fetchServerThreads();
+      console.log('there are no serverThreads in props')
+
+      // check for localStorage threads
+      let localThreads = JSON.parse(localStorage.getItem('serverThreads'));
+      // if still nothing, fetch them
+      if (!localThreads) {
+        return this.fetchServerThreads()
+      } else {
+        // if we have them in localStorage, just refresh in App
+        this.props.refreshServerThreads(localThreads);
+      }
+      
+    } else {
+      // console.log('we have serverThreads')
+
+      console.log(this.state.sorter, localSorter);
+      // sort the threads if need be, i.e. if this.state.sorter !== localSorter
+      if (this.state.sorter !== localSorter) {
+        this.handleSortButton(localSorter || this.state.sorter)
+      }
     }
+
+
   }
 
   // the buttons to sort by date, citations, etc
@@ -80,7 +103,7 @@ class ThreadPage extends React.Component {
 
           let color;
           if (isLocalSorter) {
-            color = 'blue';
+            color = 'rgb(29, 120, 223)';
           } else {
             color = 'white';
           }
@@ -111,7 +134,7 @@ class ThreadPage extends React.Component {
 
   handleSortButton(sorter) {
     // update local storage
-    localStorage.setItem('threadSorter', JSON.stringify(sorter))
+    localStorage.setItem('threadSorter', JSON.stringify(sorter));
 
     // update the state    
     this.setState({
@@ -119,7 +142,6 @@ class ThreadPage extends React.Component {
     }, () => {
       // sort 'em
       this.sortThreads();
-
     })
   }
 
@@ -182,7 +204,7 @@ class ThreadPage extends React.Component {
       threads = threads.filter(thread => thread.owner !== this.props.user._id)
     }
     return (
-      <div className="center-all-col" style={{paddingBottom: '20px'}}>
+      <div className="center-all-col" style={{ paddingBottom: '20px' }}>
 
         <p className="section-title">{title}</p>
 
@@ -409,8 +431,8 @@ class ThreadPage extends React.Component {
 const styles = {
   buttonHolder: {
     position: 'absolute',
-    top: '18px',
-    right: '30px',
+    top: '4px',
+    right: '4%',
     display: 'flex',
     flexDirection: 'row'
   },

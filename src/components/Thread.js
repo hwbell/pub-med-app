@@ -128,16 +128,14 @@ class Thread extends React.Component {
           </div>}
 
         <p className="thread-title" style={styles.text}>{thread.name}</p>
-          
-        <p className="time" style={{paddingLeft: '24px'}}>{time}</p>        
-        
+
         <p className="thread-text">
           <i className=" far fa-user"></i>{`  ${thread.user}`}
         </p>
 
-        <p className="thread-text">
-          {`@ article(s): `}
-          <strong>{`${thread.article}`}</strong>
+        <p className="time" >{time}</p>
+        <p className="time" >
+          {`@ article(s): ${thread.article}`}
         </p>
 
         {thread.paragraph && <p className="thread-text" >{thread.paragraph}</p>}

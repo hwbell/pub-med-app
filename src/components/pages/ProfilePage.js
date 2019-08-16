@@ -59,18 +59,18 @@ class ProfilePage extends React.Component {
     return (
       <div className="outline signin" style={{ padding: '40px' }}>
 
-        <p className="thread-title" style={{alignSelf: 'flex-start'}}>Welcome Back</p>
+        <p className="thread-title" style={{ alignSelf: 'flex-start' }}>Welcome Back</p>
         <p className="paragraph">
           {`Login to your account to connect with other researchers!`}
         </p>
 
-        <p className="thread-title" style={{alignSelf: 'flex-start'}}>Don't have an account?</p>
+        <p className="thread-title" style={{ alignSelf: 'flex-start' }}>Don't have an account?</p>
         <p className="paragraph">
           {`If you don't already have an account, you can sign up by checking the new user box below
           and confirming your password.`}
         </p>
 
-        <p className="thread-title" style={{alignSelf: 'flex-start'}}>Why should I make account?</p>
+        <p className="thread-title" style={{ alignSelf: 'flex-start' }}>Why should I make account?</p>
         <p className="paragraph">
           {`You are welcome to use the site however you like, and we invite you to do so! However, certain
           tools on the site are limited to logged in users, such as saving information to our servers, as well as
@@ -179,15 +179,17 @@ class ProfilePage extends React.Component {
         </p>
 
 
-        {user.collections &&
-          <div style={styles.iconRow} className="row">
-            {user.collections.map((item, i) => <i key={i} className="fas fa-atom"></i>)}
-          </div>}
+        <div style={{marginLeft: '20px'}}>
+          {user.collections &&
+            <div style={styles.iconRow} className="row">
+              {user.collections.map((item, i) => <i key={i} className="fas fa-atom"></i>)}
+            </div>}
 
-        {user.threads &&
-          <div style={styles.iconRow} className="row">
-            {user.threads.map((item, i) => <i key={i} className="fas fa-dna"></i>)}
-          </div>}
+          {user.threads &&
+            <div style={styles.iconRow} className="row">
+              {user.threads.map((item, i) => <i key={i} className="fas fa-dna"></i>)}
+            </div>}
+        </div>
 
         <div style={styles.nameAndIcon}>
 

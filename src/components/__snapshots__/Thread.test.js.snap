@@ -23,16 +23,6 @@ exports[`Thread renders correctly 1`] = `
       Sourcing of PMID: 013091283
     </p>
     <p
-      className="time"
-      style={
-        Object {
-          "paddingLeft": "24px",
-        }
-      }
-    >
-      NaN-NaN-N @ NaN:NaNam
-    </p>
-    <p
       className="thread-text"
     >
       <i
@@ -41,12 +31,14 @@ exports[`Thread renders correctly 1`] = `
         The Creator
     </p>
     <p
-      className="thread-text"
+      className="time"
     >
-      @ article(s): 
-      <strong>
-        013091283
-      </strong>
+      NaN-NaN-N @ NaN:NaNam
+    </p>
+    <p
+      className="time"
+    >
+      @ article(s): 013091283
     </p>
     <p
       className="thread-text"
