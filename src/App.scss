@@ -1,13 +1,14 @@
 @import "./variables.scss";
 @import url("https://fonts.googleapis.com/css?family=Quicksand");
+@import url("https://fonts.googleapis.com/css?family=Lato");
 
 * {
   font-family: Quicksand;
-  transition: all 0.1s ease-in-out;
+  // transition: all 0.1s ease-in-out;
 }
 body {
   background-attachment: fixed;
-  background: url(./assets/background-image.jpg) fixed center;
+  background: url(./assets/background-image2.jpg) fixed center;
   background-size: 1600px auto;
   min-height: 100vh;
   overflow-x: hidden;
@@ -80,6 +81,14 @@ hr {
   justify-content: flex-start;
   align-items: flex-start;
 }
+.space-all-row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
 
 // common uses
 .heading,
@@ -94,23 +103,23 @@ hr {
   align-items: center;
 }
 .glass,
-.outline,
-.article-result {
+.outline {
   box-shadow: -2px 2px 3px 1px rgba(24, 24, 24, 0.2);
 }
 
 .article-result {
+  box-shadow: -1px 1px 1px 1px rgba(134, 134, 134, 0.2);  
   width: 100%;
-  margin-top: 2px;
-  border-radius: 2px;
-  background-color: rgba(4, 14, 49, 0.377);
+  margin: 2px;
+  // border-radius: 2px;
+  background-color: rgba(19, 35, 90, 0.377);
   padding: 10px;
 }
 
 .page {
   position: relative;
-  max-width: 800px;
-  margin: 0px auto 80px auto;
+  max-width: 750px;
+  margin: auto auto;
   padding-top: 120px;
 }
 
@@ -122,22 +131,22 @@ hr {
 .glass {
   position: relative;
   justify-content: flex-start;
-  background-color: rgba(0, 18, 68, 0.438);
+  background-color: rgba(0, 18, 68, 0.738);
   margin: 0px 2px 0px 2px;
 }
-.glass:before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: url(./assets/background-image.jpg) fixed center;
-  filter: blur(10px);
-  background-size: 100vw auto;
+// .glass:before {
+//   content: "";
+//   position: absolute;
+//   z-index: -1;
+//   top: 0;
+//   left: 0;
+//   bottom: 0;
+//   right: 0;
+  // background: url(./assets/background-image2.jpg) fixed center;
+  // filter: blur(10px);
+  // background-size: 100vw auto;
   // box-shadow:inset 0 0 0 50vw rgba(0, 0, 0, 0.2);
-}
+// }
 
 /* for any outlined container, add this to the parent div */
 .outline {
@@ -167,11 +176,12 @@ hr {
 /* some common text / button classes */
 .title,
 .subtitle {
-  color: whitesmoke;
+  color: white;
   padding: 5px 25px;
 }
 .title {
-  font-size: 40px;
+  margin: 10px;
+  font-size: 30px;
 }
 .subtitle {
   font-size: 18px;
@@ -266,6 +276,9 @@ hr {
 .nav-link:focus {
   text-decoration: underline;
 }
+.links-holder {
+  // max-width: 800px;
+}
 //
 
 /* the about page */
@@ -342,9 +355,10 @@ input {
   width: 100%;
   height: 100%;
 }
-.collection {
+.collection, .thread {
+  transition: all 0.3s ease;
   &:hover {
-    background-color: rgba(49, 60, 98, 0.527);
+    background-color: rgba(24, 31, 56, 0.527);
   }
 }
 .collection-title {
@@ -442,6 +456,27 @@ input {
     color: whitesmoke;
   }
 }
+// .input-bg {
+//   background-color: none;
+// }
+// .img-uploader {
+//   // background-color: none;
+//   color: whitesmoke;
+// }
+// .form-control {
+//   color: whitesmoke;
+
+//   background-color: inherit;
+//   border: none;
+//   margin: 0px;
+//   padding: 0
+// }
+// .upload {
+//   margin: 0;
+//   margin-bottom: 10px;
+//   font-size: 14px;
+//   border-radius: 2px; 
+// }
 
 // the ThreadPage
 .thread-title,
@@ -453,8 +488,10 @@ input {
 
 .thread {
   align-self: flex-start;
+  word-wrap: break-word;
 }
 .thread-title {
+  font-weight: lighter;
   color: rgb(227, 247, 253);
 }
 .thread-text {
@@ -474,20 +511,21 @@ input {
 
 .comment {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
 }
 .comment-title,
 .comment-text {
   font-size: 14px;
+  padding: 0;
 }
 .comment-title {
-  font-weight: 600;
+  margin-bottom: 0;
 }
-// .comment-text {
-
-// }
+.comment-text {
+  margin-top: 0;
+}
 
 /* reactstrap modals */
 /* this setting prevents the jumpy shift when the scrollbar disappears on modal popup */
@@ -504,7 +542,7 @@ body.modal-open {
 // The ArticleResult component
 .article-title,
 .article-text {
-  padding: 0px 20px;
+  padding: 0px 10px;
   margin: 2px;
   font-size: 14px;
   color: rgb(255, 255, 255);

@@ -110,7 +110,7 @@ exports[`SearchPage renders correctly 1`] = `
         onClick={[Function]}
         style={
           Object {
-            "color": "blue",
+            "color": "rgb(29, 120, 223)",
           }
         }
         type="button"

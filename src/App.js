@@ -235,6 +235,11 @@ class App extends Component {
     // wipe the user from localStorage to prevent sign in on startup
     localStorage.removeItem('user');
     localStorage.removeItem('token');
+    localStorage.removeItem('collections');
+    localStorage.removeItem('threads');
+    localStorage.removeItem('serverCollections');
+    localStorage.removeItem('serverThreads');
+
   }
 
   // this function is triggered from the CollectionPage when a user changes their collections
@@ -374,36 +379,11 @@ class App extends Component {
     return (
       <div className="fixed-top navigator" id="full-nav" style={styles.nav}>
 
-        <Link to="/" id="logo" className="nav-link">PubMed</Link>
+        {/* <div className="links-holder"> */}
 
-        <div className="row links-holder">
-          {links.map((link, i) => {
-            return (
-              <Link className="nav-link" style={styles.link} key={i} to={link.link}>{link.title}</Link>
-            )
-          })}
+          <Link to="/" id="logo" className="nav-link">PubMed</Link>
 
-          <Link className="nav-link" style={styles.link} to="/profile/">
-            <i className="fas fa-user-cog"></i>
-          </Link>
-        </div>
-
-
-      </div>
-    )
-  }
-
-  renderDropdown() {
-    return (
-      <div className="fixed-top navigator" id="dropdown" style={styles.nav}>
-
-        <Link to="/" id="logo" className="nav-link">PubMed</Link>
-
-        <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-          <DropdownToggle color="primary" caret>
-            go to
-        </DropdownToggle>
-          <DropdownMenu>
+          <div className="row">
             {links.map((link, i) => {
               return (
                 <Link className="nav-link" style={styles.link} key={i} to={link.link}>{link.title}</Link>
@@ -413,10 +393,39 @@ class App extends Component {
             <Link className="nav-link" style={styles.link} to="/profile/">
               <i className="fas fa-user-cog"></i>
             </Link>
-          </DropdownMenu>
-        </Dropdown>
+          </div>
 
+        </div>
+      // </div>
+    )
+  }
 
+  renderDropdown() {
+    return (
+      <div className="fixed-top navigator" id="dropdown" style={styles.nav}>
+
+        {/* <div className="links-holder"> */}
+
+          <Link to="/" id="logo" className="nav-link">PubMed</Link>
+
+          <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+            <DropdownToggle color="primary" caret>
+              go to
+        </DropdownToggle>
+            <DropdownMenu>
+              {links.map((link, i) => {
+                return (
+                  <Link className="nav-link" style={styles.link} key={i} to={link.link}>{link.title}</Link>
+                )
+              })}
+
+              <Link className="nav-link" style={styles.link} to="/profile/">
+                <i className="fas fa-user-cog"></i>
+              </Link>
+            </DropdownMenu>
+          </Dropdown>
+
+        {/* </div> */}
       </div>
     )
   }
@@ -448,7 +457,7 @@ class App extends Component {
           <Route render={({ location }) => (
 
             // pose is awesome 
-            <PoseGroup>
+            // <PoseGroup>
 
               <RoutesContainer key={location.pathname}>
 
@@ -496,7 +505,7 @@ class App extends Component {
 
               </RoutesContainer>
 
-            </PoseGroup>
+            // </PoseGroup>
 
           )} />
 

@@ -218,29 +218,33 @@ exports[`Collection renders correctly 1`] = `
             </p>
           </div>
           <div
+            className="space-all-row"
             style={
               Object {
                 "alignSelf": "flex-start",
-                "marginLeft": "15px",
+                "padding": "0px 10px",
+                "width": "100%",
               }
             }
           >
-            <button
-              aria-label={null}
-              className="article-button view btn btn-secondary btn-sm"
-              onClick={[Function]}
-              type="button"
-            >
-              view article
-            </button>
-            <button
-              aria-label={null}
-              className="article-button warn btn btn-secondary btn-sm"
-              onClick={[Function]}
-              type="button"
-            >
-              remove
-            </button>
+            <div>
+              <button
+                aria-label={null}
+                className="article-button view btn btn-secondary btn-sm"
+                onClick={[Function]}
+                type="button"
+              >
+                view article
+              </button>
+              <button
+                aria-label={null}
+                className="article-button warn btn btn-secondary btn-sm"
+                onClick={[Function]}
+                type="button"
+              >
+                remove
+              </button>
+            </div>
           </div>
         </div>
         <div
@@ -274,29 +278,33 @@ exports[`Collection renders correctly 1`] = `
             </p>
           </div>
           <div
+            className="space-all-row"
             style={
               Object {
                 "alignSelf": "flex-start",
-                "marginLeft": "15px",
+                "padding": "0px 10px",
+                "width": "100%",
               }
             }
           >
-            <button
-              aria-label={null}
-              className="article-button view btn btn-secondary btn-sm"
-              onClick={[Function]}
-              type="button"
-            >
-              view article
-            </button>
-            <button
-              aria-label={null}
-              className="article-button warn btn btn-secondary btn-sm"
-              onClick={[Function]}
-              type="button"
-            >
-              remove
-            </button>
+            <div>
+              <button
+                aria-label={null}
+                className="article-button view btn btn-secondary btn-sm"
+                onClick={[Function]}
+                type="button"
+              >
+                view article
+              </button>
+              <button
+                aria-label={null}
+                className="article-button warn btn btn-secondary btn-sm"
+                onClick={[Function]}
+                type="button"
+              >
+                remove
+              </button>
+            </div>
           </div>
         </div>
         <div
@@ -330,29 +338,33 @@ exports[`Collection renders correctly 1`] = `
             </p>
           </div>
           <div
+            className="space-all-row"
             style={
               Object {
                 "alignSelf": "flex-start",
-                "marginLeft": "15px",
+                "padding": "0px 10px",
+                "width": "100%",
               }
             }
           >
-            <button
-              aria-label={null}
-              className="article-button view btn btn-secondary btn-sm"
-              onClick={[Function]}
-              type="button"
-            >
-              view article
-            </button>
-            <button
-              aria-label={null}
-              className="article-button warn btn btn-secondary btn-sm"
-              onClick={[Function]}
-              type="button"
-            >
-              remove
-            </button>
+            <div>
+              <button
+                aria-label={null}
+                className="article-button view btn btn-secondary btn-sm"
+                onClick={[Function]}
+                type="button"
+              >
+                view article
+              </button>
+              <button
+                aria-label={null}
+                className="article-button warn btn btn-secondary btn-sm"
+                onClick={[Function]}
+                type="button"
+              >
+                remove
+              </button>
+            </div>
           </div>
         </div>
       </div>

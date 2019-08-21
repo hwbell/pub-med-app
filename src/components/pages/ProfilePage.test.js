@@ -140,6 +140,11 @@ describe('ProfilePage', () => {
 
     wrapper.update();
     expect(wrapper.find('.profile').length).toEqual(1);
+    expect(wrapper.find('.top-info').length).toEqual(1);
+    // expect(wrapper.find('.add-image').length).toEqual(1);
+
+    // expect(wrapper.find('ImageUploader').length).toEqual(1);
+    
   })
 
   it('handleCheck() should toggle the checkbox', () => {
@@ -218,23 +223,23 @@ describe('ProfilePage', () => {
     
     // start not showing the fade
     expect(wrapper.state().showPopup).toBe(false);    
-    expect(wrapper.find('Fade').props().in).toBe(false);
+    expect(wrapper.find('Fade').at(0).props().in).toBe(false);
 
     // toggles when the user hovers on the edit button
     wrapper.find('.fa-user-edit').simulate('mouseover');
     wrapper.update();
     
     expect(wrapper.state().showPopup).toBe(true);
-    expect(wrapper.find('Fade').props().in).toBe(true);
-    expect(wrapper.find('Fade').render().text()).toBe('edit profile');
+    expect(wrapper.find('Fade').at(0).props().in).toBe(true);
+    expect(wrapper.find('Fade').at(0).render().text()).toBe('edit profile');
 
      // toggles when the user hovers on the logout button
      wrapper.find('.fa-sign-out-alt').simulate('mouseover');
      wrapper.update();
      
      expect(wrapper.state().showPopup).toBe(true);
-     expect(wrapper.find('Fade').props().in).toBe(true);
-     expect(wrapper.find('Fade').render().text()).toBe('log out');
+     expect(wrapper.find('Fade').at(0).props().in).toBe(true);
+     expect(wrapper.find('Fade').at(0).render().text()).toBe('log out');
 
   })
 

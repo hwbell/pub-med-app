@@ -248,4 +248,15 @@ describe('ThreadPage', () => {
 
     expect(registerServerThreadsStub.mock.calls.length).toBe(1)
   })
+
+  it('should sort the threads with the localStorage sorter if it exists', () => {
+    // it is set to _id inside the component, so set it to something else
+    let localSorter = 'commentsCount';
+
+    localStorage.setItem('threadSorter', JSON.stringify(localSorter));
+    const newWrapper = mount(<ThreadPage {...someProps} />);
+
+    
+  })
+
 })

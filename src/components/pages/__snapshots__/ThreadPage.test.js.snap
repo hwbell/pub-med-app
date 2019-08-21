@@ -72,14 +72,11 @@ exports[`ThreadPage renders correctly 1`] = `
           className="outline"
         >
           <div
+            className="thread"
             style={
               Object {
-                "alignItems": "flex-start",
-                "alignSelf": "flex-start",
-                "display": "flex",
-                "flexDirection": "column",
-                "justifyContent": "flex-start",
                 "padding": "10px",
+                "paddingTop": "20px",
                 "width": "100%",
               }
             }
@@ -113,7 +110,7 @@ exports[`ThreadPage renders correctly 1`] = `
               className="thread-text"
             >
               <i
-                className=" far fa-user"
+                className=" fas fa-user"
               />
                 undefined
             </p>
@@ -260,14 +257,11 @@ exports[`ThreadPage renders correctly 1`] = `
           className="outline"
         >
           <div
+            className="thread"
             style={
               Object {
-                "alignItems": "flex-start",
-                "alignSelf": "flex-start",
-                "display": "flex",
-                "flexDirection": "column",
-                "justifyContent": "flex-start",
                 "padding": "10px",
+                "paddingTop": "20px",
                 "width": "100%",
               }
             }
@@ -301,7 +295,7 @@ exports[`ThreadPage renders correctly 1`] = `
               className="thread-text"
             >
               <i
-                className=" far fa-user"
+                className=" fas fa-user"
               />
                 undefined
             </p>
@@ -448,14 +442,11 @@ exports[`ThreadPage renders correctly 1`] = `
           className="outline"
         >
           <div
+            className="thread"
             style={
               Object {
-                "alignItems": "flex-start",
-                "alignSelf": "flex-start",
-                "display": "flex",
-                "flexDirection": "column",
-                "justifyContent": "flex-start",
                 "padding": "10px",
+                "paddingTop": "20px",
                 "width": "100%",
               }
             }
@@ -489,7 +480,7 @@ exports[`ThreadPage renders correctly 1`] = `
               className="thread-text"
             >
               <i
-                className=" far fa-user"
+                className=" fas fa-user"
               />
                 undefined
             </p>
@@ -695,14 +686,11 @@ exports[`ThreadPage renders correctly 1`] = `
           className="outline"
         >
           <div
+            className="thread"
             style={
               Object {
-                "alignItems": "flex-start",
-                "alignSelf": "flex-start",
-                "display": "flex",
-                "flexDirection": "column",
-                "justifyContent": "flex-start",
                 "padding": "10px",
+                "paddingTop": "20px",
                 "width": "100%",
               }
             }
@@ -716,7 +704,7 @@ exports[`ThreadPage renders correctly 1`] = `
               className="thread-text"
             >
               <i
-                className=" far fa-user"
+                className=" fas fa-user"
               />
                 undefined
             </p>
@@ -863,14 +851,11 @@ exports[`ThreadPage renders correctly 1`] = `
           className="outline"
         >
           <div
+            className="thread"
             style={
               Object {
-                "alignItems": "flex-start",
-                "alignSelf": "flex-start",
-                "display": "flex",
-                "flexDirection": "column",
-                "justifyContent": "flex-start",
                 "padding": "10px",
+                "paddingTop": "20px",
                 "width": "100%",
               }
             }
@@ -884,7 +869,7 @@ exports[`ThreadPage renders correctly 1`] = `
               className="thread-text"
             >
               <i
-                className=" far fa-user"
+                className=" fas fa-user"
               />
                 undefined
             </p>

@@ -112,7 +112,7 @@ class HomePage extends React.Component {
 
           <div className="col col-12 col-sm-4">
             <TextBlock
-              buttons={[{ link: '/about', text: 'search the literature' }]}
+              buttons={[{ link: '/search', text: 'search the literature' }]}
               text={journalsIntro}
             />
           </div>

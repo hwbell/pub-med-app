@@ -5,49 +5,6 @@ exports[`ArticleResult renders correctly 1`] = `
   className="article-result"
 >
   <div
-    className="indicators"
-    style={
-      Object {
-        "bottom": "10px",
-        "padding": "10px",
-        "position": "absolute",
-        "right": "20px",
-        "zIndex": 10,
-      }
-    }
-  >
-    <i
-      className="fas fa-dollar-sign"
-      style={
-        Object {
-          "color": "white",
-          "fontSize": "12px",
-          "margin": "4px",
-        }
-      }
-    />
-    <i
-      className="fas fa-dollar-sign"
-      style={
-        Object {
-          "color": "white",
-          "fontSize": "12px",
-          "margin": "4px",
-        }
-      }
-    />
-    <i
-      className="fas fa-dollar-sign"
-      style={
-        Object {
-          "color": "white",
-          "fontSize": "12px",
-          "margin": "4px",
-        }
-      }
-    />
-  </div>
-  <div
     style={
       Object {
         "alignItems": "flex-start",
@@ -78,29 +35,77 @@ exports[`ArticleResult renders correctly 1`] = `
     </p>
   </div>
   <div
+    className="space-all-row"
     style={
       Object {
         "alignSelf": "flex-start",
-        "marginLeft": "15px",
+        "padding": "0px 10px",
+        "width": "100%",
       }
     }
   >
-    <button
-      aria-label={null}
-      className="article-button view btn btn-secondary btn-sm"
-      onClick={[Function]}
-      type="button"
+    <div>
+      <button
+        aria-label={null}
+        className="article-button view btn btn-secondary btn-sm"
+        onClick={[Function]}
+        type="button"
+      >
+        view article
+      </button>
+      <button
+        aria-label={null}
+        className="article-button add btn btn-secondary btn-sm"
+        onClick={[Function]}
+        type="button"
+      >
+        add to collection
+      </button>
+    </div>
+    <div
+      className="indicators"
     >
-      view article
-    </button>
-    <button
-      aria-label={null}
-      className="article-button add btn btn-secondary btn-sm"
-      onClick={[Function]}
-      type="button"
-    >
-      add to collection
-    </button>
+      <p
+        style={
+          Object {
+            "fontSize": "12px",
+            "margin": 0,
+          }
+        }
+      >
+        full text:
+      </p>
+      <i
+        className="fas fa-dollar-sign"
+        style={
+          Object {
+            "color": "white",
+            "fontSize": "12px",
+            "margin": "4px",
+          }
+        }
+      />
+      <i
+        className="fas fa-dollar-sign"
+        style={
+          Object {
+            "color": "white",
+            "fontSize": "12px",
+            "margin": "4px",
+          }
+        }
+      />
+      <i
+        className="fas fa-dollar-sign"
+        style={
+          Object {
+            "color": "white",
+            "fontSize": "12px",
+            "margin": "4px",
+          }
+        }
+      />
+    </div>
   </div>
 </div>
 `;

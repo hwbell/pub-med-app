@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 // components
 import { Button } from 'reactstrap';
-
+import Media from 'react-media';
 
 // ******************************************************************************
 // this component is made to display just the article title and associated buttons
@@ -21,7 +21,7 @@ class ArticleResult extends React.Component {
     let { article } = this.props;
     let { fullTextUrlList } = article;
 
-    if ( !fullTextUrlList || !fullTextUrlList.fullTextUrl ||  !fullTextUrlList.fullTextUrl.length > 0 ) {
+    if (!fullTextUrlList || !fullTextUrlList.fullTextUrl || !fullTextUrlList.fullTextUrl.length > 0) {
       return null;
     }
 
@@ -37,10 +37,11 @@ class ArticleResult extends React.Component {
     return (
 
       <div style={styles.indicatorsHolder} className="indicators">
+        <p style={{ margin: 0, fontSize: '12px' }}>full text:</p>
         {fullTextUrlList.fullTextUrl.map((item, i) => {
-            let iconClass = item.availabilityCode === 'OA' ? 'fas fa-book-open' : 'fas fa-dollar-sign';
-            return <i key={i} className={iconClass} style={styles.icon}></i>
-          })}
+          let iconClass = item.availabilityCode === 'OA' ? 'fas fa-book-open' : 'fas fa-dollar-sign';
+          return <i key={i} className={iconClass} style={styles.icon}></i>
+        })}
       </div>
     )
   }
@@ -71,26 +72,31 @@ class ArticleResult extends React.Component {
 
   renderButtons() {
     return (
-      <div style={styles.buttonsHolder}>
+      <div style={styles.buttonsHolder} className="space-all-row">
 
         {/* the provided buttons & click functions */}
-        {this.props.buttons.map((button, i) => {
+        <div>
+          {this.props.buttons.map((button, i) => {
 
-          let buttonClass = 'article-button';
+            let buttonClass = 'article-button';
 
-          if (button.text === 'remove') {
-            buttonClass += ` warn`;
-          } else if (button.text === 'add to collection') {
-            buttonClass += ` add`;
-          } else {
-            buttonClass += ` view`;
-          }
+            if (button.text === 'remove') {
+              buttonClass += ` warn`;
+            } else if (button.text === 'add to collection') {
+              buttonClass += ` add`;
+            } else {
+              buttonClass += ` view`;
+            }
 
-          return (
-            <Button key={i} className={buttonClass} size="sm"
-              onClick={() => button.onClick(this.props.article, this.props.collection, -1)}>{button.text}</Button>
-          )
-        })}
+            return (
+              <Button key={i} className={buttonClass} size="sm"
+                onClick={() => button.onClick(this.props.article, this.props.collection, -1)}>{button.text}</Button>
+            )
+          })}
+        </div>
+
+        {/* icons telling the user if full text/ etc is available */}
+        {this.renderIndicators()}
 
       </div>
     )
@@ -100,9 +106,6 @@ class ArticleResult extends React.Component {
 
     return (
       <div className="article-result">
-
-        {/* icons telling the user if full text/ etc is available */}
-        {this.renderIndicators()}
 
         {/* the title / author / journal info */}
         {this.renderText()}
@@ -118,8 +121,9 @@ class ArticleResult extends React.Component {
 
 const styles = {
   buttonsHolder: {
-    marginLeft: '15px',
-    alignSelf: 'flex-start'
+    padding: '0px 10px',
+    alignSelf: 'flex-start',
+    width: '100%'
   },
   top: {
     width: '100%',
@@ -128,15 +132,15 @@ const styles = {
     justifyContent: 'space-around',
     alignItems: 'flex-start'
   },
-  indicatorsHolder: {
-    position: 'absolute',
-    right: '20px',
-    bottom: '10px',
-    zIndex: 10,
-    padding: '10px',
-  },
+  // indicatorsHolder: {
+  //   position: 'absolute',
+  //   right: '20px',
+  //   bottom: '10px',
+  //   zIndex: 10,
+  //   padding: '10px',
+  // },
   icon: {
-    fontSize: '12px', 
+    fontSize: '12px',
     color: 'white',
     margin: '4px'
   }

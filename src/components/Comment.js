@@ -17,7 +17,7 @@ class Comment extends React.Component {
     return (
       <div className="comment">
 
-        <p className="comment-title">{`${user}- `}</p>
+        <p className="comment-title"><i className="far fa-user"></i>{` ${user} says: `}</p>
 
         <p className="comment-text">{text}</p>
 

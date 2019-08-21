@@ -291,7 +291,7 @@ exports[`renders correctly 1`] = `
             onClick={[Function]}
           >
             <a
-              href="/about"
+              href="/search"
               onClick={[Function]}
               style={
                 Object {

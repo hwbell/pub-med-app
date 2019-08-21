@@ -114,7 +114,7 @@ class Thread extends React.Component {
     let time = extractStringDate(createdAt);
 
     return (
-      <div style={styles.threadContainer}>
+      <div style={styles.threadContainer} className="thread">
 
         {/* these will show if the user owns the thread */}
         {this.props.allowEdit &&
@@ -130,7 +130,7 @@ class Thread extends React.Component {
         <p className="thread-title" style={styles.text}>{thread.name}</p>
 
         <p className="thread-text">
-          <i className=" far fa-user"></i>{`  ${thread.user}`}
+          <i className=" fas fa-user"></i>{`  ${thread.user}`}
         </p>
 
         <p className="time" >{time}</p>
@@ -213,11 +213,7 @@ const styles = {
   threadContainer: {
     width: '100%',
     padding: '10px',
-    alignSelf: 'flex-start',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start'
+    paddingTop: '20px'
   },
   button: {
     alignSelf: 'flex-end',

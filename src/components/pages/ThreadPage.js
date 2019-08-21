@@ -47,14 +47,14 @@ class ThreadPage extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.serverThreads);
+    // console.log(this.props.serverThreads);
 
     let localSorter = JSON.parse(localStorage.getItem('threadSorter'));
-    console.log(localSorter);
+    // console.log(localSorter);
 
     // fetch the threads if we don't have them
     if (!this.props.serverThreads) {
-      console.log('there are no serverThreads in props')
+      // console.log('there are no serverThreads in props')
 
       // check for localStorage threads
       let localThreads = JSON.parse(localStorage.getItem('serverThreads'));
@@ -69,7 +69,7 @@ class ThreadPage extends React.Component {
     } else {
       // console.log('we have serverThreads')
 
-      console.log(this.state.sorter, localSorter);
+      // console.log(this.state.sorter, localSorter);
       // sort the threads if need be, i.e. if this.state.sorter !== localSorter
       if (this.state.sorter !== localSorter) {
         this.handleSortButton(localSorter || this.state.sorter)
@@ -121,7 +121,7 @@ class ThreadPage extends React.Component {
     let { sorter } = this.state;
 
     threads = threads.sort((a, b) => {
-      console.log(a[sorter], b[sorter])
+      // console.log(a[sorter], b[sorter])
       if (sorter === 'name') {
         return a[sorter] > b[sorter] ? 1 : -1;
       } else {

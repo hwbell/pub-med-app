@@ -47,7 +47,7 @@ class AboutPage extends React.Component {
                 return (
                   <div key={i}>
                     <div style={styles.titleHolder}>
-                      {section.title && <p className="paragraph" style={{ marginBottom: '0px' }}>{section.title}</p>}
+                      {section.title && <p className="paragraph" style={{ marginBottom: '0px', fontWeight: 'bold' }}>{section.title}</p>}
 
                       <Link to={section.icon.route || '/about'}>
                         <i key={i} className={section.icon.className}></i>

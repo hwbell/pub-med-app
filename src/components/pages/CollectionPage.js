@@ -107,7 +107,7 @@ class CollectionPage extends React.Component {
 
           let color;
           if (isLocalSorter) {
-            color = 'blue';
+            color = 'rgb(29, 120, 223)';
           } else {
             color = 'white';
           }

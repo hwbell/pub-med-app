@@ -30,7 +30,7 @@ exports[`ProfilePage renders correctly 1`] = `
       className="outline signin"
       style={
         Object {
-          "padding": "40px",
+          "padding": "20px",
         }
       }
     >
@@ -39,6 +39,7 @@ exports[`ProfilePage renders correctly 1`] = `
         style={
           Object {
             "alignSelf": "flex-start",
+            "fontWeight": "bold",
           }
         }
       >
@@ -47,13 +48,14 @@ exports[`ProfilePage renders correctly 1`] = `
       <p
         className="paragraph"
       >
-        Login to your account to connect with other researchers!
+        Login to your account to find scientific literature and connect with other researchers!
       </p>
       <p
         className="thread-title"
         style={
           Object {
             "alignSelf": "flex-start",
+            "fontWeight": "bold",
           }
         }
       >
@@ -70,6 +72,7 @@ exports[`ProfilePage renders correctly 1`] = `
         style={
           Object {
             "alignSelf": "flex-start",
+            "fontWeight": "bold",
           }
         }
       >

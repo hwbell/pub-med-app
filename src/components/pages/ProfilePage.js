@@ -8,6 +8,7 @@ import Header from '../Header';
 import ProfileForm from '../ProfileForm';
 import OutlinedText from '../OutlinedText';
 import AlertModal from '../AlertModal';
+import ImageUploader from '../ImageUploader';
 
 import { Button, Form, FormGroup, Label, Input, Fade } from 'reactstrap';
 
@@ -35,7 +36,11 @@ class ProfilePage extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSubmitUser = this.handleSubmitUser.bind(this);
     this.attemptSignIn = this.attemptSignIn.bind(this);
+
+    this.renderButtons = this.renderButtons.bind(this);
+    this.renderUserTopInfo = this.renderUserTopInfo.bind(this);
     this.renderProfile = this.renderProfile.bind(this);
+
     this.toggleAlertModal = this.toggleAlertModal.bind(this);
     this.toggleProfileForm = this.toggleProfileForm.bind(this);
     this.togglePopup = this.togglePopup.bind(this);
@@ -57,20 +62,20 @@ class ProfilePage extends React.Component {
 
   renderSignIn() {
     return (
-      <div className="outline signin" style={{ padding: '40px' }}>
+      <div className="outline signin" style={{ padding: '20px' }}>
 
-        <p className="thread-title" style={{ alignSelf: 'flex-start' }}>Welcome Back</p>
+        <p className="thread-title" style={styles.subtitle}>Welcome Back</p>
         <p className="paragraph">
-          {`Login to your account to connect with other researchers!`}
+          {`Login to your account to find scientific literature and connect with other researchers!`}
         </p>
 
-        <p className="thread-title" style={{ alignSelf: 'flex-start' }}>Don't have an account?</p>
+        <p className="thread-title" style={styles.subtitle}>Don't have an account?</p>
         <p className="paragraph">
           {`If you don't already have an account, you can sign up by checking the new user box below
           and confirming your password.`}
         </p>
 
-        <p className="thread-title" style={{ alignSelf: 'flex-start' }}>Why should I make account?</p>
+        <p className="thread-title" style={styles.subtitle}>Why should I make account?</p>
         <p className="paragraph">
           {`You are welcome to use the site however you like, and we invite you to do so! However, certain
           tools on the site are limited to logged in users, such as saving information to our servers, as well as
@@ -128,58 +133,51 @@ class ProfilePage extends React.Component {
     )
   }
 
-  renderProfile() {
-
-    let user = this.props.user;
-    // console.log(user)
-
-    if (!user) {
-      return;
-    }
-
-    let { about, research, interests, affiliations } = user;
-
-    let userProps = {
-      about, research, interests, affiliations
-    }
-
+  renderButtons() {
     return (
-      <div className="outline profile" style={styles.profileInfo}>
+      <div style={styles.buttonHolder}>
+        <div className="left-all-row">
+          <Button color="link" size="sm"
+            style={styles.button}
+            onMouseOver={() => this.togglePopup('edit profile')}
+            onMouseLeave={() => this.togglePopup('')}
+            onClick={this.toggleProfileForm}>
+            <i className="fas fa-user-edit"></i>
+          </Button>
 
-        <div style={styles.buttonHolder}>
-          <div className="left-all-row">
-            <Button color="link" size="sm"
-              style={styles.button}
-              onMouseOver={() => this.togglePopup('edit profile')}
-              onMouseLeave={() => this.togglePopup('')}
-              onClick={this.toggleProfileForm}>
-              <i className="fas fa-user-edit"></i>
-            </Button>
-
-            <Button color="link" size="sm"
-              style={styles.button}
-              onMouseOver={() => this.togglePopup('log out')}
-              onMouseLeave={() => this.togglePopup('')}
-              onClick={this.attemptSignOut}>
-              <i className="warn-icon fas fa-sign-out-alt"></i>
-            </Button>
-          </div>
-
-          <Fade in={this.state.showPopup} style={{ color: 'white', fontSize: '12px', alignSelf: 'flex-end' }}>
-            {this.state.popupMessage}
-          </Fade>
-
+          <Button color="link" size="sm"
+            style={styles.button}
+            onMouseOver={() => this.togglePopup('log out')}
+            onMouseLeave={() => this.togglePopup('')}
+            onClick={this.attemptSignOut}>
+            <i className="warn-icon fas fa-sign-out-alt"></i>
+          </Button>
         </div>
 
+        <Fade in={this.state.showPopup} style={{ color: 'white', fontSize: '12px', alignSelf: 'flex-end' }}>
+          {this.state.popupMessage}
+        </Fade>
+
+      </div>
+    )
+  }
+
+  renderUserTopInfo() {
+
+    let user = this.props.user;
+
+    return (
+
+      <div className="top-info left-all-col">
         <p className="profile-title">
-          <strong>{`${this.props.user.name || this.props.user.email}`}</strong>
+          <strong>{`${user.name || user.email}`}</strong>
         </p>
         <p className="thread-text">
           {user.email}
         </p>
 
 
-        <div style={{marginLeft: '20px'}}>
+        <div style={{ marginLeft: '10px' }}>
           {user.collections &&
             <div style={styles.iconRow} className="row">
               {user.collections.map((item, i) => <i key={i} className="fas fa-atom"></i>)}
@@ -204,9 +202,43 @@ class ProfilePage extends React.Component {
                 `${user.threads.length} threads`}
             </p>
           </div>
+        </div>
+      </div>
+    )
+  }
 
+  renderImageOrPicker() {
 
+    return (
+      <div style={{ marginTop: '10px' }} className="add-image lef-all-col col">
+        <ImageUploader />
+      </div>
+    )
+  }
 
+  renderProfile() {
+
+    let user = this.props.user;
+    // console.log(user)
+
+    if (!user) {
+      return;
+    }
+
+    let { about, research, interests, affiliations } = user;
+    let userProps = {
+      about, research, interests, affiliations
+    }
+
+    return (
+      <div className="outline profile" style={styles.profileInfo}>
+
+        {/* the logout and edit buttons */}
+        {this.renderButtons()}
+
+        <div className="" style={{ width: '80%' }}>
+          {this.renderUserTopInfo()}
+          {/* {this.renderImageOrPicker()} */}
         </div>
 
         {Object.keys(userProps).map((prop, i) => {
@@ -487,6 +519,10 @@ class ProfilePage extends React.Component {
 }
 
 const styles = {
+  subtitle: {
+    alignSelf: 'flex-start',
+    fontWeight: 'bold'
+  },
   form: {
     width: '80%',
     maxWidth: '300px',

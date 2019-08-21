@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ImageUploader renders correctly 1`] = `
+<div
+  className="upload-container"
+  style={
+    Object {
+      "alignSelf": "flex-start",
+    }
+  }
+>
+  <p
+    style={
+      Object {
+        "fontSize": "14px",
+      }
+    }
+  >
+    add an image to your profile!
+  </p>
+  <input
+    className="form-control form-control-sm form-control-file"
+    name="file"
+    onChange={[Function]}
+    type="file"
+  />
+  <div
+    className="fade"
+  >
+    <button
+      aria-label={null}
+      className="article-button add upload btn btn-secondary btn-md"
+      onClick={[Function]}
+    >
+      upload pic
+    </button>
+  </div>
+</div>
+`;

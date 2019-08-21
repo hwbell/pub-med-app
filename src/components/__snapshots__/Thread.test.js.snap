@@ -5,14 +5,11 @@ exports[`Thread renders correctly 1`] = `
   className="outline"
 >
   <div
+    className="thread"
     style={
       Object {
-        "alignItems": "flex-start",
-        "alignSelf": "flex-start",
-        "display": "flex",
-        "flexDirection": "column",
-        "justifyContent": "flex-start",
         "padding": "10px",
+        "paddingTop": "20px",
         "width": "100%",
       }
     }
@@ -26,7 +23,7 @@ exports[`Thread renders correctly 1`] = `
       className="thread-text"
     >
       <i
-        className=" far fa-user"
+        className=" fas fa-user"
       />
         The Creator
     </p>
@@ -94,7 +91,10 @@ exports[`Thread renders correctly 1`] = `
           <p
             className="comment-title"
           >
-            Jeff- 
+            <i
+              className="far fa-user"
+            />
+             Jeff says: 
           </p>
           <p
             className="comment-text"
@@ -108,7 +108,10 @@ exports[`Thread renders correctly 1`] = `
           <p
             className="comment-title"
           >
-            mark- 
+            <i
+              className="far fa-user"
+            />
+             mark says: 
           </p>
           <p
             className="comment-text"
