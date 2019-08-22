@@ -116,18 +116,19 @@ class Thread extends React.Component {
     return (
       <div style={styles.threadContainer} className="thread">
 
-        {/* these will show if the user owns the thread */}
-        {this.props.allowEdit &&
-          <div style={styles.buttonHolder}>
-            <i className="fas fa-edit article-button"
-              onClick={() => this.props.handleEdit(thread)}></i>
+        <div className="space-all-row">
+          <p className="thread-title" style={styles.title}>{thread.name}</p>
+          {/* these will show if the user owns the thread */}
+          {this.props.allowEdit &&
+            <div style={styles.buttonHolder}>
+              <i className="fas fa-edit article-button"
+                onClick={() => this.props.handleEdit(thread)}></i>
 
-            <i className="fas fa-trash-alt article-button"
-              onClick={this.toggleDeleteWarning}></i>
+              <i className="fas fa-trash-alt article-button"
+                onClick={this.toggleDeleteWarning}></i>
 
-          </div>}
-
-        <p className="thread-title" style={styles.text}>{thread.name}</p>
+            </div>}
+        </div>
 
         <p className="thread-text">
           <i className=" fas fa-user"></i>{`  ${thread.user}`}
@@ -212,8 +213,11 @@ class Thread extends React.Component {
 const styles = {
   threadContainer: {
     width: '100%',
-    padding: '10px',
-    paddingTop: '20px'
+    // padding: '10px',
+    // paddingTop: '20px'
+  },
+  title: {
+    width: '75%'
   },
   button: {
     alignSelf: 'flex-end',
@@ -229,9 +233,10 @@ const styles = {
     alignItems: 'flex-start'
   },
   buttonHolder: {
-    position: 'absolute',
-    top: '10px',
-    right: '10px',
+    // position: 'absolute',
+    // top: '10px',
+    // right: '10px',
+    alignSelf: 'flex-start',
     display: 'flex',
     flexDirection: 'row'
   },

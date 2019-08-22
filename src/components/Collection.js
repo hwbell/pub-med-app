@@ -165,7 +165,7 @@ class Collection extends React.Component {
   // with the postCollection() function below  
 
   editSavedCollection(article) {
-
+    console.log('editing saved collection')
     // create a state collection with props if it isn't in state yet, 
     // otherwise grab the state collection. We use the collection in state as a holder for 
     // changes that the user can save. This function makes changes in the UI, but doesn't 
@@ -239,7 +239,7 @@ class Collection extends React.Component {
       },
       {
         text: 'remove',
-        onClick: collection.owner ? this.editSavedCollection : this.props.modifyCollection
+        onClick: this.editSavedCollection
       }
     ];
 
@@ -262,16 +262,17 @@ class Collection extends React.Component {
 
     let collection = this.state.collection || this.props.collection;
     let title = collection.name;
-    
+
     let createdAt = new Date(collection.createdAt)
     let time = extractStringDate(createdAt);
+
     return (
       <div style={styles.title}>
         <div className="left-all-row">
-          <p className="thread-title" style={{margin: '10px'}}>
+          <p className="thread-title" style={{ margin: '10px' }}>
             <strong>{`${title} `}</strong>{` (${collection.articles.length})`}
           </p>
-          <i className="far fa-edit" style={{marginTop: '10px'}}
+          <i className="far fa-edit" style={{ marginTop: '10px' }}
             onClick={this.toggleEdit}></i>
         </div>
 
@@ -377,8 +378,11 @@ class Collection extends React.Component {
   renderSaveOption() {
     return (
       <div style={styles.iconHolder}>
-        <i className="far fa-save" style={styles.icon}
-          onClick={this.postCollection}></i>
+        {/* only render the save button if its a server collection */}
+        {this.props.isSaved &&
+          <i className="far fa-save" style={styles.icon}
+            onClick={this.postCollection}></i>}
+        
         <i className="fas fa-undo" style={styles.icon}
           onClick={this.clearEdits}></i>
       </div>
@@ -437,6 +441,7 @@ class Collection extends React.Component {
   }
 
   render() {
+    // console.log(this.props.collections)
 
     // if there is a collection in state, this means changes have been made and the props
     // one copied to state to be edited
@@ -450,7 +455,7 @@ class Collection extends React.Component {
         <AlertModal {...this.state.modalProps} />
 
         {/* the save icon that appears once we have any edits */}
-        {this.state.collection && this.props.isSaved &&
+        {this.state.collection &&
           this.renderSaveOption()
         }
 

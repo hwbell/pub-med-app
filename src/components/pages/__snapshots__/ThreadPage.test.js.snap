@@ -30,31 +30,47 @@ exports[`ThreadPage renders correctly 1`] = `
       className="outline"
       style={
         Object {
+          "padding": "5px",
           "position": "relative",
         }
       }
     >
       <div
-        className="fade"
-        style={
-          Object {
-            "display": "flex",
-            "flexDirection": "row",
-            "position": "absolute",
-            "right": "4%",
-            "top": "4px",
-          }
-        }
+        className="space-all-row"
       >
-        <button
-          aria-label={null}
-          className="add article-button btn btn-secondary btn-sm"
-          onClick={[Function]}
-          type="button"
+        <p
+          className="thread-title"
         >
-          +new thread
-        </button>
+          Get input from the scientific community
+        </p>
+        <div
+          className="fade"
+          style={
+            Object {
+              "alignSelf": "flex-start",
+              "display": "flex",
+              "flexDirection": "row",
+            }
+          }
+        >
+          <button
+            aria-label={null}
+            className="add article-button btn btn-secondary btn-sm"
+            onClick={[Function]}
+            type="button"
+          >
+            +new thread
+          </button>
+        </div>
       </div>
+      <p
+        className="thread-text"
+      >
+        See what other scientists have to say about a resource, method, or scientific topic! 
+                  If you are logged in, you can post and comments on as many threads as you like. If you're just visiting, feel 
+                  free to browse recent threads to see the active discussions in the community.
+      </p>
+      <hr />
       <div
         className="center-all-col"
         style={
@@ -75,37 +91,42 @@ exports[`ThreadPage renders correctly 1`] = `
             className="thread"
             style={
               Object {
-                "padding": "10px",
-                "paddingTop": "20px",
                 "width": "100%",
               }
             }
           >
             <div
-              style={
-                Object {
-                  "display": "flex",
-                  "flexDirection": "row",
-                  "position": "absolute",
-                  "right": "10px",
-                  "top": "10px",
+              className="space-all-row"
+            >
+              <p
+                className="thread-title"
+                style={
+                  Object {
+                    "width": "75%",
+                  }
                 }
-              }
-            >
-              <i
-                className="fas fa-edit article-button"
-                onClick={[Function]}
-              />
-              <i
-                className="fas fa-trash-alt article-button"
-                onClick={[Function]}
-              />
+              >
+                Sourcing of PMID: 013091283
+              </p>
+              <div
+                style={
+                  Object {
+                    "alignSelf": "flex-start",
+                    "display": "flex",
+                    "flexDirection": "row",
+                  }
+                }
+              >
+                <i
+                  className="fas fa-edit article-button"
+                  onClick={[Function]}
+                />
+                <i
+                  className="fas fa-trash-alt article-button"
+                  onClick={[Function]}
+                />
+              </div>
             </div>
-            <p
-              className="thread-title"
-            >
-              Sourcing of PMID: 013091283
-            </p>
             <p
               className="thread-text"
             >
@@ -260,37 +281,42 @@ exports[`ThreadPage renders correctly 1`] = `
             className="thread"
             style={
               Object {
-                "padding": "10px",
-                "paddingTop": "20px",
                 "width": "100%",
               }
             }
           >
             <div
-              style={
-                Object {
-                  "display": "flex",
-                  "flexDirection": "row",
-                  "position": "absolute",
-                  "right": "10px",
-                  "top": "10px",
+              className="space-all-row"
+            >
+              <p
+                className="thread-title"
+                style={
+                  Object {
+                    "width": "75%",
+                  }
                 }
-              }
-            >
-              <i
-                className="fas fa-edit article-button"
-                onClick={[Function]}
-              />
-              <i
-                className="fas fa-trash-alt article-button"
-                onClick={[Function]}
-              />
+              >
+                Data in figure 1 of PMID: 013091283
+              </p>
+              <div
+                style={
+                  Object {
+                    "alignSelf": "flex-start",
+                    "display": "flex",
+                    "flexDirection": "row",
+                  }
+                }
+              >
+                <i
+                  className="fas fa-edit article-button"
+                  onClick={[Function]}
+                />
+                <i
+                  className="fas fa-trash-alt article-button"
+                  onClick={[Function]}
+                />
+              </div>
             </div>
-            <p
-              className="thread-title"
-            >
-              Data in figure 1 of PMID: 013091283
-            </p>
             <p
               className="thread-text"
             >
@@ -445,37 +471,42 @@ exports[`ThreadPage renders correctly 1`] = `
             className="thread"
             style={
               Object {
-                "padding": "10px",
-                "paddingTop": "20px",
                 "width": "100%",
               }
             }
           >
             <div
-              style={
-                Object {
-                  "display": "flex",
-                  "flexDirection": "row",
-                  "position": "absolute",
-                  "right": "10px",
-                  "top": "10px",
+              className="space-all-row"
+            >
+              <p
+                className="thread-title"
+                style={
+                  Object {
+                    "width": "75%",
+                  }
                 }
-              }
-            >
-              <i
-                className="fas fa-edit article-button"
-                onClick={[Function]}
-              />
-              <i
-                className="fas fa-trash-alt article-button"
-                onClick={[Function]}
-              />
+              >
+                Figure 3 in PMID: 013091283
+              </p>
+              <div
+                style={
+                  Object {
+                    "alignSelf": "flex-start",
+                    "display": "flex",
+                    "flexDirection": "row",
+                  }
+                }
+              >
+                <i
+                  className="fas fa-edit article-button"
+                  onClick={[Function]}
+                />
+                <i
+                  className="fas fa-trash-alt article-button"
+                  onClick={[Function]}
+                />
+              </div>
             </div>
-            <p
-              className="thread-title"
-            >
-              Figure 3 in PMID: 013091283
-            </p>
             <p
               className="thread-text"
             >
@@ -624,6 +655,7 @@ exports[`ThreadPage renders correctly 1`] = `
           </div>
         </div>
       </div>
+      <hr />
       <div
         className="center-all-col"
         style={
@@ -689,17 +721,24 @@ exports[`ThreadPage renders correctly 1`] = `
             className="thread"
             style={
               Object {
-                "padding": "10px",
-                "paddingTop": "20px",
                 "width": "100%",
               }
             }
           >
-            <p
-              className="thread-title"
+            <div
+              className="space-all-row"
             >
-              Sourcing of PMID: 013091283
-            </p>
+              <p
+                className="thread-title"
+                style={
+                  Object {
+                    "width": "75%",
+                  }
+                }
+              >
+                Sourcing of PMID: 013091283
+              </p>
+            </div>
             <p
               className="thread-text"
             >
@@ -854,17 +893,24 @@ exports[`ThreadPage renders correctly 1`] = `
             className="thread"
             style={
               Object {
-                "padding": "10px",
-                "paddingTop": "20px",
                 "width": "100%",
               }
             }
           >
-            <p
-              className="thread-title"
+            <div
+              className="space-all-row"
             >
-              Figure 3 in PMID: 013091283
-            </p>
+              <p
+                className="thread-title"
+                style={
+                  Object {
+                    "width": "75%",
+                  }
+                }
+              >
+                Figure 3 in PMID: 013091283
+              </p>
+            </div>
             <p
               className="thread-text"
             >

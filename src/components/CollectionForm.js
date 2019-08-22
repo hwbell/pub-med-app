@@ -98,11 +98,13 @@ class CollectionForm extends React.Component {
 
       return (
         <div className="center-all-col">
-          {allCollections.map((collection, i) =>
-            <Button key={i}
-              color="link"
-              style={{ fontSize: '16px', backgroundColor: i === this.state.highlightInd ? 'rgb(230,230,230)' : 'white' }}
-              onClick={() => this.highlight(i)}>{`${collection.name} ( ${collection.articles.length} )`}</Button>)}
+          <div className="">
+            {allCollections.map((collection, i) =>
+              <Button key={i}
+                color="link"
+                style={{ fontSize: '16px', backgroundColor: i === this.state.highlightInd ? 'rgb(230,230,230)' : 'white' }}
+                onClick={() => this.highlight(i)}>{`${collection.name} ( ${collection.articles.length} )`}</Button>)}
+          </div>
         </div>
       )
     } else {
@@ -296,7 +298,7 @@ const styles = {
     fontSize: '14px'
   },
   input: {
-    margin: '10px', 
+    margin: '10px',
     borderRadius: '6px',
     width: '60%',
     fontSize: '14px'

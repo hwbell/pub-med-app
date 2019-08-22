@@ -143,6 +143,21 @@ describe('App', () => {
     expect(wrapper.state().user.collections[0]).toMatchObject(newObj);
   })
 
+  it('should create a new collection when this.createNewCollection() is fired', () => {
+    expect(wrapper.state().collections).toEqual([]);
+
+    let collection = getSampleCollections()[0];
+    wrapper.instance().createNewCollection(collection);
+    wrapper.update();
+
+    expect(wrapper.state().collections).toMatchObject([collection]);
+    // should tag the time
+    expect(wrapper.state().collections[0].createdAt).toBeTruthy();
+
+  })
+
 })
+
+
 
 

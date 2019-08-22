@@ -105,10 +105,25 @@ class App extends Component {
       let user = JSON.parse(localStorage.getItem('user'));
       return this.registerSignIn(user);
     }
+
+    // check for leftover collections
+    let localCollections = JSON.parse(localStorage.getItem('collections'))
+    console.log(localCollections)
+
+    if (localCollections && !!localCollections.length) {
+      this.setState({
+        collections: localCollections
+      }, () => {
+        console.log(this.state.collections)
+      })
+    }
   }
 
   createNewCollection(collection, callback) {
     console.log('creating new collection');
+
+    // tag the time
+    collection.createdAt = new Date();
 
     let collections = this.state.collections;
     collections.push(collection);
@@ -116,9 +131,12 @@ class App extends Component {
     this.setState({
       collections
     }, () => {
-      callback()
       localStorage.setItem('collections', JSON.stringify(collections))
     });
+
+    if(callback) {
+      callback();
+    }
   }
 
   deleteCollection(collectionToDelete, callback) {
@@ -141,41 +159,47 @@ class App extends Component {
   //   2. when removing an article from the collection page (only state collections, not server collections)
   modifyCollection(article, collectionName, change, callback) {
 
-    // if no collectionName / article, return
+    let { collections } = this.state;
+    console.log(collections)
+
+    // console.log(article, collectionName, change)
+
+    // // if no collectionName / article, return
     if (!article || !collectionName) {
       return;
     }
 
-    // to handle an object with 'name' key as well
+    // // // to handle an object with 'name' key as well
     if (collectionName.name) {
+      console.log('collection has a name prop')
       collectionName = collectionName.name
     }
 
     let verb = change > 0 ? 'Adding' : 'Removing';
     console.log(`${verb} article ${article.id} in user's ${collectionName} collection`)
 
-    let collections = this.state.collections;
-
     if (change > 0) {
+      console.log('add article')
       collections = addArticle(collections, collectionName, article)
+      console.log(collections);
     } else {
+      console.log('remove article')
       collections = removeArticle(collections, collectionName, article)
+      console.log(collections);
     }
 
-    console.log(collections)
+    this.setState({
+      collections
+    }, () => {
+      localStorage.setItem('collections', JSON.stringify(collections))
+    });
 
     if (callback) {
-      localStorage.setItem('collections', JSON.stringify(collections))
-      this.setState({
-        collections
-      }, () => callback());
-    } else {
-      this.setState({
-        collections
-      }, () => {
-        localStorage.setItem('collections', JSON.stringify(collections))
-      });
+      callback();
     }
+
+
+
   }
 
   // fire this function 
@@ -381,21 +405,21 @@ class App extends Component {
 
         {/* <div className="links-holder"> */}
 
-          <Link to="/" id="logo" className="nav-link">PubMed</Link>
+        <Link to="/" id="logo" className="nav-link">PubMed</Link>
 
-          <div className="row">
-            {links.map((link, i) => {
-              return (
-                <Link className="nav-link" style={styles.link} key={i} to={link.link}>{link.title}</Link>
-              )
-            })}
+        <div className="row">
+          {links.map((link, i) => {
+            return (
+              <Link className="nav-link" style={styles.link} key={i} to={link.link}>{link.title}</Link>
+            )
+          })}
 
-            <Link className="nav-link" style={styles.link} to="/profile/">
-              <i className="fas fa-user-cog"></i>
-            </Link>
-          </div>
-
+          <Link className="nav-link" style={styles.link} to="/profile/">
+            <i className="fas fa-user-cog"></i>
+          </Link>
         </div>
+
+      </div>
       // </div>
     )
   }
@@ -406,24 +430,24 @@ class App extends Component {
 
         {/* <div className="links-holder"> */}
 
-          <Link to="/" id="logo" className="nav-link">PubMed</Link>
+        <Link to="/" id="logo" className="nav-link">PubMed</Link>
 
-          <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-            <DropdownToggle color="primary" caret>
-              go to
+        <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+          <DropdownToggle color="primary" caret>
+            go to
         </DropdownToggle>
-            <DropdownMenu>
-              {links.map((link, i) => {
-                return (
-                  <Link className="nav-link" style={styles.link} key={i} to={link.link}>{link.title}</Link>
-                )
-              })}
+          <DropdownMenu>
+            {links.map((link, i) => {
+              return (
+                <Link className="nav-link" style={styles.link} key={i} to={link.link}>{link.title}</Link>
+              )
+            })}
 
-              <Link className="nav-link" style={styles.link} to="/profile/">
-                <i className="fas fa-user-cog"></i>
-              </Link>
-            </DropdownMenu>
-          </Dropdown>
+            <Link className="nav-link" style={styles.link} to="/profile/">
+              <i className="fas fa-user-cog"></i>
+            </Link>
+          </DropdownMenu>
+        </Dropdown>
 
         {/* </div> */}
       </div>
@@ -459,51 +483,51 @@ class App extends Component {
             // pose is awesome 
             // <PoseGroup>
 
-              <RoutesContainer key={location.pathname}>
+            <RoutesContainer key={location.pathname}>
 
-                <Switch location={location}>
-                  <Route exact path="/" component={HomePage} />
-                  <Route path="/about/" component={AboutPage} />
-                  <Route path="/search/" render={() =>
-                    <SearchPage
-                      collections={this.state.collections}
-                      createNewCollection={this.createNewCollection}
-                      modifyCollection={this.modifyCollection}
-                      refreshUserCollections={this.refreshUserCollections}
-                      user={this.state.user} />
-                  } />
-                  <Route path="/collections/" render={() =>
-                    <CollectionPage
-                      collections={this.state.collections}
-                      modifyCollection={this.modifyCollection}
-                      deleteCollection={this.deleteCollection}
-                      refreshUserCollections={this.refreshUserCollections}
-                      user={this.state.user}
-                    />
-                  } />
-                  <Route path="/threads/" render={() =>
-                    <ThreadPage
-                      serverThreads={this.state.serverThreads}
-                      user={this.state.user}
-                      refreshUserThreads={this.refreshUserThreads}
-                      refreshServerThreads={this.refreshServerThreads}
-                      registerServerThreads={this.registerServerThreads}
-                      deleteThread={this.deleteThread}
-                    />
+              <Switch location={location}>
+                <Route exact path="/" component={HomePage} />
+                <Route path="/about/" component={AboutPage} />
+                <Route path="/search/" render={() =>
+                  <SearchPage
+                    collections={this.state.collections}
+                    createNewCollection={this.createNewCollection}
+                    modifyCollection={this.modifyCollection}
+                    refreshUserCollections={this.refreshUserCollections}
+                    user={this.state.user} />
+                } />
+                <Route path="/collections/" render={() =>
+                  <CollectionPage
+                    collections={this.state.collections}
+                    modifyCollection={this.modifyCollection}
+                    deleteCollection={this.deleteCollection}
+                    refreshUserCollections={this.refreshUserCollections}
+                    user={this.state.user}
+                  />
+                } />
+                <Route path="/threads/" render={() =>
+                  <ThreadPage
+                    serverThreads={this.state.serverThreads}
+                    user={this.state.user}
+                    refreshUserThreads={this.refreshUserThreads}
+                    refreshServerThreads={this.refreshServerThreads}
+                    registerServerThreads={this.registerServerThreads}
+                    deleteThread={this.deleteThread}
+                  />
 
-                  } />
-                  <Route path="/profile/" render={() =>
-                    <ProfilePage
-                      registerSignIn={this.registerSignIn}
-                      registerSignOut={this.registerSignOut}
-                      refreshUser={this.refreshUser}
-                      user={this.state.user}
-                    />
+                } />
+                <Route path="/profile/" render={() =>
+                  <ProfilePage
+                    registerSignIn={this.registerSignIn}
+                    registerSignOut={this.registerSignOut}
+                    refreshUser={this.refreshUser}
+                    user={this.state.user}
+                  />
 
-                  } />
-                </Switch>
+                } />
+              </Switch>
 
-              </RoutesContainer>
+            </RoutesContainer>
 
             // </PoseGroup>
 

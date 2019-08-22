@@ -8,17 +8,24 @@ exports[`Thread renders correctly 1`] = `
     className="thread"
     style={
       Object {
-        "padding": "10px",
-        "paddingTop": "20px",
         "width": "100%",
       }
     }
   >
-    <p
-      className="thread-title"
+    <div
+      className="space-all-row"
     >
-      Sourcing of PMID: 013091283
-    </p>
+      <p
+        className="thread-title"
+        style={
+          Object {
+            "width": "75%",
+          }
+        }
+      >
+        Sourcing of PMID: 013091283
+      </p>
+    </div>
     <p
       className="thread-text"
     >

@@ -9,6 +9,7 @@ import EmailForm from "../EmailForm";
 import Collection from '../Collection';
 import { ButtonGroup, Button } from 'reactstrap';
 import Loader from 'react-loader-spinner';
+import {Link} from 'react-router-dom';
 
 // animation
 import posed, { PoseGroup } from 'react-pose';
@@ -38,7 +39,6 @@ class CollectionPage extends React.Component {
     this.sortCollections = this.sortCollections.bind(this);
 
     this.toggleEmailForm = this.toggleEmailForm.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.viewArticle = this.viewArticle.bind(this);
     this.toggleViewArticle = this.toggleViewArticle.bind(this);
@@ -99,7 +99,7 @@ class CollectionPage extends React.Component {
     return (
 
       <div className="left-all-row" style={{ padding: '0px 24px' }}>
-        <p style={{fontSize: '12px', padding: '5px'}}>sort by:</p>
+        <p style={{ fontSize: '12px', padding: '5px' }}>sort by:</p>
 
         {sortButtons.map((button, i) => {
 
@@ -182,7 +182,6 @@ class CollectionPage extends React.Component {
               key={i}
               isSaved={isSaved}
               collection={collection}
-              handleSubmit={this.handleSubmit}
               handleDelete={this.handleDelete}
               modifyCollection={this.props.modifyCollection}
               refreshUserCollections={this.props.refreshUserCollections}
@@ -204,12 +203,13 @@ class CollectionPage extends React.Component {
     const haveUserCollections = user && user.collections && user.collections.length > 0;
 
     // get the new collections
-    const newCollections = this.props.collections.length > 0 ?
-      this.props.collections :
-      JSON.parse(localStorage.getItem('collections'));
-    const haveNewCollections = newCollections && newCollections.length > 0;
+    // const newCollections = this.props.collections.length > 0 ?
+    //   this.props.collections :
+    //   JSON.parse(localStorage.getItem('collections'));
 
-    // console.log(haveUserCollections, haveNewCollections)
+    console.log(this.props.collections)
+
+    const havePropsCollections = this.props.collections && this.props.collections.length > 0;
 
     return (
       <div className="collection-page page">
@@ -232,25 +232,38 @@ class CollectionPage extends React.Component {
 
           {/* results */}
 
-          <div className="outline" style={styles.content}>
+          <div className="outline intro" style={styles.content}>
 
-            <p className="profile-title">New Collections</p>
+            <p className="thread-title" style={{ alignSelf: 'flex-start' }}>Organize and export your resources</p>
+            <p className="thread-text">{`Below you can edit your resource collections before exporting them as a pdf. You can remove any
+            articles you don't need, or go back and add more on the search page. Remember to export or save your 
+            records!`}</p>
+
+            <p className="thread-text">
+              {`If you are logged in, you can save any new collection you 
+                  make, and they will appear below as your saved collections. If you are just visiting, 
+                  you can still export a collection as a pdf below. Just look for the save icon!`}
+            </p>
+
+            <p className="section-title">New Collections</p>
 
             {/* the new collections when they are present */}
-            {haveNewCollections ?
+            {havePropsCollections ?
 
-              this.renderCollections(newCollections, false)
+              this.renderCollections(this.props.collections, false)
 
               // or if there aren't any collections yet
               :
-              <p className="paragraph">
-                {`You don't have any new collections made. You can create some by searching
-                 the database and adding any interesting articles to your collection. Then you can
-                  organize, share & export them here. `}
-              </p>
+              <div>
+                <p className="paragraph">
+                  {`You don't have any new collections made yet. Visit the search page to start collecting some articles!  `}
+                  <Link to="/search" >find articles</Link>
+                </p>
+                
+              </div>
             }
 
-            <p className="profile-title">Saved Collections</p>
+            <p className="section-title">Saved Collections</p>
 
             {/* the user's collections when they are present */}
             {haveUserCollections ?
@@ -260,8 +273,7 @@ class CollectionPage extends React.Component {
               // or if there aren't any collections yet
               :
               <p className="paragraph">
-                {`You don't have any collections saved to your profile yet. You can save any new collection you make.
-                Just look for the 'save to my collections' button!`}
+                {`You don't have any collections saved to your profile yet.`}
               </p>
             }
           </div>
@@ -282,6 +294,9 @@ const styles = {
     borderRadius: '8px',
     backgroundColor: 'rgba(0, 0, 0, 0.24)'
   },
+  content: {
+    padding: '5px'
+  }
 }
 
 export default CollectionPage;

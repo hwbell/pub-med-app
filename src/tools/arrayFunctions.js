@@ -1,11 +1,14 @@
 // this function will remove an article from a specific collection in the collections array
 const removeArticle = (collections, collectionName, article) => {
-
+  console.log(collections, collectionName, article)
   // find the matching collection and remove the article
   collections.forEach((collection, i) => {
 
     if (collection.name === collectionName) {
-      collection.articles = collection.articles.filter(item => item._id !== article._id)
+      collection.articles = collection.articles.filter((item) => {
+        console.log(item.id, article.id)
+        return item.id !== article.id;
+      })
     }
 
   });

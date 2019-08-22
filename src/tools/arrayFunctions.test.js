@@ -1,8 +1,8 @@
 import { removeArticle, addArticle, updateObjInArray } from './arrayFunctions';
 
-const article1 = { _id: 'PMID934534' }
-const article2 = { _id: 'PMID987945' }
-const article3 = { _id: 'PMID987627' }
+const article1 = { id: 'PMID934534' }
+const article2 = { id: 'PMID987945' }
+const article3 = { id: 'PMID987627' }
 
 const updatedThread = {
   name: 'A newer thread!',

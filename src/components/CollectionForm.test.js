@@ -109,11 +109,12 @@ describe('CollectionForm', () => {
     // title 
     expect(wrapper.find('.thread-text').length).toBe(1);
   
-    // should have two .nav-link buttons with the names of the provided collections for 
+    // should have two buttons @ the bottom and one for each unique collection with the names of the provided collections for 
     // both newly created collections and server collections
-    expect(wrapper.find('.nav-link').length).toEqual(9);
-    expect(wrapper.find('.nav-link').at(0).html()).toContain(collections[0].name);
-    expect(wrapper.find('.nav-link').at(1).html()).toContain(collections[1].name);
+    console.log(wrapper.props())
+    expect(wrapper.find('Button').length).toEqual(11);
+    expect(wrapper.find('Button').at(0).html()).toContain(collections[0].name);
+    expect(wrapper.find('Button').at(1).html()).toContain(collections[1].name);
   
     // two size="sm" buttons - these don't have a unique class right now
     expect(wrapper.find({ size: 'sm' }).length).toEqual(2);
@@ -147,7 +148,7 @@ describe('CollectionForm', () => {
     wrapper.setProps({ collections: [] });
     wrapper.update();
     expect(wrapper.find('.thread-text').at(0).text()).toEqual(
-      `You don't currently have any new collections ... would you like to make one? You can enter a name below.`
+      `Select a collection to add the article to, or make a new collection.`
     );
   })
   
@@ -206,7 +207,7 @@ describe('CollectionForm', () => {
   
     // the highlightInd should initially be null
     expect(wrapper.state().highlightInd).toEqual(null);
-    expect(wrapper.find('.nav-link').length).toEqual(9);
+    expect(wrapper.find('Button').length).toEqual(11);
   
     // click the collections and check the highlightInd matches
     wrapper.find('.nav-link').forEach((link, i) => {

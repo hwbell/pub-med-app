@@ -65,7 +65,7 @@ class ThreadPage extends React.Component {
         // if we have them in localStorage, just refresh in App
         this.props.refreshServerThreads(localThreads);
       }
-      
+
     } else {
       // console.log('we have serverThreads')
 
@@ -402,11 +402,22 @@ class ThreadPage extends React.Component {
           />
 
           <div className="outline" style={styles.threadsHolder}>
-            {/* the button for new threads - only present when logged in */}
-            <Fade in={!!this.props.user} style={styles.buttonHolder}>
-              <Button className="add article-button" size="sm"
-                onClick={() => this.handleEdit()}>+new thread</Button>
-            </Fade>
+
+            <div className="space-all-row">
+              <p className="thread-title">Get input from the scientific community</p>
+
+              {/* the button for new threads - only present when logged in */}
+              <Fade style={{ alignSelf: 'flex-start' }} in={!!this.props.user} style={styles.buttonHolder}>
+                <Button className="add article-button" size="sm"
+                  onClick={() => this.handleEdit()}>+new thread</Button>
+              </Fade>
+            </div>
+
+            <p className="thread-text">{`See what other scientists have to say about a resource, method, or scientific topic! 
+                  If you are logged in, you can post and comments on as many threads as you like. If you're just visiting, feel 
+                  free to browse recent threads to see the active discussions in the community.`}
+            </p>
+            <hr></hr>
 
             {/* the loader icon */}
             {!haveServerThreads &&
@@ -414,6 +425,8 @@ class ThreadPage extends React.Component {
             }
 
             {haveUserThreads && this.renderThreads(user.threads, true)}
+
+            {haveUserThreads && <hr></hr>}
 
             {haveServerThreads && this.renderThreads(serverThreads)}
 
@@ -430,15 +443,16 @@ class ThreadPage extends React.Component {
 
 const styles = {
   buttonHolder: {
-    position: 'absolute',
-    top: '4px',
-    right: '4%',
+    // position: 'absolute',
+    // top: '4px',
+    // right: '4%',
+    alignSelf: 'flex-start',
     display: 'flex',
     flexDirection: 'row'
   },
   threadsHolder: {
     position: 'relative',
-    // width: '100%'
+    padding: '5px'
   }
 }
 

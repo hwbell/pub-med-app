@@ -4,6 +4,7 @@
 
 * {
   font-family: Quicksand;
+  color: $text-color;
   // transition: all 0.1s ease-in-out;
 }
 body {
@@ -38,8 +39,8 @@ body {
 hr {
   /* border: 0; */
   width: 100%;
-  background-color: grey;
-  height: 0.3px;
+  background-color: rgba(184, 182, 182, 0.466);
+  // height: 0.3px;
   margin-bottom: 10px;
 }
 
@@ -176,7 +177,6 @@ hr {
 /* some common text / button classes */
 .title,
 .subtitle {
-  color: white;
   padding: 5px 25px;
 }
 .title {
@@ -369,13 +369,15 @@ input {
   }
 }
 .section-title {
-  font-weight: bolder;
+  // font-weight: bolder;
   font-size: 18px;
   align-self: flex-start;
   margin: 5px 30px;
 }
 .collection-block {
   width: 100%;
+  margin: 4px;
+  padding: 0;
 }
 .collection-edit {
   // margin: 8px 4px 0 0;
@@ -428,6 +430,12 @@ input {
   font-size: 18px;
   align-self: flex-start;
   font-weight: 600;
+}
+.fa-user-cog {
+  color: $main-blue;
+  &:hover {
+    color: silver;
+  }
 }
 
 .fa-atom,
@@ -492,7 +500,7 @@ input {
 }
 .thread-title {
   font-weight: lighter;
-  color: rgb(227, 247, 253);
+  // color: rgb(227, 247, 253);
 }
 .thread-text {
   font-size: 14px;
@@ -540,7 +548,13 @@ body.modal-open {
 }
 .modal-body {
   padding: 15px;
-  background-color: white;
+  // background-color: whitesmoke;
+}
+.modal-body, .modal-header, .modal-footer {
+  background-color: rgb(243, 243, 243);
+}
+.modal-title {
+  color: black;
 }
 
 // The ArticleResult component

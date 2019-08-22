@@ -94,6 +94,8 @@ describe('Collection', () => {
   });
 
   it('should hide the save button if isSaved=true', () => {
+    expect(wrapper.find('.fa-save').length).toEqual(1);
+
     // change the prop
     wrapper.setProps({
       isSaved: true
@@ -298,16 +300,17 @@ describe('Collection', () => {
     const wrapper = shallow(<Collection {...someProps} />);    
     const instance = wrapper.instance();
 
+    // this shouldn't be present to start
+    expect(wrapper.find('.fa-undo').length).toBe(0);
+
     // get some changes registered
     instance.handleChange('collection title');
-    wrapper.setProps({
-      isSaved: true
-    })
     wrapper.update();    
     instance.handleSubmit(e);
     wrapper.update();
 
-    // click to clear
+    // refresh button appears, click to clearEdits
+    expect(wrapper.find('.fa-undo').length).toBe(1);
     wrapper.find('.fa-undo').simulate('click');
     wrapper.update();
 
