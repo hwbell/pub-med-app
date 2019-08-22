@@ -538,6 +538,10 @@ body.modal-open {
   padding: 1vw;
   max-width: 750px;
 }
+.modal-body {
+  padding: 15px;
+  background-color: white;
+}
 
 // The ArticleResult component
 .article-title,

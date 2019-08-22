@@ -323,7 +323,8 @@ class Collection extends React.Component {
   renderButtons() {
     // the user can only post the collection with this save button below
     // if they are logged in and it is a new collection
-    let userCanSave = !this.props.isSaved && !!JSON.parse(localStorage.getItem('user'));
+
+    let userCanSave = !this.props.isSaved && !!localStorage.getItem('user') && localStorage.getItem('user') !== "undefined";
     // console.log(userCanSave)    
     return (
       <div className="left-all-col">
