@@ -20,6 +20,9 @@ I welcome feedback on this app!
 ## Have an idea for the app? 
 This is still a new project, but my hope is to have some collaborators sometime soon. I'm open to all new ideas for the project.
 
+## Why PMC Europe?
+I found PMC Europe's api more efficient / reliable to work with when developing this
+app. I may add other api's in the future for more complete searches.
 
 ## CRA
 
