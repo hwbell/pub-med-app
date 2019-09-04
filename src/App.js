@@ -433,18 +433,19 @@ class App extends Component {
         <Link to="/" id="logo" className="nav-link">PubMed</Link>
 
         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-          <DropdownToggle color="primary" caret>
-            go to
+          <DropdownToggle color="link" style={styles.dropDown}>
+            <i className="fas fa-compass"></i>
         </DropdownToggle>
-          <DropdownMenu>
+          <DropdownMenu style={styles.dropDownMenu}>
             {links.map((link, i) => {
               return (
-                <Link className="nav-link" style={styles.link} key={i} to={link.link}>{link.title}</Link>
+                <Link className="nav-link" style={styles.link} key={i} to={link.link}
+                  onClick={this.toggle}>{link.title}</Link>
               )
             })}
 
             <Link className="nav-link" style={styles.link} to="/profile/">
-              <i className="fas fa-user-cog"></i>
+              <i className="fas fa-user-cog" onClick={this.toggle}></i>
             </Link>
           </DropdownMenu>
         </Dropdown>
@@ -552,6 +553,12 @@ const styles = {
     alignItems: 'center'
   },
   link: {
-    fontSize: ' 18px'
+    fontSize: '16px',
+    // padding: '4px'
+  },
+  dropDownMenu: {
+    borderRadius: '4px',
+    backgroundColor: 'whitesmoke'
   }
+
 }

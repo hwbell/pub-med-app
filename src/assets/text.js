@@ -35,7 +35,7 @@ const aboutPageText = {
         title: 'How do I use the site?',
         icon: {},
         text: [
-          `Use this site as you would use PubMed to find abstracts, articles, and more. The site was built as 
+          `You can use this site to find abstracts, articles, and more. The site was built as 
           an alternative to the standard PubMed website, in an effort to speed up the process of literature mining 
           and research in general through record keeping and resource sharing.`
         ]
@@ -44,7 +44,7 @@ const aboutPageText = {
         title: 'What else can I do with this site?',
         icon: {},
         text: [
-          `The first thing you should do is make a user account. It only takes a few seconds, and 
+          `First, you should make a user account. It only takes a few seconds, and 
     you just need to provide an email address and password. Once you are logged in, you can 
     use all the features of the site.`,
           `If you are compiling a list of papers & publications, you will find the collections page very 

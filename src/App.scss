@@ -19,8 +19,10 @@ body {
   font-size: 16px;
 }
 * > a {
+  color: rgb(71, 156, 253);
   &:hover {
-    text-decoration: none;
+    color: rgb(57, 125, 202);
+    text-decoration: none;    
   }
 }
 * > span {
@@ -277,10 +279,10 @@ hr {
 .nav-link:focus {
   text-decoration: underline;
 }
-.links-holder {
-  // max-width: 800px;
-}
-//
+// .links-holder {
+//   // max-width: 800px;
+// }
+// //
 
 /* the about page */
 .about-img {
@@ -318,6 +320,15 @@ hr {
   }
   margin: 4px;
 }
+.fa-compass {
+  font-size: 28px;
+  color: rgb(71, 156, 253);
+  &:hover {
+    color: rgb(57, 125, 202);
+  }
+  margin: 4px;
+}
+
 
 //
 

@@ -54,8 +54,14 @@ class AboutPage extends React.Component {
                       </Link>
                     </div>
 
-                    {section.text.map((text, i) => {
-                      return <p key={i} className="paragraph">{text}</p>
+                    {section.text.map((text, j) => {
+                      return <p key={j} className="paragraph">
+                        {text}
+                        {i===2 && j===0 && 
+                        <Link to={'/profile'}>
+                          {`  Make a profile!`}
+                        </Link>}
+                      </p>
                     })}
                   </div>
                 )
