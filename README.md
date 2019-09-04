@@ -1,3 +1,28 @@
+## What is this app? 
+This app was built as an interface for finding articles available
+from PubMed Central Europe, and connecting with other researchers.<br>
+
+It was initially built for experience with several technologies and 
+frameworks, but always with the intention of making something 
+genuinely useful for researchers. I will keep adding features as
+time allows!<br>
+
+## How was it built? 
+This application was built using React.js, and many useful third party npm packages.
+See package.json for these.<br>
+
+The app uses a node.js server to store user / app information, which is hosted separately. This server is also a public repository of mine, 'pub-med-server'.
+It uses mongoDB to store/update the information for user collections, threads, profiles, etc.
+
+## What do you think?
+I welcome feedback on this app! 
+
+## Have an idea for the app? 
+This is still a new project, but my hope is to have some collaborators sometime soon. I'm open to all new ideas for the project.
+
+
+## CRA
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
