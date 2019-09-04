@@ -11,11 +11,10 @@ time allows!<br>
 This application was built using React.js, and many useful third party npm packages.
 See package.json for these.<br>
 
-The app uses a node.js server to store user / app information, which is hosted separately. This server is also a public repository of mine, 'pub-med-server'.
-It uses mongoDB to store/update the information for user collections, threads, profiles, etc.
+The app uses a node.js server to store user / app information, which is hosted separately. This server is also a public repository of mine, 'pub-med-server'. The server uses express.js and mongoDB to store and update information for user collections, threads, profiles, etc. 
 
 ## What do you think?
-I welcome feedback on this app! 
+I welcome feedback on this app! Feel free to send me a message.
 
 ## Have an idea for the app? 
 This is still a new project, but my hope is to have some collaborators sometime soon. I'm open to all new ideas for the project.
