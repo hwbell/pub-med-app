@@ -1,6 +1,7 @@
 {
   "name": "pub-med-app",
   "version": "0.1.0",
+  "description": "A user interface for the resources of Pub Med Central Europe.",
   "engines": {
     "node": "10.6.0"
   },

@@ -33,7 +33,7 @@ const styles = {
     padding: '10px'
   },
   text: {
-    color: 'white'
+    // color: 'white'
   },
   container: {
     width: '60%'
