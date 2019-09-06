@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 // components
 import { Button, Collapse, Input, Form, Fade } from 'reactstrap';
 import ArticleResult from './ArticleResult';
-import { PDFViewer } from '@react-pdf/renderer';
+import { PDFViewer, PDFDownloadLink } from '@react-pdf/renderer';
 import GeneratedPdf from './GeneratedPdf';
 import AlertModal from './AlertModal'
 
@@ -13,6 +13,7 @@ import AlertModal from './AlertModal'
 import { saveCollection, deleteCollection } from '../tools/serverFunctions';
 import { extractStringDate } from '../tools/objectFunctions';
 import { CSSTransitionGroup } from 'react-transition-group' // ES6
+import Media from 'react-media';
 
 // ******************************************************************************
 class Collection extends React.Component {
@@ -89,7 +90,8 @@ class Collection extends React.Component {
 
   togglePreview() {
     this.setState({
-      showPreview: !this.state.showPreview
+      showPreview: !this.state.showPreview,
+      showContent: true
     })
   }
 
@@ -382,7 +384,7 @@ class Collection extends React.Component {
         {this.props.isSaved &&
           <i className="far fa-save" style={styles.icon}
             onClick={this.postCollection}></i>}
-        
+
         <i className="fas fa-undo" style={styles.icon}
           onClick={this.clearEdits}></i>
       </div>
@@ -488,17 +490,29 @@ class Collection extends React.Component {
 
             {/* the pdf, when the preview button is clicked */}
             {this.state.showPreview &&
-              <div ref={this.props.ref} key="pdf" className="pdf-holder">
-                <PDFViewer className="pdf-viewer">
-                  <GeneratedPdf collection={collection} />
-                </PDFViewer>
+              <div ref={this.props.ref} id="pdf" key="pdf">
+
+                {/* show the pdf on larger screens, but just a link to the pdf on mobile */}
+                <Media query="(max-width: 599px)">
+                  {matches =>
+                    matches ? (
+                      <PDFDownloadLink className="pdf-link" document={<GeneratedPdf collection={collection} />} fileName={collection.name}>
+                        {({ blob, url, loading, error }) => (loading ? 'Creating document...' : `${collection.name}.pdf`)}
+                      </PDFDownloadLink>
+                    ) : (
+                        <PDFViewer className="pdf-viewer">
+                          <GeneratedPdf collection={collection} />
+                        </PDFViewer>
+                      )
+                  }
+                </Media>
+
               </div>}
 
             {/* the articles in the collection, in ArticleResult format */}
-            {!this.state.showPreview &&
               <div ref={this.props.ref} key="results" className="results-holder">
                 {this.renderResults(collection)}
-              </div>}
+              </div>
 
           </CSSTransitionGroup>
         </Collapse>

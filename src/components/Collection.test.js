@@ -4,6 +4,12 @@ import { shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 import { getArticles } from '../tools/apiFunctions';
 
+const resizeWindow = (x, y) => {
+  window.innerWidth = x;
+  window.innerHeight = y;
+  window.dispatchEvent(new Event('resize'));
+}
+
 // stubs
 let handleDeleteStub = jest.fn();
 
@@ -79,7 +85,7 @@ describe('Collection', () => {
     expect(wrapper.find('.thread-title').length).toEqual(1);
     expect(wrapper.find('.fa-edit').length).toEqual(1);
 
-    expect(wrapper.find('.pdf-holder').length).toEqual(0);
+    expect(wrapper.find('#pdf').length).toEqual(0);
 
     // if isSaved is false && we have a localStorage user, we will have 4 buttons , i.e. showing save button
     expect(wrapper.find('Button').length).toEqual(4);
@@ -89,7 +95,7 @@ describe('Collection', () => {
     expect(wrapper.find('.fa-trash').length).toEqual(1);
 
     // the creation date
-    expect(wrapper.find('.time').length).toBe(1);    
+    expect(wrapper.find('.time').length).toBe(1);
 
   });
 
@@ -109,7 +115,7 @@ describe('Collection', () => {
     // change the localStorage
     localStorage.removeItem('user');
     let newWrapper = shallow(<Collection {...someProps} />);
-    
+
     expect(newWrapper.find('Button').length).toEqual(3);
     expect(newWrapper.find('.fa-save').length).toEqual(0);
   })
@@ -165,20 +171,31 @@ describe('Collection', () => {
 
   })
 
-  it('should switch between pdf and list view', () => {
+  it('should toggle the pdf document', () => {
 
-    // show the list view initially
-    expect(wrapper.find('.results-holder').length).toEqual(1);
-    expect(wrapper.find('.pdf-holder').length).toEqual(0);
+    // no pdf initially
+    expect(wrapper.find('#pdf').length).toEqual(0);
 
     // click the 'make pdf' button
     wrapper.find('Button').at(1).simulate('click');
     expect(wrapper.state().showPreview).toEqual(true);
 
-    // should be switched now
-    expect(wrapper.find('.results-holder').length).toEqual(0);
-    expect(wrapper.find('.pdf-holder').length).toEqual(1);
+    // should be displayed now
+    expect(wrapper.find('#pdf').length).toEqual(1);
 
+    // click the 'make pdf' button again
+    wrapper.find('Button').at(1).simulate('click');
+    expect(wrapper.state().showPreview).toEqual(false);
+
+    // should be hidden now
+    expect(wrapper.find('#pdf').length).toEqual(0);
+
+  })
+
+  it('should expand the collapse when pdf button is clicked', () => {
+    expect(wrapper.find('Collapse').props().isOpen).toBe(false);
+    wrapper.find('Button').at(1).simulate('click');
+    expect(wrapper.find('Collapse').props().isOpen).toBe(true);
   })
 
   it('should toggle the editing boolean', () => {
@@ -210,7 +227,7 @@ describe('Collection', () => {
         wrapper.find('Button').at(i).simulate('mouseOver');
         wrapper.update();
         expect(wrapper.find('Fade').props().in).toBe(true);
-        expect(wrapper.find('Fade').render().text()).toBe(messages[i-1]);
+        expect(wrapper.find('Fade').render().text()).toBe(messages[i - 1]);
       }
     })
 
@@ -223,8 +240,8 @@ describe('Collection', () => {
     wrapper.instance().toggleEdit();
     expect(wrapper.state().editing).toBeTruthy();
 
-    expect(wrapper.find('.fa-times-circle').length).toEqual(1);    
-    expect(wrapper.find('.fa-check-circle').length).toEqual(1);    
+    expect(wrapper.find('.fa-times-circle').length).toEqual(1);
+    expect(wrapper.find('.fa-check-circle').length).toEqual(1);
     expect(wrapper.find('Form').length).toEqual(1);
     expect(wrapper.find('Input').length).toEqual(1);
     expect(wrapper.find('Input').props().value).toEqual(someProps.collection.name);
@@ -297,7 +314,7 @@ describe('Collection', () => {
 
   it('should fire the clearEdits() method when the undo icon is clicked', () => {
     const clearEditsSpy = jest.spyOn(Collection.prototype, 'clearEdits');
-    const wrapper = shallow(<Collection {...someProps} />);    
+    const wrapper = shallow(<Collection {...someProps} />);
     const instance = wrapper.instance();
 
     // this shouldn't be present to start
@@ -305,7 +322,7 @@ describe('Collection', () => {
 
     // get some changes registered
     instance.handleChange('collection title');
-    wrapper.update();    
+    wrapper.update();
     instance.handleSubmit(e);
     wrapper.update();
 
@@ -328,7 +345,7 @@ describe('Collection', () => {
     instance.toggleAlertModal();
     wrapper.update();
     expect(wrapper.state().modalProps.isVisible).toEqual(true);
-  
+
     instance.toggleAlertModal();
     wrapper.update();
     expect(wrapper.state().modalProps.isVisible).toEqual(false);
