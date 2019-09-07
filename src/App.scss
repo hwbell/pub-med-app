@@ -364,7 +364,12 @@ input {
 }
 // if on mobile, just a link, since it won't display properly
 .pdf-link {
-  margin: 10px;
+  margin: 10px 20px;
+}
+.fa-file-download {
+  margin: 2px 4px;
+  padding: 0;
+  font-size: 12px;
 }
 
 .collection, .thread {

@@ -546,7 +546,7 @@ export default App;
 
 const styles = {
   nav: {
-    padding: '10px',
+    // padding: '10px',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',

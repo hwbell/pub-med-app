@@ -143,7 +143,7 @@ class Thread extends React.Component {
 
         {/* the content expander button */}
         <div className="left-all-row">
-          <p className="thread-text">{`${thread.commentsCount} comments`}</p>
+          <p className="time">{`${thread.commentsCount} comments`}</p>
 
           <Button
             style={styles.expandButton}

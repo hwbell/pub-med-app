@@ -4,11 +4,14 @@ import { shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 import { getArticles } from '../tools/apiFunctions';
 
-const resizeWindow = (x, y) => {
-  window.innerWidth = x;
-  window.innerHeight = y;
-  window.dispatchEvent(new Event('resize'));
-}
+// const resizeWindow = (x, y) => {
+//   window.innerWidth = x;
+//   window.innerHeight = y;
+//   window.dispatchEvent(new Event('resize'));
+// }
+
+// for setTimeout inside of toggle functions
+jest.useFakeTimers()
 
 // stubs
 let handleDeleteStub = jest.fn();
@@ -130,7 +133,10 @@ describe('Collection', () => {
     expect(wrapper.state().showPreview).toEqual(false);
     wrapper.find('Button').at(1).simulate('click');
     wrapper.update();
-    expect(wrapper.state().showPreview).toEqual(true);
+    // theres a 500ms timer on this in the toggle function
+    setTimeout(() => {
+      expect(wrapper.state().showPreview).toEqual(true);
+    }, 600)
 
     // the save button
     wrapper.find('Button').at(2).simulate('click');
@@ -178,16 +184,45 @@ describe('Collection', () => {
 
     // click the 'make pdf' button
     wrapper.find('Button').at(1).simulate('click');
-    expect(wrapper.state().showPreview).toEqual(true);
 
-    // should be displayed now
-    expect(wrapper.find('#pdf').length).toEqual(1);
+    // account for the 500ms timer on the toggle function
+    setTimeout(() => {
+      // should be displayed now
+      expect(wrapper.state().showPreview).toEqual(true);
+      expect(wrapper.find('#pdf').length).toEqual(1);
+    }, 600)
 
     // click the 'make pdf' button again
     wrapper.find('Button').at(1).simulate('click');
     expect(wrapper.state().showPreview).toEqual(false);
 
     // should be hidden now
+    expect(wrapper.find('#pdf').length).toEqual(0);
+
+  })
+
+  it('should close the pdf when the collapse is closed', () => {
+    expect(wrapper.find('Collapse').props().isOpen).toBe(false);
+
+    // click the collapse button
+    wrapper.find('Button').at(0).simulate('click');
+
+    // should be expanded
+    expect(wrapper.find('Collapse').props().isOpen).toBe(true);
+
+    // open the pdf
+    wrapper.find('Button').at(1).simulate('click');
+
+    // account for the 500ms timer on the toggle function
+    jest.runAllTimers();
+    expect(wrapper.find('#pdf').length).toEqual(1);
+
+
+    // close the collapse 
+    wrapper.find('Button').at(0).simulate('click');
+    expect(wrapper.find('Collapse').props().isOpen).toBe(false);
+
+    // pdf should be closed now
     expect(wrapper.find('#pdf').length).toEqual(0);
 
   })

@@ -64,7 +64,8 @@ class Collection extends React.Component {
 
   toggleContent() {
     this.setState({
-      showContent: !this.state.showContent
+      showContent: !this.state.showContent,
+      showPreview: false
     });
   }
 
@@ -89,10 +90,16 @@ class Collection extends React.Component {
   }
 
   togglePreview() {
-    this.setState({
-      showPreview: !this.state.showPreview,
-      showContent: true
-    })
+    if (!this.state.showContent) {
+      this.setState({
+        showContent: true
+      })
+    }
+    setTimeout(() => {
+      this.setState({
+        showPreview: !this.state.showPreview
+      })
+    }, 500 )
   }
 
   // to store the value of the input
@@ -497,7 +504,14 @@ class Collection extends React.Component {
                   {matches =>
                     matches ? (
                       <PDFDownloadLink className="pdf-link" document={<GeneratedPdf collection={collection} />} fileName={collection.name}>
-                        {({ blob, url, loading, error }) => (loading ? 'Creating document...' : `${collection.name}.pdf`)}
+                        {({ blob, url, loading, error }) => (loading ? 
+                          'Creating document...' 
+                          : 
+                          <Button 
+                            style={{fontWeight: 'bolder'}}
+                            className="article-button add" size="sm">
+                            {`${collection.name}.pdf`}
+                            <i className="fas fa-file-download"></i></Button>)}
                       </PDFDownloadLink>
                     ) : (
                         <PDFViewer className="pdf-viewer">

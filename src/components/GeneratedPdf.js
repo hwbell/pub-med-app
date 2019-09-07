@@ -43,7 +43,7 @@ class GeneratedPdf extends React.Component {
 
     return (
       <Document>
-        <Page size="A4" className="pdf-page" style={styles.page}>
+        <Page size="A4" style={styles.page}>
 
           <Text style={styles.header}>{this.props.collection.name}</Text>
 
