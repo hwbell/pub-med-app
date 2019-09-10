@@ -152,7 +152,7 @@ class SearchPage extends React.Component {
         <Loader
           height={100}
           width={100}
-          type="ThreeDots"
+          type="Ball-Triangle"
           color="whitesmoke"
         />
       </div>
@@ -290,7 +290,7 @@ class SearchPage extends React.Component {
 
   render() {
 
-    console.log(this.props.collections)
+    // console.log(this.props.collections)
 
     return (
       <div className="page">
@@ -373,6 +373,12 @@ const styles = {
   main: {
     width: '100%'
   },
+  content: {
+    minHeight: '80vh'
+  },
+  loaderHolder: {
+    marginTop: '20px'
+  }
 }
 
 export default SearchPage;

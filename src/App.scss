@@ -386,10 +386,10 @@ input {
   }
 }
 .section-title {
-  // font-weight: bolder;
-  font-size: 18px;
+  font-weight: bolder;
+  font-size: 16px;
   align-self: flex-start;
-  margin: 5px 30px;
+  margin: 5px 20px;
 }
 .collection-block {
   width: 100%;
@@ -418,7 +418,7 @@ input {
 }
 .fa-times-circle,
 .fa-check-circle {
-  color: whitesmoke;
+  color: rgb(206, 205, 205);
   font-size: 14px;
   &:hover {
     cursor: pointer;
@@ -516,7 +516,7 @@ input {
   word-wrap: break-word;
 }
 .thread-title {
-  font-weight: lighter;
+  // font-weight: bolder;
   // color: rgb(227, 247, 253);
 }
 .thread-text {
@@ -615,6 +615,9 @@ body.modal-open {
   transition: all 0.3s ease;
   margin: 10px;
   font-size: 22px;
+}
+.fa-book-open {
+  color: $main-blue
 }
 .fa-dollar-sign {
   color: rgb(23, 177, 49);

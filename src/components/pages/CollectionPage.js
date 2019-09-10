@@ -242,8 +242,10 @@ class CollectionPage extends React.Component {
             <p className="thread-text">
               {`If you are logged in, you can save any new collection you 
                   make, and they will appear below as your saved collections. If you are just visiting, 
-                  you can still export a collection as a pdf below. Just look for the save icon!`}
+                  you can still export a collection as a pdf below!`}
             </p>
+
+            <hr></hr>
 
             <p className="section-title">New Collections</p>
 

@@ -36,13 +36,13 @@ class AboutPage extends React.Component {
 
           <div id="aboutportal" className="outline" style={styles.content}>
 
-            <div style={styles.linkHolder}>
-              <AnchorLink className="anchor-link" offset='100' href='#aboutpmc'>about PMC</AnchorLink>
-            </div>
+            <div style={{ marginTop: '10px' }}>
 
-            <div style={{ marginTop: '20px' }}>
+              <div className="space-all-row">
+                <p className="profile-title" >About this Site</p>
+                <AnchorLink style={styles.anchorLink} className="anchor-link" offset='100' href='#aboutpmc'>about PMC</AnchorLink>
+              </div>
 
-              <p className="profile-title" >About this Site</p>
               {aboutPageText.full.top.map((section, i) => {
                 return (
                   <div key={i}>
@@ -57,10 +57,10 @@ class AboutPage extends React.Component {
                     {section.text.map((text, j) => {
                       return <p key={j} className="paragraph">
                         {text}
-                        {i===2 && j===0 && 
-                        <Link to={'/profile'}>
-                          {`  Make a profile!`}
-                        </Link>}
+                        {i === 2 && j === 0 &&
+                          <Link to={'/profile'}>
+                            {`  Make a profile!`}
+                          </Link>}
                       </p>
                     })}
                   </div>
@@ -72,12 +72,13 @@ class AboutPage extends React.Component {
 
           <div id="aboutpmc" className="outline" style={styles.content}>
 
-            <div style={styles.linkHolder}>
-              <AnchorLink className="anchor-link" offset='100' href='#aboutportal'>about the site</AnchorLink>
-            </div>
+            <div style={{ marginTop: '10px' }}>
 
-            <div style={{ marginTop: '20px' }}>
-              <p className="profile-title">About PubMed Central</p>
+              <div className="space-all-row">
+                <p className="profile-title">About PubMed Central</p>
+                <AnchorLink style={styles.anchorLink} className="anchor-link" offset='100' href='#aboutportal'>about the site</AnchorLink>
+              </div>
+
               <p className="paragraph">{aboutPageText.full.middle[0]}</p>
               <p className="paragraph">{aboutPageText.full.middle[1]}</p>
             </div>
@@ -111,13 +112,8 @@ const styles = {
     justifyContent: 'flex-start',
     alignItems: 'center'
   },
-  linkHolder: {
-    position: 'absolute',
-    right: '20px',
-    top: '2px',
-    zIndex: 10,
-    display: 'flex',
-    fontSize: '14px'
+  anchorLink: {
+    paddingRight: '10px'
   }
 
 }
