@@ -289,15 +289,15 @@ class ProfilePage extends React.Component {
       return;
     }
 
-    // check for all fields, with username being optional
+    // check for all fields
     let user = this.state.user;
-    if (!user.email || !user.password) {
+    if (!user.email || !user.password || !user.name) {
       console.log('missing email or password')
 
       let { modalProps } = this.state;
       modalProps.confirming = false;
       modalProps.confirm = this.toggleAlertModal;
-      modalProps.message = 'Email and password are required!'
+      modalProps.message = 'Email, password, and username are required!'
 
       this.setState({
         modalProps
@@ -337,9 +337,10 @@ class ProfilePage extends React.Component {
         console.log(response)
 
         if (response.code === 11000) {
+          console.log('account is not unique')
           let { modalProps } = this.state;
 
-          modalProps.message = `Sorry, it looks like that email or name is registered already! Please try another entry`
+          modalProps.message = `Sorry, it looks like that email is registered already! Please try another entry`
           modalProps.confirming = false;
           modalProps.confirm = this.toggleAlertModal;
 
@@ -348,17 +349,19 @@ class ProfilePage extends React.Component {
           }, () => {
             return this.toggleAlertModal();
           })
+        } else {
+          let { user, token } = response;
+
+          // save info to local storage
+          localStorage.setItem(`user`, JSON.stringify(user));
+          localStorage.setItem(`token`, JSON.stringify(token));
+
+          // register back in App
+          return this.props.registerSignIn(user);
         }
 
 
-        let { user, token } = response;
 
-        // save info to local storage
-        localStorage.setItem(`user`, JSON.stringify(user));
-        localStorage.setItem(`token`, JSON.stringify(token));
-
-        // register back in App
-        return this.props.registerSignIn(user);
 
       }).catch((e) => {
         console.log(e)
