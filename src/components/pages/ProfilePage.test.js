@@ -2,7 +2,9 @@ import React from 'react';
 import ProfilePage from './ProfilePage';
 import { shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
-import { getArticles } from '../../tools/apiFunctions.js';
+
+// mock the server functions
+jest.mock('./tools/serverFunctions.js');
 
 // sample props
 const user = {
@@ -16,13 +18,13 @@ const newThread = {
 }
 
 describe('ProfilePage', () => {
-  
+
   let articles;
   let threads;
   let collections;
   let someProps;
 
-  beforeAll( async () => {
+  beforeAll(async () => {
     articles = [
       {
         id: '013091283'
@@ -70,11 +72,11 @@ describe('ProfilePage', () => {
         collections
       }
     }
-  }) 
+  })
 
   let wrapper;
   beforeEach(() => {
-    wrapper = shallow(<ProfilePage {...someProps}/>);
+    wrapper = shallow(<ProfilePage {...someProps} />);
   })
 
   // tests
@@ -102,16 +104,16 @@ describe('ProfilePage', () => {
   });
 
   it('shows the signin form if user is not signed in', () => {
-    
+
     wrapper.update();
     expect(wrapper.find('.profile').length).toEqual(1);
     expect(wrapper.find('.signin').length).toEqual(0);
     expect(wrapper.find('.profile-title').length).toEqual(1);
     expect(wrapper.find('.thread-text').length).toEqual(3);
 
-    expect(wrapper.find('Button').length).toEqual(2);    
-    expect(wrapper.find('.fa-user-edit').length).toEqual(1);    
-    expect(wrapper.find('.fa-sign-out-alt').length).toEqual(1);    
+    expect(wrapper.find('Button').length).toEqual(2);
+    expect(wrapper.find('.fa-user-edit').length).toEqual(1);
+    expect(wrapper.find('.fa-sign-out-alt').length).toEqual(1);
 
     expect(wrapper.find('Fade').length).toBe(1);
 
@@ -144,7 +146,7 @@ describe('ProfilePage', () => {
     // expect(wrapper.find('.add-image').length).toEqual(1);
 
     // expect(wrapper.find('ImageUploader').length).toEqual(1);
-    
+
   })
 
   it('handleCheck() should toggle the checkbox', () => {
@@ -172,7 +174,7 @@ describe('ProfilePage', () => {
   it('handleCheck() should change the text of the login / sign up button', () => {
     wrapper.setProps({ user: null });
     wrapper.update();
-    
+
     expect(wrapper.find('Button').at(0).render().text()).toEqual('login');
 
     wrapper.instance().handleCheck();
@@ -191,16 +193,16 @@ describe('ProfilePage', () => {
     wrapper.instance().toggleAlertModal();
     wrapper.update();
 
-    expect(wrapper.state().modalProps.isVisible).toBe(true);   
+    expect(wrapper.state().modalProps.isVisible).toBe(true);
     expect(wrapper.find('AlertModal').props().isVisible).toBe(true);
 
     wrapper.instance().toggleAlertModal();
     wrapper.update();
 
-    expect(wrapper.state().modalProps.isVisible).toBe(false);   
+    expect(wrapper.state().modalProps.isVisible).toBe(false);
     expect(wrapper.find('AlertModal').props().isVisible).toBe(false);
 
-    
+
   })
 
   it('togglePopup should assign this.state.popupText and toggle the boolean for the Fade', () => {
@@ -214,44 +216,44 @@ describe('ProfilePage', () => {
     expect(wrapper.find('Fade').props().in).toBe(true);
     expect(wrapper.find('Fade').render().text()).toBe('fade text');
     expect(wrapper.state().showPopup).toBe(true);
-    
+
   })
 
   it('should show the Fade text when the edit / logout buttons are hovered', async () => {
     // mount to check inner props of the Fade
-    let wrapper = await mount(<ProfilePage {...someProps}/>);
-    
+    let wrapper = await mount(<ProfilePage {...someProps} />);
+
     // start not showing the fade
-    expect(wrapper.state().showPopup).toBe(false);    
+    expect(wrapper.state().showPopup).toBe(false);
     expect(wrapper.find('Fade').at(0).props().in).toBe(false);
 
     // toggles when the user hovers on the edit button
     wrapper.find('.fa-user-edit').simulate('mouseover');
     wrapper.update();
-    
+
     expect(wrapper.state().showPopup).toBe(true);
     expect(wrapper.find('Fade').at(0).props().in).toBe(true);
     expect(wrapper.find('Fade').at(0).render().text()).toBe('edit profile');
 
-     // toggles when the user hovers on the logout button
-     wrapper.find('.fa-sign-out-alt').simulate('mouseover');
-     wrapper.update();
-     
-     expect(wrapper.state().showPopup).toBe(true);
-     expect(wrapper.find('Fade').at(0).props().in).toBe(true);
-     expect(wrapper.find('Fade').at(0).render().text()).toBe('log out');
+    // toggles when the user hovers on the logout button
+    wrapper.find('.fa-sign-out-alt').simulate('mouseover');
+    wrapper.update();
+
+    expect(wrapper.state().showPopup).toBe(true);
+    expect(wrapper.find('Fade').at(0).props().in).toBe(true);
+    expect(wrapper.find('Fade').at(0).render().text()).toBe('log out');
 
   })
 
   it('toggles the ProfileForm modal when the edit icon is clicked', () => {
 
     expect(wrapper.state().showProfileForm).toBe(false);
-    
+
     wrapper.instance().toggleProfileForm();
     wrapper.update();
     expect(wrapper.state().showProfileForm).toBe(true);
 
-    wrapper.instance().toggleProfileForm();    
+    wrapper.instance().toggleProfileForm();
     wrapper.update();
     expect(wrapper.state().showProfileForm).toBe(false);
 
@@ -265,9 +267,9 @@ describe('ProfilePage', () => {
     // add another collection
     let user = someProps.user;
     user.collections.push(articles[0]);
-    wrapper.setProps({user});
+    wrapper.setProps({ user });
     wrapper.update();
-   
+
     expect(wrapper.find('.fa-atom').length).toBe(3);
 
   })
@@ -280,11 +282,21 @@ describe('ProfilePage', () => {
     // add another thread
     let user = someProps.user;
     user.threads.push(newThread);
-    wrapper.setProps({user});
+    wrapper.setProps({ user });
     wrapper.update();
-   
+
     expect(wrapper.find('.fa-dna').length).toBe(4);
   })
-  
+
+
+  it('should attempt to signIn if all fields are provided', () => {
+    wrapper.update();
+
+    // wrapper.
+  })
+
+  it('should attempt to signIn if all fields are provided', () => {
+
+  })
 
 })

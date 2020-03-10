@@ -289,15 +289,15 @@ class ProfilePage extends React.Component {
       return;
     }
 
-    // check for all fields
+    // check for all required fields
     let user = this.state.user;
-    if (!user.email || !user.password || !user.name) {
+    if (!user.email || !user.password) {
       console.log('missing email or password')
 
       let { modalProps } = this.state;
       modalProps.confirming = false;
       modalProps.confirm = this.toggleAlertModal;
-      modalProps.message = 'Email, password, and username are required!'
+      modalProps.message = 'Email, and password are required!'
 
       this.setState({
         modalProps

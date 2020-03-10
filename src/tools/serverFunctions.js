@@ -32,6 +32,7 @@ export async function signInUser(user, isNewUser) {
 
 // patches the user's profile
 export async function patchUser(patch, headers) {
+  console.log(`patching user profile @ ${collectionServerUrl}users/me}`)
   let serverResponse = await fetch(`${collectionServerUrl}users/me`, {
     method: 'PATCH',
     body: JSON.stringify(patch),

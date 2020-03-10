@@ -312,7 +312,7 @@ class App extends Component {
         user
       }, () => {
         // save to local storage
-        localStorage.setItem(`threads`, JSON.stringify(user));
+        localStorage.setItem(`user`, JSON.stringify(user));
       })
     }
 
@@ -352,6 +352,8 @@ class App extends Component {
       serverThreads: updatedThreads
     }, () => {
       console.log(this.state.serverThreads)
+      // save to local storage
+      localStorage.setItem(`serverThreads`, JSON.stringify(updatedThreads));
     })
   }
 
