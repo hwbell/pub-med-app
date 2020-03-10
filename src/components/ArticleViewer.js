@@ -98,7 +98,7 @@ class ArticleViewer extends React.Component {
         {urlList.length > 0 &&
           <div>
 
-            <p className="preview-subtitle">Full Text:</p>
+            <p className="preview-subtitle">Full Text Available:</p>
 
             <div>
               {urlList.map((link, i) => {

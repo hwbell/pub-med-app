@@ -64,6 +64,16 @@ const links = [
   },
 ]
 
+// const bgImages = [
+//   './assets/cells.jpg',
+//   './assets/cells2.jpg',
+//   './assets/cells2.jpg',
+//   './assets/earth.png',
+//   './assets/background-image.jpg',
+//   './assets/background-image2.jpg',
+//   './assets/background-image3.jpg',
+// ]
+
 class App extends Component {
 
   constructor(props) {
@@ -99,6 +109,19 @@ class App extends Component {
   }
 
   componentDidMount() {
+   
+    // // cycle the background images
+    // let imgNum = 0;
+    // window.setInterval( () => {
+    //   console.log('interval hitting')
+    // }, 1000 )
+    // setInterval(() => {
+    //   console.log('changing color')
+    //   const bodyElt = document.querySelector("body");
+    //   bodyElt.style.background = `url(./assets/cells.jpg)` 
+    //   imgNum ++;
+    // }, 1000)
+
     // sign in on startup if there is a token in localStorage
     if (localStorage.getItem('user') && localStorage.getItem('user') !== "undefined") {
       // console.log(localStorage.getItem('user'))
@@ -117,6 +140,7 @@ class App extends Component {
         console.log(this.state.collections)
       })
     }
+
   }
 
   createNewCollection(collection, callback) {
@@ -553,10 +577,6 @@ const styles = {
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center'
-  },
-  link: {
-    fontSize: '16px',
-    // padding: '4px'
   },
   dropDownMenu: {
     borderRadius: '4px',

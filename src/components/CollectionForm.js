@@ -295,19 +295,16 @@ const styles = {
   text: {
     color: 'black',
     margin: '16px 4px 16px 20px',
-    fontSize: '14px'
   },
   input: {
     margin: '10px',
     borderRadius: '6px',
     width: '60%',
-    fontSize: '14px'
   },
   articleText: {
     color: 'blue',
     margin: '10px 20px',
     fontWeight: 'bold',
-    fontSize: '14px'
   }
 
 }

@@ -141,7 +141,7 @@ const styles = {
   // },
   icon: {
     fontSize: '12px',
-    color: 'white',
+    // color: 'white',
     margin: '4px'
   }
 }

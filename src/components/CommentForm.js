@@ -86,7 +86,6 @@ const styles = {
     height: '100%',
   },
   text: {
-    color: 'silver',
     // fontSize: '14px',
     margin: '5px 20px'
   },

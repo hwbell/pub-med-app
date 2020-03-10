@@ -153,7 +153,7 @@ class SearchPage extends React.Component {
           height={100}
           width={100}
           type="Ball-Triangle"
-          color="whitesmoke"
+          color="black"
         />
       </div>
     )
@@ -244,7 +244,7 @@ class SearchPage extends React.Component {
           if (isLocalSorter) {
             color = 'rgb(29, 120, 223)';
           } else {
-            color = 'white';
+            color = 'black';
           }
           return <Button key={i} style={{ color }} className="sort-link" color="link" size="sm"
             onClick={() => this.handleSortButton(button.sorter)}>{button.text}</Button>
