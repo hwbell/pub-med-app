@@ -177,11 +177,17 @@ hr {
 
 // common uses
 .heading,
-// .glass,
 .outline,
 .article-result,
 .collection-block {
   width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.glass {
   position: relative;
   display: flex;
   flex-direction: column;
